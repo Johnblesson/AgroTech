@@ -1,0 +1,169 @@
+
+<style>
+  .property-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Adjust the gap between grid items */
+    padding: 15px;
+    list-style: none;
+  }
+
+  .property-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .property-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+/* Card Footer*/
+.card-footer-actions {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+    .card-footer-actions-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .card-footer-actions-btn ion-icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+    .card-footer-actions-btn span {
+      font-size: 14px;
+    }
+/* Card Footer*/
+
+
+  .card-footer {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-author {
+    display: flex;
+    align-items: center;
+  }
+
+  .card-author .author-name a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card-footer-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .top-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(9, 100%, 62%);
+  }
+
+  .top-left {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .property-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
+
+<ul class="property-list has-scrollbar">
+  <% products.forEach(product => { %>
+    <li class="property-item">
+      <a href="/product-detail/<%= product._id %>">
+        <div class="property-card">
+          <figure class="card-banner">
+            <% if (product.photoUrl) { %>
+              <img src="<%= product.photoUrl %>" alt="Product Photo">
+            <% } else { %>
+              <p>No photo available</p>
+            <% } %>
+
+            <!-- Dynamic badges for availability and status -->
+            <div class="card-badge top-right"><%= product.availability %></div>
+            <div class="card-badge green top-left"><%= product.typeOfProduct %></div>
+
+            <div class="banner-actions">
+              <button class="banner-actions-btn">
+                <ion-icon name="location"></ion-icon>
+                <address><%= product.location %></address>
+              </button>
+            </div>
+          </figure>
+
+          <div class="card-content">
+            <div class="card-price">
+              <strong><%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong>
+               <pre><%= product.negotiation %></pre>
+            </div>
+            <h3 class="h3 card-title">
+              <a href="/product-detail/<%= product._id %>"><%= product.title %></a>
+            </h3>
+            <p class="card-text">
+              <% if (product.description && product.description.length > 150) { %>
+                <%= product.description.substring(0, 150) + "..." %>
+              <% } else { %>
+                <%= product.description %>
+              <% } %>
+            </p>
+            <ul class="card-list">
+              <li class="card-item">
+                <strong>Product ID (AID): AID<%= product.aid %></strong>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <div class="card-author">
+              <p class="author-name">Created by: <a href="#"><%= product.createdBy %></a></p>
+              <p class="author-title">Created At: <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)</p>
+            </div>
+            <div class="card-footer-actions">
+              <button class="card-footer-actions-btn">
+                <ion-icon name="eye-outline"></ion-icon>
+                <span><%= product.clicks %></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+  <% }); %>
+</ul>
+<!-- End of property list -->
+<link href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.css" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

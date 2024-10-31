@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Salaries</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1>Salaries form</h1>
+<form action="/add-salaries" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="staffName" class="formbold-form-label"> Staff Name: </label>
+        <div>
+          <select name="staffName" class="formbold-form-input" id="staffName">
+            <% staffNames.forEach(staffName => { %>
+              <option value="" disabled selected hidden>Select Staff</option>
+              <option value="<%= staffName %>"><%= staffName %></option>
+            <% }); %>
+          </select>
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="position" class="formbold-form-label"> Position: </label>
+        <div>
+          <select name="position" class="formbold-form-input" id="position">
+            <% positions.forEach(position => { %>
+              <option value="" disabled selected hidden>Select Position</option>
+              <option value="<%= position %>"><%= position %></option>
+            <% }); %>
+          </select>
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="salaries" class="formbold-form-label"> Amount: </label>
+        <div>
+          <input
+            type="Number"
+            name="salaries"
+            id="salaries"
+            placeholder="Salaries"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="salaryMonth" class="formbold-form-label"> Salary Month: </label>
+        <div>
+          <input
+            type="text"
+            name="salaryMonth"
+            id="salaryMonth"
+            placeholder="Salary Month"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div> -->
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="salaryMonth" class="formbold-form-label"> Salary Month: </label>
+        <div>
+          <select name="salaryMonth" id="salaryMonth" class="formbold-form-input" required>
+            <option value="" disabled selected hidden>Select Month</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </div>
+      </div>
+      
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="approvedBy" class="formbold-form-label"> Approved By: </label>
+        <div>
+          <select name="approvedBy" class="formbold-form-input" id="approvedBy">
+            <% positions.forEach(position => { %>
+              <option value="" disabled selected hidden>Select Approved by</option>
+              <option value="<%= position %>"><%= position %></option>
+            <% }); %>
+          </select>
+        </div>
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

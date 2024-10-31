@@ -1,0 +1,224 @@
+.property-list.has-scrollbar {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Make the container full viewport height */
+}
+
+.property-item {
+    width: 100%; /* Take up full width */
+    max-width: 1200px; /* Limit the maximum width */
+    margin: auto; /* Center the item horizontally */
+}
+
+.property-card {
+    width: 100%; /* Take up full width */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.carousel-item {
+    display: none;
+    text-align: center;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-badge {
+    padding: 5px 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.top-right {
+    top: 10px;
+    left: 10px;
+    background-color: hsl(9, 100%, 62%);
+}
+
+.top-left {
+    top: 10px;
+    right: 10px;
+}
+
+.banner-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.banner-actions-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.banner-actions-btn:hover {
+    background-color: #0056b3;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-price {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.author-name a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.author-name a:hover {
+    text-decoration: underline;
+}
+
+.author-title {
+    margin-top: 5px;
+    color: #777;
+}
+
+.card-footer-actions-btn {
+    background-color: transparent;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 1.5rem;
+}
+
+.card-footer-actions-btn:hover {
+    color: #333;
+}
+
+.apartment-links-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.apartment-links-container p {
+    margin: 0;
+}
+
+.apartment-links-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.apartment-links-container a:hover {
+    text-decoration: underline;
+}
+.carousel-item {
+    display: none; /* Hide all carousel items by default */
+}
+.carousel-item.active {
+    display: block; /* Display active carousel item */
+}
+.carousel-img {
+    width: 100%;
+    height: auto;
+}
+
+.btn1 {
+width: 50%;
+padding: 10px;
+background: linear-gradient(to right, #5c6bc0, #512da8);
+color: #fff;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.btn1:hover {
+background: #512da8;
+}
+
+
+.carousel {
+    position: relative;
+}
+.download-btn {
+    position: absolute;
+    /* top: 10px; */
+    right: 1px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+  /* --orange-soda: hsl(9, 100%, 62%); */
+    background-color: var(--orange-soda);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.carousel-item {
+    position: relative;
+    display: none;
+}
+.carousel-item.active {
+    display: block;
+}
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.thumbnail {
+    width: 60px;
+    height: 40px;
+    margin: 0 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+.thumbnail:hover, .thumbnail.active {
+    opacity: 1;
+}

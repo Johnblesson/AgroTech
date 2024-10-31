@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
+  <body>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+
+<div class="img__container">
+    <% if (users.photo) { %>
+        <img src="<%= relativePath %>" alt="profile" />
+    <% } else { %>
+        <!-- Default image placeholder if photo doesn't exist -->
+        <img src="/path/to/default/image.jpg" alt="profile" />
+    <% } %>
+    <span></span>
+</div>
+
+        <h2><%= users.fullname %></h2>
+        <p><%= '@' + users.username %></p>
+        <p><%= users.email %></p>
+        <p><%= users.role %> || <%= users.status %></p>
+        <p><%= users.createdAt %></p>
+        
+
+          <ul class="about">
+            <li><span>4,073</span>Followers</li>
+            <li><span>322</span>Following</li>
+            <li><span>200,543</span>Attraction</li>
+          </ul>
+
+          <div class="content">
+            <p>
+                <%= users.bio %>
+            </p>
+
+            
+            <ul>
+              <!-- <li><i class="fab fa-twitter"></i></li>
+              <i class="fab fa-pinterest"></i>
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-dribbble"></i> -->
+            </ul>
+          </div>
+        </div>
+        <div class="right__col">
+          <nav>
+            <ul>
+              <li><a href="">posts</a></li>
+              <!-- <li><a href="">galleries</a></li> -->
+              <!-- <li><a href="#">home</a></li> -->
+            </ul>
+            <form action="/update-admin-profile/<%= users._id %>">
+            <button>Edit</button>
+          </form>
+          </nav>
+
+          <div class="photos">
+            <!-- <img src="/images/img_1.avif" alt="Photo" />
+            <img src="/images/img_2.avif" alt="Photo" />
+            <img src="/images/img_3.avif" alt="Photo" />
+            <img src="/images/img_4.avif" alt="Photo" />
+            <img src="/images/img_5.avif" alt="Photo" />
+            <img src="/images/img_6.avif" alt="Photo" /> -->
+            <ul class="property-list has-scrollbar">
+              <% apartments.forEach(apt => { %>
+                <li class="property-item">
+                  <div class="property-card">
+            
+                    <div class="card-content">
+                      <div class="card-price">
+                        <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+                      </div>
+                      <h3 class="h3 card-title">
+                        <a href="/apartment-detail/<%= apt._id %>"><%= apt.title %></a>
+                      </h3>
+                      <p class="card-text">
+                        <% if (apt.description && apt.description.length > 150) { %>
+                          <%= apt.description.substring(0, 150) + "..." %>
+                        <% } else { %>
+                          <%= apt.description %>
+                        <% } %>
+                      </p>
+                      <ul class="card-list">
+                        <li class="card-item">
+                          <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+                          <a href="/apartment-detail/<%= apt._id %>">
+                            <span>View Details</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-footer">
+                      <div class="card-author">
+                        <div>
+                          <p class="author-name"> Created by:
+                            <a href="#"><%= apt.createdBy %></a>
+                          </p>
+                          <p class="author-title">
+                            Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-footer-actions">
+                        <a href="/update-apartment/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
+                          <ion-icon name="create-outline"></ion-icon>
+                        </a>
+                        <form action="/apartments/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
+                          <button type="submit" class="card-footer-actions-btn" title="Delete">
+                            <ion-icon name="trash-outline"></ion-icon>
+                          </button>
+                        </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </li>
+              <% }); %>
+            </ul>
+            
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+  </script>
+  </body>
+</html>
+

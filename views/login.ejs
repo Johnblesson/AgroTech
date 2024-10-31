@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <title>AgroTech SL - Login | Empowering Farmers in Sierra Leone</title>
+
+    <!-- Meta Description Tag -->
+    <meta name="description" content="AgroTech SL connects farmers in Sierra Leone with tools and resources to maximize productivity. Join us to enhance your farming experience.">
+
+    <!-- Meta Keywords Tag -->
+    <meta name="keywords" content="
+        AgroTech,
+        farming platform,
+        Sierra Leone farmers,
+        agricultural tools,
+        farm management,
+        crop production,
+        farmer resources,
+        connect farmers,
+        sustainable agriculture,
+        agricultural innovation">
+    
+    <!-- Meta Author Tag -->
+    <meta name="author" content="John Blesson Rowe">
+
+    <style>
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input[type="password"] {
+            width: calc(100% - 40px); /* Adjust input width to accommodate icon */
+            padding-right: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-container login">
+            <form action="/login" method="post">
+                <div class="logo-container">
+                    <a href="#" class="logo">AgroTech SL</a>
+                </div>
+
+                <!-- Display flash error messages -->
+                <% if (errorMessages && errorMessages.length > 0) { %>
+                    <div class="error-message">
+                        <% errorMessages.forEach(function(message) { %>
+                            <p><%= message %></p>
+                        <% }); %>
+                    </div>
+                <% } %>
+
+                <input type="text" name="username" placeholder="Username" required aria-label="Username">
+                <div class="password-wrapper">
+                    <input type="password" name="password" id="password" placeholder="Password" required aria-label="Password">
+                    <i class="toggle-password fas fa-eye-slash" title="Toggle password visibility"></i>
+                </div>
+
+                <!-- <a href="#">Forgot Your Password?</a> -->
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const togglePassword = document.querySelector('.toggle-password');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+
+            // Adjust input width when password is hidden
+            if (type === 'password') {
+                password.style.width = 'calc(100% - 40px)';
+            } else {
+                password.style.width = '100%';
+            }
+        });
+    </script>
+</body>
+
+</html>

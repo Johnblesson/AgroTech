@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Sessions</title>
+    <link rel="stylesheet" href="./css/users.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <h2>Active Sessions</h2>
+    <div class="table-wrapper">
+        <!-- Search by Fullname -->
+        <div class="search-container">
+            <input type="text" id="searchFullnameInput" placeholder="Search by Name..." onkeyup="searchUsers('fullname')">
+            <button onclick="clearSearch('fullname')">Clear</button>
+        </div>
+        <!-- Search by Phone -->
+        <div class="search-container">
+            <input type="text" id="searchPhoneInput" placeholder="Search by Phone Number..." onkeyup="searchUsers('phone')">
+            <button onclick="clearSearch('phone')">Clear</button>
+        </div>
+        <!-- Search by Role -->
+        <div class="search-container">
+            <input type="text" id="searchRoleInput" placeholder="Search by Role..." onkeyup="searchUsers('role')">
+            <button onclick="clearSearch('role')">Clear</button>
+        </div>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Fullname</th>
+                    <th>Username</th>
+                    <th>Phone No.</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(users => { %>
+                <tr>
+                    <td class="hover"><%= users.fullname %></td>
+                    <td class="hover"><%= users.username %></td>
+                    <td class="hover"><%= users.phone %></td>
+                    <td class="hover"><%= users.email %></td>
+                    <td class="hover <%= users.role === 'admin' ? 'role-pink-bg' : (users.role === 'user' ? 'role-green-bg' : (users.role === 'agent' ? 'role-sky-blue-bg' : '')) %>"><%= users.role %></td>
+                    <td class="hover <%= users.status === 'active' ? 'status-green-bg' : (users.status === 'inactive' ? 'status-red-bg' : '') %>">
+                        <% if (users.status === 'active') { %>
+                            <span class="status-circle active-circle"></span> Active
+                        <% } else if (users.status === 'inactive') { %>
+                            <span class="status-circle inactive-circle"></span> Inactive
+                        <% } else { %>
+                            <%= users.status %>
+                        <% } %>
+                    </td>
+                    <td class="hover px-6 py-4 whitespace-nowrap">
+                        <a href="/edit-user/<%= users._id %>"><i class="fas fa-edit text-green-500 cursor-pointer"></i></a>
+                        <!-- <a href="/terminate-sessions"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i></a> -->
+                        <a href="/view/<%= users._id %>"><i class="fas fa-eye text-blue-500 cursor-pointer mx-2"></i></a>
+                    </td>
+                </tr>
+                <% }); %>
+            <tbody>
+        </table>
+        <div class="container mx-auto">
+            <div class="pagination">
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>">
+                        <%= i %>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function searchUsers(searchType) {
+        var input, filter, table, tr, td, i, txtValue;
+        switch (searchType) {
+            case 'fullname':
+                input = document.getElementById("searchFullnameInput");
+                break;
+            case 'phone':
+                input = document.getElementById("searchPhoneInput");
+                break;
+            case 'role':
+                input = document.getElementById("searchRoleInput");
+                break;
+        }
+        filter = input.value.toUpperCase();
+        table = document.getElementsByClassName("fl-table")[0];
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            switch (searchType) {
+                case 'fullname':
+                    td = tr[i].getElementsByTagName("td")[0];
+                    break;
+                case 'phone':
+                    td = tr[i].getElementsByTagName("td")[2];
+                    break;
+                case 'role':
+                    td = tr[i].getElementsByTagName("td")[4];
+                    break;
+            }
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function clearSearch(searchType) {
+        var input;
+        switch (searchType) {
+            case 'fullname':
+                input = document.getElementById("searchFullnameInput");
+                break;
+            case 'phone':
+                input = document.getElementById("searchPhoneInput");
+                break;
+            case 'role':
+                input = document.getElementById("searchRoleInput");
+                break;
+        }
+        input.value = "";
+        searchUsers(searchType);
+    }
+</script>
+</html>

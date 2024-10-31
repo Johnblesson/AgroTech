@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avaliability Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    
+    <form action="/update-admin-availability/<%= apartment._id %>?_method=PATCH" method="POST">
+      <div class="formbold-mb-3">
+      <div>
+        <label for="aid" class="formbold-form-label"> AID </label>
+        <input
+          type="text"
+          name="aid"
+          id="aid"
+          value="<%= apartment.aid %>"
+          class="formbold-form-input"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="formbold-mb-3">
+        <div>
+            <label for="avaliablity" class="formbold-form-label"> Availability: </label>
+            <select id="availabilty" class="formbold-form-input" name="availabilty">
+              <option value="" disabled selected hidden>Select Availability</option>
+              <option value="Avaliable">Available</option>
+              <option value="Not Availabile">Not Available</option>
+          </select>
+          </div>
+    </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value="<%= apartment.phone %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="location" class="formbold-form-label"> Location </label>
+
+        <div>         
+          <input
+            type="text"
+            name="location"
+            id="location"
+            value="<%= apartment.location %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="address" class="formbold-form-label"> Created by </label>
+    <input
+      type="text"
+      name="createdBy"
+      class="formbold-form-input"
+      value="<%= apartment.createdBy %>"
+        readonly
+    />
+      </div>
+  
+      <button class="formbold-btn">Update Availability</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

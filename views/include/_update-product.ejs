@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homehub - Find your dream house</title>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
+<style>
+  .header-bottom-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.header-bottom-actions-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none; /* Optional: remove underline */
+    margin: 0 10px; /* Adjust spacing between buttons */
+}
+
+.header-bottom-actions-btn ion-icon {
+    margin-bottom: 5px; /* Adjust as needed */
+}
+
+.file-input-container {
+    display: grid;
+    grid-template-columns: 1fr; /* One column for vertical alignment */
+    gap: 10px; /* Adjust the gap between input elements */
+  }
+
+  .formbold-form-file {
+    /* Add your styling for file inputs here */
+    /* Example styles */
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+</style>
+<style>
+  .file-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the gap between input elements */
+  }
+
+  .formbold-form-file {
+    /* Add your styling for file inputs here */
+    /* Example styles */
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+
+  .file-name-placeholder {
+    /* Add your styling for filename placeholders here */
+    /* Example styles */
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .file-input-container {
+      gap: 5px; /* Reduce the gap for smaller screens */
+    }
+
+    .formbold-form-file {
+      /* Adjust styling for smaller screens */
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    .file-name-placeholder {
+      font-size: 12px; /* Reduce font size for smaller screens */
+    }
+  }
+
+  .formbold-form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font: 1.5em sans-serif;
+  }
+
+</style>
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+   <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <!-- <ion-icon name="location-outline"></ion-icon> -->
+
+              <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <!-- <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-telegram"></ion-icon>
+              </a>
+            </li>
+
+          </ul> -->
+          <form action="/logout" method="get">
+          <button class="header-top-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+
+        <!-- <a href="/home" class="logo">
+          <img style="width: 50%;" src="./images/hub.jpg" alt="Homeverse logo">
+        </a> -->
+
+        <a href="/home" class="logo">
+          <img src="/images/hub.png" alt="Homehub logo">
+        </a>
+        
+
+        <nav class="navbar" data-navbar>
+
+          <div class="navbar-top">
+
+            <a href="#" class="logo">
+              <img src="./images/hub.png" alt="Homeverse logo">
+            </a>
+
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+
+              <li>
+                <a href="/home" class="navbar-link" data-nav-link>Home</a>
+              </li>
+
+              <li>
+                <a href="/all-properties" class="navbar-link" data-nav-link>Apartments</a>
+              </li>
+
+              <li>
+                <a href="/my-post" class="navbar-link" data-nav-link>My Posts</a>
+              </li>
+
+              <li>
+                <a href="/service" class="navbar-link" data-nav-link>Service</a>
+              </li>
+<!-- 
+              <li>
+                <a href="/blog" class="navbar-link" data-nav-link>Blog</a>
+              </li> -->
+
+              <li>
+                <a href="/contact" class="navbar-link" data-nav-link>Contact</a>
+              </li>
+
+            </ul>
+          </div>
+
+        </nav>
+
+        <div class="header-bottom-actions">
+
+          <button class="header-bottom-actions-btn" aria-label="Search"><a href="/search">
+            <ion-icon name="search-outline"></ion-icon>
+          </a>
+            <span>Search</span>
+          </button>
+
+          <!-- <button class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+
+            <span>Profile</span>
+          </button> -->
+
+          <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Profile</span>
+          </a>
+
+          <button class="header-bottom-actions-btn" aria-label="Cart">
+            <ion-icon name="cart-outline"></ion-icon>
+
+            <span>Cart</span>
+          </button>
+
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+
+            <span>Menu</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+
+  <div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+      <pre style="text-align: center; font: 0.6em sans-serif;">
+        Update the details of your product.
+        Ensure all information is correct for potential buyers.
+      </pre>
+      <form action="/update-product/<%= product._id %>" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="PATCH"> <!-- Method override for PATCH -->
+        <input type="hidden" name="productId" id="productId" value="<%= product._id %>" />
+  
+        <div class="formbold-mb-3">
+          <label for="title" class="formbold-form-label">Product Name: </label>
+          <input type="text" name="title" id="title" value="<%= product.title %>" class="formbold-form-input" required/>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="typeOfProduct" class="formbold-form-label"> Product Type: </label>
+          <select id="typeOfProduct" name="typeOfProduct" class="formbold-form-input" required>
+            <option value="" disabled>Select Product Type</option>
+            <option value="Crop" <%= product.typeOfProduct === 'Crop' ? 'selected' : '' %>>Crop</option>
+            <option value="Livestock" <%= product.typeOfProduct === 'Livestock' ? 'selected' : '' %>>Livestock</option>
+            <option value="Poultry" <%= product.typeOfProduct === 'Poultry' ? 'selected' : '' %>>Poultry</option>
+            <option value="Dairy" <%= product.typeOfProduct === 'Dairy' ? 'selected' : '' %>>Dairy</option>
+            <option value="Others" <%= product.typeOfProduct === 'Others' ? 'selected' : '' %>>Others</option>
+          </select>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="price" class="formbold-form-label"> Price: </label>
+          <input type="number" name="price" id="price" value="<%= product.price %>" class="formbold-form-input" required/>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="currency" class="formbold-form-label"> Currency: </label>
+          <select id="currency" name="currency" class="formbold-form-input" required>
+            <option value="SLL" <%= product.currency === 'SLL' ? 'selected' : '' %>>Sierra Leonean Leone (SLL)</option>
+            <option value="USD" <%= product.currency === 'USD' ? 'selected' : '' %>>United States Dollar (USD)</option>
+            <option value="EUR" <%= product.currency === 'EUR' ? 'selected' : '' %>>Euro (EUR)</option>
+          </select>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="phone" class="formbold-form-label"> Contact Phone: </label>
+          <input type="text" name="phone" id="phone" value="<%= product.phone %>" class="formbold-form-input" required/>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="location" class="formbold-form-label"> Location: </label>
+          <input type="text" name="location" id="location" value="<%= product.location %>" class="formbold-form-input" required/>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
+          <select id="negotiation" name="negotiation" class="formbold-form-input" required>
+            <option value="Negotiable" <%= product.negotiation === 'Negotiable' ? 'selected' : '' %>>Negotiable</option>
+            <option value="Non Negotiable" <%= product.negotiation === 'Non Negotiable' ? 'selected' : '' %>>Non Negotiable</option>
+          </select>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <input type="hidden" name="role" value="<%= user.role %>" />
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="createdBy" class="formbold-form-label"> Created By: </label>
+          <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="description" class="formbold-form-label"> Product Description: </label>
+          <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Describe the product in detail..."><%= product.description %></textarea>
+        </div>
+  
+        <!-- <div class="file-input-container">
+          <label for="photo" class="formbold-form-label"> Upload Images </label>
+          <input type="file" name="photo" class="formbold-form-file">
+          <input type="file" name="photo1" class="formbold-form-file">
+          <input type="file" name="photo2" class="formbold-form-file">
+        </div> -->
+  
+        <button type="submit" class="formbold-btn">Update Product</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById('status').addEventListener('change', function() {
+      const durationField = document.getElementById('durationField');
+      durationField.style.display = this.value === 'Rent' ? 'block' : 'none';
+    });
+  
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+  
+      fetch('/create-apartment', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+  
+  <script>
+    const fileInputs = document.querySelectorAll('.formbold-form-file');
+  
+    fileInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const fileName = this.files[0].name;
+        const placeholderId = this.dataset.placeholder.replace(/\s+/g, '-').toLowerCase() + '-placeholder';
+        const placeholder = document.getElementById(placeholderId);
+        
+        if (fileName) {
+          placeholder.textContent = fileName;
+        } else {
+          placeholder.textContent = 'No file chosen';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeHub - <%= user ? user.role : '' %></title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+   <!-- Custom CSS link -->
+   <link rel="stylesheet" href="/css/form.css">
+   <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+<style>
+    .header-bottom-actions {
+      display: flex;
+      justify-content: center;
+  }
+  
+  .header-bottom-actions-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none; /* Optional: remove underline */
+      margin: 0 10px; /* Adjust spacing between buttons */
+  }
+  
+  .header-bottom-actions-btn ion-icon {
+      margin-bottom: 5px; /* Adjust as needed */
+  }
+  </style>
+<body>
+
+   
+</head>
+<body>
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="/administrator" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator | <%= user ? user.username : '' %>
+                <% if (sudo) { %>
+                  <p>(Owner)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+              <% if (accountant) { %>
+                <p>(Accountant)</p>
+            <% } else { %>
+                <p></p> <!-- Empty paragraph -->
+            <% } %>
+              </span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+        
+        <a href="/admin-home" class="logo">
+          <img src="/images/hub.png" alt="Homehub logo">
+        </a>
+
+        <nav class="navbar" data-navbar>
+
+          <div class="navbar-top">
+<!-- 
+            <a href="#" class="logo">
+              <img src="./images/homehub-logo.jpg" alt="Homehub logo">
+            </a> -->
+
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+
+              <li>
+                <a href="/admin-home" class="navbar-link" data-nav-link>Home</a>
+              </li>
+
+              <li>
+                <a href="/all-admin-properties" class="navbar-link" data-nav-link>Apartments</a>
+              </li>
+
+              <li>
+                <a href="/admin-about" class="navbar-link" data-nav-link>About</a>
+              </li>
+
+              <li>
+                <a href="/admin-service" class="navbar-link" data-nav-link>Service</a>
+              </li>
+
+              <!-- <li>
+                <a href="/admin-blog" class="navbar-link" data-nav-link>Blog</a>
+              </li> -->
+
+              <li>
+                <a href="/admin-contact" class="navbar-link" data-nav-link>Contact</a>
+              </li>
+
+            </ul>
+          </div>
+
+        </nav>
+
+        <div class="header-bottom-actions">
+
+          <button class="header-bottom-actions-btn" aria-label="Search"><a href="/search-admin">
+            <ion-icon name="search-outline"></ion-icon>
+          </a>
+            <span>Search</span>
+          </button>
+
+          <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Profile</span>
+        </a>
+        
+          <button class="header-bottom-actions-btn" aria-label="Cart">
+            <ion-icon name="cart-outline"></ion-icon>
+
+            <span>Cart</span>
+          </button>
+
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+
+            <span>Menu</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1>Edit Staff</h1>
+    <form action="/update-staff/<%= staffs._id %>?_method=PATCH" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="dateOfEmployment" class="formbold-form-label">Date of Employment:</label>
+        <div>
+          <input
+            type="text"
+            name="dateOfEmployment"
+            id="dateOfEmployment"
+            class="formbold-form-input"
+            value="<%= staffs.dateOfEmployment %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="staffName" class="formbold-form-label">Staff Name:</label>
+        <div>
+          <input
+            type="text"
+            name="staffName"
+            id="staffName"
+            class="formbold-form-input"
+            value="<%= staffs.staffName %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="position" class="formbold-form-label">Position:</label>
+        <div>
+          <input
+            type="text"
+            name="position"
+            id="position"
+            placeholder="Position"
+            class="formbold-form-input"
+            value="<%= staffs.position %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label">Phone:</label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            value="<%= staffs.phone %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="email" class="formbold-form-label">Email:</label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address"
+            class="formbold-form-input"
+            value="<%= staffs.email %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label">Current Address:</label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          placeholder="Street address"
+          class="formbold-form-input formbold-mb-3"
+          value="<%= staffs.address %>"
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Street address line 2"
+          class="formbold-form-input"
+        />
+      </div>
+
+      <div>
+        <label for="status" class="formbold-form-label"> Status: </label>
+        <div>
+          <select id="status" class="formbold-form-input" name="status">
+          <option value="" disabled selected hidden>Select Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        </div>
+      </div>
+
+      <input type="hidden" name="createdBy" value="<%= user.fullname %>">
+      <input type="hidden" name="username" value="<%= user.username %>">
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">Comments:</label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

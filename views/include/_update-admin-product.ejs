@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Product</title>
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">
+      Update the details of your product.
+      Ensure all information is correct for potential buyers.
+    </pre>
+    <form action="/update-admin-products/<%= product._id %>" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_method" value="PATCH"> <!-- Method override for PATCH -->
+      <input type="hidden" name="productId" id="productId" value="<%= product._id %>" />
+
+      <div class="formbold-mb-3">
+        <label for="title" class="formbold-form-label">Product Name: </label>
+        <input type="text" name="title" id="title" value="<%= product.title %>" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="typeOfProduct" class="formbold-form-label"> Product Type: </label>
+        <select id="typeOfProduct" name="typeOfProduct" class="formbold-form-input" required>
+          <option value="" disabled>Select Product Type</option>
+          <option value="Crop" <%= product.typeOfProduct === 'Crop' ? 'selected' : '' %>>Crop</option>
+          <option value="Livestock" <%= product.typeOfProduct === 'Livestock' ? 'selected' : '' %>>Livestock</option>
+          <option value="Poultry" <%= product.typeOfProduct === 'Poultry' ? 'selected' : '' %>>Poultry</option>
+          <option value="Dairy" <%= product.typeOfProduct === 'Dairy' ? 'selected' : '' %>>Dairy</option>
+          <option value="Others" <%= product.typeOfProduct === 'Others' ? 'selected' : '' %>>Others</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="price" class="formbold-form-label"> Price: </label>
+        <input type="number" name="price" id="price" value="<%= product.price %>" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="currency" class="formbold-form-label"> Currency: </label>
+        <select id="currency" name="currency" class="formbold-form-input" required>
+          <option value="SLL" <%= product.currency === 'SLL' ? 'selected' : '' %>>Sierra Leonean Leone (SLL)</option>
+          <option value="USD" <%= product.currency === 'USD' ? 'selected' : '' %>>United States Dollar (USD)</option>
+          <option value="EUR" <%= product.currency === 'EUR' ? 'selected' : '' %>>Euro (EUR)</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="phone" class="formbold-form-label"> Contact Phone: </label>
+        <input type="text" name="phone" id="phone" value="<%= product.phone %>" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <input type="text" name="location" id="location" value="<%= product.location %>" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
+        <select id="negotiation" name="negotiation" class="formbold-form-input" required>
+          <option value="Negotiable" <%= product.negotiation === 'Negotiable' ? 'selected' : '' %>>Negotiable</option>
+          <option value="Non Negotiable" <%= product.negotiation === 'Non Negotiable' ? 'selected' : '' %>>Non Negotiable</option>
+        </select>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="avaliablity" class="formbold-form-label"> Availability: </label>
+          <select id="availabilty" class="formbold-form-input" name="availabilty">
+            <option value="" disabled selected hidden>Select Availability</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+        </select>
+        </div>
+          <div>
+            <label for="sponsored" class="formbold-form-label"> Sponsored: </label>
+            <select id="sponsored" class="formbold-form-input" name="sponsored">
+              <option value="" disabled selected hidden>Select Sponsored</option>
+              <option value="false">False</option>
+              <option value="true">True</option>
+          </select>
+          </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <input type="hidden" name="role" value="<%= user.role %>" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="createdBy" class="formbold-form-label"> Created By: </label>
+        <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="description" class="formbold-form-label"> Product Description: </label>
+        <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Describe the product in detail..."><%= product.description %></textarea>
+      </div>
+
+      <!-- <div class="file-input-container">
+        <label for="photo" class="formbold-form-label"> Upload Images </label>
+        <input type="file" name="photo" class="formbold-form-file">
+        <input type="file" name="photo1" class="formbold-form-file">
+        <input type="file" name="photo2" class="formbold-form-file">
+      </div> -->
+
+      <button type="submit" class="formbold-btn">Update Product</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

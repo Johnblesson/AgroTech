@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Frequency Pie Chart</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    #countryPieChart {
+      max-width: 800px;
+      max-height: 800px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #ff4d4f;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: fit-content;
+    }
+
+    .back-link:hover {
+      background-color: #ff7875;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="countryPieChart"></canvas>
+
+  <!-- Link to go back to the main page -->
+  <a href="/view-ip-addresses" class="back-link">Back to IP Table</a>
+
+  <script>
+    const ctx = document.getElementById('countryPieChart').getContext('2d');
+    const countryPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: <%- JSON.stringify(labels) %>,
+        datasets: [{
+          data: <%- JSON.stringify(data) %>,
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+        }]
+      }
+    });
+  </script>
+</body>
+</html>

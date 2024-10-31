@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/success.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <title>Delete Apartment</title>
+
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.success-message {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.success-message h1 {
+    color: hsl(9, 100%, 62%);;
+}
+
+.add-another-reception {
+    text-align: center;
+}
+
+.add-another-reception a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: hsl(9, 100%, 62%);;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-another-reception a:hover {
+    background-color: hsl(9, 83%, 55%);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-message">
+            <h1>Apartment Deleted Successfully!</h1>
+            <p>Apartment details have been deleted successfully.</p>
+        </div>
+        <div class="add-another-reception">
+            <a href="/go-back" id="go-back-link">Go Back</a>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('go-back-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.history.back();
+    });
+</script>
+</html>

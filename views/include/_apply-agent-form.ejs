@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">Apply for the agency program. 
+      Make sure you input your correct informations. We will notify when you are approved.
+    </pre>
+<form action="/agents" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="fullname" class="formbold-form-label"> Fullname: </label>
+        <div>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            readonly
+            class="formbold-form-input"
+            value="<%= user.fullname %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="email" class="formbold-form-label"> Email: </label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email (Optional)"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label">Current Address: </label>
+
+        <input
+          type="text"
+          name="address"
+          id="address"
+          placeholder="Street address"
+          class="formbold-form-input formbold-mb-3"
+          required
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Street address line 2"
+          class="formbold-form-input"
+        />
+      </div>
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments:
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+          placeholder="Add comments"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

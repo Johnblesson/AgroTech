@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Boost</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator <%= user ? user.username : '' %>
+                <% if (sudo) { %>
+                  <p>(Owner)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+
+              <% if (accountant) { %>
+                <p>(Accountant)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+
+              <% if (manager) { %>
+                <p>(General Manager)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+              </span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="formbold-main-wrapper">
+    
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper"> <h3></h3>
+      
+  <form action="/update-boost/<%= boost._id %>?_method=PATCH" method="POST">
+
+    <div class="formbold-mb-3 formbold-input-wrapp">
+      <label for="aid" class="formbold-form-label"> AID: </label>
+      <div>
+        <input
+          type="text"
+          name="applyAid"
+          id="aid"
+          value="<%= boost.applyAid %>"
+          class="formbold-form-input"
+          readonly
+        />
+      </div>
+    </div>
+  
+        <div class="formbold-mb-3 formbold-input-wrapp">
+          <label for="location" class="formbold-form-label"> Apartment Location: </label>
+          <div>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value="<%= boost.location %>"
+              class="formbold-form-input"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="formbold-mb-3 formbold-input-wrapp">
+            <label for="phone" class="formbold-form-label"> Phone: </label>
+            <div>
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                value="<%= boost.phone %>"
+                class="formbold-form-input"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="formbold-mb-3">
+            <label for="address" class="formbold-form-label"> Fullname </label>
+        <input
+          type="text"
+          name="createdBy"
+          class="formbold-form-input"
+          value="<%= boost.createdBy %>"
+            readonly
+        />
+        <label for="address" class="formbold-form-label"> Username </label>
+        <input
+          type="text"
+          name="username"
+          class="formbold-form-input"
+          value="<%= boost.username %>"
+          readonly
+        />
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="address" class="formbold-form-label"> Address </label>
+  
+          <input
+            type="text"
+            name="address"
+            id="address"
+            value="<%= boost.address %>"
+            class="formbold-form-input formbold-mb-3"
+            readonly
+          />
+          <input
+            type="text"
+            name="address2"
+            id="address2"
+            value="<%= boost.address2 %>"
+            class="formbold-form-input"
+          />
+        </div>
+  
+        
+        <div class="formbold-mb-3">
+            <label for="comments" class="formbold-form-label">
+              Comments
+            </label>
+            <textarea
+              rows="6"
+              name="comments"
+              id="comments"
+              class="formbold-form-input"
+              readonly
+            ><%= boost.comments %></textarea>
+          </div>
+
+          <div class="formbold-input-flex">
+            <div>
+              <label for="payment" class="formbold-form-label"> Payment: </label>
+              <div>
+                <select id="payment" class="formbold-form-input" name="payment">
+                <option value="" disabled selected hidden>Select payment</option>
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+              </select>
+              </div>
+            </div>
+    
+            <div>
+              <label for="Expiration" class="formbold-form-label"> Expiration: </label>
+              <div>
+                <select id="Expiration" class="formbold-form-input" name="expiration">
+                <option value="" disabled selected hidden>Select Expiration</option>
+                  <option value="vaild">Vaild</option>
+                  <option value="invaild">Invaild</option>
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class="formbold-mb-3 formbold-input-wrapp">
+            <label for="duration" class="formbold-form-label"> Duration: </label>
+            <div>
+              <input
+                type="text"
+                name="duration"
+                id="duration"
+                value="<%= boost.duration %>"
+                class="formbold-form-input"
+                placeholder="The date of payment to the date of Expiration (DD-MM-YYYY)"
+              />
+            </div>
+          </div>
+        <button type="submit" class="formbold-btn">Done</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

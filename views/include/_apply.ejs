@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">Apply for apartment. 
+      Make sure you input your correct informations.
+    </pre>
+<form action="/apply" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="location" class="formbold-form-label"> Apartment Location: </label>
+        <div>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            value="<%= location %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="apply-aid" class="formbold-form-label"> Apartment ID (AID): </label>
+        <div>
+          <input
+            type="text"
+            name="applyAid"
+            id="apply-aid"
+            class="formbold-form-input"
+            value="<%= 'AID' + aid %>"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label">Current Address: </label>
+
+        <input
+          type="text"
+          name="address"
+          id="address"
+          placeholder="Street address"
+          class="formbold-form-input formbold-mb-3"
+          required
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Street address line 2"
+          class="formbold-form-input"
+        />
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <input
+        type="hidden"
+        name="role"
+        value="<%= user.role %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments:
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+          placeholder="Add few comments"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

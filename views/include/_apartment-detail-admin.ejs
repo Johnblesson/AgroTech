@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Detail</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/apt-detail.css">
+     <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <style>
+        .carousel {
+            position: relative;
+        }
+        .download-btn {
+            position: absolute;
+            /* top: 10px; */
+            right: 1px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .carousel-item {
+            position: relative;
+            display: none;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .thumbnail {
+            width: 60px;
+            height: 40px;
+            margin: 0 5px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="property-list has-scrollbar">
+        <div class="property-item">
+            <div class="property-card">
+                <div class="carousel">
+                    <% if (apartment.photoUrls && apartment.photoUrls.length > 0) { %>
+                        <% apartment.photoUrls.forEach((photoUrl, index) => { %>
+                            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                <img src="<%= photoUrl %>" class="carousel-img" alt="Apartment Photo">
+                                <a href="<%= photoUrl %>" download class="download-btn">
+                                    <ion-icon name="download-outline"></ion-icon>
+                                </a>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="carousel-item active">
+                            <p>No photo available</p>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="thumbnail-container">
+                    <% if (apartment.photoUrls && apartment.photoUrls.length > 0) { %>
+                        <% apartment.photoUrls.forEach((photoUrl, index) => { %>
+                            <img src="<%= photoUrl %>" class="thumbnail <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>" alt="Thumbnail">
+                        <% }) %>
+                    <% } %>
+                </div>
+                <!-- Dynamic badges indicating availability and status -->
+                <div class="card-badge top-right"><%= apartment.availabilty %></div>
+                <div class="card-badge green top-left"><%= apartment.status %></div>
+
+                <div class="card-content">
+                    <!-- Dynamic price -->
+                    <div class="card-price">
+                        <strong><%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apartment.duration %> <p style="font-size: 12px;"><%= apartment.negotiation %></p>
+                    </div> 
+                    <!-- Dynamic title -->
+                    <h3 class="h3 card-title">
+                        <%= apartment.title %>
+                    </h3>
+                    <!-- Dynamic description -->
+                    <p class="card-text">
+                        <%= apartment.description %>
+                    </p>
+                    <!-- Additional details as needed -->
+                    <div class="card-details">
+                        <h3 class="card-title">
+                            Apartment Details
+                        </h3>
+                        <div class="card-text">
+                            <p><strong>Location:</strong> <%= apartment.location %></p>
+                            <p><strong>State:</strong> <%= apartment.state %></p>
+                            <p><strong>Bedrooms:</strong> <%= apartment.bedrooms %></p>
+                            <p><strong>Bathrooms:</strong> <%= apartment.bathrooms %></p>
+                            <p><strong>Square Footage:</strong> <%= apartment.squareFootage %> sq ft</p>
+                            <p><strong>Price:</strong> <%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %> <%= apartment.duration %></p>
+                            <p><strong>Negotiation:</strong> <%= apartment.negotiation %></p>
+                            <p><strong>Status:</strong> <%= apartment.status %></p>
+                            <p><strong>Availability:</strong> <%= apartment.availabilty %></p>
+                        </div>
+                        <div>
+                        <ul class="card-list">
+                            <!-- Placeholder for square footage -->
+                            <li class="card-item">
+                                <strong>Apartment ID (AID): AID<%= apartment.aid %></strong>
+                                <a href="/admin-application-form?aid=<%= apartment.aid %>&location=<%= apartment.location %>">
+                                    <span>Apply for this property.</span>
+                                    <button class="btn1">Apply</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <!-- Links container -->
+                <div class="apartment-links-container">
+                    <p>Before you apply for this apartment, make sure you have read the following:</p>
+                    <a href="/terms-and-conditions">Terms and Conditions</a>
+                    <a href="/services-fee-agreement">Service Fee Agreement</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                </div>
+
+                <div class="card-footer">
+                    <div class="card-author">
+                        <!-- Dynamic user fullname -->
+                        <p class="author-name"> Created by: <a href="#"><%= apartment.createdBy %></a></p>
+                        <!-- Dynamic user bio -->
+                        <p class="author-title">
+                            Created At: <%= apartment.formattedCreatedAt %> (<%= apartment.daysAgo %> days ago)
+                        </p>
+                    </div>
+                    <!-- <div class="card-footer-actions">
+                        <button class="card-footer-actions-btn">
+                            <ion-icon name="resize-outline"></ion-icon>
+                        </button>
+                        <button class="card-footer-actions-btn">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </button>
+                        <button class="card-footer-actions-btn">
+                            <ion-icon name="add-circle-outline"></ion-icon>
+                        </button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for carousel functionality
+        let slideIndex = 0;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        function showSlides() {
+            carouselItems.forEach(item => item.style.display = "none");
+            thumbnails.forEach(item => item.classList.remove('active'));
+            slideIndex++;
+            if (slideIndex > carouselItems.length) { slideIndex = 1 }
+            carouselItems[slideIndex - 1].style.display = "block";
+            thumbnails[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        function showSlide(index) {
+            carouselItems.forEach(item => item.classList.remove('active'));
+            thumbnails.forEach(item => item.classList.remove('active'));
+            carouselItems[index].classList.add('active');
+            thumbnails[index].classList.add('active');
+            slideIndex = index;
+        }
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => showSlide(index));
+        });
+
+        showSlides();
+    </script>
+
+    <!-- Ionicons CDN for icons -->
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Apartment</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    
+    <form action="/edit-admin-apartment/<%= apartment._id %>?_method=PATCH" method="POST">
+      <div class="formbold-input-flex">
+      <div>
+        <label for="aid" class="formbold-form-label"> AID: </label>
+        <input
+          type="text"
+          name="aid"
+          id="aid"
+          value="<%= apartment.aid %>"
+          class="formbold-form-input"
+          readonly
+        />
+      </div>
+    </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="title" class="formbold-form-label"> Title: </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value="<%= apartment.title %>"
+            class="formbold-form-input"
+          />
+        </div>
+
+        <div>
+          <label for="typeOfProperty" class="formbold-form-label"> Type of Property: </label>
+          <select id="typeOfProperty" class="formbold-form-input" name="typeOfProperty">
+            <option value="Apartment" <%= apartment.typeOfProperty === 'Apartment' ? 'selected' : '' %>>Apartment</option>
+            <option value="Land" <%= apartment.typeOfProperty === 'Land' ? 'selected' : '' %>>Land</option>
+            <option value="Shop" <%= apartment.typeOfProperty === 'Shop' ? 'selected' : '' %>>Shop</option>
+            <option value="Other" <%= apartment.typeOfProperty === 'Other' ? 'selected' : '' %>>Other</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+            <label for="price" class="formbold-form-label"> Price: </label>
+            <input
+            type="number"
+            name="price"
+            id="price"
+            value="<%= apartment.price %>"
+            class="formbold-form-input"
+            readonly
+            />
+        </div>
+
+        <div>
+          <label for="status" class="formbold-form-label"> Status: </label>
+          <select id="status" class="formbold-form-input" name="status">
+            <option value="" disabled selected hidden>Select Status</option>
+            <option value="Sell" <%= apartment.status === 'Sell' ? 'selected' : '' %>>Sell</option>
+            <option value="Rent" <%= apartment.status === 'Rent' ? 'selected' : '' %>>Rent</option>
+            <option value="Least" <%= apartment.status === 'Least' ? 'selected' : '' %>>Least</option>
+            <option value="Others" <%= apartment.status === 'Others' ? 'selected' : '' %>>Others</option>
+          </select>
+        </div>
+        
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value="<%= apartment.phone %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="state" class="formbold-form-label"> State: </label>
+        <input type="text" name="state" id="state" value="<%= apartment.state %>" class="formbold-form-input" />
+      </div>
+      
+
+      <div class="formbold-mb-3">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <input type="text" name="location" id="location" value="<%= apartment.location %>" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="bedrooms" class="formbold-form-label"> Bedrooms: </label>
+          <input
+            type="number"
+            name="bedrooms"
+            id="bedrooms"
+            value="<%= apartment.bedrooms %>"
+            class="formbold-form-input"
+          />
+        </div>
+
+        <div>
+          <label for="bathrooms" class="formbold-form-label"> Bathrooms: </label>
+          <input
+            type="number"
+            name="bathrooms"
+            id="bathrooms"
+            value="<%= apartment.bathrooms %>"
+            class="formbold-form-input"
+          />
+        </div>
+
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
+        <div>
+          <select id="negotiation" class="formbold-form-input" name="negotiation">
+            <option value="" disabled selected hidden>Select Negotiation</option>
+            <option value="Negotiable">Negotiable</option>
+            <option value="Non Negotiable">Non Negotiable</option>
+        </select>
+        </div>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="avaliablity" class="formbold-form-label"> Availability: </label>
+          <select id="availabilty" class="formbold-form-input" name="availabilty">
+            <option value="" disabled selected hidden>Select Availability</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+        </select>
+        </div>
+          <div>
+            <label for="sponsored" class="formbold-form-label"> Sponsored: </label>
+            <select id="sponsored" class="formbold-form-input" name="sponsored">
+              <option value="" disabled selected hidden>Select Sponsored</option>
+              <option value="false">False</option>
+              <option value="true">True</option>
+          </select>
+          </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label"> Address: </label>
+
+        <input
+          type="text"
+          name="address"
+          id="address"
+          value="<%= apartment.address %>"
+          class="formbold-form-input formbold-mb-3"
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Address 2 (Optional)"
+          value="<%= apartment.address2 %>"
+          class="formbold-form-input"
+        />
+      </div> 
+
+      <div class="formbold-mb-3">
+        <label for="description" class="formbold-form-label"> Description: </label>
+        <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Decribe your property..."><%= apartment.description %></textarea>
+      </div>
+      
+      <div class="formbold-mb-3">
+        <label for="createdBy" class="formbold-form-label"> Created By: </label>
+
+        <input
+          type="text"
+          name="createdBy"
+          id="createdBy"
+          value="<%= apartment.createdBy %>"
+          class="formbold-form-input formbold-mb-3"
+          readonly
+        />
+      </div>  
+
+      <button class="formbold-btn">Update Apartment</button>
+    </form>
+  </div>
+</div>
+<style>
+ 
+</style>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+
+<style>
+  .property-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Adjust the gap between grid items */
+    padding: 15px;
+    list-style: none;
+  }
+
+  .property-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .property-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .card-footer {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-author {
+    display: flex;
+    align-items: center;
+  }
+
+  .card-author .author-name a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card-footer-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .top-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(9, 100%, 62%);
+  }
+
+  .top-left {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .property-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
+
+<ul class="property-list has-scrollbar">
+  <% apartments.forEach(apt => { %>
+    <li class="property-item">
+      <div class="property-card">
+        <figure class="card-banner">
+          <% if (apt.photoUrl) { %>
+            <img src="<%= apt.photoUrl %>" alt="Apartment Photo">
+          <% } else { %>
+            <p>No photo available</p>
+          <% } %>
+
+          <div class="card-badge top-right"><%= apt.availabilty %></div>
+          <div class="card-badge green top-left"><%= apt.status %></div>
+
+          <div class="banner-actions">
+            <button class="banner-actions-btn">
+              <ion-icon name="location"></ion-icon>
+              <address><%= apt.location %></address>
+            </button>
+            <button class="banner-actions-btn">
+              <ion-icon name="bed-outline"></ion-icon>
+              <span><%= apt.bedrooms %></span>
+            </button>
+            <button class="banner-actions-btn">
+              <ion-icon name="man-outline"></ion-icon>
+              <span><%= apt.bathrooms %></span>
+            </button>
+          </div>
+        </figure>
+
+        <div class="card-content">
+          <div class="card-price">
+            <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+          </div>
+          <h3 class="h3 card-title">
+            <a href="/apartment-detail/<%= apt._id %>"><%= apt.title %></a>
+          </h3>
+          <p class="card-text">
+            <% if (apt.description && apt.description.length > 150) { %>
+              <%= apt.description.substring(0, 150) + "..." %>
+            <% } else { %>
+              <%= apt.description %>
+            <% } %>
+          </p>
+          <ul class="card-list">
+            <li class="card-item">
+              <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+              <a href="/apartment-detail/<%= apt._id %>">
+                <span>View Details</span>
+              </a>
+            </li>
+            <li class="card-item">
+              <strong>Boost Apartment</strong>
+              <a href="/apply-for-sponsorship?aid=<%= apt.aid %>&location=<%= apt.location %>">
+                <span>Boost Now</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <div class="card-author">
+            <div>
+              <p class="author-name"> Created by:
+                <a href="#"><%= apt.createdBy %></a>
+              </p>
+              <p class="author-title">
+                Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
+              </p>
+            </div>
+          </div>
+          <div class="card-footer-actions">
+            <a href="/update-apartment/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
+              <ion-icon name="create-outline"></ion-icon>
+            </a>
+            <form action="/apartments/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
+              <button type="submit" class="card-footer-actions-btn" title="Delete">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </li>
+  <% }); %>
+</ul>

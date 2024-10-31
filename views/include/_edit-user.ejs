@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update User</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    
+    <form action="/edit-user/<%= users._id %>?_method=PATCH" method="POST">
+      <div class="formbold-input-flex">
+        <div>
+          <label for="fullname" class="formbold-form-label"> Fullname </label>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            value="<%= users.fullname %>"
+            class="formbold-form-input"
+          />
+        </div>
+
+        <div>
+          <label for="title" class="formbold-form-label"> Username </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value="<%= users.username %>"
+            class="formbold-form-input"
+          />
+        </div>
+
+      </div>
+
+      
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="email" class="formbold-form-label"> Email: </label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value="<%= users.email %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone Number: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value="<%= users.phone %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="createdAt" class="formbold-form-label"> Created At: </label>
+        <div>
+          <input
+            type="text"
+            name="createdAt"
+            id="createdAt"
+            value="<%= users.createdAt %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="password" class="formbold-form-label"> Password: </label>
+        <div>
+          <input
+            type="text"
+            name="password"
+            id="password"
+            value="<%= users.password %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="status" class="formbold-form-label"> Status: </label>
+          <div>
+            <select id="status" class="formbold-form-input" name="status">
+            <option value="" disabled selected hidden>Select Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+          </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="role" class="formbold-form-label"> Role: </label>
+          <div>
+            <select id="role" class="formbold-form-input" name="role">
+            <option value="" disabled selected hidden>Select Role</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+              <option value="agent">Agent</option>
+          </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="formbold-input-flex">
+        <!-- <div>
+          <label for="sudo" class="formbold-form-label"> Sudo: </label>
+          <select id="sudo" class="formbold-form-input" name="sudo">
+            <option value="" disabled selected hidden>Select Options</option>
+            <option value="false">False</option>
+            <option value="true">True</option>
+        </select>
+        </div> -->
+
+        <!-- <div>
+          <label for="password" class="formbold-form-label">Password: </label>
+          <input type="password" id="password" class="formbold-form-input" placeholder="Enter password">
+        </div>
+        
+        <div>
+          <label for="sudo" class="formbold-form-label"> Sudo: </label>
+          <select id="sudo" class="formbold-form-input" name="sudo" disabled>
+            <option value="" disabled selected hidden>Select Options</option>
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+        </div> -->
+
+        <div>
+          <label for="accountant" class="formbold-form-label"> Accountant: </label>
+          <select id="accountant" class="formbold-form-input" name="accountant">
+            <option value="" disabled selected hidden>Select Options</option>
+            <option value="false">False</option>
+            <option value="true">True</option>
+        </select>
+        </div>
+      </div>
+      <div class="formbold-input-flex">
+        <div>
+          <label for="manager" class="formbold-form-label">Managing Director: </label>
+          <select id="manager" class="formbold-form-input" name="manager">
+            <option value="" disabled selected hidden>Select Options</option>
+            <option value="false">False</option>
+            <option value="true">True</option>
+        </select>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- <div class="formbold-form-file-flex">
+        <label for="apartmentsPhoto" class="formbold-form-label">
+          Upload Property Image
+        </label>
+        <input
+          type="file"
+          name="apartmentsPhoto"
+          id="apartmentsPhoto"
+          class="formbold-form-file"
+        />
+      </div> -->
+
+      <button class="formbold-btn">Update User Account</button>
+    </form>
+  </div>
+</div>
+<!-- <script>
+  document.getElementById('password').addEventListener('input', function() {
+    const passwordField = document.getElementById('password');
+    const sudoField = document.getElementById('sudo');
+    const correctPassword = '123456'; // Set your password here
+
+    if (passwordField.value === correctPassword) {
+      sudoField.removeAttribute('disabled');
+    } else {
+      sudoField.setAttribute('disabled', 'disabled');
+    }
+  });
+</script> -->
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Verification</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    
+    <form action="/update-admin-products/<%= product._id %>?_method=PATCH" method="POST">
+      <div class="formbold-mb-3">
+        <div>
+          <label for="pid" class="formbold-form-label"> PID: </label>
+          <input
+            type="text"
+            name="pid"
+            id="pid"
+            value="<%= product.pid %>"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+        <div class="formbold-mb-3">
+            <div>
+              <label for="verification" class="formbold-form-label"> Verification </label>
+              <select id="verification" class="formbold-form-input" name="verification" required>
+            <option value="" disabled selected hidden>Select Verification</option>
+                <option value="verified">Verified</option>
+                <option value="not verified">Not Verified</option>
+            </select>
+        </div>
+          </div>
+        <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value="<%= product.phone %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="location" class="formbold-form-label"> Location </label>
+        <div>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            value="<%= product.location %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="createdBy" class="formbold-form-label"> Created by: </label>
+        <div>
+          <input
+            type="text"
+            name="createdBy"
+            value="<%= product.createdBy  %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+ 
+      <button class="formbold-btn">Verified Product</button>
+    </form>
+  </div>
+</div>
+<style>
+ 
+</style>
+
+</body>
+</html>

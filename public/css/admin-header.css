@@ -1,0 +1,127 @@
+.header-bottom-actions {
+    display: flex;
+    justify-content: center;
+}
+  
+  .header-bottom-actions-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none; /* Optional: remove underline */
+      margin: 0 10px; /* Adjust spacing between buttons */
+  }
+  
+  .header-bottom-actions-btn ion-icon {
+      margin-bottom: 5px; /* Adjust as needed */
+  }
+
+
+  .alert {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+
+
+  /* Dropdown Button */
+.dropbtn {
+    /* background-color: hsl(9, 100%, 62%); */
+    color: white;
+    padding: 5px 10px;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.arrow {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Dropdown Links */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown content when the button is clicked */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: hsl(9, 100%, 62%);
+}
+
+
+
+/* Dropdown menu styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  min-width: 160px;
+  z-index: 1000;
+  padding: 10px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
+
+.dropdown-item {
+  color: #333;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Light background on hover */
+  color: #007bff; /* Text color on hover */
+}
+
+/* Adjust dropdown to align correctly */
+.dropdown-menu li {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  padding: 8px 15px;
+}

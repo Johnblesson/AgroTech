@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update profile</title>
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<style>
+  .file-input-container {
+    display: grid;
+    grid-template-columns: 1fr; /* One column for vertical alignment */
+    gap: 10px; /* Adjust the gap between input elements */
+  }
+
+  .formbold-form-file {
+    /* Add your styling for file inputs here */
+    /* Example styles */
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+</style>
+<style>
+  .file-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the gap between input elements */
+  }
+
+  .formbold-form-file {
+    /* Add your styling for file inputs here */
+    /* Example styles */
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+
+  .file-name-placeholder {
+    /* Add your styling for filename placeholders here */
+    /* Example styles */
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .file-input-container {
+      gap: 5px; /* Reduce the gap for smaller screens */
+    }
+
+    .formbold-form-file {
+      /* Adjust styling for smaller screens */
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    .file-name-placeholder {
+      font-size: 12px; /* Reduce font size for smaller screens */
+    }
+  }
+</style>
+<body>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1 style="font-size: 18px; text-align: center;">Update Profile</h1>
+    <form action="/update-profile/<%= users._id %>?_method=PATCH" method="POST" class="edit-profile-form">
+      <input type="hidden" name="aid" id="aid" class="formbold-form-input" />
+
+      <div class="formbold-mb-3">
+        <label for="title" class="formbold-form-label"> Fullname: </label>
+        <input type="text" name="title" id="title" value="<%= users.fullname %>" class="formbold-form-input" />
+      </div>
+
+
+      <div class="formbold-mb-3">
+        <label for="username" class="formbold-form-label"> Username: </label>
+        <input type="text" name="username" id="username" value="<%= users.username %>" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="email" class="formbold-form-label"> Email: </label>
+        <input type="email" name="email" id="location" value="<%= users.email %>" class="formbold-form-input" />
+      </div>
+
+        <div class="formbold-mb-3">
+            <label for="phone" class="formbold-form-label"> Phone: </label>
+            <input type="text" name="phone" id="phone" value="<%= users.phone %>" class="formbold-form-input" />
+        </div>
+
+        <div class="formbold-mb-3">
+            <label for="bio" class="formbold-form-label"> Bio: </label>
+            <textarea rows="6" name="bio" id="bio" class="formbold-form-input"><%= users.bio %></textarea>
+          </div>
+
+      <button type="submit" class="formbold-btn">Update</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

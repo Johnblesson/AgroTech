@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Posting Form</title>
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">
+      Enter the complete details of your product. 
+      Ensure all information is correct so buyers can reach out. 
+      We’ll connect you to potential buyers soon!
+    </pre>
+    <form action="create-product" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="productId" id="productId" class="formbold-form-input" />
+
+      <div class="formbold-mb-3">
+        <label for="title" class="formbold-form-label"> Product Name: </label>
+        <input type="text" name="title" id="title" placeholder="Enter Product Name" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="typeOfProduct" class="formbold-form-label"> Product Type: </label>
+        <select id="typeOfProduct" name="typeOfProduct" class="formbold-form-input" required>
+          <option value="" disabled selected hidden>Select Product Type</option>
+          <option value="Crop">Crop</option>
+          <option value="Livestock">Livestock</option>
+          <option value="Poultry">Poultry</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="price" class="formbold-form-label"> Price: </label>
+        <input type="number" name="price" id="price" placeholder="Enter Price" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="currency" class="formbold-form-label"> Currency: </label>
+        <select id="currency" name="currency" class="formbold-form-input" required>
+          <option value="" disabled selected>Select Currency</option>
+          <option value="SLL">Sierra Leonean Leone (SLL)</option>
+          <option value="USD">United States Dollar (USD)</option>
+          <option value="EUR">Euro (EUR)</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="phone" class="formbold-form-label"> Contact Phone: </label>
+        <input type="text" name="phone" id="phone" placeholder="Phone Number" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <input type="text" name="location" id="location" placeholder="Location" class="formbold-form-input" required/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="region" class="formbold-form-label"> Region: </label>
+        <select id="region" name="region" class="formbold-form-input" required>
+          <option value="" disabled selected hidden>Select Region</option>
+          <option value="Western Region">Western Region</option>
+          <option value="Eastern Region">Eastern Region</option>
+          <option value="Southern Region">Southern Region</option>
+          <option value="Northern Region">Northern Region</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
+        <select id="negotiation" name="negotiation" class="formbold-form-input" required>
+          <option value="" disabled selected hidden>Is the price negotiable?</option>
+          <option value="Negotiable">Negotiable</option>
+          <option value="Non Negotiable">Non Negotiable</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="description" class="formbold-form-label"> Product Description: </label>
+        <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Describe the product in detail..."></textarea>
+      </div>
+
+      <div class="formbold-mb-3">
+        <input type="hidden" name="role" value="<%= user.role %>" class="formbold-form-input"/>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="createdBy" class="formbold-form-label"> Created By: </label>
+        <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+      </div>
+
+      <div class="file-input-container">
+        <label for="photos" class="formbold-form-label"> Upload Images </label>
+        <input type="file" name="photo" class="formbold-form-file" required>
+        <input type="file" name="photo1" class="formbold-form-file">
+        <input type="file" name="photo2" class="formbold-form-file">
+      </div>
+
+      <button type="submit" class="formbold-btn">Add Product</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/create-product', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="container mt-5 mx-auto">
+    <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><%= contact.createdBy %> || <%= contact.username %></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col py-3">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item"> Message</li>
+                        <li class="breadcrumb-item active"><%= contact.phone %></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col text-end fw-lighter">
+                <b>Last Updated <%= new Date(contact.updatedAt).toUTCString() %> </b>
+                <b>UserId:</b> <%= contact._id %>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item"> 
+            <div class="row">
+                <div class="col" style="max-width: 140px"> <b>Full Name:</b></div>
+                <div class="col"><%= contact.fullname %></div>
+            </div>
+        </li>
+        <li class="list-group-item"> 
+            <div class="row">
+                <div class="col" style="max-width: 140px"> <b>Phone Number:</b></div>
+                <div class="col"><%= contact.phone %></div>
+            </div>
+          </li>
+        </li>
+        <li class="list-group-item"> 
+          <div class="row">
+              <div class="col" style="max-width: 140px"> <b>Message:</b></div>
+              <div class="col"><%= contact.msg %></div>
+          </div>
+      </li>
+<li class="list-group-item"> 
+  <div class="row">
+    <div class="col" style="max-width: 140px"> <b>Date Created:</b></div>
+    <div class="col"><%= contact.createdAt %></div>
+  </div>
+</li>
+
+<li class="list-group-item"> 
+  <div class="row">
+    <div class="col" style="max-width: 140px"> <b>Date Modified:</b></div>
+    <div class="col"><%= contact.updatedAt %></div>
+  </div>
+</li>
+    </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  // JavaScript code for exporting to Excel
+  document.getElementById("exportBtn").addEventListener("click", function() {
+      // Logic for exporting to Excel goes here
+      // You can use a library like SheetJS (https://sheetjs.com/) for Excel export
+  });
+</script>
+</body>
+</html>

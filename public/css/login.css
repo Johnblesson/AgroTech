@@ -1,0 +1,144 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+
+span {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+a {
+    display: block;
+    text-align: right;
+    margin: 10px 0;
+    color: #512da8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #5c6bc0, #512da8);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #512da8;
+}
+
+p {
+    text-align: center;
+    margin: 20px 0 0;
+    color: #512da8;
+}
+
+p a {
+    /* color: #333; */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* p a:hover {
+    text-decoration: none;
+} */
+
+/*-----------------------------------*\
+  #LOGO
+\*-----------------------------------*/
+.logo-container {
+    display: flex; /* Use Flexbox to center contents */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if the container has a height */
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4CAF50; /* Choose a green shade for an agricultural theme */
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.logo:hover {
+    color: #fff;
+    background-color: #4CAF50;
+    text-decoration: none;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="file"] {
+        width: calc(100% - 20px); /* Reduce input box width further */
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+
+    button {
+        padding: 12px; /* Increase button padding for easier tapping */
+        font-size: 16px;
+    }
+}

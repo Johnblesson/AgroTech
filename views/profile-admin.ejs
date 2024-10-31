@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/profile.css" />
+
+  </head>
+  <body>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+
+        <div class="img__container">
+          <% if (users.photoUrl) { %>
+            <img src="<%= users.photoUrl %>" alt="Apartment Photo">
+          <% } else { %>
+            <p>No photo available</p>
+          <% } %>
+            
+        </div>
+
+        <h2><%= users.fullname %></h2>
+        <p><%= '@' + users.username %></p>
+        <p><%= users.email %></p>
+        <p><%= users.role %> || <%= users.status %></p>
+        <p><%= users.createdAt %></p>
+        
+
+          <ul class="about">
+            <li><span>4,073</span>Followers</li>
+            <li><span>322</span>Following</li>
+            <li><span>200,543</span>Attraction</li>
+          </ul>
+
+          <div class="content">
+            <p>
+                <%= users.bio %>
+            </p>
+
+            <form action="/update-admin-profile/<%= users._id %>">
+            <button type="submit" class="edit">Edit Profile</button>
+            </form>
+            <ul>
+              <li><i class="fab fa-twitter"></i></li>
+              <i class="fab fa-pinterest"></i>
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-dribbble"></i>
+            </ul>
+          </div>
+        </div>
+        <div class="right__col">
+          <nav>
+            <ul>
+              <li><a href="">posts</a></li>
+              <li><a href="">galleries</a></li>
+              <li><a href=""onclick="goBack()">home</a></li>
+              <li><a href="/create-apartment-admin">create post</a></li>
+            </ul>
+            <button>Follow</button>
+          </nav>
+
+          <!-- <div class="photos">
+            <img src="/images/img_1.avif" alt="Photo" />
+            <img src="/images/img_2.avif" alt="Photo" />
+            <img src="/images/img_3.avif" alt="Photo" />
+            <img src="/images/img_4.avif" alt="Photo" />
+            <img src="/images/img_5.avif" alt="Photo" />
+            <img src="/images/img_6.avif" alt="Photo" />
+          </div> -->
+
+          <ul class="property-list has-scrollbar">
+            <% apartments.forEach(apt => { %>
+              <li class="property-item">
+                <div class="property-card">
+                  <figure class="card-banner">
+                    <!-- Dynamic image source -->
+                    <% if (apt.relativePath) { %>
+                      <img src="<%= apt.relativePath %>" alt="<%= apt.title %>" />
+                    <% } else { %>
+                      <!-- Default image placeholder if photo doesn't exist -->
+                      <img src="/path/to/default/image.jpg" alt="default image" />
+                    <% } %>
+          
+                    <!-- Dynamic badge indicating availability -->
+                  <div class="card-badge top-right"><%= apt.availabilty %></div>
+          
+                    <!-- Dynamic badge indicating status (e.g., For Rent, For Sale) -->
+                   <!-- Dynamic badge indicating status -->
+                  <div class="card-badge green top-left"><%= apt.status %></div>
+          
+                    <div class="banner-actions">
+                      <!-- Button with location information -->
+                      <button class="banner-actions-btn">
+                        <ion-icon name="location"></ion-icon>
+                        <address><%= apt.location %></address>
+                      </button>
+                      <!-- Button with number of bedrooms -->
+                      <button class="banner-actions-btn">
+                        <ion-icon name="bed-outline"></ion-icon>
+                        <span><%= apt.bedrooms %></span>
+                      </button>
+                      <!-- Button with number of bathrooms -->
+                      <button class="banner-actions-btn">
+                        <ion-icon name="man-outline"></ion-icon>
+                        <span><%= apt.bathrooms %></span>
+                      </button>
+                    </div>
+                  </figure>
+                  <div class="card-content">
+                    <!-- Dynamic price -->
+                    <div class="card-price">
+                      <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+                    </div> 
+                    <!-- Dynamic title -->
+                    <h3 class="h3 card-title">
+                      <a href="#"><%= apt.title %></a>
+                    </h3>
+                    <!-- Dynamic description -->
+                    <p class="card-text">
+                      <%= apt.description %>
+                    </p>
+                    <ul class="card-list">
+                      <!-- Placeholder for square footage -->
+                      <li class="card-item">
+                        <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+                        <a href="/admin-application-form?aid=<%= apt.aid %>&location=<%= apt.location %>">
+                          <span>Contact site: Administrator</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-footer">
+                    <div class="card-author">
+                      <div>
+                        <!-- Dynamic user fullname -->
+                        <p class="author-name"> Created by:
+                          <a href=""><%= apt.createdBy %></a>
+                        </p>
+                        <!-- Dynamic user bio -->
+                        <p class="author-title"></p>
+                      </div>
+                    </div>
+                    <div class="card-footer-actions">
+                      <!-- Action buttons (placeholders) -->
+                      <button class="card-footer-actions-btn">
+                        <ion-icon name="resize-outline"></ion-icon>
+                      </button>
+                      <button class="card-footer-actions-btn">
+                        <ion-icon name="heart-outline"></ion-icon>
+                      </button>
+                      <button class="card-footer-actions-btn">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+          
+        
+
+
+        </div>
+      </div>
+    </div>
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+  </script>
+  </body>
+</html>
+

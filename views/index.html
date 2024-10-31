@@ -1,0 +1,288 @@
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "7ed5629e-e9e9-4c3c-91f5-a9f0c076fecb",
+    });
+  });
+</script>
+
+
+
+
+
+
+<div class="header-bottom-actions">
+
+  <button class="header-bottom-actions-btn" aria-label="Search"><a href="/search">
+    <ion-icon name="search-outline"></ion-icon>
+  </a>
+    <span>Search</span>
+  </button>
+
+  <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+    <ion-icon name="person-outline"></ion-icon>
+    <span>Profile</span>
+  </a>
+
+  <a href="/all-properties" class="header-bottom-actions-btn" aria-label="Home">
+    <ion-icon name="home-outline"></ion-icon>
+    <span>Properties</span>
+  </a>
+
+  <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+    <ion-icon name="menu-outline"></ion-icon>
+
+    <span>Menu</span>
+  </button>
+
+</div>
+
+
+
+
+<!-- Certainly! Here’s a structured documentation outline for your agents:
+
+---
+
+**HomeHub Agency External Agent Program Documentation**
+
+---
+
+### 1. **Introduction**
+
+Welcome to the HomeHub Agency External Agent Program! This document provides a comprehensive guide on how to participate, earn commissions, and make the most of our program.
+
+### 2. **Program Overview**
+
+HomeHub Agency connects buyers and sellers in the real estate market. As an external agent, you can earn commissions by referring buyers, posting property listings, or both. Our commission structure ensures you are rewarded for your efforts in facilitating successful transactions.
+
+### 3. **How to Get Started**
+
+**3.1. Registration**
+- Visit [www.homehubng.com](http://www.homehubng.com) and navigate to the External Agent Program page.
+- Complete the registration form with your personal details and contact information.
+- Submit your application for review.
+
+**3.2. Training and Resources**
+- Once approved, you will receive access to training materials and resources to help you get started.
+- Participate in any available webinars or workshops to familiarize yourself with our platform and processes.
+
+### 4. **Earning Commissions**
+
+**4.1. Commission Rates**
+- **Buyer Referrals**: Earn 5% commission of the total transaction amount for each successful purchase made by a buyer you refer.
+- **Property Listings**: Earn 5% commission of the total transaction amount for each property you post on our platform that is successfully sold or rented.
+
+**4.2. Commission Structure**
+- HomeHub Agency retains a 10% commission on each transaction.
+- From this 10%, 5% is allocated to you, and the remaining 5% is retained by HomeHub Agency.
+
+### 5. **Transaction Process**
+
+**5.1. Referring Buyers**
+- Provide your referred buyer with the necessary details and ensure they register and complete the purchase through HomeHub Agency.
+- Track the progress of your referral through your agent dashboard.
+
+**5.2. Posting Properties**
+- Submit property listings through your agent dashboard.
+- Ensure all property details are accurate and complete.
+- Monitor the status of your listings and follow up as needed.
+
+### 6. **Commission Payments**
+
+**6.1. Payment Schedule**
+- Commissions are paid out on a [monthly/bi-weekly] basis, following the completion of the transaction.
+- Payments will be made through [bank transfer/paypal/other payment methods].
+
+**6.2. Tracking and Reporting**
+- Access your commission statements and transaction history through your agent dashboard.
+- For any discrepancies or issues, contact our support team.
+
+### 7. **Program Policies**
+
+**7.1. Compliance**
+- Adhere to HomeHub Agency’s terms and conditions.
+- Ensure all activities comply with applicable real estate regulations and ethical standards.
+
+**7.2. Termination**
+- Either party may terminate the agreement with [notice period] if needed.
+- Any outstanding commissions will be processed upon termination.
+
+### 8. **Contact Information**
+
+For any questions or support, please contact:
+- **Email**: [support@homehubng.com](mailto:support@homehubng.com)
+- **Phone**: [Your contact number]
+- **Address**: [Your office address]
+
+### 9. **FAQs**
+
+**Q1: How do I check the status of my referrals and listings?**
+- Use the agent dashboard to view updates and track your referrals and listings.
+
+**Q2: What if I have issues with a transaction?**
+- Contact our support team immediately for assistance.
+
+---
+
+This document can be formatted as a PDF and made available for download on your website or shared directly with your agents. Let me know if you need any additional details or modifications! -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/user-message.css" />
+  <title>Your Messages</title>
+  <style>
+   
+  </style>
+</head>
+<body>
+  <!-- Go Back Button -->
+  <a href="/go-back" class="go-back-btn">Go Back</a>
+
+  <h1>Your Messages</h1>
+  
+  <% messages.forEach(message => { %>
+    <div class="message-card">
+      <div class="message-info">
+        <form action="/delete-user-message/<%= message._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');">
+          <button type="submit" class="remove-icon" title="Remove">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </form>
+        <strong>From:</strong> <%= message.senderId ? (message.senderId.fullname || message.senderId.username) : 'Unknown' %> (Administrator)<br>
+        <strong>Date:</strong> <%= new Date(message.date).toLocaleString() %>
+      </div>
+      <div class="message-content">
+        <strong>Message:</strong> <%= message.message %>
+      </div>
+      <% if (message.link) { %>
+        <a href="<%= message.link %>" class="message-link" target="_blank">Click here to view the attachment</a>
+      <% } %>
+      
+      <!-- Reply Button -->
+    <a href="/reply/<%= message._id %>" class="reply-btn">Reply</a>
+    </div>
+  <% }) %>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Message History</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .table-wrapper {
+      margin-top: 50px;
+    }
+    h1 {
+      margin-bottom: 30px;
+      color: #343a40;
+    }
+    .table {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .table thead {
+      background-color: #343a40;
+      color: #fff;
+    }
+    .table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .no-messages {
+      color: #6c757d;
+      font-size: 18px;
+    }
+    .remove-icon {
+      background: none;
+      border: none;
+      color: #dc3545;
+      cursor: pointer;
+    }
+    .remove-icon i {
+      font-size: 18px;
+    }
+    .remove-icon:hover i {
+      color: #bd2130;
+    }
+  </style>
+</head>
+<body>
+  <div class="container table-wrapper">
+    <h1 class="text-center">Message History</h1>
+    
+    <% if (messages.length === 0) { %>
+      <p class="no-messages text-center">No messages found.</p>
+    <% } else { %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Sender</th>
+            <th>Recipient</th>
+            <th>Message</th>
+            <th>Date Sent</th>
+            <th>Action</th> <!-- New column for action (delete) -->
+          </tr>
+        </thead>
+        <tbody>
+          <% messages.forEach((message, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= message.sender ? message.sender.fullname : 'System' %></td>
+              <td><%= message.fullname %> (<%= message.username %>)</td>
+              <td><%= message.message %></td>
+              <td><%= moment(message.date).format('DD-MM-YYYY HH:mm') %></td>
+              <td>
+                <form action="/admin-delete-user-message/<%= message.userId %>/<%= message.messageId %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');">
+                  <button type="submit" class="remove-icon" title="Remove">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<!-- Dynamic createdAt -->
+<p class="author-title">
+  Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
+  Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
+</p>

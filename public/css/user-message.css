@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 60px;
+  }
+  .go-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: hsl(9, 100%, 62%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .go-back-btn:hover {
+    background-color: #c0392b;
+  }
+  .message-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .message-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .message-card .message-content {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  .no-messages {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+  }
+  .message-info {
+    font-size: 14px;
+    color: #666;
+  }
+  .remove-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: hsl(9, 100%, 62%);
+    text-decoration: none;
+  }
+  .remove-icon:hover {
+    color: #c0392b;
+  }
+  .remove-icon i {
+    font-size: 16px;
+  }
+  .message-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    word-wrap: break-word;
+  }
+  .message-link:hover {
+    text-decoration: underline;
+  }
+
+ /* Reply section */
+  .reply-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .reply-btn:hover {
+    background-color: #0056b3;
+  }
+
+
+  /* Style for replies dropdown */
+  .replies-dropdown {
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .replies-toggle {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+    display: inline-block;
+  }
+  .reply-item {
+    border-top: 1px solid #ddd;
+    padding: 8px 0;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 24px;
+      margin-top: 40px;
+    }
+    .go-back-btn {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    .message-card {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .go-back-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .message-card {
+      padding: 10px;
+    }
+  }

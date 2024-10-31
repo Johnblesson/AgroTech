@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">
+      Send us a message for more information. 
+      Make sure you input your correct informations,
+      we will get back to you as soon as possible.
+    </pre>
+<form action="/contact" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="fullname" class="formbold-form-label"> Full Name: </label>
+        <div>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            value="<%= user.fullname %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <div>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Location"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="msg" class="formbold-form-label">
+            Message:
+        </label>
+        <textarea
+          rows="6"
+          name="msg"
+          id="msg"
+          class="formbold-form-input"
+          placeholder="Enter your message here..."
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

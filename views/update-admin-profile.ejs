@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+    <div class="header__wrapper">
+        <header></header>
+        <div class="cols__container">
+            <div class="left__col">
+                <div class="img__container">
+                    <% if (users.photoUrl) { %>
+                        <img src="<%= users.photoUrl %>" alt="Apartment Photo">
+                      <% } else { %>
+                        <p>No photo available</p>
+                      <% } %>
+                    <span></span>
+                </div>
+                <h2><%= users.fullname %></h2>
+                <p><%= '@' + users.username %></p>
+                <p><%= users.email %></p>
+                <p><%= users.role %> || <%= users.status %></p>
+                <p><%= users.createdAt %></p>
+
+                <ul class="about">
+                    <li><span>4,073</span>Followers</li>
+                    <li><span>322</span>Following</li>
+                    <li><span>200,543</span>Attraction</li>
+                </ul>
+
+                <div class="content">
+                    <p>
+                        
+                    </p>
+
+                        
+                    </form>
+
+                    <ul class="social-icons">
+                        <li><i class="fab fa-twitter"></i></li>
+                        <li><i class="fab fa-pinterest"></i></li>
+                        <li><i class="fab fa-facebook"></i></li>
+                        <li><i class="fab fa-dribbble"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right__col">
+                <nav>
+                    <ul>
+                        <li><a href="">posts</a></li>
+                        <li><a href="">galleries</a></li>
+                        <li><a href="/admin-home">home</a></li>
+                        <li><a href="">about</a></li>
+                    </ul>
+                    <button>Follow</button>
+                </nav>
+
+                <div class="updateform">
+                    <!-- Edit profile form will be inserted here -->
+                    <form action="/update-admin-profile/<%= users._id %>?_method=PATCH" method="POST" class="edit-profile-form">
+                        <!-- <label for="fullname">Full Name</label> -->
+                        <input type="text" id="fullname" name="fullname"  value="<%= users.fullname %>">
+                        
+                        <!-- <label for="username">Username</label> -->
+                        <input type="text" id="username" name="username" value="<%= users.username %>">
+                        
+                        <!-- <label for="email">Email</label> -->
+                        <input type="email" id="email" name="email" value="<%= users.email %>">
+
+                        <label for="bio">Bio</label>
+                        <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
+
+                        <button type="submit" class="edit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

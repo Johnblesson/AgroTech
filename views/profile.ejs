@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
+  <body>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+
+          <% if (users.photoUrl) { %>
+            <img src="<%= users.photoUrl %>" alt="Apartment Photo">
+          <% } else { %>
+            <p>No photo available</p>
+          <% } %>
+    <span></span>
+</div>
+        <h2><%= users.fullname %></h2>
+        <p><%= '@' + users.username %></p>
+        <p><%= users.email %></p>
+        <p><%= users.role %> || <%= users.status %></p>
+        <p><%= users.createdAt %></p>
+        
+
+          <ul class="about">
+            <li><span>4,073</span>Followers</li>
+            <li><span>322</span>Following</li>
+            <li><span>200,543</span>Attraction</li>
+          </ul>
+
+          <div class="content">
+            <p>
+                <%= users.bio %>
+            </p>
+
+            <form action="/update-profile/<%= users._id %>">
+            <button type="submit" class="edit">Edit Profile</button>
+            </form>
+            <ul>
+              <li><i class="fab fa-twitter"></i></li>
+              <i class="fab fa-pinterest"></i>
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-dribbble"></i>
+            </ul>
+          </div>
+        </div>
+        <div class="right__col">
+          <nav>
+            <ul>
+              <li><a href="">posts</a></li>
+              <li><a href="">galleries</a></li>
+              <li><a href="" onclick="goBack()">home</a></li>
+              <li><a href="/create-apartment">create post</a></li>
+            </ul>
+            <button>Follow</button>
+          </nav>
+
+          <!-- <div class="photos">
+            <img src="/images/img_1.avif" alt="Photo" />
+            <img src="/images/img_2.avif" alt="Photo" />
+            <img src="/images/img_3.avif" alt="Photo" />
+            <img src="/images/img_4.avif" alt="Photo" />
+            <img src="/images/img_5.avif" alt="Photo" />
+            <img src="/images/img_6.avif" alt="Photo" />
+          </div> -->
+
+          <!-- include all-properties -->
+          <%- include('include/_my-post', { apartments: apartments }) %>
+          <!-- /include all-properties -->
+        </div>
+      </div>
+    </div>
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+  </script>
+  </body>
+</html>
+

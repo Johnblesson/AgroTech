@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="./css/settings.css">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+    <!-- Page Heading -->
+    <!-- <h2 class="page-heading">Settings</h2> -->
+    <!-- Card Container -->
+    <div class="card-container">
+        <a href="/update-profile/<%= user._id %>" class="card">Edit profile</a>
+        <a href="/update-password/<%= user._id %>" class="card">Change password</a>
+        <a href="/setup-2fa" class="card">2F Authentication</a>
+        <a href="#" class="card"  onclick="redirectToFaq('<%= role %>')">Homehub FAQ</a>
+        <a href="/login-history" class="card">Devices</a>
+        <a href="/logout" class="card">Logout</a>
+    </div>
+
+    <div class="two-factor-form">
+        <h2 class="page-heading">Two-Factor Authentication</h2>
+        <form action="/2fa" method="POST">
+          <label>
+            <input type="radio" name="twoFactorAuth" value="enable" <%= user.twoFactorEnabled ? 'checked' : '' %>> Enable 2FA
+          </label>
+          <label>
+            <input type="radio" name="twoFactorAuth" value="disable" <%= !user.twoFactorEnabled ? 'checked' : '' %>> Disable 2FA
+          </label>
+          <button type="submit">Save Changes</button>
+        </form>
+        
+        <% if (user.twoFactorEnabled) { %>
+          <p>2FA is currently <strong>enabled</strong>.</p>
+        <% } else { %>
+          <p>2FA is currently <strong>disabled</strong>.</p>
+        <% } %>
+      </div>
+
+      <script>
+         // Redirect to the faq page
+          function redirectToFaq(role) {
+              if (role === 'admin') {
+                  window.location.href = '/faq-admin';
+              } else if (role === 'user') {
+                  window.location.href = '/faq';
+              }
+          }
+      </script>
+
+</body>
+</html>

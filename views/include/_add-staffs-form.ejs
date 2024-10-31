@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Staffs</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1>Staff form</h1>
+<form action="/add-staffs" method="POST">
+
+  <div class="formbold-mb-3 formbold-input-wrapp">
+    <label for="dateOfEmployment" class="formbold-form-label"> Date of Employment: </label>
+    <div>
+      <input
+        type="date"
+        name="dateOfEmployment"
+        id="dateOfEmployment"
+        class="formbold-form-input"
+        required
+      />
+    </div>
+  </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="staffName" class="formbold-form-label"> Staff Name: </label>
+        <div>
+          <input
+            type="text"
+            name="staffName"
+            id="staffName"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="position" class="formbold-form-label"> Position: </label>
+        <div>
+          <input
+            type="text"
+            name="position"
+            id="position"
+            placeholder="Position"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="email" class="formbold-form-label"> Email: </label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label">Current Address </label>
+
+        <input
+          type="text"
+          name="address"
+          id="address"
+          placeholder="Street address"
+          class="formbold-form-input formbold-mb-3"
+          required
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Street address line 2"
+          class="formbold-form-input"
+        />
+      </div>
+
+      <div>
+        <label for="status" class="formbold-form-label"> Status: </label>
+        <div>
+          <select id="status" class="formbold-form-input" name="status">
+          <option value="" disabled selected hidden>Select Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        </div>
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

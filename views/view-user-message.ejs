@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/user-message.css" />
+  <title>Your Messages</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <!-- Go Back Button -->
+  <a href="/go-back" class="go-back-btn">Go Back</a>
+
+  <h1>Your Messages</h1>
+  
+  <% messages.forEach(message => { %>
+    <div class="message-card">
+      <div class="message-info">
+        <form action="/delete-user-message/<%= message._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');">
+          <button type="submit" class="remove-icon" title="Remove">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </form>
+        <strong>From:</strong> <%= message.senderId ? (message.senderId.fullname || message.senderId.username) : 'Unknown' %> (Administrator)<br>
+        <strong>Date:</strong> <%= new Date(message.date).toLocaleString() %>
+      </div>
+      <div class="message-content">
+        <strong>Message:</strong> <%= message.message %>
+      </div>
+      <% if (message.link) { %>
+        <a href="<%= message.link %>" class="message-link" target="_blank">Click here to view the attachment</a>
+      <% } %>
+
+      <!-- Reply Button -->
+      <a href="/reply/<%= message._id %>" class="reply-btn">Reply</a>
+      
+      <!-- Check if the message has replies -->
+      <% if (message.replies && message.replies.length > 0) { %>
+        <!-- Toggle to show/hide replies -->
+        <div class="replies-toggle" onclick="toggleReplies('<%= message._id %>')">See Replies (<%= message.replies.length %>)</div>
+        
+        <!-- Replies Dropdown -->
+        <div class="replies-dropdown" id="replies-<%= message._id %>" style="display: none;">
+          <% message.replies.forEach(reply => { %>
+            <div class="reply-item">
+              <strong>Reply from <%= reply.senderId ? (reply.senderId.fullname || reply.senderId.username) : 'Unknown' %>:</strong><br>
+              <%= reply.replyMessage %><br>
+              <small><em><%= new Date(reply.date).toLocaleString() %></em></small>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  <% }) %>
+
+  <script>
+    // Function to toggle the visibility of the replies dropdown
+    function toggleReplies(messageId) {
+      const repliesDiv = document.getElementById(`replies-${messageId}`);
+      if (repliesDiv.style.display === 'none') {
+        repliesDiv.style.display = 'block';
+      } else {
+        repliesDiv.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

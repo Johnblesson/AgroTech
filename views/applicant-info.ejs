@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 
+    - favicon
+    -->
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="container mt-5 mx-auto">
+    <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button id="shareBtn" type="button" onclick="window.print()" class="btn btn-sm btn-outline-secondary">Share as PDF</button>
+            <button id="exportBtn" type="button" onclick="window.print()" class="btn btn-sm btn-outline-secondary">Export as PDF</button>
+        </div>
+    </div>
+    </div>
+
+    <div class="col py-3">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Applicant Information</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="#"> Apartment</a></li> -->
+                        <li class="breadcrumb-item active"><%= apply.applyAid %></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col text-end fw-lighter">
+                <b>Last Updated <%= new Date(apply.updatedAt).toUTCString() %> </b>
+                <!-- <b>applyId:</b>  apply._id  -->
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item"> 
+            <div class="row">
+                <div class="col" style="max-width: 140px"> <b>Apartment ID (AID):</b></div>
+                <div class="col"><%= apply.applyAid %></div>
+            </div>
+        </li>
+
+        <li class="list-group-item"> 
+            <div class="row">
+                <div class="col" style="max-width: 140px"> <b>Property Location:</b></div>
+                <div class="col"><%= apply.location %></div>
+            </div>
+          </li>
+          
+        <li class="list-group-item"> 
+          <div class="row">
+              <div class="col" style="max-width: 140px"> <b>Applicant Fullname:</b></div>
+              <div class="col"><%= apply.createdBy %></div>
+          </div>
+      </li>
+       
+        <li class="list-group-item"> 
+            <div class="row">
+                <div class="col" style="max-width: 140px"> <b>Username:</b></div>
+                <div class="col"><%= apply.username %></div>
+            </div>
+        </li>
+<li class="list-group-item"> 
+  <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Phone Number:</b></div>
+      <div class="col"><%= apply.phone %></div>
+  </div>
+</li>
+
+<li class="list-group-item"> 
+  <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Applicant Address:</b></div>
+      <div class="col"><%= apply.address %></div>
+  </div>
+</li>
+<li class="list-group-item"> 
+  <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Role:</b></div>
+      <div class="col"><%= apply.role %></div>
+  </div>
+</li>
+<li class="list-group-item"> 
+  <div class="row">
+    <div class="col" style="max-width: 140px"> <b>Date Created:</b></div>
+    <div class="col"><%= apply.createdAt %></div>
+  </div>
+</li>
+
+<li class="list-group-item"> 
+  <div class="row">
+    <div class="col" style="max-width: 140px"> <b>Date Modified:</b></div>
+    <div class="col"><%= apply.updatedAt %></div>
+  </div>
+</li>
+    </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  // JavaScript code for exporting to Excel
+  document.getElementById("exportBtn").addEventListener("click", function() {
+      // Logic for exporting to Excel goes here
+      // You can use a library like SheetJS (https://sheetjs.com/) for Excel export
+  });
+</script>
+ <!-- Include html2pdf.js library -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+ <!-- <script src="/js/pdf.js"></script> -->
+</body>
+</html>

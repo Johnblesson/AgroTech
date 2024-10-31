@@ -1,0 +1,206 @@
+<style>
+    .property-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Adjust the gap between grid items */
+    padding: 15px;
+    list-style: none;
+  }
+  
+  .property-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .property-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .card-content {
+    padding: 16px;
+  }
+
+
+    /* Card Footer*/
+    .card-footer-actions {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+    .card-footer-actions-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .card-footer-actions-btn ion-icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+    .card-footer-actions-btn span {
+      font-size: 14px;
+    }
+/* Card Footer*/
+
+  
+  .card-footer {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-author {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-author .author-name a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .card-footer-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .top-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(9, 100%, 62%);
+  }
+  
+  .top-left{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .property-list {
+      grid-template-columns: repeat(1, 1fr); /* One column on mobile devices */
+    }
+  }
+  
+  </style>
+  
+  <ul class="property-list has-scrollbar">
+    <% apartments.forEach(apt => { %>
+      <li class="property-item">
+        <a href="/login">
+        <div class="property-card">
+          <figure class="card-banner">
+
+            <!-- Dynamic image -->
+          <% if (apt.photoUrl) { %>
+            <img src="<%= apt.photoUrl %>" alt="Apartment Photo">
+          <% } else { %>
+            <p>No photo available</p>
+          <% } %>
+
+            <!-- Dynamic badge indicating availability -->
+          <div class="card-badge top-right"><%= apt.availabilty %></div>
+  
+            <!-- Dynamic badge indicating status (e.g., For Rent, For Sale) -->
+           <!-- Dynamic badge indicating status -->
+          <div class="card-badge green top-left"><%= apt.status %></div>
+  
+            <div class="banner-actions">
+              <!-- Button with location information -->
+              <button class="banner-actions-btn">
+                <ion-icon name="location"></ion-icon>
+                <address><%= apt.location %></address>
+              </button>
+              <!-- Button with number of bedrooms -->
+              <button class="banner-actions-btn">
+                <ion-icon name="bed-outline"></ion-icon>
+                <span><%= apt.bedrooms %></span>
+              </button>
+              <!-- Button with number of bathrooms -->
+              <button class="banner-actions-btn">
+                <ion-icon name="man-outline"></ion-icon>
+                <span><%= apt.bathrooms %></span>
+              </button>
+            </div>
+          </figure>
+          <div class="card-content">
+            <!-- Dynamic price -->
+            <div class="card-price">
+              <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+            </div> 
+            <!-- Dynamic title -->
+            <h3 class="h3 card-title">
+              <a href="/login"><%= apt.title %></a>
+            </h3>
+            <!-- Dynamic description -->
+            <p class="card-text">
+              <% if (apt.description && apt.description.length > 250) { %>
+                <%= apt.description.substring(0, 250) + "..." %>
+            <% } else { %>
+                <%= apt.description %>
+            <% } %>
+            </p>
+            <ul class="card-list">
+              <!-- Placeholder for square footage -->
+              <li class="card-item">
+                <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+                <a href="/signup">
+                  <span>Register to see details and more...</span>
+                  <span>Sign Up</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <div class="card-author">
+              <div>
+                <!-- Dynamic CreatedBy -->
+                <p class="author-name"> Created by:
+                  <a href="#"><%= apt.createdBy %></a>
+                </p>
+                <!-- Dynamic createdAt -->
+                <!-- <p class="author-title">
+
+                </p> -->
+              </div>
+            </div>
+            <div class="card-footer-actions">
+              <!-- Action buttons (placeholders) -->
+              <!-- <button class="card-footer-actions-btn">
+                <ion-icon name="resize-outline"></ion-icon>
+              </button>
+              <button class="card-footer-actions-btn">
+                <ion-icon name="heart-outline"></ion-icon>
+              </button>
+              <button class="card-footer-actions-btn">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </button> -->
+              <button class="card-footer-actions-btn">
+                <ion-icon name="eye-outline"></ion-icon>
+                <span><%= apt.clicks %></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </a>
+      </li>
+    <% }); %>
+  </ul>
+  

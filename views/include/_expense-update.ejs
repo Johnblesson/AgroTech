@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1>Expenses form</h1>
+<form action="/update-expenses/<%= expenses._id %>?_method=PATCH" method="POST">
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="date" class="formbold-form-label"> Date: </label>
+        <div>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            value="<%= expenses.date %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="purpose" class="formbold-form-label"> Description/ Purpose: </label>
+        <div>
+          <input
+            type="text"
+            name="purpose"
+            id="purpose"
+            value="<%= expenses.purpose %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="amount" class="formbold-form-label"> Amount: </label>
+        <div>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            value="<%= expenses.amount %>"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="receivedBy" class="formbold-form-label">Received by: </label>
+
+        <input
+          type="text"
+          name="receivedBy"
+          id="receivedBy"
+          value="<%= expenses.receivedBy %>"
+          class="formbold-form-input formbold-mb-3"
+        />
+        <input
+          type="text"
+          name="approvedBy"
+          id="approvedBy"
+        value="<%= expenses.approvedBy %>"
+          class="formbold-form-input"
+        />
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.createdBy  %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+        ><%= expenses.comments %></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

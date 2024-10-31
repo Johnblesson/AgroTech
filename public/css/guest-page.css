@@ -1,0 +1,152 @@
+.header-bottom-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-bottom-actions-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  .header-bottom-actions-btn ion-icon {
+    margin-bottom: 5px;
+  }
+
+
+  /* Dropdown menu styles */
+.dropdown {
+position: relative;
+}
+
+.dropdown-menu {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: #ffffff;
+border: 1px solid #ddd;
+min-width: 160px;
+z-index: 1000;
+padding: 10px 0;
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+display: block; /* Show dropdown on hover */
+}
+
+.dropdown-item {
+color: #333;
+padding: 10px 15px;
+text-decoration: none;
+display: block;
+white-space: nowrap;
+}
+
+.dropdown-item:hover {
+background-color: #f8f9fa; /* Light background on hover */
+color: #007bff; /* Text color on hover */
+}
+
+/* Adjust dropdown to align correctly */
+.dropdown-menu li {
+padding: 0;
+margin: 0;
+}
+
+.dropdown-menu li a {
+padding: 8px 15px;
+}
+
+
+.hero-text {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+background-color: #f8f9fa;
+border-radius: 8px;
+margin-top: 20px;
+}
+
+.signup-text {
+color: hsl(9, 100%, 62%);
+font-weight: 600;
+}
+
+.signup-text:hover {
+color: #007bff;
+text-decoration: underline;
+}
+
+
+/* Modal container - hidden by default */
+.modal {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      }
+
+      /* Modal content box */
+      .modal-content {
+          background-color: #fff;
+          margin: 15% auto;
+          padding: 20px;
+          border-radius: 10px;
+          width: 80%;
+          max-width: 400px;
+          text-align: center;
+      }
+
+      /* Close button */
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+
+      /* Close button hover */
+      .close:hover, .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      /* Centering the buttons container */
+      .button-container {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+      }
+
+      /* Modal buttons */
+      .modal-button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 0 10px;
+      }
+
+      /* Primary button (Sign Up) */
+      .primary-btn {
+          background-color: #28a745;
+          color: white;
+      }
+
+      /* Secondary button (No, Thanks) */
+      .secondary-btn {
+          background-color: #ccc;
+          color: black;
+      }

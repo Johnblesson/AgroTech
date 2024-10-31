@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+
+  .detail-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .property-card {
+    width: 80%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .card-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .card-content, .card-footer {
+    padding: 16px;
+  }
+
+  .card-footer {
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-author {
+    display: flex;
+    align-items: center;
+  }
+
+  .card-author .author-name a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card-footer-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: hsl(9, 100%, 62%);
+    padding: 5px 10px;
+    color: #fff;
+    border-bottom-left-radius: 8px;
+  }
+
+  .top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    padding: 5px 10px;
+    color: #fff;
+    border-bottom-right-radius: 8px;
+  }
+
+  .details {
+    padding: 16px;
+    width: 80%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .details h2 {
+    margin-top: 0;
+  }
+
+  .details p {
+    margin-bottom: 8px;
+  }
+
+  .details ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .details ul li {
+    background: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .details ul li:last-child {
+    border-bottom: none;
+  }
+
+  .back-button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .property-card, .details {
+      width: 95%;
+    }
+  }

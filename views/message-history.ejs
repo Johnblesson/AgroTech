@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Message History</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .table-wrapper {
+      margin-top: 50px;
+    }
+    .title-card {
+      background-color: #ff6f00; /* Orange background color */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .title-card h1 {
+      color: #fff; /* White text color */
+      margin: 0;
+    }
+    .card {
+      background-color: hsl(227, 29%, 13%);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background-color: #dc3545; /* Red background color */
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .reply-card {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #ffffff;
+    }
+    .remove-icon {
+      background: none;
+      border: none;
+      color: #000000;
+      cursor: pointer;
+    }
+    .remove-icon i {
+      font-size: 18px;
+    }
+    .remove-icon:hover i {
+      color: #bd2130;
+    }
+    .no-replies {
+      color: #6c757d;
+      font-size: 14px;
+    }
+    .btn-link {
+      color: #fff; /* Change text color to white */
+      text-decoration: none; /* Remove underline */
+    }
+    .btn-link:hover {
+      color: #ccc; /* Optional: Change color on hover */
+      text-decoration: none; /* Ensure no underline on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container table-wrapper">
+    <!-- Title Card -->
+    <div class="card title-card text-center">
+      <h1 class="mb-0">Message History</h1>
+    </div>
+    
+    <% if (messages.length === 0) { %>
+      <p class="no-messages text-center">No messages found.</p>
+    <% } else { %>
+      <% messages.forEach((message, index) => { %>
+        <div class="card">
+          <div class="card-header" id="heading<%= index %>">
+            <h5 class="mb-0">
+              <button class="btn btn-link btn-replies" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+                <strong>Message:</strong> <%= message.message %>
+              </button>
+            </h5>
+            <form action="/admin-delete-user-message/<%= message.userId %>/<%= message._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');" style="display:inline-block;">
+              <button type="submit" class="remove-icon" title="Remove">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
+          </div>
+          
+          <div id="collapse<%= index %>" class="collapse" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+            <div class="card-body">
+              <p style="color: #f8f9fa;"><strong>Date Sent:</strong> <%= moment(message.date).format('DD-MM-YYYY HH:mm') %></p>
+              <p style="color: #f8f9fa;"><strong>Sender:</strong> <%= message.sender ? (message.sender.fullname || message.sender.username) : 'Unknown' %></p>
+              <p style="color: #f8f9fa;"><strong>Recipient:</strong> <%= message.fullname %> (<%= message.username %>)</p>              
+              <% if (message.replies && message.replies.length > 0) { %>
+                <h6 style="color: #f8f9fa;"><strong>Replies:</strong></h6>
+                <% message.replies.forEach((reply) => { %>
+                  <div class="reply-card">
+                    <strong>Reply:</strong> <%= reply.replyMessage %><br>
+                    <small><strong>From:</strong> <%= reply.senderId ? (reply.senderId.fullname || reply.senderId.username) : 'Unknown' %> | <strong>Date:</strong> <%= new Date(reply.date).toLocaleString() %></small>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <p class="no-replies">No replies yet.</p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

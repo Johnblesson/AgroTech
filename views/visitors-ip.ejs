@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Addresses of Visitors</title>
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/visitors-ip.css">
+</head>
+<body>
+  <div class="container">
+    <h1>IP Addresses of Visitors</h1>
+    <input type="text" id="searchInput" placeholder="Search IP addresses" onkeyup="filterTable()">
+    <table id="ipTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>IP Address</th>
+          <th>Country</th>
+          <th>Country Name</th>
+          <th>Timestamp</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ipAddresses.forEach(function(ip, index) { %>
+          <tr>
+            <td><%= index + 1 + (currentPage - 1) * 10 %></td>
+            <td><%= ip.ip %></td>
+            <td><%= ip.country %></td>
+            <td><%= ip.countryName %></td>
+            <td><%= new Date(ip.timestamp).toLocaleString() %></td>
+            <td>
+            <a href="#" onclick="deleteIPAddress('<%= ip._id %>')"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i>
+                  <button type="submit" class="delete-btn">Delete</button>
+            </a>
+            <a href="/ip-address-details/<%= ip._id %>"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i>
+              <button type="submit" class="delete-btn">Details</button>
+          </a>
+              </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+      <% } %>
+    
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+      <% } %>
+    
+      <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>">Next &raquo;</a>
+      <% } %>
+    </div>
+
+    <!-- Container for centering the links -->
+<div class="center-links">
+  <a href="/metrics" class="metrics-link">View Metrics</a>
+  <a href="/cities" class="metrics-link">View Cities</a>
+  <a href="/pie-chart" class="metrics-link">Pie Metrics</a>
+  <a href="/country-metrics" class="metrics-link">Total Visits</a>
+</div>
+  </div>
+</body>
+<script src="/js/visitors-ip.js"></script>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Apartments</title>
+  <link rel="stylesheet" href="./css/search.css">
+  <style>
+  
+  </style>
+</head>
+<body>
+  <h1>Search Apartments</h1>
+  <div class="search-container">
+    <form method="GET" action="/search-admin">
+      <select name="location">
+        <option value="">Select location</option>
+        <% locations.forEach(loc => { %>
+          <option value="<%= loc %>"><%= loc %></option>
+        <% }); %>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+    <form method="GET" action="/search-admin">
+      <input type="text" name="location" placeholder="Enter location here">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <ul class="property-list has-scrollbar">
+    <% apartments.forEach(apt => { %>
+      <li class="property-item">
+        <a href="/application-form?aid=<%= apt.aid %>&location=<%= apt.location %>">
+          <div class="property-card">
+            <figure class="card-banner">
+              <% if (apt.photoUrl) { %>
+                <img src="<%= apt.photoUrl %>" alt="Apartment Photo">
+              <% } else { %>
+                <p>No photo available</p>
+              <% } %>
+
+              <div class="card-badge top-right"><%= apt.availabilty %></div>
+              <div class="card-badge green top-left"><%= apt.status %></div>
+
+              <div class="banner-actions">
+                <button class="banner-actions-btn">
+                  <ion-icon name="location"></ion-icon>
+                  <address><%= apt.location %></address>
+                </button>
+                <button class="banner-actions-btn">
+                  <ion-icon name="bed-outline"></ion-icon>
+                  <span><%= apt.bedrooms %></span>
+                </button>
+                <button class="banner-actions-btn">
+                  <ion-icon name="man-outline"></ion-icon>
+                  <span><%= apt.bathrooms %></span>
+                </button>
+              </div>
+            </figure>
+
+            <div class="card-content">
+              <div class="card-price">
+                <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+              </div>
+              <h3 class="h3 card-title">
+                <a href="/application-form?aid=<%= apt.aid %>&location=<%= apt.location %>"><%= apt.title %></a>
+              </h3>
+              <p class="card-text">
+                <%= apt.description %>
+              </p>
+              <ul class="card-list">
+                <li class="card-item">
+                  <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+                  <a href="/application-form?aid=<%= apt.aid %>&location=<%= apt.location %>">
+                    <span>Contact site: Administrator</span>
+                    <span>Apply</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <div class="card-author">
+                <div>
+                  <p class="author-name">Created by:
+                    <a href="#"><%= apt.createdBy %></a>
+                  </p>
+                  <p class="author-title">
+                    Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
+                  </p>
+                </div>
+              </div>
+              <div class="card-footer-actions">
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="resize-outline"></ion-icon>
+                </button>
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </button>
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>

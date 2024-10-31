@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Reply to Message</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 60px;
+    }
+    .reply-form {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .message-info {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #555;
+    }
+    .message-content {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+    textarea {
+      width: 96%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: hsl(9, 100%, 62%);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .flash-message {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .flash-message.success {
+      color: #28a745;
+    }
+    .flash-message.error {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reply to Message</h1>
+
+  <!-- Flash Messages -->
+  <% if (successMessage) { %>
+    <div class="flash-message success">
+      <i class="fas fa-check-circle"></i> <%= successMessage %>
+    </div>
+  <% } %>
+  <% if (errorMessage) { %>
+    <div class="flash-message error">
+      <i class="fas fa-exclamation-circle"></i> <%= errorMessage %>
+    </div>
+  <% } %>
+
+  <div class="reply-form">
+    <div class="message-info">
+      <strong>From:</strong> <%= message.senderId ? (message.senderId.fullname || message.senderId.username) : 'Unknown' %> <br>
+      <strong>Date:</strong> <%= new Date(message.date).toLocaleString() %>
+    </div>
+    <div class="message-content">
+      <strong>Message:</strong> <%= message.message %>
+    </div>
+
+    <!-- Reply Form -->
+    <form action="/reply/<%= message._id %>" method="POST">
+      <textarea name="replyMessage" rows="4" placeholder="Type your reply here..." required></textarea>
+      <button type="submit">Send Reply</button>
+    </form>
+  </div>
+</body>
+</html>

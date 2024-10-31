@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Application</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name=""></ion-icon>
+
+              <span><%= greeting %> Administrator <%= user ? user.username : '' %>
+                <% if (sudo) { %>
+                  <p>(Owner)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+
+              <% if (accountant) { %>
+                <p>(Accountant)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+
+              <% if (manager) { %>
+                <p>(General Manager)</p>
+              <% } else { %>
+                  <p></p> <!-- Empty paragraph -->
+              <% } %>
+              </span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="formbold-main-wrapper">
+    
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper"> <h3>UPDATE APPLICATION</h3>
+      
+  <form action="/update-admin-application/<%= apply._id %>?_method=PATCH" method="POST">
+
+    <div class="formbold-mb-3 formbold-input-wrapp">
+      <label for="aid" class="formbold-form-label"> AID: </label>
+      <div>
+        <input
+          type="text"
+          name="applyAid"
+          id="aid"
+          value="<%= apply.applyAid %>"
+          class="formbold-form-input"
+          readonly
+        />
+      </div>
+    </div>
+  
+        <div class="formbold-mb-3 formbold-input-wrapp">
+          <label for="phone" class="formbold-form-label"> Phone: </label>
+          <div>
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              value="<%= apply.phone %>"
+              class="formbold-form-input"
+              readonly
+            />
+          </div>
+        </div>
+  
+        <div class="formbold-mb-3 formbold-input-wrapp">
+          <label for="location" class="formbold-form-label"> Apartment Location: </label>
+          <div>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value="<%= apply.location %>"
+              class="formbold-form-input"
+              readonly
+            />
+          </div>
+        </div>
+  
+        <div class="formbold-mb-3">
+          <label for="address" class="formbold-form-label"> Address </label>
+  
+          <input
+            type="text"
+            name="address"
+            id="address"
+            value="<%= apply.address %>"
+            class="formbold-form-input formbold-mb-3"
+            readonly
+          />
+          <input
+            type="text"
+            name="address2"
+            id="address2"
+            value="<%= apply.address2 %>"
+            class="formbold-form-input"
+          />
+        </div>
+  
+        <div class="formbold-mb-3">
+            <label for="address" class="formbold-form-label"> Fullname </label>
+        <input
+          type="text"
+          name="createdBy"
+          class="formbold-form-input"
+          value="<%= apply.createdBy %>"
+            readonly
+        />
+        <label for="address" class="formbold-form-label"> Username </label>
+        <input
+          type="text"
+          name="username"
+          class="formbold-form-input"
+          value="<%= apply.username %>"
+          readonly
+        />
+        </div>
+        <div class="formbold-mb-3">
+            <label for="comments" class="formbold-form-label">
+              Comments
+            </label>
+            <textarea
+              rows="6"
+              name="comments"
+              id="comments"
+              class="formbold-form-input"
+              readonly
+            ><%= apply.comments %></textarea>
+          </div>
+
+          <div class="formbold-mb-3 formbold-input-wrapp">
+            <label for="assignedStaff" class="formbold-form-label">Assigned Staff:</label>
+            <div>
+              <input
+                type="text"
+                name="assignedStaff"
+                id="assignedStaff"
+                value="<%= apply.staffInCharge %>"
+                class="formbold-form-input"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="formbold-mb-3 formbold-input-wrapp">
+            <label for="staffInCharge" class="formbold-form-label"> Staff in Charge: </label>
+            <div>
+              <select name="staffInCharge" class="formbold-form-input" id="staffInCharge">
+                <% staffNames.forEach(staffName => { %>
+                  <option value="" disabled selected hidden>Select Staff</option>
+                  <option value="<%= staffName %>"><%= staffName %></option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+          
+  
+        <button type="submit" class="formbold-btn">Done</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

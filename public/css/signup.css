@@ -1,0 +1,175 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.social-icons .icon {
+    text-decoration: none;
+    color: #fff;
+    background: #512da8;
+    padding: 10px;
+    border-radius: 50%;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.social-icons .icon:hover {
+    background: linear-gradient(to right, #5c6bc0, #512da8);
+}
+
+span {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #5c6bc0, #512da8);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #512da8;
+}
+
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input[type="password"] {
+    width: calc(100% - 40px); /* Adjust input width to accommodate icon */
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+div {
+            margin-bottom: 10px;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            padding: 4px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+            border: none;
+        }
+        input[type="checkbox"]:checked::after {
+            content: '\2713';
+            font-size: 10px;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 3px;
+        }
+        label {
+            margin-left: -2px;
+            color: #555555;
+            font-size: 10px;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .social-icons .icon {
+        margin: 0 5px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .social-icons .icon {
+        margin: 0 5px;
+    }
+
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="file"] {
+        width: calc(100% - 20px); /* Reduce input box width further */
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+
+    button {
+        padding: 12px; /* Increase button padding for easier tapping */
+        font-size: 16px;
+    }
+}
+
+

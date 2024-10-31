@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment Details</title>
+<style>
+  .header-bottom-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.header-bottom-actions-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none; /* Optional: remove underline */
+    margin: 0 10px; /* Adjust spacing between buttons */
+}
+
+.header-bottom-actions-btn ion-icon {
+    margin-bottom: 5px; /* Adjust as needed */
+}
+
+
+
+
+
+/* Dropdown menu styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  min-width: 160px;
+  z-index: 1000;
+  padding: 10px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
+
+.dropdown-item {
+  color: #333;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Light background on hover */
+  color: #007bff; /* Text color on hover */
+}
+
+/* Adjust dropdown to align correctly */
+.dropdown-menu li {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  padding: 8px 15px;
+}
+
+
+</style>
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+
+        <ul class="header-top-list">
+
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <!-- <ion-icon name="location-outline"></ion-icon> -->
+
+              <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+            <!-- Add nigeria Flag -->
+            <li>
+              <a href="#" class="header-top-social-link">
+                <img src="/images/ng.png" alt="nigeria" style="width: 20px; height: 20px; border-radius: 50%;">
+              </a>
+            </li>
+          <form action="/logout" method="get">
+          <button class="header-top-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+
+        <!-- <a href="/home" class="logo">
+          <img style="width: 50%;" src="./images/hub.jpg" alt="Homeverse logo">
+        </a> -->
+
+        <a href="/home" class="logo">
+          <img src="/images/hub.png" alt="Homehub logo">
+        </a>
+        
+
+        <nav class="navbar" data-navbar>
+
+          <div class="navbar-top">
+
+            <a href="#" class="logo">
+              <img src="/images/logo.png" alt="Homeverse logo">
+            </a>
+
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+          
+              <li>
+                <a href="/home" class="navbar-link" data-nav-link>Home</a>
+              </li>
+          
+              <li class="dropdown">
+                <a href="#" class="navbar-link dropdown-toggle" data-nav-link>Properties</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/all-properties" class="dropdown-item">All Properties</a></li>
+                  <li><a href="/sell" class="dropdown-item">For Sell</a></li>
+                  <li><a href="/rent" class="dropdown-item">For Rent</a></li>
+                  <li><a href="/lease" class="dropdown-item">For Lease</a></li>
+                </ul>
+              </li>
+          
+              <li>
+                <a href="/my-post" class="navbar-link" data-nav-link>My Listings</a>
+              </li>
+          
+              <li>
+                <a href="/service" class="navbar-link" data-nav-link>Service</a>
+              </li>
+          
+              <!-- 
+              <li>
+                <a href="/blog" class="navbar-link" data-nav-link>Blog</a>
+              </li> 
+              -->
+          
+              <li>
+                <a href="/contact" class="navbar-link" data-nav-link>Contact</a>
+              </li>
+          
+            </ul>
+          </div>
+
+        </nav>
+
+        <div class="header-bottom-actions">
+
+          <button class="header-bottom-actions-btn" aria-label="Search"><a href="/search">
+            <ion-icon name="search-outline"></ion-icon>
+          </a>
+            <span>Search</span>
+          </button>
+          <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Profile</span>
+          </a>
+          <a href="/all-properties" class="header-bottom-actions-btn" aria-label="Home">
+            <ion-icon name="home-outline"></ion-icon>
+            <span>Properties</span>
+          </a>
+          <a href="/my-messages/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Messages">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+            <span>Messages</span>
+          </a>
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+
+            <span>Menu</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Get the dropdown parent
+  const dropdown = document.querySelector('.dropdown');
+  
+  // Get the link inside the dropdown that toggles the menu
+  const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+  
+  // Add a click event listener to toggle the dropdown
+  dropdownToggle.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+    
+    // Toggle the 'active' class on the dropdown
+    dropdown.classList.toggle('active');
+  });
+  
+  // Optionally, close the dropdown if clicking outside of it
+  document.addEventListener('click', function(event) {
+    // Check if the click happened outside the dropdown menu
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+});
+
+  </script>

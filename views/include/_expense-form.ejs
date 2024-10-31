@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses Form</title>
+    <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <h1>Expenses form</h1>
+<form action="/expenses" method="POST">
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="date" class="formbold-form-label"> Date: </label>
+        <div>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="purpose" class="formbold-form-label"> Description/ Purpose: </label>
+        <div>
+          <input
+            type="text"
+            name="purpose"
+            id="purpose"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="amount" class="formbold-form-label"> Amount: </label>
+        <div>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            placeholder="Amount in Leones"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="receivedBy" class="formbold-form-label">Received by: </label>
+
+        <input
+          type="text"
+          name="receivedBy"
+          id="receivedBy"
+          placeholder="Received by"
+          class="formbold-form-input formbold-mb-3"
+          required
+        />
+        <input
+          type="text"
+          name="approvedBy"
+          id="approvedBy"
+          placeholder="Approved by"
+          class="formbold-form-input"
+        />
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname  %>"
+      />
+
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

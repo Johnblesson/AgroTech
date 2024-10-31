@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Notifications</title>
+  <style>
+    /* Notification container */
+    .notification-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+      background-color: #f7f7f7;
+    }
+
+    /* Notification card */
+    .notification-card {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .notification-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Notification title */
+    .notification-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    /* Notification location */
+    .notification-location {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    /* Created by text */
+    .notification-createdBy {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    /* Notification date */
+    .notification-date {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 15px;
+    }
+
+    /* Notification link */
+    .notification-link {
+      display: inline-block;
+      background-color: #5cb85c;
+      padding: 8px 12px;
+      border-radius: 5px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .notification-link:hover {
+      background-color: #4cae4c;
+    }
+
+    /* Delete button */
+    .notification-delete {
+      display: inline-block;
+      background-color: #d9534f;
+      padding: 8px 12px;
+      border-radius: 5px;
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 10px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .notification-delete:hover {
+      background-color: #c9302c;
+    }
+
+    /* Centered header */
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Notifications</h1>
+
+  <div class="notification-container">
+    <% notifications.forEach(notification => { %>
+      <div class="notification-card">
+        <div class="notification-title"><%= notification.title %></div>
+        <div class="notification-location">Location: <%= notification.location %></div>
+        <div class="notification-createdBy">Created By: <%= notification.createdBy %></div>
+        <div class="notification-date">Posted on: <%= new Date(notification.createdAt).toLocaleDateString() %></div>
+        
+        <!-- View Details Button -->
+        <a href="#" class="notification-link">View Details</a>
+        
+        <!-- Delete Button -->
+        <a href="/delete-notification/<%= notification._id %>" class="notification-delete" onclick="return confirm('Are you sure you want to delete this notification?');">Delete</a>
+      </div>
+    <% }); %>
+  </div>
+
+</body>
+</html>

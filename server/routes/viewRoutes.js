@@ -9,7 +9,8 @@ import {
     getPostProduct, 
     getPostProductAdmin,
     guestPage, 
-    faq, 
+    faq,
+    agroNews,
     faqAdmin, 
     agentController, 
     viewIPAddresses, 
@@ -60,7 +61,9 @@ router.get("/service", cacheMiddleware, service);
 
 router.get("/blog", cacheMiddleware, blog);
 
-router.get('/create-product', cacheMiddleware, ensureAuthenticated, getPostProduct)
+router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews)
+
+router.get('/create-product',  cacheMiddleware, ensureAuthenticated, getPostProduct)
 
 router.get('/create-product-admin', cacheMiddleware, ensureAuthenticated, isAdmin, getPostProductAdmin)
 

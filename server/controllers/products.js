@@ -76,96 +76,6 @@ export const createProduct = async (req, res) => {
 };
 
 
-// import Products from '../models/products.js';
-// import User from '../models/auth.js';
-// import Notification from '../models/notification.js';
-// import moment from 'moment';
-// import mongoose from 'mongoose';
-// import { io } from '../../server.js'; // Import the io instance
-
-// // Controller function to create a new product
-// export const createProduct = async (req, res) => {
-//   try {
-//     // Check if all three required files are uploaded
-//     if (!req.files || !req.files.photo || !req.files.photo[0] || !req.files.photo1 || !req.files.photo1[0] || !req.files.photo2 || !req.files.photo2[0]) {
-//       return res.status(400).json({ error: 'All three photos are required' });
-//     }
-
-//     // Log req.files to ensure it contains the file information
-//     console.log('Uploaded files:', req.files);
-
-//     const photo = req.files.photo[0];
-//     const photo1 = req.files.photo1[0];
-//     const photo2 = req.files.photo2[0];
-
-//     // Check if files contain the location
-//     if (!photo.location || !photo1.location || !photo2.location) {
-//       return res.status(400).json({ error: 'File locations not found' });
-//     }
-
-//     // Log file locations to ensure they contain the S3 URLs
-//     // console.log('File locations:', photo.location, photo1.location, photo2.location);
-
-//     const userId = req.user._id; // Assuming you have user info in req.user from authentication middleware
-//     const user = await User.findById(userId); // Assuming user is found by ID
-
-
-//     // Create a new Products object with form data
-//     const productData = new Products({
-//       pid: req.body.pid,
-//       title: req.body.title,
-//       location: req.body.location,
-//       price: req.body.price,
-//       currency: req.body.currency, 
-//       typeOfProduct: req.body.typeOfProduct,
-//       description: req.body.description,
-//       photo: photo.location, // Use S3 URL
-//       photo1: photo1.location, // Use S3 URL
-//       photo2: photo2.location, // Use S3 URL
-//       phone: req.body.phone,
-//       region: req.body.region,
-//       negotiation: req.body.negotiation,
-//       availability: req.body.availabilty,
-//       verification: req.body.verification,
-//       sponsored: req.body.sponsored,
-//       createdBy: req.body.createdBy,
-//       role: req.body.role,
-//       clicks: req.body.clicks,
-//       user: userId,
-//       createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
-//       updatedAt: new Date()
-//     });
-
-//     // Save the product to the database
-//     const savedProduct = await productData.save();
-
-//     // Save the notification to the database
-//     const notification = new Notification({
-//       title: savedProduct.title,
-//       location: savedProduct.location,
-//       createdBy: savedProduct.createdBy,
-//     });
-
-//     // Save the notification to the database
-//     await notification.save();
-
-//     // Emit a new product notification to all connected clients
-//     io.emit('new-product', { title: savedProduct.title, location: savedProduct.location, createdBy: savedProduct.createdBy });
-
-//     if (user.role === 'admin') {
-//       res.redirect('/admin-product-success');
-//     } else if (user.role === 'user') {
-//       res.redirect('/product-success');
-//     } else {
-//       res.redirect('/product-success');
-//     }
-//     // console.log(savedProduct);
-//     console.log('Product created successfully');
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
 
 // Controller function to get all Products notifications
 export const getNotifications = async (req, res) => {
@@ -176,7 +86,6 @@ export const getNotifications = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 
 // Controller function to delete a notification
 export const deleteNotification = async (req, res) => {
@@ -513,23 +422,6 @@ export const productUpdate = async (req, res) => {
   } catch (error) {
     console.error('Error updating Aroducts record:', error);
     res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
-// Controller function to get all products
-export const properties = async (req, res) => {
-  try {
-    // Fetch all aroducts from the database
-    const products = await Products.find();
-
-    // Render the all-properties view template with the apartments data
-    res.render("properties", {
-      products, // Pass the apartments data to the EJS template
-      relativePath
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
   }
 };
 
@@ -1032,7 +924,7 @@ export const productDetail = async (req, res) => {
     updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
     updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
 
-    res.render("apartment-detail", {
+    res.render("product-detail", {
       product: updatedProduct,
       products, // Ensure products are passed to the template
       user,
@@ -1047,77 +939,146 @@ export const productDetail = async (req, res) => {
 };
 
 
-// Controller to display a single product's details
+// // Controller to display a single product's details
+// export const adminProductDetail = async (req, res) => {
+//   const getTimeOfDay = () => {
+//   const currentHour = new Date().getHours();
+//   if (currentHour >= 5 && currentHour < 12) {
+//     return 'Good Morning';
+//   } else if (currentHour >= 12 && currentHour < 18) {
+//     return 'Good Afternoon';
+//   } else {
+//     return 'Good Evening';
+//   }
+// };
+// try {
+//   const { id } = req.params;
+
+//   // Validate ObjectId
+//   if (!mongoose.Types.ObjectId.isValid(id)) {
+//     return res.status(400).send("Invalid product ID");
+//   }
+
+//   const product = await Products.findById(id);
+
+//   if (!product) {
+//     return res.status(404).send("product not found");
+//   }
+
+//     // Increment the clicks count
+//     product.clicks = (product.clicks || 0) + 1;
+//     await product.save();
+
+//   // Ensure photoUrls is set properly for the current product
+//   const updatedProduct = {
+//     ...product._doc,
+//     photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
+//   };
+
+//   // Fetch all products for other sections or navigation
+//   const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+
+//   const user = req.isAuthenticated() ? req.user : null;
+//   const role = user ? user.role : null; // Get user role if user is authenticated
+//   const greeting = getTimeOfDay();
+
+//   // Format the createdAt date and calculate days ago
+//   updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
+//   updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
+
+
+//   // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//   const sudo = user && user.sudo ? user.sudo : false;
+
+//   // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//   const accountant = user && user.accountant ? user.accountant : false;
+
+//   // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//   const manager = user && user.manager ? user.manager : false;
+
+//   res.render("product-detail-admin", {
+//     product: updatedProduct,
+//     products,
+//     user,
+//     greeting,
+//     role,
+//     sudo,
+//     accountant,
+//     manager,
+//     alert: req.query.alert, // Pass the alert message
+//   });
+// } catch (error) {
+//   console.error(error);
+//   res.status(500).send("An error occurred while fetching the product details.");
+// }
+// };
+
+
+// Controller to display a single product's details for admin
 export const adminProductDetail = async (req, res) => {
   const getTimeOfDay = () => {
-  const currentHour = new Date().getHours();
-  if (currentHour >= 5 && currentHour < 12) {
-    return 'Good Morning';
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return 'Good Afternoon';
-  } else {
-    return 'Good Evening';
-  }
-};
-try {
-  const { id } = req.params;
+    const currentHour = new Date().getHours();
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
 
-  // Validate ObjectId
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send("Invalid product ID");
-  }
+  try {
+    const { id } = req.params;
 
-  const product = await Products.findById(id);
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send("Invalid product ID");
+    }
 
-  if (!product) {
-    return res.status(404).send("product not found");
-  }
+    const product = await Products.findById(id);
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
 
     // Increment the clicks count
     product.clicks = (product.clicks || 0) + 1;
     await product.save();
 
-  // Ensure photoUrls is set properly for the current product
-  const updatedProduct = {
-    ...product._doc,
-    photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
-  };
+    // Ensure photoUrls is set properly for the current product
+    const updatedProduct = {
+      ...product._doc,
+      photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
+    };
 
-  // Fetch all products for other sections or navigation
-  const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+    // Fetch all verified products for other sections or navigation
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
-  const user = req.isAuthenticated() ? req.user : null;
-  const role = user ? user.role : null; // Get user role if user is authenticated
-  const greeting = getTimeOfDay();
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null; // Get user role if user is authenticated
+    const greeting = getTimeOfDay();
 
-  // Format the createdAt date and calculate days ago
-  updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
-  updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
+    // Format the createdAt date and calculate days ago
+    updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
+    updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
 
+    // Determine user permissions
+    const permissions = {
+      sudo: user && user.sudo ? user.sudo : false,
+      accountant: user && user.accountant ? user.accountant : false,
+      manager: user && user.manager ? user.manager : false,
+    };
 
-  // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-  const sudo = user && user.sudo ? user.sudo : false;
-
-  // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-  const accountant = user && user.accountant ? user.accountant : false;
-
-  // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-  const manager = user && user.manager ? user.manager : false;
-
-  res.render("apartment-detail-admin", {
-    product: updatedProduct,
-    products,
-    user,
-    greeting,
-    role,
-    sudo,
-    accountant,
-    manager,
-    alert: req.query.alert, // Pass the alert message
-  });
-} catch (error) {
-  console.error(error);
-  res.status(500).send("An error occurred while fetching the product details.");
-}
+    res.render("product-detail-admin", {
+      product: updatedProduct,
+      products,
+      user,
+      greeting,
+      role,
+      ...permissions, // Spread user permissions
+      alert: req.query.alert, // Pass the alert message
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while fetching the product details. Please try again later.");
+  }
 };
-

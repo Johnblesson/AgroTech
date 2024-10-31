@@ -3,6 +3,7 @@ import User from "../models/auth.js";
 import moment from "moment";
 import PageViews from "../models/pageViews.js";
 import IPAddress from "../models/ipaddress.js";
+import { getName } from 'country-list';
 // import { checkUserMessages } from '../controllers/contact.js'
 import axios from 'axios';
 import mongoose from 'mongoose';
@@ -28,10 +29,7 @@ export const homeRoute = async (req, res) => {
 
     const apts = await Products.findOne({ _id: req.params.id });
 
-    const products = await Products.find({ 
-      verification: 'verified', 
-      status: { $in: ['Sell', 'Lease'] } 
-    }).sort({ sponsored: -1, createdAt: -1 });
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
     const greeting = getTimeOfDay();
     const user = req.isAuthenticated() ? req.user : null;
@@ -47,7 +45,8 @@ export const homeRoute = async (req, res) => {
     }
 
     products.forEach(product => {
-      product.photoUrl = product.photo || '';
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
@@ -86,10 +85,7 @@ export const adminHomeRoute = async (req, res) => {
 
   try {
     const apts = await Products.findOne({ _id: req.params.id });
-    const products = await Products.find({ 
-      verification: 'verified', 
-      status: { $in: ['Sell', 'Lease'] } 
-    }).sort({ sponsored: -1, createdAt: -1 });
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
     const greeting = getTimeOfDay();
     const user = req.isAuthenticated() ? req.user : null;
@@ -105,9 +101,9 @@ export const adminHomeRoute = async (req, res) => {
       unreadCount = userWithMessages.messages.filter(message => !message.read).length;
     }
 
-    // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
     products.forEach(product => {
-      product.photoUrl = product.photo || '';
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
@@ -208,49 +204,6 @@ const getTimeOfDay = () => {
 };
 
 
-// Display all products for admin
-// export const allAdminProducts = async (req, res) => {
-//   const getTimeOfDay = () => {
-//     const currentHour = new Date().getHours();
-//     if (currentHour >= 5 && currentHour < 12) return 'Good Morning';
-//     if (currentHour >= 12 && currentHour < 18) return 'Good Afternoon';
-//     return 'Good Evening';
-//   };
-
-//   try {
-//     // Fetch product by ID if needed and all verified products
-//     const apts = await Products.findOne({ _id: req.params.id });
-//     const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
-//     const greeting = getTimeOfDay();
-//     const user = req.isAuthenticated() ? req.user : null;
-//     const role = user ? user.role : null;
-//     const sudo = user?.sudo || false;
-//     const accountant = user?.accountant || false;
-//     const manager = user?.manager || false;
-
-//     products.forEach(product => {
-//       product.photoUrl = product.photo || ''; // Default to empty if no photo
-//       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
-//       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
-//     });
-
-//     res.render("all-admin-products", {
-//       products,
-//       greeting,
-//       user,
-//       apts,
-//       sudo,
-//       accountant,
-//       role,
-//       manager,
-//       alert: req.query.alert,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("An error occurred while fetching products.");
-//   }
-// };
-
 
 export const allAdminProducts = async (req, res) => {
   const getTimeOfDay = () => {
@@ -297,13 +250,13 @@ export const allAdminProducts = async (req, res) => {
 
 
   
- // Display all products for farmers
+// Display all products for farmers
 export const allVirtualProducts = async (req, res) => {
-    
-    // Function to determine the time of the day
+  
+  // Function to determine the time of the day
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
-  
+
     if (currentHour >= 5 && currentHour < 12) {
       return 'Good Morning';
     } else if (currentHour >= 12 && currentHour < 18) {
@@ -312,43 +265,41 @@ export const allVirtualProducts = async (req, res) => {
       return 'Good Evening';
     }
   };
-    try {
-      const apts = await Products.findOne({ _id: req.params.id });
-      // Find all verified products and sort them by sponsored status and createdAt timestamp in descending order
-      const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
-      const user = req.isAuthenticated() ? req.user : null;
-      const role = user ? user.role : null; // Get user role if user is authenticated
 
-      const product = await Products.find();
+  try {
+    const apts = await Products.findOne({ _id: req.params.id });
+    // Find all verified products and sort them by sponsored status and createdAt timestamp in descending order
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null; // Get user role if user is authenticated
+
+    const product = await Products.find();
 
     // Ensure photoUrl is set properly for each product
     products.forEach(product => {
-      if (!product.photo) {
-        product.photoUrl = ''; // Initialize an empty string if no photo is available
+      if (!product.photos || product.photos.length === 0) {
+        product.photoUrl = ''; // Initialize an empty string if no photos are available
       } else {
-        product.photoUrl = product.photo; // Set photoUrl to the value of photo
+        product.photoUrl = product.photos[0]; // Set photoUrl to the first photo in the photos array
       }
     });
-  
-       // Determine the time of the day
-      const greeting = getTimeOfDay();
-  
-      // Render the index page with the receptions and latestStorage data
-      res.render('all-virtual-products', { product, greeting, user, products, role, alert: req.query.alert });
-    } catch (error) {
-      console.error('Error rendering the page:', error);
-      res.status(500).send('Internal Server Error');
-    }
-  };
+
+    // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Render the index page with the receptions and latestStorage data
+    res.render('all-virtual-products', { product, greeting, user, products, role, alert: req.query.alert });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
 
 
     // About Page
 export const about = async (req, res) => {
-    const locals = {
-      title: "About Page",
-      description: "This is the about page of the System.",
-    };
   
     // Function to determine the time of the day
   const getTimeOfDay = () => {
@@ -383,7 +334,7 @@ export const about = async (req, res) => {
       const greeting = getTimeOfDay();
   
       // Render the index page with the receptions and latestStorage data
-      res.render('about', { locals, user, greeting, apartments, role, alert: req.query.alert });
+      res.render('about', { user, greeting, apartments, role, alert: req.query.alert });
     } catch (error) {
       console.error('Error rendering the page:', error);
       res.status(500).send('Internal Server Error');
@@ -393,10 +344,6 @@ export const about = async (req, res) => {
 
 // Features Page
 export const features = async (req, res) => {
-    const locals = {
-      title: "Home Page",
-      description: "This is the home page of the System.",
-    };
   
     // Function to determine the time of the day
   const getTimeOfDay = () => {
@@ -418,7 +365,7 @@ export const features = async (req, res) => {
       const greeting = getTimeOfDay();
   
       // Render the index page with the receptions and latestStorage data
-      res.render('features', { locals, user, greeting, role, alert: req.query.alert });
+      res.render('features', { user, greeting, role, alert: req.query.alert });
     } catch (error) {
       console.error('Error rendering the page:', error);
       res.status(500).send('Internal Server Error');
@@ -426,44 +373,53 @@ export const features = async (req, res) => {
   };
 
 // Blog Page
-export const blog = async (req, res) => {
-  const getTimeOfDay = () => {
-    const currentHour = new Date().getHours();
+ // Display all products for farmers
+ export const blog = async (req, res) => {
+    
+  // Function to determine the time of the day
+const getTimeOfDay = () => {
+  const currentHour = new Date().getHours();
 
-    if (currentHour >= 5 && currentHour < 12) {
-      return 'Good Morning';
-    } else if (currentHour >= 12 && currentHour < 18) {
-      return 'Good Afternoon';
-    } else {
-      return 'Good Evening';
-    }
-  };
-
+  if (currentHour >= 5 && currentHour < 12) {
+    return 'Good Morning';
+  } else if (currentHour >= 12 && currentHour < 18) {
+    return 'Good Afternoon';
+  } else {
+    return 'Good Evening';
+  }
+};
   try {
-    // Fetch all verified products from the database
-    const products = await Products.find({ verification: 'verified' });
-
+    const apts = await Products.findOne({ _id: req.params.id });
+    // Find all verified products and sort them by sponsored status and createdAt timestamp in descending order
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const sudo = user && user.sudo ? user.sudo : false;
 
-    // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const accountant = user && user.accountant ? user.accountant : false;
+ 
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const manager = user && user.manager ? user.manager : false;
+
+    const product = await Products.find();
+
     products.forEach(product => {
-      // Ensure photoUrl is set properly
-      product.photoUrl = product.photo || ''; // Use empty string if no photo is available
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
+      product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+      product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
 
+     // Determine the time of the day
     const greeting = getTimeOfDay();
 
-    res.render("index-admin", { // Assuming your main admin page is index-admin.ejs
-      products,
-      greeting,
-      user,
-      role,
-      alert: req.query.alert, // Pass the alert message
-    });
+    // Render the index page with the receptions and latestStorage data
+    res.render('blog', { product, greeting, user, products, role, sudo, accountant, manager, alert: req.query.alert });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while fetching products.");
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
   }
 };
 
@@ -539,76 +495,194 @@ const getTimeOfDay = () => {
 };
 
 // Controller function to render guest page
-import { getName } from 'country-list';
+
+// export const guestPage = async (req, res) => {
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
+
+//   // Get the real IP address (use Cloudflare's IP header if behind a proxy)
+//   const ip =
+//     req.headers['cf-connecting-ip'] ||  // For Cloudflare users
+//     req.headers['x-forwarded-for']?.split(',')[0] ||  // For proxies, split in case of multiple IPs
+//     req.connection.remoteAddress ||
+//     req.socket.remoteAddress || '';
+
+//   const timestamp = new Date().toISOString();
+//   console.log('ip address:', ip, '/guestpage', timestamp);
+
+//   // Don't log localhost IPs
+//   if (ip === '127.0.0.1' || ip === '::1') {
+//     console.log('Localhost IP detected, skipping logging.');
+//     return res.render('guest-page', { greeting: getTimeOfDay() });
+//   }
+
+//   const API_KEY = 'dc750824f1d744';  // Replace with your IPinfo API key
+
+//   try {
+//     // Fetch location data from IPinfo
+//     const geoData = await axios.get(`https://ipinfo.io/${ip}?token=${API_KEY}`);
+//     const countryCode = geoData.data.country || 'Unknown';
+//     const city = geoData.data.city || 'Unknown';
+//     const region = geoData.data.region || 'Unknown';
+//     const postal = geoData.data.postal || 'Unknown';
+//     const loc = geoData.data.loc || 'Unknown';  // Format: "latitude,longitude"
+//     const org = geoData.data.org || 'Unknown';
+//     const timezone = geoData.data.timezone || 'Unknown';
+//     const hostname = geoData.data.hostname || 'Unknown';
+
+//     // Get full country name using the library
+//     const countryName = getName(countryCode) || 'Unknown';
+
+//     console.log(
+//       'Country:', countryCode,
+//       'Country name:', countryName,
+//       'City:', city,
+//       'Region:', region,
+//       'Postal:', postal,
+//       'Loc:', loc,
+//       'Org:', org,
+//       'Timezone:', timezone,
+//       'Hostname:', hostname
+//     );
+
+//     // Check if the IP was already logged within the last 24 hours
+//     const oneDayAgo = new Date();
+//     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+//     const existingLog = await IPAddress.findOne({
+//       ip: ip,
+//       timestamp: { $gte: oneDayAgo.toISOString() }
+//     });
+
+//     if (!existingLog) {
+//       // Log IP if it hasn't been logged in the past 24 hours
+//       await IPAddress.create({
+//         ip,
+//         country: countryCode,
+//         countryName,
+//         city,
+//         region,
+//         postal,
+//         loc,
+//         org,
+//         timezone,
+//         timestamp,
+//         hostname
+//       });
+//       console.log('IP, country, and city logged:', ip, countryName, city, region, postal, loc, org, timezone);
+//     } else {
+//       console.log('IP already logged within 24 hours:', ip);
+//     }
+
+//     // Increment the view count for the guest page
+//     const pageView = await PageViews.findOneAndUpdate(
+//       { page: 'guestPage' },
+//       { $inc: { views: 1 } },
+//       { upsert: true, new: true }
+//     );
+
+//     const apts = await Products.findOne({ _id: req.params.id });
+//     // const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+//     const products = await Products.find({ 
+//       verification: 'verified', 
+//       }).sort({ sponsored: -1, createdAt: -1 });
+
+//     const user = req.isAuthenticated() ? req.user : null;
+
+//     products.forEach(product => {
+//       // Display the first photo in the 'photos' array if available, otherwise use an empty string
+//       product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
+//       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+//       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
+//     });
+
+//     const greeting = getTimeOfDay();
+//     const views = pageView.views; // Get the view count
+
+//     res.render('guest-page', { greeting, apts, user, products, views });
+//   } catch (error) {
+//     console.error('Error rendering the page:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
 
 export const guestPage = async (req, res) => {
+  // Function to get greeting based on the time of day
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
-    if (currentHour >= 5 && currentHour < 12) {
-      return 'Good Morning';
-    } else if (currentHour >= 12 && currentHour < 18) {
-      return 'Good Afternoon';
-    } else {
-      return 'Good Evening';
-    }
+    if (currentHour >= 5 && currentHour < 12) return 'Good Morning';
+    if (currentHour >= 12 && currentHour < 18) return 'Good Afternoon';
+    return 'Good Evening';
   };
 
-  // Get the real IP address (use Cloudflare's IP header if behind a proxy)
-  const ip =
-    req.headers['cf-connecting-ip'] ||  // For Cloudflare users
-    req.headers['x-forwarded-for']?.split(',')[0] ||  // For proxies, split in case of multiple IPs
+  // Get client IP address
+  const getClientIp = () => 
+    req.headers['cf-connecting-ip'] ||  // For Cloudflare
+    req.headers['x-forwarded-for']?.split(',')[0] ||  // For proxies
     req.connection.remoteAddress ||
     req.socket.remoteAddress || '';
 
+  const ip = getClientIp();
   const timestamp = new Date().toISOString();
-  console.log('ip address:', ip, '/guestpage', timestamp);
+  console.log('IP address:', ip, '/guest-page', timestamp);
 
   // Don't log localhost IPs
   if (ip === '127.0.0.1' || ip === '::1') {
     console.log('Localhost IP detected, skipping logging.');
-    return res.render('guest-page', { greeting: getTimeOfDay() });
+    return res.render('guest-page', { greeting: getTimeOfDay(), products: [] });
   }
 
   const API_KEY = 'dc750824f1d744';  // Replace with your IPinfo API key
 
   try {
-    // Fetch location data from IPinfo
+    // Fetch location data from IPinfo API
     const geoData = await axios.get(`https://ipinfo.io/${ip}?token=${API_KEY}`);
-    const countryCode = geoData.data.country || 'Unknown';
-    const city = geoData.data.city || 'Unknown';
-    const region = geoData.data.region || 'Unknown';
-    const postal = geoData.data.postal || 'Unknown';
-    const loc = geoData.data.loc || 'Unknown';  // Format: "latitude,longitude"
-    const org = geoData.data.org || 'Unknown';
-    const timezone = geoData.data.timezone || 'Unknown';
-    const hostname = geoData.data.hostname || 'Unknown';
+    const {
+      country: countryCode = 'Unknown',
+      city = 'Unknown',
+      region = 'Unknown',
+      postal = 'Unknown',
+      loc = 'Unknown',  // Latitude, Longitude
+      org = 'Unknown',
+      timezone = 'Unknown',
+      hostname = 'Unknown'
+    } = geoData.data;
 
-    // Get full country name using the library
+    // Get full country name
     const countryName = getName(countryCode) || 'Unknown';
 
-    console.log(
-      'Country:', countryCode,
-      'Country name:', countryName,
-      'City:', city,
-      'Region:', region,
-      'Postal:', postal,
-      'Loc:', loc,
-      'Org:', org,
-      'Timezone:', timezone,
-      'Hostname:', hostname
-    );
+    console.log('IP Information:', {
+      Country: countryCode,
+      CountryName: countryName,
+      City: city,
+      Region: region,
+      Postal: postal,
+      Loc: loc,
+      Org: org,
+      Timezone: timezone,
+      Hostname: hostname
+    });
 
-    // Check if the IP was already logged within the last 24 hours
+    // Check if IP has been logged within the last 24 hours
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
     const existingLog = await IPAddress.findOne({
-      ip: ip,
+      ip,
       timestamp: { $gte: oneDayAgo.toISOString() }
     });
 
+    // Log IP if not logged in the past 24 hours
     if (!existingLog) {
-      // Log IP if it hasn't been logged in the past 24 hours
       await IPAddress.create({
         ip,
         country: countryCode,
@@ -622,38 +696,35 @@ export const guestPage = async (req, res) => {
         timestamp,
         hostname
       });
-      console.log('IP, country, and city logged:', ip, countryName, city, region, postal, loc, org, timezone);
+      console.log('IP and location logged:', { ip, countryName, city });
     } else {
-      console.log('IP already logged within 24 hours:', ip);
+      console.log('IP already logged within the last 24 hours:', ip);
     }
 
-    // Increment the view count for the guest page
+    // Increment guest page view count
     const pageView = await PageViews.findOneAndUpdate(
       { page: 'guestPage' },
       { $inc: { views: 1 } },
       { upsert: true, new: true }
     );
 
-    const apts = await Apartments.findOne({ _id: req.params.id });
-    // const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
-    const apartments = await Apartments.find({ 
-      verification: 'verified', 
-      // status: 'Sell' 
-      status: { $in: ['Sell', 'Lease', 'Rent'] } 
-    }).sort({ sponsored: -1, createdAt: -1 });
+    // Fetch verified products
+    const products = await Products.find({ verification: 'verified' })
+      .sort({ sponsored: -1, createdAt: -1 })
+      .lean(); // Use lean for better performance
 
-    const user = req.isAuthenticated() ? req.user : null;
-
-    apartments.forEach(apartment => {
-      apartment.photoUrl = apartment.photo || '';
-      apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
-      apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
+    // Ensure photo URLs and additional properties are available
+    products.forEach(product => {
+      product.photoUrl = product.photos?.[0] || ''; 
+      product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+      product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
 
+    // Greeting based on time of day
     const greeting = getTimeOfDay();
-    const views = pageView.views; // Get the view count
+    const views = pageView?.views || 0;  // Safe access for views
 
-    res.render('guest-page', { greeting, apts, user, apartments, views });
+    res.render('guest-page', { greeting, products, views });
   } catch (error) {
     console.error('Error rendering the page:', error);
     res.status(500).send('Internal Server Error');

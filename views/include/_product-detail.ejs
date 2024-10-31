@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apartment Detail</title>
+    <title>Product Detail</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/apt-detail.css">
-     <!-- 
+    <!-- 
     - favicon
-  -->
-  <!-- <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml"> -->
+    -->
+    <!-- <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml"> -->
     <style>
         .carousel {
             position: relative;
         }
         .download-btn {
             position: absolute;
-            /* top: 10px; */
             right: 1px;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
@@ -48,6 +47,27 @@
         .thumbnail:hover, .thumbnail.active {
             opacity: 1;
         }
+
+        .product-links-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9; /* Light background for visibility */
+            border: 1px solid #ddd; /* Light border for definition */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .product-links-container p {
+            margin-bottom: 10px; /* Space between the paragraph and links */
+            font-weight: 600; /* Bold for emphasis */
+        }
+        .product-links-container a {
+            display: block; /* Stack links vertically */
+            color: #007bff; /* Link color */
+            text-decoration: none; /* No underline */
+            margin-bottom: 5px; /* Space between links */
+        }
+        .product-links-container a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
     </style>
 </head>
 <body>
@@ -55,10 +75,10 @@
         <div class="property-item">
             <div class="property-card">
                 <div class="carousel">
-                    <% if (apartment.photoUrls && apartment.photoUrls.length > 0) { %>
-                        <% apartment.photoUrls.forEach((photoUrl, index) => { %>
+                    <% if (product.photoUrls && product.photoUrls.length > 0) { %>
+                        <% product.photoUrls.forEach((photoUrl, index) => { %>
                             <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                                <img src="<%= photoUrl %>" class="carousel-img" alt="Apartment Photo">
+                                <img src="<%= photoUrl %>" class="carousel-img" alt="product Photo">
                                 <a href="<%= photoUrl %>" download class="download-btn">
                                     <ion-icon name="download-outline"></ion-icon>
                                 </a>
@@ -71,52 +91,50 @@
                     <% } %>
                 </div>
                 <div class="thumbnail-container">
-                    <% if (apartment.photoUrls && apartment.photoUrls.length > 0) { %>
-                        <% apartment.photoUrls.forEach((photoUrl, index) => { %>
+                    <% if (product.photoUrls && product.photoUrls.length > 0) { %>
+                        <% product.photoUrls.forEach((photoUrl, index) => { %>
                             <img src="<%= photoUrl %>" class="thumbnail <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>" alt="Thumbnail">
                         <% }) %>
                     <% } %>
                 </div>
                 <!-- Dynamic badges indicating availability and status -->
-                <div class="card-badge top-right"><%= apartment.availabilty %></div>
-                <div class="card-badge green top-left"><%= apartment.status %></div>
+                <div class="card-badge top-right"><%= product.availability %></div>
+                <div class="card-badge green top-left"><%= product.typeOfProduct %></div>
 
                 <div class="card-content">
                     <!-- Dynamic price -->
                     <div class="card-price">
-                        <strong><%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apartment.duration %> <p style="font-size: 12px;"><%= apartment.negotiation %></p>
+                        <strong><%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= product.duration %> 
+                        <p style="font-size: 12px;"><%= product.negotiation %></p>
                     </div> 
                     <!-- Dynamic title -->
                     <h3 class="h3 card-title">
-                        <%= apartment.title %>
+                        <%= product.title %>
                     </h3>
                     <!-- Dynamic description -->
                     <p class="card-text">
-                        <%= apartment.description %>
+                        <%= product.description %>
                     </p>
                     <!-- Additional details as needed -->
                     <div class="card-details">
                         <h3 class="card-title">
-                            Apartment Details
+                            Product Details
                         </h3>
                         <div class="card-text">
-                            <p><strong>Location:</strong> <%= apartment.location %></p>
-                            <p><strong>State:</strong> <%= apartment.state %></p>
-                            <p><strong>Bedrooms:</strong> <%= apartment.bedrooms %></p>
-                            <p><strong>Bathrooms:</strong> <%= apartment.bathrooms %></p>
-                            <p><strong>Square Footage:</strong> <%= apartment.squareFootage %> sq ft</p>
-                            <p><strong>Price:</strong> <%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %> <%= apartment.duration %></p>
-                            <p><strong>Negotiation:</strong> <%= apartment.negotiation %></p>
-                            <p><strong>Status:</strong> <%= apartment.status %></p>
-                            <p><strong>Availability:</strong> <%= apartment.availabilty %></p>
+                            <p><strong>Location:</strong> <%= product.location %></p>
+                            <p><strong>Region:</strong> <%= product.region %></p>
+                            <p><strong>Price:</strong> <%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %> <%= product.duration %></p>
+                            <p><strong>Negotiation:</strong> <%= product.negotiation %></p>
+                            <p><strong>Product Type:</strong> <%= product.typeOfProduct %></p>
+                            <p><strong>Availability:</strong> <%= product.availability %></p>
                         </div>
                         <div>
                         <ul class="card-list">
                             <!-- Placeholder for square footage -->
                             <li class="card-item">
-                                <strong>Apartment ID (AID): AID<%= apartment.aid %></strong>
-                                <a href="/application-form?aid=<%= apartment.aid %>&location=<%= apartment.location %>">
-                                    <span>Apply for this property.</span>
+                                <strong>Product ID (PID): PID<%= product.pid %></strong>
+                                <a href="/application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= product.title %>">
+                                    <span>Apply to buy this product.</span>
                                     <button class="btn1">Apply</button>
                                 </a>
                             </li>
@@ -125,8 +143,8 @@
                     </div>
                 </div>
                 <!-- Links container -->
-                <div class="apartment-links-container">
-                    <p>Before you apply for this apartment, make sure you have read the following:</p>
+                <div class="product-links-container">
+                    <p>Before you apply for this product, make sure you have read the following:</p>
                     <a href="/terms-and-conditions">Terms and Conditions</a>
                     <a href="/services-fee-agreement">Service Fee Agreement</a>
                     <a href="/privacy-policy">Privacy Policy</a>
@@ -135,23 +153,12 @@
                 <div class="card-footer">
                     <div class="card-author">
                         <!-- Dynamic user fullname -->
-                        <p class="author-name"> Created by: <a href="#"><%= apartment.createdBy %></a></p>
+                        <p class="author-name"> Created by: <a href="#"><%= product.createdBy %></a></p>
                         <!-- Dynamic user bio -->
                         <p class="author-title">
-                            Created At: <%= apartment.formattedCreatedAt %> (<%= apartment.daysAgo %> days ago)
+                            Created At: <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
                         </p>
                     </div>
-                    <!-- <div class="card-footer-actions">
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="resize-outline"></ion-icon>
-                        </button>
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="add-circle-outline"></ion-icon>
-                        </button>
-                    </div> -->
                 </div>
             </div>
         </div>

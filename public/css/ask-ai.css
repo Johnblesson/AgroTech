@@ -1,0 +1,42 @@
+.ask-ai-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  #chatBox {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .user-message, .ai-message {
+    margin: 10px 0;
+  }
+  
+  .user-message {
+    text-align: left;
+  }
+  
+  .ai-message {
+    text-align: right;
+  }
+  
+  #askForm {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #userMessage {
+    width: 80%;
+    padding: 10px;
+  }
+  
+  button {
+    padding: 10px;
+  }
+  

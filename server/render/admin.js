@@ -1,4 +1,4 @@
-import Apartments from "../models/products.js";
+import Products from "../models/products.js";
 import User from "../models/auth.js";
 import moment from "moment";
 
@@ -106,21 +106,19 @@ export const adminBlog = async (req, res) => {
   };
 
   try {
-    const apts = await Apartments.findOne({ _id: req.params.id });
-    const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+    const apts = await Products.findOne({ _id: req.params.id });
+    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
 
-     // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
-     apartments.forEach(apartment => {
-      // Ensure photoUrl is set properly
-      apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
-
-      // Format the createdAt date and calculate days ago
-      apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
-      apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
+    products.forEach(product => {
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
+      product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+      product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
+
 
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
@@ -128,11 +126,11 @@ export const adminBlog = async (req, res) => {
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
 
-      // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-      const manager = user && user.manager ? user.manager : false;
+    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+    const manager = user && user.manager ? user.manager : false;
 
     const greeting = getTimeOfDay();
-    res.render('admin-blog', { greeting, apts, user, apartments, sudo, accountant, role, manager,
+    res.render('admin-blog', { greeting, apts, user, products, sudo, accountant, role, manager,
       alert: req.query.alert, // Pass the alert message
      });
   } catch (error) {

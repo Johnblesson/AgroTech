@@ -97,7 +97,7 @@
             </li>
   
             <li>
-              <a href="#" class="footer-link">Blog</a>
+              <a href="#" class="footer-link" onclick="redirectToBlog('<%= role %>')">Blog</a>
             </li>
   
             <li>
@@ -199,6 +199,14 @@
   </script>
   
   <script>
+     function redirectToBlog(role) {
+      if (role === 'admin') {
+        window.location.href = '/admin-blog';
+      } else if (role === 'user') {
+        window.location.href = '/blog';
+      }
+    }
+
     function redirectToAbout(role) {
       if (role === 'admin') {
         window.location.href = '/admin-about';

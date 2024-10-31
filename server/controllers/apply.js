@@ -1,4 +1,4 @@
-import Apartments from "../models/products.js";
+import Products from "../models/products.js";
 import Application from "../models/apply.js";
 import Boost from "../models/boost.js";
 import Staffs from "../models/staffs.js";
@@ -163,12 +163,13 @@ export const application = async (req, res) => {
   };
 
   try {
-    // Get the apartment ID and location from the query parameters
-    const apartmentId = req.query.aid;
+    // Get the product ID and location from the query parameters
+    const productId = req.query.pid;
     const location = req.query.location;
+    const title = req.query.title;
 
-    // Fetch the apartment details based on the ID
-    const apartment = await Apartments.findOne({ _id: req.params.id });
+    // Fetch the product details based on the ID
+    const product = await Products.findOne({ _id: req.params.id });
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
@@ -182,9 +183,10 @@ export const application = async (req, res) => {
     res.render('apply', {
       user,
       greeting,
-      apartment,
-      aid: apartmentId,
+      product,
+      pid: productId,
       location: location,
+      title: title,
       role,
       alert: req.query.alert, // Pass the alert message
     });
@@ -211,12 +213,13 @@ export const adminApplication = async (req, res) => {
   };
 
   try {
-    // Get the apartment ID and location from the query parameters
-    const apartmentId = req.query.aid;
+    // Get the product ID and location from the query parameters
+    const productId = req.query.pid;
     const location = req.query.location;
+    const title = req.query.title;
 
-    // Fetch the apartment details based on the ID
-    const apartment = await Apartments.findOne({ _id: req.params.id });
+    // Fetch the product details based on the ID
+    const product = await Products.findOne({ _id: req.params.id });
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
@@ -240,9 +243,10 @@ export const adminApplication = async (req, res) => {
     res.render('apply-admin', {
       user,
       greeting,
-      apartment,
-      aid: apartmentId,
+      product,
+      pid: productId,
       location: location,
+      title: title,
       sudo,
       accountant,
       role,
@@ -254,6 +258,7 @@ export const adminApplication = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
 
 
 // Update Admin Applications record

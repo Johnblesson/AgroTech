@@ -63,53 +63,14 @@
       <div class="container">
 
         <ul class="header-top-list">
-
-          <!-- <li>
-            <a href="mailto:info@homeverse.com" class="header-top-link">
-              <ion-icon name="mail-outline"></ion-icon>
-
-              <span>info@homeverse.com</span>
-            </a>
-          </li> -->
-
           <li>
             <a href="/view/<%= user._id %>" class="header-top-link">
               <!-- <ion-icon name="location-outline"></ion-icon> -->
-
               <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
             </a>
           </li>
-
         </ul>
-
         <div class="wrapper">
-          <!-- <ul class="header-top-social-list">
-
-            <li>
-              <a href="#" class="header-top-social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="header-top-social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="header-top-social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="header-top-social-link">
-                <ion-icon name="logo-telegram"></ion-icon>
-              </a>
-            </li>
-
-          </ul> -->
           <form action="/logout" method="get">
           <button class="header-top-btn">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -127,23 +88,13 @@
           <img style="width: 50%;" src="./images/hub.jpg" alt="Homeverse logo">
         </a> -->
 
-        <a href="/home" class="logo">
-          <img src="/images/hub1.png" alt="Homehub logo">
-        </a>
-        
-        <!-- <a href="/home" class="logo">
-          <img src="./images/hub1.png" alt="Homehub logo">
-          <div class="main">HomeHub</div>
-          <div class="sub">housing agency</div>
-        </a> -->
+        <a href="/home" class="logo">AgroTech SL</a>
 
         <nav class="navbar" data-navbar>
 
           <div class="navbar-top">
 
-            <a href="#" class="logo">
-              <img src="/images/hub1.png" alt="Homeverse logo">
-            </a>
+            <a href="/home" class="logo">AgroTech SL</a>
 
             <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
               <ion-icon name="close-outline"></ion-icon>

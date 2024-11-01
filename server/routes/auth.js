@@ -55,7 +55,7 @@ router.get("/sitemap.xml", siteMaps)
 // router.get('/auth/google/callback', googleAuthCallback);
 
 // Route to view login history
-router.get('/login-history', ensureAuthenticated, isAdmin, loginHistory);
+router.get('/login-history', ensureAuthenticated, loginHistory);
 
 // Route to remove login history item
 router.get('/remove-login-history/:id', ensureAuthenticated, removeLoginHistory);
@@ -64,16 +64,16 @@ router.get('/remove-login-history/:id', ensureAuthenticated, removeLoginHistory)
 router.post('/clear-login-history', ensureAuthenticated, clearLoginHistory);
 
 // Route to set up 2FA
-router.get('/setup-2fa', ensureAuthenticated, isAdmin, setup2FA);
+router.get('/setup-2fa', ensureAuthenticated, setup2FA);
 
 // Route to verify the 2FA token
-router.post('/verify-2fa', ensureAuthenticated, isAdmin, verify2FA);
+router.post('/verify-2fa', ensureAuthenticated, verify2FA);
 
 // Route to handle 2FA toggling
-router.post('/2fa', ensureAuthenticated, isAdmin, toggle2FA);
+router.post('/2fa', ensureAuthenticated, toggle2FA);
 
 // Route to render 2FA verification page
-router.get('/2fa-verify', ensureAuthenticated, isAdmin, (req, res) => {
+router.get('/2fa-verify', ensureAuthenticated, (req, res) => {
     const user = req.isAuthenticated() ? req.user : null;
     res.render('2fa-verify', { user }); // Your EJS template for 2FA verification
   });

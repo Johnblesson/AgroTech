@@ -20,14 +20,6 @@
 
         <ul class="header-top-list">
 
-          <!-- <li>
-            <a href="mailto:info@homeverse.com" class="header-top-link">
-              <ion-icon name="mail-outline"></ion-icon>
-
-              <span>info@homeverse.com</span>
-            </a>
-          </li> -->
-
           <li>
             <a href="#" class="header-top-link">
               <ion-icon name=""></ion-icon>
@@ -97,15 +89,10 @@
   </header>
 
   <div class="formbold-main-wrapper">
-    
-    <!-- Author: FormBold Team -->
-    <!-- Learn More: https://formbold.com -->
-    <div class="formbold-form-wrapper"> <h3></h3>
-      
+    <div class="formbold-form-wrapper"> <h3></h3>   
   <form action="/update-boost/<%= boost._id %>?_method=PATCH" method="POST">
-
     <div class="formbold-mb-3 formbold-input-wrapp">
-      <label for="aid" class="formbold-form-label"> AID: </label>
+      <label for="aid" class="formbold-form-label"> PID: </label>
       <div>
         <input
           type="text"
@@ -119,7 +106,7 @@
     </div>
   
         <div class="formbold-mb-3 formbold-input-wrapp">
-          <label for="location" class="formbold-form-label"> Apartment Location: </label>
+          <label for="location" class="formbold-form-label"> Location: </label>
           <div>
             <input
               type="text"

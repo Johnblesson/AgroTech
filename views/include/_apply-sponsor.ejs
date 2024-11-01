@@ -3,54 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Apartment Form</title>
-    <!-- 
-    - custom css link
-  -->
+  <title>AgroTech | Admin Form</title>
   <link rel="stylesheet" href="./css/form.css">
-
   <style>
     /* Define base styles for form elements */
-.formbold-form-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.formbold-form-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-}
-
-/* Add responsive styles */
-@media (max-width: 768px) {
-  .formbold-form-wrapper {
-    width: 90%;
-    margin: auto;
-  }
-
-  .formbold-input-wrapp {
+  .formbold-form-label {
     display: block;
-  }
-
-  .formbold-form-input {
     margin-bottom: 8px;
   }
 
-  .formbold-mb-3 {
-    margin-bottom: 24px;
-  }
-}
-
-/* Additional styles for smaller screens */
-@media (max-width: 480px) {
   .formbold-form-input {
-    font-size: 14px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
   }
-}
+
+  /* Add responsive styles */
+  @media (max-width: 768px) {
+    .formbold-form-wrapper {
+      width: 90%;
+      margin: auto;
+    }
+
+    .formbold-input-wrapp {
+      display: block;
+    }
+
+    .formbold-form-input {
+      margin-bottom: 8px;
+    }
+
+    .formbold-mb-3 {
+      margin-bottom: 24px;
+    }
+  }
+
+  /* Additional styles for smaller screens */
+  @media (max-width: 480px) {
+    .formbold-form-input {
+      font-size: 14px;
+    }
+  }
 
   </style>
 </head>
@@ -58,28 +54,28 @@
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">Boost apartment. 
+    <pre style="text-align: center; font: 0.6em sans-serif;">Boost Product. 
       Make sure you input your correct informations.
       You will be contacted to make payment.
     </pre>
-<form action="/apply-boost" method="POST">
 
+  <form action="/apply-boost" method="POST">
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <label for="title" class="formbold-form-label"> Product Name: </label>
         <div>
           <input
             type="text"
-            name="phone"
-            id="phone"
-            placeholder="Phone number"
+            name="title"
+            id="title"
+            value="<%= title %>"
             class="formbold-form-input"
-            required
+            readonly
           />
         </div>
       </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="location" class="formbold-form-label"> Apartment Location: </label>
+        <label for="location" class="formbold-form-label"> Location: </label>
         <div>
           <input
             type="text"
@@ -93,16 +89,29 @@
       </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="apply-aid" class="formbold-form-label"> Apartment ID (AID): </label>
+        <label for="apply-aid" class="formbold-form-label"> Product ID (PID): </label>
         <div>
           <input
             type="text"
             name="applyAid"
             id="apply-aid"
-            placeholder="Apartment ID"
             class="formbold-form-input"
-            value="<%= 'AID' + aid %>"
+            value="<%= 'PID' + pid %>"
             readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
           />
         </div>
       </div>

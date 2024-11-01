@@ -6,10 +6,6 @@ import moment from "moment";
 // Admin
  // About Page
 export const adminAbout = async (req, res) => {
-    const locals = {
-      title: "Home Page",
-      description: "This is the home page of the System.",
-    };
   
     // Function to determine the time of the day
   const getTimeOfDay = () => {
@@ -40,14 +36,14 @@ export const adminAbout = async (req, res) => {
       const manager = user && user.manager ? user.manager : false;
   
       // Render the index page with the receptions and latestStorage data
-      res.render('admin-about', { locals, user, greeting, sudo, accountant, role, manager, alert: req.query.alert });
+      res.render('admin-about', { user, greeting, sudo, accountant, role, manager, alert: req.query.alert });
     } catch (error) {
       console.error('Error rendering the page:', error);
       res.status(500).send('Internal Server Error');
     }
   };
 
-    // Features Page
+  // Features Page
 export const adminFeatures = async (req, res) => {
     const locals = {
       title: "Home Page",

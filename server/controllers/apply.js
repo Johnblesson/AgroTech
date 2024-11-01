@@ -8,10 +8,11 @@ import { io } from '../../server.js'; // Import the io instance
 export const createApplication = async (req, res) => {
   try {
     // Extracting data from request body
-    const { phone, location, applyAid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
+    const { title, phone, location, applyAid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
 
     // Create a new Application object with form data
     const applicationForm = new Application({
+      title,
       phone,
       location,
       username,
@@ -80,11 +81,6 @@ export const getAllApplication = async (req, res) => {
 
 // Get edit applicaion
 export const editApplication = async (req, res) => {
-  const locals = {
-    title: "Edit application",
-    description: "This is the edit application page.",
-  };
-
   // Function to determine the time of the day
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
@@ -118,7 +114,6 @@ export const editApplication = async (req, res) => {
     const accountant = user && user.accountant ? user.accountant : false;
 
     res.render("edit-application", {
-      locals,
       apply,
       greeting,
       user,
@@ -318,12 +313,13 @@ export const applyForSponsorship = async (req, res) => {
   };
 
   try {
-    // Get the apartment ID and location from the query parameters
-    const apartmentId = req.query.aid;
+    // Get the product ID and location from the query parameters
+    const productId = req.query.pid;
     const location = req.query.location;
+    const title = req.query.title;
 
-    // Fetch the apartment details based on the ID
-    const apartment = await Apartments.findOne({ _id: req.params.id });
+    // Fetch the product details based on the ID
+    const product = await Products.findOne({ _id: req.params.id });
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
@@ -337,9 +333,10 @@ export const applyForSponsorship = async (req, res) => {
     res.render('apply-sponsor', {
       user,
       greeting,
-      apartment,
-      aid: apartmentId,
+      product,
+      pid: productId,
       location: location,
+      title: title,
       role,
       alert: req.query.alert, // Pass the alert message
     });
@@ -350,9 +347,8 @@ export const applyForSponsorship = async (req, res) => {
 };
 
 
+
 // adminApplyForSponsorship
-
-
 export const adminApplyForSponsorship = async (req, res) => {
 
   // Function to determine the time of the day
@@ -369,12 +365,13 @@ export const adminApplyForSponsorship = async (req, res) => {
   };
 
   try {
-    // Get the apartment ID and location from the query parameters
-    const apartmentId = req.query.aid;
+    // Get the product ID and location from the query parameters
+    const productId = req.query.pid;
     const location = req.query.location;
+    const title = req.query.title;
 
-    // Fetch the apartment details based on the ID
-    const apartment = await Apartments.findOne({ _id: req.params.id });
+    // Fetch the product details based on the ID
+    const product = await Products.findOne({ _id: req.params.id });
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
@@ -397,9 +394,10 @@ export const adminApplyForSponsorship = async (req, res) => {
     res.render('apply-sponsor-admin', {
       user,
       greeting,
-      apartment,
-      aid: apartmentId,
+      product,
+      pid: productId,
       location: location,
+      title: title,
       role,
       sudo,
       accountant,
@@ -413,58 +411,18 @@ export const adminApplyForSponsorship = async (req, res) => {
 };
 
 
-
-// // Controller function to create a new boost
-// export const createBoost = async (req, res) => {
-//   try {
-//     // Extracting data from request body
-//     const { phone, location, applyAid, username, address, address2, createdBy, comments, payment, duration, expiration } = req.body;
-
-//     // Create a new Boost object with form data
-//     const boostForm = new Boost({
-//       phone,
-//       location,
-//       username,
-//       applyAid,
-//       address,
-//       address2,
-//       createdBy,
-//       comments,
-//       payment,
-//       duration,
-//       expiration,
-//       createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
-//       updatedAt: new Date()
-//     });
-
-//     // Saving the boost-apartment to the database
-//     const savedboost = await boostForm.save();
-
-//     // Emit a new Application notification to all connected clients
-//     // io.emit('new-application', { createdBy: savedApplication.createdBy, applyAid: savedApplication.applyAid, location: savedApplication.location });
-
-//     // Sending a success response
-//     res.status(201).render('success/boost')
-//     console.log(savedboost);
-//   } catch (error) {
-//     // Sending an error response
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
-
-
 // Controller function to create a new boost
 export const createBoost = async (req, res) => {
   try {
     // Extracting data from request body
-    const { phone, location, applyAid, username, address, address2, createdBy, comments, payment, duration, expiration } = req.body;
+    const { title, phone, location, applyAid, username, address, address2, createdBy, comments, payment, duration, expiration } = req.body;
 
     // Convert payment to boolean
     const paymentBoolean = typeof payment === 'string' ? payment.toLowerCase() === 'true' : Boolean(payment);
 
     // Create a new Boost object with form data
     const boostForm = new Boost({
+      title,
       phone,
       location,
       username,

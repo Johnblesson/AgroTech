@@ -11,7 +11,9 @@ import {
     guestPage, 
     faq,
     agroNews,
-    faqAdmin, 
+    faqAdmin,
+    farmingTips,
+    weatherUpdate,
     agentController, 
     viewIPAddresses, 
     deleteIPAddress,
@@ -53,15 +55,19 @@ import { checkSudoMiddleware } from '../middlewares/sudo.js';
 
 router.get("/", cacheMiddleware, guestPage)
 
-router.get("/about", cacheMiddleware, about);
+router.get("/about", cacheMiddleware, ensureAuthenticated, about);
 
-router.get("/features", cacheMiddleware, features);
+router.get("/features", cacheMiddleware, ensureAuthenticated, features);
 
-router.get("/service", cacheMiddleware, service);
+router.get("/service", cacheMiddleware, ensureAuthenticated, service);
 
-router.get("/blog", cacheMiddleware, blog);
+router.get("/blog", cacheMiddleware, ensureAuthenticated, blog);
 
-router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews)
+router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews) // farmingTips
+
+router.get('/tips', cacheMiddleware, ensureAuthenticated, farmingTips)
+
+router.get('/weather-update', cacheMiddleware, ensureAuthenticated, weatherUpdate)
 
 router.get('/create-product',  cacheMiddleware, ensureAuthenticated, getPostProduct)
 
@@ -105,7 +111,7 @@ router.get("/cities", ensureAuthenticated, cacheMiddleware, isAdmin, checkSudoMi
 router.get("/ip-address-details/:id", ensureAuthenticated, cacheMiddleware, isAdmin, checkSudoMiddleware, viewipaddressdetails);
 router.get("/pie-chart", ensureAuthenticated, cacheMiddleware, isAdmin, checkSudoMiddleware, pieChartPage);
 router.get("/country-metrics", ensureAuthenticated, cacheMiddleware, isAdmin, checkSudoMiddleware, renderCountryMetricsPage)
-router.get("/settings", ensureAuthenticated, cacheMiddleware, isAdmin, settings);
+router.get("/settings", ensureAuthenticated, cacheMiddleware, settings);
 
 
 // Post apartments success message

@@ -1,13 +1,13 @@
 <!-- include header -->
-<%- include('include/_header') %>
+<%- include(isAdmin ? 'include/_header-admin' : 'include/_header') %>
 <!-- /include header -->
 
 <!-- include hero -->
-<%- include('include/_hero') %>
+<%- include(isAdmin ? 'include/_hero-admin' : 'include/_hero') %>
 <!-- /include hero -->
 
 <!-- include agro-news -->
-
+<%- include('include/_agro-news') %>
 <!-- /include agro-news -->
 
 <!-- include cta -->

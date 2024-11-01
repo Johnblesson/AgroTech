@@ -239,13 +239,13 @@ export const sponsorship = async (req, res) => {
 
     // Fetch all storage data
     // const allStorage = await User.find().skip(skip).limit(limit);
-    const totalEntries = await Apartments.countDocuments();
+    const totalEntries = await Products.countDocuments();
 
     const totalPages = Math.ceil(totalEntries / limit);
 
     const users = await User.find();
-    // Fetch all apartments from the database
-    const apartments = await Apartments.find();
+    // Fetch all products from the database
+    const products = await Products.find();
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
@@ -253,9 +253,9 @@ export const sponsorship = async (req, res) => {
     // Check if the user is authenticated and get their ID
     const user = req.isAuthenticated() ? req.user : null;
 
-    // Render the all-properties view template with the apartments data
+    // Render the all-properties view template with the products data
     res.render("sponsorship", {
-      apartments,
+      products,
       greeting,
       user,
       users,
@@ -265,7 +265,7 @@ export const sponsorship = async (req, res) => {
   
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
+    res.status(500).send("An error occurred while fetching products.");
   }
 };
 
@@ -640,7 +640,6 @@ export const editSponsorship = async (req, res) => {
     const accountant = user && user.accountant ? user.accountant : false;
 
     res.render("sponsorship-form", {
-      locals,
       product,
       greeting,
       user,
@@ -655,42 +654,42 @@ export const editSponsorship = async (req, res) => {
 };
 
 
-// Update Admin Apartments record
+// Update Admin Products record
 export const updateAdminSponsorship = async (req, res) => {
   try {
     const { id } = req.params; // Extract the ID of the record to be updated
 
-    // Find the existing Apartments record by ID and update its fields
-    const updatedProduct = await Apartments.findByIdAndUpdate(id, req.body, { new: true });
-
-    // Check if the Apartments record exists
-    if (!updatedProduct) {
-      return res.status(404).json({ message: 'Apartments record not found' });
-    }
-
-    // Respond with the updated Apartments record
-    res.status(200).render('success/update-apartment', { updatedProduct });
-  } catch (error) {
-    console.error('Error updating Apartments record:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
-// Update Admin Apartments record
-export const updateAdminAvailability = async (req, res) => {
-  try {
-    const { id } = req.params; // Extract the ID of the record to be updated
-
-    // Find the existing Apartments record by ID and update its fields
+    // Find the existing Products record by ID and update its fields
     const updatedProduct = await Products.findByIdAndUpdate(id, req.body, { new: true });
 
-    // Check if the Apartments record exists
+    // Check if the Products record exists
     if (!updatedProduct) {
       return res.status(404).json({ message: 'Products record not found' });
     }
 
     // Respond with the updated Products record
-    res.status(200).render('success/update-apartment', { updatedProduct });
+    res.status(200).render('success/update-product', { updatedProduct });
+  } catch (error) {
+    console.error('Error updating Products record:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Update Admin Products record
+export const updateAdminAvailability = async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the ID of the record to be updated
+
+    // Find the existing Products record by ID and update its fields
+    const updatedProduct = await Products.findByIdAndUpdate(id, req.body, { new: true });
+
+    // Check if the Products record exists
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Products record not found' });
+    }
+
+    // Respond with the updated Products record
+    res.status(200).render('success/update-product', { updatedProduct });
   } catch (error) {
     console.error('Error updating products record:', error);
     res.status(500).json({ message: 'Internal server error' });

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Apartment Form</title>
+  <title>AgroTech | Form - Apply for boosting</title>
     <!-- 
     - custom css link
   -->
@@ -58,28 +58,28 @@
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">Boost apartment. 
+    <pre style="text-align: center; font: 0.6em sans-serif;">Boost Product. 
       Make sure you input your correct informations.
       You will be contacted to make payment.
     </pre>
 <form action="/apply-boost" method="POST">
 
-      <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="phone" class="formbold-form-label"> Phone: </label>
-        <div>
-          <input
-            type="text"
-            name="phone"
-            id="phone"
-            placeholder="Phone number"
-            class="formbold-form-input"
-            required
-          />
-        </div>
-      </div>
+  <div class="formbold-mb-3 formbold-input-wrapp">
+    <label for="title" class="formbold-form-label"> Product Name: </label>
+    <div>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        value="<%= title %>"
+        class="formbold-form-input"
+        readonly
+      />
+    </div>
+  </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="location" class="formbold-form-label"> Apartment Location: </label>
+        <label for="location" class="formbold-form-label">Location: </label>
         <div>
           <input
             type="text"
@@ -93,16 +93,29 @@
       </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="apply-aid" class="formbold-form-label"> Apartment ID (AID): </label>
+        <label for="apply-aid" class="formbold-form-label"> Product ID (PID): </label>
         <div>
           <input
             type="text"
             name="applyAid"
             id="apply-aid"
-            placeholder="Apartment ID"
             class="formbold-form-input"
-            value="<%= 'AID' + aid %>"
+            value="<%= 'PID' + pid %>"
             readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <div>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone number"
+            class="formbold-form-input"
+            required
           />
         </div>
       </div>

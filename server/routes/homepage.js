@@ -2,7 +2,7 @@ import { Router } from "express";
 const router = Router();
 
 import { homeRoute, adminHomeRoute } from "../render/render.js";
-import { myPost, myPostAdmin, updateApartments, deleteApartment, getUpdateForm } from "../controllers/myPost.js";
+import { myPost, myPostAdmin, updateProducts , deleteProduct, getUpdateForm } from "../controllers/myPost.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 import cacheMiddleware from "../middlewares/cacheMiddleware.js"
@@ -14,10 +14,10 @@ router.get("/admin-home", ensureAuthenticated, isAdmin, cacheMiddleware, adminHo
 // My Post Route
 router.get("/my-post", ensureAuthenticated, cacheMiddleware, myPost);
 router.get("/admin-my-post", ensureAuthenticated, cacheMiddleware, isAdmin, myPostAdmin);
-router.get("/update-apartment/:id", ensureAuthenticated, cacheMiddleware, getUpdateForm);
-// Route to update an apartment
-router.patch('/update-apartments/:id', ensureAuthenticated, updateApartments);
-// Route to delete an apartment
-router.delete('/apartments/:id', ensureAuthenticated, deleteApartment);
+router.get("/update-product/:id", ensureAuthenticated, cacheMiddleware, getUpdateForm);
+// Route to update an product
+router.patch('/update-product/:id', ensureAuthenticated, updateProducts );
+// Route to delete an product
+router.delete('/products/:id', ensureAuthenticated, deleteProduct);
 
 export default router

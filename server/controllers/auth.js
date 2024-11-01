@@ -819,6 +819,8 @@ export const settings = async (req, res) => {
     const manager = user && user.manager ? user.manager : false;
 
     const users = await User.findOne({ _id: req.params.id });
+
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
   
     // Determine the time of the day
     const greeting = getTimeOfDay();  
@@ -831,6 +833,7 @@ export const settings = async (req, res) => {
             accountant,
             manager,
             users,
+            isAdmin, // Pass isAdmin to the template
             alert: req.query.alert, // Pass the alert message
         });
     } catch (error) {

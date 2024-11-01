@@ -298,7 +298,7 @@ export const allVirtualProducts = async (req, res) => {
 
 
 
-    // About Page
+// About Page
 export const about = async (req, res) => {
   
     // Function to determine the time of the day
@@ -314,18 +314,9 @@ export const about = async (req, res) => {
     }
   };
     try {
-    // Find all verified apartments and sort them by sponsored status and createdAt timestamp in descending order
-    const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+      // Find all verified products and sort them by sponsored status and createdAt timestamp in descending order
+      const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
-    // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
-    apartments.forEach(apartment => {
-      // Ensure photoUrl is set properly to the first photo if it's an array
-      if (Array.isArray(apartment.photo) && apartment.photo.length > 0) {
-        apartment.photoUrl = apartment.photo[0];
-      } else {
-        apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
-      }
-    });
       const user = req.isAuthenticated() ? req.user : null;
       const role = user ? user.role : null; // Get user role if user is authenticated
 
@@ -334,7 +325,7 @@ export const about = async (req, res) => {
       const greeting = getTimeOfDay();
   
       // Render the index page with the receptions and latestStorage data
-      res.render('about', { user, greeting, apartments, role, alert: req.query.alert });
+      res.render('about', { user, greeting, products, role, alert: req.query.alert });
     } catch (error) {
       console.error('Error rendering the page:', error);
       res.status(500).send('Internal Server Error');
@@ -458,7 +449,7 @@ export const service = async (req, res) => {
     }
   };
 
-// Features Page
+// Agro News Page
 export const agroNews = async (req, res) => {
   
   // Function to determine the time of the day
@@ -496,6 +487,87 @@ const getTimeOfDay = () => {
       // Handle other roles or unauthorized access
       res.status(403).send('Unauthorized');
     }
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+// Farming Tips Page
+export const farmingTips = async (req, res) => {
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null;
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
+    const sudo = user && user.sudo ? user.sudo : false;
+    const accountant = user && user.accountant ? user.accountant : false;
+    const manager = user && user.manager ? user.manager : false;
+
+    const greeting = getTimeOfDay();
+
+    res.render('farming-tips', {
+      user,
+      greeting,
+      role,
+      sudo,
+      accountant,
+      manager,
+      isAdmin, // Pass isAdmin to the template
+      alert: req.query.alert,
+    });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
+// Weather Update Page
+export const weatherUpdate = async (req, res) => {
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null;
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
+    const sudo = user && user.sudo ? user.sudo : false;
+    const accountant = user && user.accountant ? user.accountant : false;
+    const manager = user && user.manager ? user.manager : false;
+
+    const greeting = getTimeOfDay();
+
+    res.render('weather-update', {
+      user,
+      greeting,
+      role,
+      sudo,
+      accountant,
+      manager,
+      isAdmin, // Pass isAdmin to the template
+      alert: req.query.alert,
+    });
   } catch (error) {
     console.error('Error rendering the page:', error);
     res.status(500).send('Internal Server Error');
@@ -859,7 +931,7 @@ export const faq = async (req, res) => {
     const role = user ? user.role : null; // Get user role if user is authenticated
 
     res.render("faq", {
-      // apartments,
+      // products,
       greeting,
       user,
       // apts,

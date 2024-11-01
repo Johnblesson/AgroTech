@@ -134,7 +134,7 @@
                             <!-- Placeholder for square footage -->
                             <li class="card-item">
                                 <strong>Product ID (PID): PID<%= product.pid %></strong>
-                                <a href="/admin-application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= product.title %>">
+                                <a href="/admin-application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= apt.title %>">
                                     <span>Apply to buy this product.</span>
                                     <button class="btn1">Apply</button>
                                 </a>
@@ -160,17 +160,6 @@
                             Created At: <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
                         </p>
                     </div>
-                    <!-- <div class="card-footer-actions">
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="resize-outline"></ion-icon>
-                        </button>
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-                        <button class="card-footer-actions-btn">
-                            <ion-icon name="add-circle-outline"></ion-icon>
-                        </button>
-                    </div> -->
                 </div>
             </div>
         </div>

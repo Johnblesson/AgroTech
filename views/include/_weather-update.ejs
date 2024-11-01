@@ -1,0 +1,125 @@
+<!-- include weather update -->
+<style>
+    .weather-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group select, .form-group button {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    .weather-result {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid hsl(9, 94%, 63%);
+        border-radius: 4px;
+        background-color: #e7f1ff;
+    }
+    .weather-result h2 {
+        margin: 0;
+    }
+
+    .colorful-button {
+        background-color: hsl(9, 100%, 62%);
+        color: white; /* Text color */
+        border: none; /* Remove default border */
+        padding: 10px; /* Padding for button */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Change cursor on hover */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    }
+
+    .colorful-button:hover {
+        background-color: hsl(9, 96%, 63%); /* Darker shade on hover */
+        transform: scale(1.05); /* Slightly increase size on hover */
+    }
+
+    .colorful-button:active {
+        background-color: #004085; /* Even darker shade when clicked */
+        transform: scale(0.95); /* Slightly decrease size when clicked */
+    }
+</style>
+<div class="weather-container">
+    <h1>Free Weather Update</h1>
+    <div class="form-group">
+        <label for="region">Select Region</label>
+        <select id="region">
+            <option value="Freetown">Freetown</option>
+            <option value="Bo">Bo</option>
+            <option value="Kenema">Kenema</option>
+            <option value="Makeni">Makeni</option>
+            <option value="Koidu">Koidu</option>
+            <option value="Port Loko">Port Loko</option>
+            <option value="Moyamba">Moyamba</option>
+            <option value="Pujehun">Pujehun</option>
+            <option value="Tonkolili">Tonkolili</option>
+            <option value="Kambia">Kambia</option>
+        </select>
+    </div>
+    <!-- <div class="form-group">
+        <button id="getWeather">Get Weather Update</button>
+    </div> -->
+    <div class="form-group">
+        <button id="getWeather" class="colorful-button">Get Weather Update</button>
+    </div>
+    <div class="weather-result" id="weatherResult" style="display:none;">
+        <h2>Weather Update for <span id="locationName"></span></h2>
+        <p id="weatherDescription"></p>
+        <p id="temperature"></p>
+        <p id="humidity"></p>
+        <p id="windSpeed"></p>
+    </div>
+</div>
+
+<script>
+    const apiKey = 'ade35581dc50ae6aba7ea83384d17e99'; // Your API Key
+    const getWeatherButton = document.getElementById('getWeather');
+    const weatherResult = document.getElementById('weatherResult');
+    const locationName = document.getElementById('locationName');
+    const weatherDescription = document.getElementById('weatherDescription');
+    const temperature = document.getElementById('temperature');
+    const humidity = document.getElementById('humidity');
+    const windSpeed = document.getElementById('windSpeed');
+
+    getWeatherButton.addEventListener('click', () => {
+        const region = document.getElementById('region').value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${region},SL&appid=${apiKey}&units=metric`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Weather data not available');
+                }
+                return response.json();
+            })
+            .then(data => {
+                locationName.textContent = data.name;
+                weatherDescription.textContent = `Weather: ${data.weather[0].description}`;
+                temperature.textContent = `Temperature: ${data.main.temp} °C`;
+                humidity.textContent = `Humidity: ${data.main.humidity}%`;
+                windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+                weatherResult.style.display = 'block';
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+</script>

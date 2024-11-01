@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const applySchema = new mongoose.Schema({
+    title: String,
     phone: String,
     location: String,
     username: String,

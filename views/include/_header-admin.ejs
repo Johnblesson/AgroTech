@@ -201,7 +201,7 @@
                 <a href="#" class="navbar-link dropdown-toggle" data-nav-link>Resources</a>
                 <ul class="dropdown-menu">
                   <li><a href="/agro-news" class="dropdown-item">Agro News</a></li>
-                  <li><a href="/tools" class="dropdown-item">Tools</a></li>
+                  <li><a href="/weather-update" class="dropdown-item">Weather Update</a></li>
                   <li><a href="/tips" class="dropdown-item">Farming Tips</a></li>
                 </ul>
               </li>
@@ -212,12 +212,6 @@
         </nav>
 
         <div class="header-bottom-actions">
-          <button class="header-bottom-actions-btn" aria-label="Search">
-            <a href="/search">
-              <ion-icon name="search-outline"></ion-icon>
-            </a>
-            <span>Search</span>
-          </button>
           <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
             <ion-icon name="person-outline"></ion-icon>
             <span>Profile</span>
@@ -230,6 +224,12 @@
             <ion-icon name="storefront-outline"></ion-icon>
             <span>Marketplace</span>
           </a>
+          <button class="header-bottom-actions-btn" aria-label="Setttings">
+            <a href="/settings">
+              <ion-icon name="settings-outline"></ion-icon>
+            </a>
+            <span>Settings</span>
+          </button>
           <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
             <ion-icon name="menu-outline"></ion-icon>
             <span>Menu</span>

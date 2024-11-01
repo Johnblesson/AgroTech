@@ -1,5 +1,6 @@
 AgroTech SL: Enhancing Agriculture in Sierra Leone
 
+</a href="https://agrotechsl.onrender.com/"><img src="public/images/agrotech.png" alt="AgroTech UI"></a>
 <a href="https://agrotechsl.onrender.com/">Demo</a>
 
 Overview:

@@ -11,7 +11,7 @@ dotenv.config();
 // Generate a QR code and set up 2FA for the user
 export const setup2FA = async (req, res) => {
     try {
-      const secret = speakeasy.generateSecret({ name: 'homehub-ng' });
+      const secret = speakeasy.generateSecret({ name: 'agrotech-sl' });
   
       // Save the base32 secret to the user's record in the database
       const user = await User.findById(req.user._id); // Assuming you are using session/cookie-based authentication
@@ -111,7 +111,7 @@ export const toggle2FA = async (req, res) => {
   
       if (twoFactorAuth === 'enable' && !user.twoFactorEnabled) {
         // Enable 2FA
-        const secret = speakeasy.generateSecret({ name: 'homehub-ng' });
+        const secret = speakeasy.generateSecret({ name: 'agrotech-sl' });
         user.twoFactorSecret = secret.base32;
         user.twoFactorEnabled = true;
         await user.save();

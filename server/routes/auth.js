@@ -30,7 +30,6 @@ import {
     toggle2FA 
 } 
 from '../controllers/2FA.js'
-import { siteMaps } from "../render/sitemap.js"
 import upload from "../upload/upload.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
@@ -54,8 +53,6 @@ router.get("/update-password/:id", ensureAuthenticated, viewChangePwdPage)
 // router.get("/update-password-user/:id", ensureAuthenticated, viewChangePwdPageUser)
 router.patch("/update-password/:id", ensureAuthenticated, changePassword)
 
-// Sitemap
-router.get("/sitemap.xml", siteMaps)
 
 // google oauth
 // router.get('/auth/google', googleAuth);

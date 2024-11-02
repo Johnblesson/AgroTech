@@ -370,7 +370,8 @@ export const view = async (req, res) => {
           users, 
           greeting,
           user,
-          role
+          role,
+          alert: req.query.alert, // Pass the alert message
       });
   } else {
       // Handle other roles or unauthorized access

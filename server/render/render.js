@@ -275,13 +275,11 @@ export const allVirtualProducts = async (req, res) => {
 
     const product = await Products.find();
 
-    // Ensure photoUrl is set properly for each product
     products.forEach(product => {
-      if (!product.photos || product.photos.length === 0) {
-        product.photoUrl = ''; // Initialize an empty string if no photos are available
-      } else {
-        product.photoUrl = product.photos[0]; // Set photoUrl to the first photo in the photos array
-      }
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
+      product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+      product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
 
     // Determine the time of the day

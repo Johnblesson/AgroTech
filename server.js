@@ -45,6 +45,12 @@ app.set('trust proxy', true)
 // Enable Gzip compression
 app.use(compression());
 
+// Pass io to routes
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 // Set the view engine to ejs
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -653,17 +653,17 @@ export const guestPage = async (req, res) => {
     // Get full country name
     const countryName = getName(countryCode) || 'Unknown';
 
-    console.log('IP Information:', {
-      Country: countryCode,
-      CountryName: countryName,
-      City: city,
-      Region: region,
-      Postal: postal,
-      Loc: loc,
-      Org: org,
-      Timezone: timezone,
-      Hostname: hostname
-    });
+    // console.log('IP Information:', {
+    //   Country: countryCode,
+    //   CountryName: countryName,
+    //   City: city,
+    //   Region: region,
+    //   Postal: postal,
+    //   Loc: loc,
+    //   Org: org,
+    //   Timezone: timezone,
+    //   Hostname: hostname
+    // });
 
     // Check if IP has been logged within the last 24 hours
     const oneDayAgo = new Date();

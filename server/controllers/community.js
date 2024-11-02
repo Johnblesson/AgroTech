@@ -3,17 +3,38 @@ import Community from '../models/community.js';
 import User from '../models/auth.js';
 
 // Create a post
+// export const createPost = async (req, res) => {
+//   try {
+//     const newPost = await Community.create({
+//       post: req.body.post,
+//       createdBy: req.user._id,
+//     });
+//     res.redirect('/community'); // Redirect to the community page after posting
+//   } catch (error) {
+//     res.status(500).send('Error creating post');
+//   }
+// };
+
+
 export const createPost = async (req, res) => {
   try {
     const newPost = await Community.create({
       post: req.body.post,
       createdBy: req.user._id,
     });
-    res.redirect('/community'); // Redirect to the community page after posting
+
+    // Populate the createdBy field to include the user photo and fullname
+    await newPost.populate('createdBy', 'photo fullname');
+
+    // Emit the new post to all connected clients
+    req.io.emit('newPost', newPost);
+
+    res.sendStatus(200); // Send success status without redirecting
   } catch (error) {
     res.status(500).send('Error creating post');
   }
 };
+
 
 
 // Get all posts
@@ -69,6 +90,19 @@ export const getPosts = async (req, res) => {
 
 
 // Like a post
+// export const likePost = async (req, res) => {
+//   try {
+//     const post = await Community.findById(req.params.postId);
+//     if (!post.likes.includes(req.user._id)) {
+//       post.likes.push(req.user._id);
+//       await post.save();
+//     }
+//     res.redirect('/community');
+//   } catch (error) {
+//     res.status(500).send('Error liking post');
+//   }
+// };
+
 export const likePost = async (req, res) => {
   try {
     const post = await Community.findById(req.params.postId);
@@ -76,23 +110,52 @@ export const likePost = async (req, res) => {
       post.likes.push(req.user._id);
       await post.save();
     }
-    res.redirect('/community');
+
+    // Emit the updated post to all clients
+    req.io.emit('postLiked', { postId: post._id, likes: post.likes.length });
+
+    res.sendStatus(200); // Send success status without redirecting
   } catch (error) {
     res.status(500).send('Error liking post');
   }
 };
 
 
+
 // Comment on a post
+// export const commentOnPost = async (req, res) => {
+//   try {
+//     const post = await Community.findById(req.params.postId);
+//     post.comments.push({
+//       text: req.body.comment,
+//       commentedBy: req.user._id,
+//     });
+//     await post.save();
+//     res.redirect('/community');
+//   } catch (error) {
+//     res.status(500).send('Error commenting on post');
+//   }
+// };
+
+
 export const commentOnPost = async (req, res) => {
   try {
     const post = await Community.findById(req.params.postId);
-    post.comments.push({
+    const newComment = {
       text: req.body.comment,
       commentedBy: req.user._id,
-    });
+    };
+    post.comments.push(newComment);
     await post.save();
-    res.redirect('/community');
+
+    // Populate the commentedBy field to include user photo and fullname
+    await post.populate('comments.commentedBy', 'photo fullname');
+
+    // Emit the new comment to all clients
+    req.io.emit('newComment', { postId: post._id, comment: newComment });
+
+    // res.redirect('/community');
+    res.sendStatus(200); // Send success status without redirecting
   } catch (error) {
     res.status(500).send('Error commenting on post');
   }

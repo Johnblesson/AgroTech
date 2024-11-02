@@ -41,7 +41,7 @@ export const createProduct = async (req, res) => {
       availability: req.body.availability,
       verification: req.body.verification,
       sponsored: req.body.sponsored,
-      createdBy: user._id,
+      createdBy: req.body.createdBy,
       role: user.role,
       clicks: req.body.clicks,
       user: userId,
@@ -390,7 +390,6 @@ export const updateAdminProducts = async (req, res) => {
          const accountant = user && user.accountant ? user.accountant : false;
 
     res.render("update-admin-product", {
-      locals,
       product,
       greeting,
       user,
@@ -424,6 +423,7 @@ export const productUpdate = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 // Get
 export const adminEditProducts = async (req, res) => {

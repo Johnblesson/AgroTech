@@ -11,13 +11,17 @@
 <body>
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">
-      Update the details of your product.
-      Ensure all information is correct for potential buyers.
-    </pre>
-    <form action="/update-admin-products/<%= product._id %>" method="POST" enctype="multipart/form-data">
+    <h2 style="text-align: center;">
+      UPDATE PRODUCT
+    </h2>
+    <form action="/edit-admin-product/<%= product._id %>?_method=PATCH" method="POST">
       <input type="hidden" name="_method" value="PATCH"> <!-- Method override for PATCH -->
       <input type="hidden" name="productId" id="productId" value="<%= product._id %>" />
+
+      <div class="formbold-mb-3">
+        <label for="pid" class="formbold-form-label">Product ID: </label>
+        <input type="text" name="pid" id="pid" value="<%= product.pid %>" class="formbold-form-input" required/>
+      </div>
 
       <div class="formbold-mb-3">
         <label for="title" class="formbold-form-label">Product Name: </label>
@@ -87,13 +91,32 @@
           </div>
       </div>
 
+      <div class="formbold-input-flex">
+        <!-- <div>
+          <label for="avaliablity" class="formbold-form-label"> Availability: </label>
+          <select id="availabilty" class="formbold-form-input" name="availabilty">
+            <option value="" disabled selected hidden>Select Availability</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+        </select>
+        </div> -->
+          <div>
+            <label for="verification" class="formbold-form-label"> Verification: </label>
+            <select id="verification" class="formbold-form-input" name="verification">
+              <option value="" disabled selected hidden>Select verification</option>
+              <option value="verified">Verified</option>
+              <option value="not verified">Not verified</option>
+          </select>
+          </div>
+      </div>
+
       <div class="formbold-mb-3">
         <input type="hidden" name="role" value="<%= user.role %>" />
       </div>
 
       <div class="formbold-mb-3">
         <label for="createdBy" class="formbold-form-label"> Created By: </label>
-        <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+        <input type="text" name="createdBy" value="<%= user.createdBy%>" class="formbold-form-input" readonly />
       </div>
 
       <div class="formbold-mb-3">

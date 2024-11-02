@@ -7,7 +7,7 @@ import {
     updateProductById,
     deleteProductById,
     editproduct,
-    updateAdminProducts,
+    productUpdate,
     allProducts,
     // updateProducts,
     adminEditProducts, // get edit products for admin
@@ -48,10 +48,10 @@ router.put('/products/:id', ensureAuthenticated, isAdmin, updateProductById);
 router.delete('/delete-products/:id', ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteProductById);
 router.get('/delete-products/:id', ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteProductById);
 // router.patch('/update-products/:id', ensureAuthenticated, isAdmin, updateProducts);
-router.patch('/update-admin-products/:id', ensureAuthenticated, checkManagerMiddleware, isAdmin, updateAdminProducts);
+router.patch('/update-admin-products/:id', ensureAuthenticated, checkManagerMiddleware, isAdmin, productUpdate);
 router.get('/view-product-details/:id', ensureAuthenticated, cacheMiddleware, isAdmin, viewproduct);
 router.get("/edit-admin-product/:id", ensureAuthenticated, cacheMiddleware, isAdmin, adminEditProducts);
-router.patch("/edit-admin-product/:id", ensureAuthenticated, isAdmin, updateAdminProducts);
+router.patch("/edit-admin-product/:id", ensureAuthenticated, isAdmin, productUpdate);
 router.get("/product-detail/:id", ensureAuthenticated, cacheMiddleware, productDetail);
 
 // Notifications

@@ -1010,12 +1010,15 @@ const getTimeOfDay = () => {
   try {
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
-
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
+    const sudo = user && user.sudo ? user.sudo : false;
+    const accountant = user && user.accountant ? user.accountant : false;
+    const manager = user && user.manager ? user.manager : false;
      // Determine the time of the day
     const greeting = getTimeOfDay();
 
     // Render the index page with the receptions and latestStorage data
-    res.render('agent-page', { locals, user, greeting, role, alert: req.query.alert });
+    res.render('agent-page', { locals, user, greeting, role, sudo, isAdmin, accountant, manager, alert: req.query.alert });
   } catch (error) {
     console.error('Error rendering the page:', error);
     res.status(500).send('Internal Server Error');

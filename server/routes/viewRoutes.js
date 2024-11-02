@@ -100,7 +100,7 @@ router.get("/faq", cacheMiddleware, ensureAuthenticated, faq)
 
 router.get("/faq-admin", cacheMiddleware, ensureAuthenticated, isAdmin, faqAdmin)
 
-router.get("/external-agent-program", cacheMiddleware, ensureAuthenticated, agentController)
+router.get("/farming-program", cacheMiddleware, ensureAuthenticated, agentController)
 
 router.get("/view-ip-addresses", cacheMiddleware, ensureAuthenticated, isAdmin, checkSudoMiddleware, viewIPAddresses)
 router.delete('/ip-addresses/:id', isAdmin, ensureAuthenticated, checkSudoMiddleware, deleteIPAddress)

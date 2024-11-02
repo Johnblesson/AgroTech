@@ -1,41 +1,100 @@
-import Agents from '../models/agents.js';	// Importing the Agents model
-import User from '../models/auth.js';	// Importing the User model
+// import Agents from '../models/agents.js';	// Importing the Agents model
+// import User from '../models/auth.js';	// Importing the User model
 
-// Controller function to create a new Agents
+// // Controller function to create a new Agents
+// // POST /agents
+
+// export const createAgentForm = async (req, res) => {
+//     try {
+
+//       // Extracting data from request body
+//       const { fullname, phone, email, username, address, address2, createdBy, comments } = req.body;
+  
+//       // Create a new Agents object with form data
+//       const agentsForm = new Agents({
+//         fullname, 
+//         phone, 
+//         email,  
+//         username, 
+//         address, 
+//         address2, 
+//         createdBy, 
+//         comments,
+//         createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+//         updatedAt: new Date()
+//       });
+  
+//       // Saving the Agents to the database
+//       const savedAgents = await agentsForm.save();
+  
+//       // Sending a success response
+//       res.status(201).render('success/agents')
+//       console.log(savedAgents);
+//     } catch (error) {
+//       // Sending an error response
+//       res.status(400).json({ error: error.message });
+//     }
+//   };
+
+import Agents from '../models/agents.js'; // Importing the Agents model
+import User from '../models/auth.js'; // Importing the User model
+import flash from 'connect-flash'; // Make sure to import connect-flash
+
+// Controller function to create a new Agent
 // POST /agents
-
 export const createAgentForm = async (req, res) => {
     try {
+        // Extracting data from request body
+        const { fullname, phone, email, username, address, address2, createdBy, comments } = req.body;
 
-      // Extracting data from request body
-      const { fullname, phone, email, username, address, address2, createdBy, comments } = req.body;
-  
-      // Create a new Agents object with form data
-      const agentsForm = new Agents({
-        fullname, 
-        phone, 
-        email,  
-        username, 
-        address, 
-        address2, 
-        createdBy, 
-        comments,
-        createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
-        updatedAt: new Date()
-      });
-  
-      // Saving the Agents to the database
-      const savedAgents = await agentsForm.save();
-  
-      // Sending a success response
-      res.status(201).render('success/agents')
-      console.log(savedAgents);
+        // Phone number validation: must be 8 digits and start with 31, 32, or 34
+        const phonePattern = /^(31|32|34)\d{6}$/; // Regex to match Qcell number format
+
+        if (!phonePattern.test(phone)) {
+            // If the phone number does not match the pattern, send a flash message and redirect
+            req.flash('error', 'Your number is not a Qcell number.'); // Flash message
+        
+        const user = req.isAuthenticated() ? req.user : null;
+        if(user.role === 'admin') {
+            return res.status(400).redirect('agents-admin'); // Redirect to the form page (change URL as needed)
+        }
+        else {
+        res.status(400).redirect('agents'); // Redirect to the form page (change URL as needed)
+       }
+        }
+
+        // Create a new Agents object with form data
+        const agentsForm = new Agents({
+            fullname, 
+            phone, 
+            email,  
+            username, 
+            address, 
+            address2, 
+            createdBy, 
+            comments,
+            createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+            updatedAt: new Date()
+        });
+
+        // Saving the Agents to the database
+        const savedAgents = await agentsForm.save();
+        
+        // Sending a success response
+        res.status(201).render('success/agents');
+        console.log(savedAgents);
     } catch (error) {
-      // Sending an error response
-      res.status(400).json({ error: error.message });
+        // Sending an error response
+        req.flash('error', error.message); // Flash error message for other errors
+        const user = req.isAuthenticated() ? req.user : null;
+        if(user.role === 'admin') {
+            return res.status(400).redirect('agents-admin'); // Redirect to the form page (change URL as needed)
+        }
+        else {
+        res.status(400).redirect('agents'); // Redirect to the form page (change URL as needed)
     }
-  };
-
+}
+};
 
 
   // Get agent form
@@ -65,6 +124,12 @@ export const agentForm = async (req, res) => {
       const user = req.isAuthenticated() ? req.user : null;
   
       const role = user.role;
+
+       // Pass flash messages
+       const messages = {
+        error: req.flash('error'), // Get error messages
+        success: req.flash('success') // You can also include success messages if needed
+      };
   
       // Render the apply page with the necessary data
       res.render('apply-agent-form', {
@@ -72,6 +137,7 @@ export const agentForm = async (req, res) => {
         greeting,
         role,
         alert: req.query.alert, // Pass the alert message
+        messages // Pass flash messages to the template
       });
     } catch (error) {
       console.error('Error rendering the page:', error);

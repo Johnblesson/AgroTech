@@ -17,6 +17,11 @@
       Make sure you input your correct informations. 
       We will notify when you are approved.
     </pre>
+
+    <% if (messages.error) { %>
+      <div class="alert alert-danger"><%= messages.error %></div>
+    <% } %>
+  
 <form action="/agents" method="POST">
 
       <div class="formbold-mb-3 formbold-input-wrapp">
@@ -33,19 +38,35 @@
         </div>
       </div>
 
-      <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="phone" class="formbold-form-label"> Phone: </label>
+      <!-- <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell): </label>
         <div>
           <input
             type="text"
             name="phone"
             id="phone"
-            placeholder="Phone number"
+            placeholder="Qcell Number without +232 (e.g 32983498)"
             class="formbold-form-input"
             required
           />
         </div>
-      </div>
+      </div> -->
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell): </label>
+        <div>
+            <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="Qcell Number without +232 (e.g 32983498)"
+                class="formbold-form-input"
+                required
+                oninput="validatePhone()"
+            />
+        </div>
+    </div>
+    <div id="phone-error" style="color: red; display: none;"></div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="email" class="formbold-form-label"> Email: </label>
@@ -104,3 +125,23 @@
 </div>
 </body>
 </html>
+
+
+<script>
+  function validatePhone() {
+      const phoneInput = document.getElementById('phone');
+      const phoneError = document.getElementById('phone-error');
+      const phoneNumber = phoneInput.value.trim();
+  
+      // Check if the input has 8 digits and starts with 31, 32, or 34
+      const isValidPhone = /^\d{8}$/.test(phoneNumber) && (phoneNumber.startsWith('31') || phoneNumber.startsWith('32') || phoneNumber.startsWith('34'));
+  
+      if (!isValidPhone) {
+          phoneError.textContent = 'Your number is not a Qcell number';
+          phoneError.style.display = 'block';
+      } else {
+          phoneError.textContent = '';
+          phoneError.style.display = 'none';
+      }
+  }
+  </script>

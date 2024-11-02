@@ -67,13 +67,42 @@
       background-color: #f8f9fa;
       color: #28a745;
     }
+
+    .arrow {
+    color: white; /* Set the arrow color to white */
+    }
+
+    .arrow-dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none; /* Hide dropdown by default */
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
   </style>
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 
 <body>
@@ -91,18 +120,38 @@
     <div class="header-top">
       <div class="container">
         <ul class="header-top-list">
-          <li>
-            <a href="/view/<%= user._id %>" class="header-top-link">
-              <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
-            </a>
-          </li>
+            <li>
+                <a href="/administrator" class="header-top-link">
+                  <ion-icon name=""></ion-icon>
+    
+                  <span><%= greeting %>, Administrator <%= user ? user.username : '' %>
+                  <% if (sudo) { %>
+                      <p>(Owner)</p>
+                  <% } else { %>
+                      <p></p>
+                  <% } %>
+    
+                  <% if (accountant) { %>
+                    <p>(Accountant)</p>
+                  <% } else { %>
+                      <p></p>
+                  <% } %>
+    
+                  <% if (manager) { %>
+                    <p>(Director)</p>
+                  <% } else { %>
+                      <p></p>
+                  <% } %>
+                  </span>
+                </a>
+              </li>
         </ul>
 
         <div class="wrapper">
           <ul class="header-top-social-list">
             <li>
               <a href="#" class="header-top-social-link">
-                <img src="./images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
+                <img src="/images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
               </a>
             </li>
           </ul>
@@ -111,25 +160,44 @@
               <i class="fas fa-sign-out-alt"></i> Logout
             </button>
           </form>
+          <!-- <div class="dropdown">
+            <button class="dropbtn"><span class="arrow">&#9660;</span></button>
+           
+            <div class="dropdown-content">
+                <a href="/home">As user</a>
+                <a href="/admin-home">As admin</a>
+            </div>
+        </div> -->
+
+        <div class="arrow-dropdown">
+          <button class="dropbtn" onclick="toggleDropdown()">
+              <span class="arrow">&#9660;</span>
+          </button>
+          <div class="dropdown-content">
+              <a href="/home">As user</a>
+              <a href="/admin-home">As admin</a>
+          </div>
+      </div>
+      
         </div>
       </div>
     </div>
 
     <div class="header-bottom">
       <div class="container">
-        <a href="/home" class="logo">AgroTech SL</a>
+        <a href="/admin-home" class="logo">AgroTech SL</a>
 
         <nav class="navbar" data-navbar>
           <div class="navbar-top">
-            <a href="/home" class="logo">AgroTech SL</a>
+            <a href="/admin-home" class="logo">AgroTech SL</a>
             <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
               <ion-icon name="close-outline"></ion-icon>
             </button>
           </div>
           <div class="navbar-bottom">
             <ul class="navbar-list">
-              <li><a href="/home" class="navbar-link" data-nav-link>Home</a></li>
-              <li><a href="/marketplace" class="navbar-link" data-nav-link>Marketplace</a></li>
+              <!-- <li><a href="/admin-home" class="navbar-link" data-nav-link>Home</a></li> -->
+              <li><a href="/admin-marketplace" class="navbar-link" data-nav-link>Marketplace</a></li>
               <li class="dropdown">
                 <a href="#" class="navbar-link dropdown-toggle" data-nav-link>Resources</a>
                 <ul class="dropdown-menu">
@@ -139,19 +207,13 @@
                 </ul>
               </li>
               <li><a href="/community" class="navbar-link">Community</a></li>
-              <li><a href="/my-post" class="navbar-link" data-nav-link>My Posts</a></li>
+              <li><a href="/admin-my-post" class="navbar-link" data-nav-link>My Posts</a></li>
               <li><a href="/contact" class="navbar-link" data-nav-link>Contact</a></li>
             </ul>
           </div>
         </nav>
 
         <div class="header-bottom-actions">
-          <!-- <button class="header-bottom-actions-btn" aria-label="Search">
-            <a href="/search">
-              <ion-icon name="search-outline"></ion-icon>
-            </a>
-            <span>Search</span>
-          </button> -->
           <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
             <ion-icon name="person-outline"></ion-icon>
             <span>Profile</span>
@@ -195,24 +257,18 @@
     });
   </script>
 
-
-<!-- include post-apartment -->
-<%- include('include/_update-profile') %>
-<!-- /include post-apartment -->
-
-  <!-- include style -->
-  <%- include('include/_style') %>
-  <!-- /include style -->
- 
- <!-- include form-style -->
-  <%- include('include/_form-style') %>
-  <!-- /include form-style -->
-
-<!-- include cta -->
-<%- include('include/_cta') %>
-<!-- /include cta -->
+  <script>
+    function toggleDropdown() {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+}
+  </script>
 
 
-<!-- include footer -->
-<%- include('include/_footer') %>
-<!-- /include footer -->
+ <!-- include userProfile -->
+ <%- include('include/_userProfile') %>
+ <!-- /include userProfile -->
+
+<!-- - ionicon link -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

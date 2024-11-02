@@ -85,6 +85,12 @@ const userSchema = new mongoose.Schema({
       ]
     },
   ],
+  communities: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Community', // Reference to Community model
+        },
+    ],
   // Reference to apartments created by the user
   apartments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Apartment' }],
   createdAt: { type: Date, default: Date.now },

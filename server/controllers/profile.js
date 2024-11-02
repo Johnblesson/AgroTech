@@ -63,6 +63,125 @@ export const profile = async (req, res) => {
     }
   };
 
+
+  export const getUserPostProfile = async (req, res) => {
+    const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId).populate('communities'); // Populate communities
+
+        if (!user) {
+            return res.render('error', { errorMessage: 'User not found' });
+        }
+
+        
+       // Fetch user data from the session or request object
+      const sudo = user && user.sudo ? user.sudo : false;
+      const role = req.user.role; // Get the role of the logged-in user
+      const accountant = user && user.accountant ? user.accountant : false;
+      const manager = user && user.manager ? user.manager : false;
+      const isAdmin = role === 'admin'; // Define isAdmin based on the role
+      const greeting = getTimeOfDay(); // Get the greeting based on the time of day
+
+          if (user.role === 'admin') {
+            res.render('userProfileAdmin', {
+              user,
+              role,
+              greeting,
+              sudo,
+              accountant,
+              manager,
+              isAdmin,
+              alert: req.query.alert, // Pass the alert message to the template
+            });
+
+          } 
+          else if (user.role === 'user') {
+            res.render('userProfile', {
+              user,
+              role,
+              greeting,
+              sudo,
+              accountant,
+              manager,
+              isAdmin,
+              alert: req.query.alert, // Pass the alert message to the template
+            });
+          }
+          else {
+            res.status(403).send('Unauthorized');
+          }
+
+    } catch (error) {
+        console.error(error);
+        res.render('error', { errorMessage: 'Error fetching user profile' });
+    }
+};
+
+
+
+
+// Get all posts
+// export const getPosts = async (req, res) => {
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
+
+//   try {
+//       const role = req.user.role; // Get the role of the logged-in user
+//       const isAdmin = role === 'admin'; // Define isAdmin based on the role
+//       const posts = await Community.find()
+//           .sort({ createdAt: -1 }) // Newest posts first
+//           .populate('createdBy', 'photo fullname') // Populate user who created the post
+//           .populate({
+//               path: 'comments.commentedBy', // Populate commenters
+//               select: 'photo fullname' // Select only the fields needed
+//           });
+
+//        // Fetch user data from the session or request object
+//       const user = req.isAuthenticated() ? req.user : null;
+//       const sudo = user && user.sudo ? user.sudo : false;
+//       const accountant = user && user.accountant ? user.accountant : false;
+//       const manager = user && user.manager ? user.manager : false;
+
+//       const greeting = getTimeOfDay(); // Get the greeting based on the time of day
+
+//       res.render('com', 
+//         { 
+//         posts, 
+//         isAdmin, 
+//         role, 
+//         sudo, 
+//         user, 
+//         accountant, 
+//         manager, 
+//         greeting,
+//         alert: req.query.alert, // Pass the alert message to the template
+//       }); // Render the community page
+//   } catch (error) {
+//       console.error('Error fetching posts:', error); // Log the error for debugging
+//       res.status(500).send('Error fetching posts');
+//   }
+// };
+
   
   // Update user data #Sudo Admin
   export const updateUser = async (req, res) => {

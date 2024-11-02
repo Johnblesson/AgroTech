@@ -24,6 +24,7 @@ import accountRoutes from "./server/routes/account.js";
 import contactRoutes from "./server/routes/contact.js";
 import agentsRoute from "./server/routes/agents.js";
 import askAiRoute from "./server/routes/ask-ai.js";
+import communityRoutes from "./server/routes/community.js";
 import http from "http";
 import compression from "compression";
 import { Server } from "socket.io"; 
@@ -104,6 +105,7 @@ app.use(accountRoutes);
 app.use(contactRoutes);
 app.use(agentsRoute);
 app.use(askAiRoute);
+app.use('/community', communityRoutes);
 
 // Set up the server to listen on port 8080
 const PORT = process.env.PORT || 8080;

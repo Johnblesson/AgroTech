@@ -9,7 +9,8 @@ import
     adminprofile,  
     view, 
     getUpdateProfile, 
-    viewAdminProfile 
+    viewAdminProfile,
+    getUserPostProfile
     } 
     from "../controllers/profile.js";
 import ensureAuthenticated from "../middlewares/auth.js";
@@ -24,5 +25,6 @@ router.get('/view/:id', ensureAuthenticated, cacheMiddleware, view);
 router.get('/view-admin-profile/:id', ensureAuthenticated, isAdmin, viewAdminProfile);
 router.get('/users', getUsers);
 router.get('/update-profile/:id', ensureAuthenticated, getUpdateProfile);
+router.get('/user/:id', ensureAuthenticated, getUserPostProfile);
 
 export default router;

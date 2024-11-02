@@ -23,7 +23,13 @@ import
     clearLoginHistory
 }
 from "../controllers/auth.js";
-import { setup2FA, verify2FA, toggle2FA } from '../controllers/2FA.js'
+
+import { 
+    setup2FA, 
+    verify2FA,
+    toggle2FA 
+} 
+from '../controllers/2FA.js'
 import { siteMaps } from "../render/sitemap.js"
 import upload from "../upload/upload.js";
 import ensureAuthenticated from "../middlewares/auth.js";
@@ -32,7 +38,8 @@ import { isAdmin } from "../middlewares/isAdmin.js";
 import cacheMiddleware from "../middlewares/cacheMiddleware.js"
 import { checkManagerMiddleware } from '../middlewares/manager.js'
 
-// import { vpnDetectionMiddleware } from "../middlewares/vpn.js";
+
+
 //Auth Routes
 router.post("/signup", upload.single("photo"), signUp);
 router.post("/login", logIn);

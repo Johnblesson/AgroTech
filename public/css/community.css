@@ -1,0 +1,184 @@
+/* Community container styling */
+.community-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto; /* Centers the container */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Post Form Styling */
+.post-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.post-form button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-form button:hover {
+    background-color: #2ecc71;
+}
+
+/* Post Card Styling */
+.post {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-header strong {
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+.post-header small {
+    color: #7f8c8d;
+}
+
+.post p {
+    font-size: 1em;
+    color: #34495e;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Like and comment section */
+.like-comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-comment-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.add-comment-form input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-comment-form button {
+    padding: 8px 12px;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-comment-form button:hover {
+    background-color: #3498db;
+}
+
+.like-comment-buttons {
+    display: flex; /* Changed to flex for horizontal alignment */
+    justify-content: space-between; /* Optional: to distribute space between buttons */
+    gap: 10px; /* Space between buttons */
+}
+
+.like-comment-buttons form {
+    margin-bottom: 5px; /* Space between the buttons */
+}
+
+.like-comment-buttons button {
+    padding: 6px 12px;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1; /* Allows buttons to grow equally */
+}
+
+.like-comment-buttons button:hover {
+    background-color: #2ecc71;
+}
+
+.like-comment-buttons button i,
+.add-comment-form button i {
+    margin-right: 5px;
+}
+
+/* Comment Section Styling */
+.comments {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-header img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.comment strong {
+    font-size: 0.95em;
+    color: #34495e;
+}
+
+.comment p {
+    margin: 5px 0 0 45px;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}

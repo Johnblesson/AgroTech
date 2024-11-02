@@ -17,39 +17,37 @@
         <div class="post">
             <div class="post-header">
                 <img src="<%= post.createdBy.photo %>" alt="User Photo">
-                <strong><%= post.createdBy.fullname %></strong>
+                <a href="/user/<%= post.createdBy._id %>"><strong><%= post.createdBy.fullname %></strong></a>
                 <small> - <%= post.createdAt.toLocaleDateString() %></small>
             </div>
             <p><%= post.post %></p>
             
-           <!-- Like and Comment Section -->
+            <!-- Like and Comment Section -->
             <div class="like-comment-section">
                 <!-- Add Comment Input at the Top -->
                 <form action="/community/<%= post._id %>/comment" method="POST" class="add-comment-form">
-                    <input type="text" name="comment" placeholder="Add a comment...">
+                    <input type="text" name="comment" placeholder="Add a comment..." required>
                     <button type="submit">
                         <i class="fas fa-paper-plane"></i> Comment
                     </button>
                 </form>
 
-                <!-- Like and Comment Buttons at the Bottom -->
+               <!-- Like and Comment Buttons at the Bottom -->
                 <div class="like-comment-buttons">
                     <form action="/community/<%= post._id %>/like" method="POST">
                         <button type="submit">
-                            <i class="fas fa-thumbs-up"></i> Like (<%= post.likes.length %>)
+                            <i class="fas fa-thumbs-up"></i> (<%= post.likes.length %>)
                         </button>
                     </form>
-                    <form action="/community/<%= post._id %>/comment" method="POST">
+                    <form action="#" method="POST">
                         <button type="submit">
-                            <i class="fas fa-comment"></i> Comment
+                            <i class="fas fa-comment"></i> (<%= post.comments.length %>)
                         </button>
                     </form>
                 </div>
-            </div>
 
 
-            
-           <!-- Display Comments -->
+            <!-- Display Comments -->
             <div class="comments">
                 <% post.comments.forEach(comment => { %>
                     <div class="comment">
@@ -64,15 +62,3 @@
         </div>
     <% }) %>
 </div>
-
-
-<style>
-
-
-
-</style>
-
-
-<style>
- 
-</style>

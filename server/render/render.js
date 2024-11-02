@@ -467,7 +467,7 @@ const getTimeOfDay = () => {
   try {
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
-    // Fetch user data from the session or request object
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
     const sudo = user && user.sudo ? user.sudo : false;
     const accountant = user && user.accountant ? user.accountant : false;
     const manager = user && user.manager ? user.manager : false;
@@ -478,10 +478,10 @@ const getTimeOfDay = () => {
     // Render the index page with the receptions and latestStorage data
     // res.render('agro-news', { user, greeting, role, alert: req.query.alert });
     if (role === 'admin') {
-      res.render('agro-news-admin', { user, greeting, role, sudo, manager, accountant, alert: req.query.alert });
+      res.render('agro-news-admin', { user, greeting, isAdmin, role, sudo, manager, accountant, alert: req.query.alert });
     } 
     else if (role === 'user') {
-      res.render('agro-news', { user, greeting, role, sudo, manager, accountant, alert: req.query.alert });
+      res.render('agro-news', { user, greeting, isAdmin, role, sudo, manager, accountant, alert: req.query.alert });
     }
      else {
       // Handle other roles or unauthorized access
@@ -531,7 +531,6 @@ export const farmingTips = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
 
 
 // Weather Update Page

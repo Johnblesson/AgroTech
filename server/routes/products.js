@@ -25,7 +25,7 @@ import {
     getNotifications,
     deleteNotification,
     productDetail, 
-    adminProductDetail 
+    // adminProductDetail 
 } from '../controllers/products.js';
 
 import { allAdminProducts, allVirtualProducts } from '../render/render.js'
@@ -53,9 +53,6 @@ router.get('/view-product-details/:id', ensureAuthenticated, cacheMiddleware, is
 router.get("/edit-admin-product/:id", ensureAuthenticated, cacheMiddleware, isAdmin, adminEditProducts);
 router.patch("/edit-admin-product/:id", ensureAuthenticated, isAdmin, updateAdminProducts);
 router.get("/product-detail/:id", ensureAuthenticated, cacheMiddleware, productDetail);
-router.get("/product-detail-admin/:id", ensureAuthenticated, cacheMiddleware, adminProductDetail)
-
-// router.get('/properties', properties);
 
 // Notifications
 router.get('/notifications', ensureAuthenticated, isAdmin, checkSudoMiddleware, getNotifications);

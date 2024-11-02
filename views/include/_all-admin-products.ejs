@@ -105,7 +105,7 @@
 <ul class="property-list has-scrollbar">
   <% products.forEach(product => { %>
     <li class="property-item">
-      <a href="/product-detail-admin/<%= product._id %>">
+      <a href="/product-detail/<%= product._id %>">
         <div class="property-card">
           <figure class="card-banner">
             <% if (product.photoUrl) { %>
@@ -132,7 +132,7 @@
                <pre><%= product.negotiation %></pre>
             </div>
             <h3 class="h3 card-title">
-              <a href="/product-detail-admin/<%= product._id %>"><%= product.title %></a>
+              <a href="/product-detail/<%= product._id %>"><%= product.title %></a>
             </h3>
             <p class="card-text">
               <% if (product.description && product.description.length > 150) { %>

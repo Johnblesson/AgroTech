@@ -875,72 +875,142 @@ export const searchProductAdmin = async (req, res) => {
 };
 
 
-// Controller to display a single product's details
-export const productDetail = async (req, res) => {
-  const getTimeOfDay = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour >= 5 && currentHour < 12) {
-      return 'Good Morning';
-    } else if (currentHour >= 12 && currentHour < 18) {
-      return 'Good Afternoon';
-    } else {
-      return 'Good Evening';
-    }
-  };
+// // Controller to display a single product's details
+// export const productDetail = async (req, res) => {
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
 
-  try {
-    const { id } = req.params;
+//   try {
+//     const { id } = req.params;
 
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).send("Invalid product ID");
-    }
+//     // Validate ObjectId
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(400).send("Invalid product ID");
+//     }
 
-    const product = await Products.findById(id);
+//     const product = await Products.findById(id);
 
-    if (!product) {
-      return res.status(404).send("product not found");
-    }
+//     if (!product) {
+//       return res.status(404).send("product not found");
+//     }
 
-    // Increment the clicks count
-    product.clicks = (product.clicks || 0) + 1;
-    await product.save();
+//     // Increment the clicks count
+//     product.clicks = (product.clicks || 0) + 1;
+//     await product.save();
 
-    // Ensure photoUrls is set properly for the current product
-    const updatedProduct = {
-      ...product._doc,
-      photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
-    };
+//     // Ensure photoUrls is set properly for the current product
+//     const updatedProduct = {
+//       ...product._doc,
+//       photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
+//     };
 
-    // Fetch all products for other sections or navigation
-    const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+//     // Fetch all products for other sections or navigation
+//     const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
-    const user = req.isAuthenticated() ? req.user : null;
-    const role = user ? user.role : null; // Get user role if user is authenticated
-    const greeting = getTimeOfDay();
+//     const user = req.isAuthenticated() ? req.user : null;
+//     const role = user ? user.role : null; // Get user role if user is authenticated
+//     const greeting = getTimeOfDay();
 
-    // Format the createdAt date and calculate days ago
-    updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
-    updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
+//     // Format the createdAt date and calculate days ago
+//     updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
+//     updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
 
-    res.render("product-detail", {
-      product: updatedProduct,
-      products, // Ensure products are passed to the template
-      user,
-      role,
-      greeting,
-      alert: req.query.alert, // Pass the alert message
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while fetching the product details.");
-  }
-};
+//     res.render("product-detail", {
+//       product: updatedProduct,
+//       products, // Ensure products are passed to the template
+//       user,
+//       role,
+//       greeting,
+//       alert: req.query.alert, // Pass the alert message
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("An error occurred while fetching the product details.");
+//   }
+// };
 
+
+
+// // Controller to display a single product's details for admin
+// export const adminProductDetail = async (req, res) => {
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
+
+//   try {
+//     const { id } = req.params;
+
+//     // Validate ObjectId
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(400).send("Invalid product ID");
+//     }
+
+//     const product = await Products.findById(id);
+//     if (!product) {
+//       return res.status(404).send("Product not found");
+//     }
+
+//     // Increment the clicks count
+//     product.clicks = (product.clicks || 0) + 1;
+//     await product.save();
+
+//     // Ensure photoUrls is set properly for the current product
+//     const updatedProduct = {
+//       ...product._doc,
+//       photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
+//     };
+
+//     // Fetch all verified products for other sections or navigation
+//     const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+
+//     const user = req.isAuthenticated() ? req.user : null;
+//     const role = user ? user.role : null; // Get user role if user is authenticated
+//     const greeting = getTimeOfDay();
+
+//     // Format the createdAt date and calculate days ago
+//     updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
+//     updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
+
+//     // Determine user permissions
+//     const permissions = {
+//       sudo: user && user.sudo ? user.sudo : false,
+//       accountant: user && user.accountant ? user.accountant : false,
+//       manager: user && user.manager ? user.manager : false,
+//     };
+
+//     res.render("product-detail-admin", {
+//       product: updatedProduct,
+//       products,
+//       user,
+//       greeting,
+//       role,
+//       ...permissions, // Spread user permissions
+//       alert: req.query.alert, // Pass the alert message
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("An error occurred while fetching the product details. Please try again later.");
+//   }
+// };
 
 
 // Controller to display a single product's details for admin
-export const adminProductDetail = async (req, res) => {
+export const productDetail = async (req, res) => {
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
     if (currentHour >= 5 && currentHour < 12) {
@@ -972,7 +1042,7 @@ export const adminProductDetail = async (req, res) => {
     // Ensure photoUrls is set properly for the current product
     const updatedProduct = {
       ...product._doc,
-      photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
+      photoUrls: product.photos // Use the photos array
     };
 
     // Fetch all verified products for other sections or navigation
@@ -993,17 +1063,34 @@ export const adminProductDetail = async (req, res) => {
       manager: user && user.manager ? user.manager : false,
     };
 
-    res.render("product-detail-admin", {
-      product: updatedProduct,
-      products,
-      user,
-      greeting,
-      role,
-      ...permissions, // Spread user permissions
-      alert: req.query.alert, // Pass the alert message
-    });
+    if (user.role === 'admin') {
+      res.render("product-detail-admin", {
+        product: updatedProduct,
+        products,
+        user,
+        greeting,
+        role,
+        ...permissions, // Spread user permissions
+        alert: req.query.alert, // Pass the alert message
+      });
+    }
+    else if (user.role === 'user') {
+      res.render("product-detail", {
+        product: updatedProduct,
+        products,
+        user,
+        greeting,
+        role,
+        ...permissions, // Spread user permissions
+        alert: req.query.alert, // Pass the alert message
+      });
+    }
+    else {
+      res.status(403).send('Unauthorized');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching the product details. Please try again later.");
   }
 };
+

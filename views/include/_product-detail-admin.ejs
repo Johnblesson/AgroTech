@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
+    <title>Detail</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/apt-detail.css">
      <!-- 
@@ -80,7 +80,7 @@
                     <% if (product.photoUrls && product.photoUrls.length > 0) { %>
                         <% product.photoUrls.forEach((photoUrl, index) => { %>
                             <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                                <img src="<%= photoUrl %>" class="carousel-img" alt="product Photo">
+                                <img src="<%= photoUrl %>" class="carousel-img" alt="Product Photo">
                                 <a href="<%= photoUrl %>" download class="download-btn">
                                     <ion-icon name="download-outline"></ion-icon>
                                 </a>
@@ -91,7 +91,7 @@
                             <p>No photo available</p>
                         </div>
                     <% } %>
-                </div>
+                </div>                
                 <div class="thumbnail-container">
                     <% if (product.photoUrls && product.photoUrls.length > 0) { %>
                         <% product.photoUrls.forEach((photoUrl, index) => { %>
@@ -134,7 +134,7 @@
                             <!-- Placeholder for square footage -->
                             <li class="card-item">
                                 <strong>Product ID (PID): PID<%= product.pid %></strong>
-                                <a href="/admin-application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= apt.title %>">
+                                <a href="/admin-application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= product.title %>">
                                     <span>Apply to buy this product.</span>
                                     <button class="btn1">Apply</button>
                                 </a>

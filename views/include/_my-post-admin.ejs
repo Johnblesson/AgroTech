@@ -81,7 +81,7 @@
 <ul class="product-list has-scrollbar">
   <% products.forEach(apt => { %>
     <li class="property-item">
-      <a href="/product-detail-admin/<%= apt._id %>">
+      <a href="/product-detail/<%= apt._id %>">
         <div class="property-card">
           <figure class="card-banner">
             <% if (apt.photoUrl) { %>
@@ -108,7 +108,7 @@
                <pre><%= apt.negotiation %></pre>
             </div>
             <h3 class="h3 card-title">
-              <a href="/product-detail-admin/<%= apt._id %>"><%= apt.title %></a>
+              <a href="/product-detail/<%= apt._id %>"><%= apt.title %></a>
             </h3>
             <p class="card-text">
               <% if (apt.description && apt.description.length > 150) { %>

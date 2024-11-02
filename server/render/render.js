@@ -493,7 +493,6 @@ const getTimeOfDay = () => {
   }
 };
 
-
 // Farming Tips Page
 export const farmingTips = async (req, res) => {
   const getTimeOfDay = () => {

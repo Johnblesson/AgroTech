@@ -268,7 +268,7 @@ export const loginHistory = async (req, res) => {
     if (!currentUser) {
       return res.status(404).json({ msg: 'User not found' });
     }
-        const role = user ? user.role : null; // Get user role if user is authenticated
+        const role = user ? user.role : null;
         const sudo = user && user.sudo ? user.sudo : false;
         const accountant = user && user.accountant ? user.accountant : false;
         const manager = user && user.manager ? user.manager : false;

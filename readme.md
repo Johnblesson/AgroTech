@@ -12,9 +12,13 @@ Key Features:
    - Product Listings: Farmers can create profiles to showcase their products, including fresh produce, seeds, and agricultural tools. Each listing will include descriptions, prices, and availability.
    - Order Placement: Consumers can browse the platform, place orders for products, and make payments online, ensuring a seamless purchasing experience.
 
+   <img src="public/images/agrotech-marketplace.png" alt="AgroTech Marketplace">
+
 2. Knowledge Hub:
    - Learning Resources: The platform will host a library of training materials, including articles, videos, and tutorials on best farming practices, pest control, crop management, and sustainable agriculture.
    - Webinars and Workshops: Regular online sessions with agricultural experts will be organized to provide farmers with up-to-date knowledge and skills.
+
+      <img src="public/images/agrotech-tips.png" alt="AgroTech Tips">
 
 3. Community Engagement:
    - Forums and Discussions: A dedicated space for farmers to ask questions, share experiences, and discuss challenges and solutions with their peers.

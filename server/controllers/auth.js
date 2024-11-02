@@ -268,18 +268,11 @@ export const loginHistory = async (req, res) => {
     if (!currentUser) {
       return res.status(404).json({ msg: 'User not found' });
     }
-
-        // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-        const sudo = user && user.sudo ? user.sudo : false;
-
-        // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-        const accountant = user && user.accountant ? user.accountant : false;
-    
-        // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-        const manager = user && user.manager ? user.manager : false;
-
         const role = user ? user.role : null; // Get user role if user is authenticated
-
+        const sudo = user && user.sudo ? user.sudo : false;
+        const accountant = user && user.accountant ? user.accountant : false;
+        const manager = user && user.manager ? user.manager : false;
+        const isAdmin = role === 'admin'; // Define isAdmin based on the role
         const greeting = getTimeOfDay();
 
     // Render the login-history view with the user's login history and last login info
@@ -289,7 +282,7 @@ export const loginHistory = async (req, res) => {
         lastLoginDevice: currentUser.lastLoginDevice,
         lastLoginCountry: currentUser.lastLoginCountry,
         loginHistory: currentUser.loginHistory
-      }, accountant, sudo, manager, role, greeting, user, alert: req.query.alert, // Pass the alert message to the view
+      }, accountant, sudo, manager, isAdmin, role, greeting, user, alert: req.query.alert, // Pass the alert message to the view
     });
   } catch (error) {
     console.error('Error rendering login history page:', error);

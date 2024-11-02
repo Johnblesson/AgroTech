@@ -1,41 +1,3 @@
-// import Agents from '../models/agents.js';	// Importing the Agents model
-// import User from '../models/auth.js';	// Importing the User model
-
-// // Controller function to create a new Agents
-// // POST /agents
-
-// export const createAgentForm = async (req, res) => {
-//     try {
-
-//       // Extracting data from request body
-//       const { fullname, phone, email, username, address, address2, createdBy, comments } = req.body;
-  
-//       // Create a new Agents object with form data
-//       const agentsForm = new Agents({
-//         fullname, 
-//         phone, 
-//         email,  
-//         username, 
-//         address, 
-//         address2, 
-//         createdBy, 
-//         comments,
-//         createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
-//         updatedAt: new Date()
-//       });
-  
-//       // Saving the Agents to the database
-//       const savedAgents = await agentsForm.save();
-  
-//       // Sending a success response
-//       res.status(201).render('success/agents')
-//       console.log(savedAgents);
-//     } catch (error) {
-//       // Sending an error response
-//       res.status(400).json({ error: error.message });
-//     }
-//   };
-
 import Agents from '../models/agents.js'; // Importing the Agents model
 import User from '../models/auth.js'; // Importing the User model
 import flash from 'connect-flash'; // Make sure to import connect-flash
@@ -49,18 +11,15 @@ export const createAgentForm = async (req, res) => {
 
         // Phone number validation: must be 8 digits and start with 31, 32, or 34
         const phonePattern = /^(31|32|34)\d{6}$/; // Regex to match Qcell number format
+        const userRole = req.isAuthenticated() && req.user ? req.user.role : null;
+
+        // Redirect path based on role
+        const redirectPath = userRole === 'admin' ? 'agents-admin' : 'agents';
 
         if (!phonePattern.test(phone)) {
             // If the phone number does not match the pattern, send a flash message and redirect
-            req.flash('error', 'Your number is not a Qcell number.'); // Flash message
-        
-        const user = req.isAuthenticated() ? req.user : null;
-        if(user.role === 'admin') {
-            return res.status(400).redirect('agents-admin'); // Redirect to the form page (change URL as needed)
-        }
-        else {
-        res.status(400).redirect('agents'); // Redirect to the form page (change URL as needed)
-       }
+            req.flash('error', 'Your number is not a Qcell number.');
+            return res.status(400).redirect(redirectPath);
         }
 
         // Create a new Agents object with form data
@@ -73,7 +32,7 @@ export const createAgentForm = async (req, res) => {
             address2, 
             createdBy, 
             comments,
-            createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+            createdAt: new Date(),
             updatedAt: new Date()
         });
 
@@ -86,14 +45,10 @@ export const createAgentForm = async (req, res) => {
     } catch (error) {
         // Sending an error response
         req.flash('error', error.message); // Flash error message for other errors
-        const user = req.isAuthenticated() ? req.user : null;
-        if(user.role === 'admin') {
-            return res.status(400).redirect('agents-admin'); // Redirect to the form page (change URL as needed)
-        }
-        else {
-        res.status(400).redirect('agents'); // Redirect to the form page (change URL as needed)
+        const userRole = req.isAuthenticated() && req.user ? req.user.role : null;
+        const redirectPath = userRole === 'admin' ? 'agents-admin' : 'agents';
+        return res.status(400).redirect(redirectPath);
     }
-}
 };
 
 
@@ -145,8 +100,6 @@ export const agentForm = async (req, res) => {
     }
   };
 
-
-    // Get agent form
   // GET /agents
 
 export const agentFormAdmin = async (req, res) => {

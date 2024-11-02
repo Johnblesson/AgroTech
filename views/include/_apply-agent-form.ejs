@@ -3,27 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apartment Form</title>
-    <!-- 
-    - custom css link
-  -->
+  <title>Farming Program Application</title>
   <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
+  <style>
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .formbold-form-label {
+      display: inline; /* Make the label text inline */
+    }
+    .required {
+      color: red;
+      margin-left: 4px;
+      display: inline; /* Keep the asterisk inline with label */
+    }
+  </style>
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">Apply for the farming program. 
-      Make sure you input your correct informations. 
-      We will notify when you are approved.
+    <pre style="text-align: center; font: 0.6em sans-serif;">
+      Apply for the farming program. 
+      Make sure you input your correct information. 
+      We will notify you when you are approved.
     </pre>
 
-    <% if (messages.error) { %>
-      <div class="alert alert-danger"><%= messages.error %></div>
-    <% } %>
-  
-<form action="/agents" method="POST">
-
+    <form action="/agents" method="POST">
+      <!-- Display flash error messages -->
+      <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="error-message">
+            <% errorMessages.forEach(function(message) { %>
+                <p><%= message %></p>
+            <% }); %>
+        </div>
+      <% } %>
+      
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="fullname" class="formbold-form-label"> Fullname: </label>
         <div>
@@ -38,8 +55,8 @@
         </div>
       </div>
 
-      <!-- <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell): </label>
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell)<span class="required">*</span>:</label>
         <div>
           <input
             type="text"
@@ -50,23 +67,7 @@
             required
           />
         </div>
-      </div> -->
-
-      <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell): </label>
-        <div>
-            <input
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Qcell Number without +232 (e.g 32983498)"
-                class="formbold-form-input"
-                required
-                oninput="validatePhone()"
-            />
-        </div>
-    </div>
-    <div id="phone-error" style="color: red; display: none;"></div>
+      </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="email" class="formbold-form-label"> Email: </label>
@@ -82,8 +83,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label">Current Address: </label>
-
+        <label for="address" class="formbold-form-label"> Current Address<span class="required">*</span>: </label>
         <input
           type="text"
           name="address"
@@ -100,16 +100,11 @@
           class="formbold-form-input"
         />
       </div>
-      <input
-        type="hidden"
-        name="username"
-        value="<%= user.username %>"
-      />
+      
+      <input type="hidden" name="username" value="<%= user.username %>" />
 
       <div class="formbold-mb-3">
-        <label for="comments" class="formbold-form-label">
-            Comments:
-        </label>
+        <label for="comments" class="formbold-form-label"> Comments: </label>
         <textarea
           rows="6"
           name="comments"
@@ -123,25 +118,6 @@
     </form>
   </div>
 </div>
+
 </body>
 </html>
-
-
-<script>
-  function validatePhone() {
-      const phoneInput = document.getElementById('phone');
-      const phoneError = document.getElementById('phone-error');
-      const phoneNumber = phoneInput.value.trim();
-  
-      // Check if the input has 8 digits and starts with 31, 32, or 34
-      const isValidPhone = /^\d{8}$/.test(phoneNumber) && (phoneNumber.startsWith('31') || phoneNumber.startsWith('32') || phoneNumber.startsWith('34'));
-  
-      if (!isValidPhone) {
-          phoneError.textContent = 'Your number is not a Qcell number';
-          phoneError.style.display = 'block';
-      } else {
-          phoneError.textContent = '';
-          phoneError.style.display = 'none';
-      }
-  }
-  </script>

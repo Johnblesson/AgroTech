@@ -1,307 +1,118 @@
-<link rel="stylesheet" href="./css/community.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farming Program Application</title>
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+  <style>
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+  </style>
 
-<div class="community-container">
-    <h1>AgroTech Community</h1>
-    
-    <!-- Post Form -->
-    <div class="post-form">
-        <form action="/community/create" method="POST">
-            <textarea name="post" rows="4" placeholder="Share your thoughts..."></textarea>
-            <button type="submit">Post</button>
-        </form>
-    </div>
-    
-    <!-- Display Posts -->
-    <% posts.forEach(post => { %>
-        <div class="post">
-            <div class="post-header">
-                <img src="<%= post.createdBy.photo %>" alt="User Photo">
-                <a href="/user/<%= post.createdBy._id %>"><strong><%= post.createdBy.fullname %></strong></a>
-                <small> - <%= post.createdAt.toLocaleDateString() %></small>
-            </div>
-            <p><%= post.post %></p>
-            
-            <!-- Like and Comment Section -->
-            <div class="like-comment-section">
-                <!-- Add Comment Input at the Top -->
-                <form action="/community/<%= post._id %>/comment" method="POST" class="add-comment-form">
-                    <input type="text" name="comment" placeholder="Add a comment..." required>
-                    <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Comment
-                    </button>
-                </form>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">Apply for the farming program. 
+      Make sure you input your correct informations. 
+      We will notify when you are approved.
+    </pre>
 
-                <!-- Toggle Comments Button -->
-                <button class="toggle-comments-btn" onclick="toggleComments('<%= post._id %>')">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-
-                <!-- Display Comments -->
-                <div class="comments" id="comments-<%= post._id %>">
-                    <% post.comments.forEach(comment => { %>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <img src="<%= comment.commentedBy.photo %>" alt="User Photo" class="user-photo">
-                                <strong class="comment-author"><%= comment.commentedBy.fullname %></strong>
-                            </div>
-                            <p class="comment-text"><%= comment.text %></p>
-                        </div>
-                    <% }) %>
-                </div> 
-                
-               <!-- Like and Comment Buttons at the Bottom -->
-               <div class="like-comment-buttons">
-                <form action="/community/<%= post._id %>/like" method="POST">
-                    <button type="submit">
-                        <i class="fas fa-thumbs-up"></i> (<%= post.likes.length %>)
-                    </button>
-                </form>
-                <form>
-                    <button>
-                        <i class="fas fa-comment"></i> (<%= post.comments.length %>)
-                    </button>
-                </form>
-            </div>
+    <form action="/agents" method="POST">
+       <!-- Display flash error messages -->
+       <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="error-message">
+            <% errorMessages.forEach(function(message) { %>
+                <p><%= message %></p>
+            <% }); %>
         </div>
-    <% }) %>
+    <% } %>
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="fullname" class="formbold-form-label"> Fullname: </label>
+        <div>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            readonly
+            class="formbold-form-input"
+            value="<%= user.fullname %>"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="phone" class="formbold-form-label"> Phone (Number must Qcell): </label>
+        <div>
+            <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="Qcell Number without +232 (e.g 32983498)"
+                class="formbold-form-input"
+                required
+            />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="email" class="formbold-form-label"> Email: </label>
+        <div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email (Optional)"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label">Current Address: </label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          placeholder="Street address"
+          class="formbold-form-input formbold-mb-3"
+          required
+        />
+        <input
+          type="text"
+          name="address2"
+          id="address2"
+          placeholder="Street address line 2"
+          class="formbold-form-input"
+        />
+      </div>
+      <input
+        type="hidden"
+        name="username"
+        value="<%= user.username %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="comments" class="formbold-form-label">
+            Comments:
+        </label>
+        <textarea
+          rows="6"
+          name="comments"
+          id="comments"
+          class="formbold-form-input"
+          placeholder="Add comments"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Done</button>
+    </form>
+  </div>
 </div>
 
-
-<script>
-    function toggleComments(postId) {
-      const commentsSection = document.getElementById(`comments-${postId}`);
-      const toggleButton = commentsSection.previousElementSibling.querySelector('.fas');
-  
-      if (commentsSection.style.display === "none" || !commentsSection.style.display) {
-        commentsSection.style.display = "block";
-        toggleButton.classList.replace("fa-chevron-down", "fa-chevron-up");
-      } else {
-        commentsSection.style.display = "none";
-        toggleButton.classList.replace("fa-chevron-up", "fa-chevron-down");
-      }
-    }
-  </script>
-  
-
-
-  <style>
-    /* Community container styling */
-.community-container {
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto; /* Centers the container */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-}
-
-/* Post Form Styling */
-.post-form {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.post-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: vertical;
-}
-
-.post-form button {
-    margin-top: 10px;
-    padding: 8px 15px;
-    color: #fff;
-    background-color: #27ae60;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.post-form button:hover {
-    background-color: #2ecc71;
-}
-
-/* Post Card Styling */
-.post {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.post-header img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.post-header strong {
-    font-size: 1.1em;
-    color: #2c3e50;
-}
-
-.post-header small {
-    color: #7f8c8d;
-}
-
-.post p {
-    font-size: 1em;
-    color: #34495e;
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-/* Like and comment section */
-.like-comment-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.add-comment-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.add-comment-form input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.add-comment-form button {
-    padding: 8px 12px;
-    background-color: #2980b9;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.add-comment-form button:hover {
-    background-color: #3498db;
-}
-
-.like-comment-buttons {
-    display: flex; /* Changed to flex for horizontal alignment */
-    justify-content: space-between; /* Optional: to distribute space between buttons */
-    gap: 10px; /* Space between buttons */
-}
-
-.like-comment-buttons form {
-    margin-bottom: 5px; /* Space between the buttons */
-}
-
-.like-comment-buttons button {
-    padding: 6px 12px;
-    background-color: #27ae60;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1; /* Allows buttons to grow equally */
-}
-
-.like-comment-buttons button:hover {
-    background-color: #2ecc71;
-}
-
-.like-comment-buttons button i,
-.add-comment-form button i {
-    margin-right: 5px;
-}
-
-/* Comment Section Styling */
-/* .comments {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #ecf0f1;
-}
-
-.comment {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 10px;
-    gap: 10px;
-}
-
-.comment-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.comment-header img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-}
-
-.comment strong {
-    font-size: 0.95em;
-    color: #34495e;
-}
-
-.comment p {
-    margin: 5px 0 0 45px;
-    color: #7f8c8d;
-    font-size: 0.9em;
-} */
-
-
-.comments {
-    margin-top: 20px;
-  }
-  
-  .comment {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
-  }
-  
-  .comment-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px; /* Space between header and text */
-  }
-  
-  .user-photo {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .comment-author {
-    font-weight: bold;
-  }
-  
-  .comment-text {
-    margin: 0; /* Reset margin if necessary */
-    line-height: 1.5;
-  }
-  
-  </style>
+</body>
+</html>

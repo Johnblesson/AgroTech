@@ -20,6 +20,8 @@ Key Features:
    - Forums and Discussions: A dedicated space for farmers to ask questions, share experiences, and discuss challenges and solutions with their peers.
    - Networking Opportunities: Facilitation of connections between farmers, suppliers, and potential investors to encourage collaboration and investment in agriculture.
 
+   <img src="public/images/agrotech-community.png" alt="AgroTech Community">
+
 4. Market Insights:
    - Price Trends: Access to real-time data on market prices for various agricultural products, helping farmers make informed decisions about what to grow and when to sell.
    - Demand Forecasting: Tools to analyze consumer trends and preferences, allowing farmers to tailor their production to meet market needs.

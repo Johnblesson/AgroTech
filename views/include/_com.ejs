@@ -3,7 +3,7 @@
 
 <div class="community-container">
     <h1>AgroTech Community</h1>
-    
+
     <!-- Post Form -->
     <div class="post-form">
         <form id="post-form">
@@ -11,22 +11,23 @@
             <button type="submit">Post</button>
         </form>
     </div>
-    
+
     <!-- Display Posts -->
     <% posts.forEach(post => { %>
-        <div class="post" id="post-<%= post._id %>">
+        <div class="post-card"> <!-- Changed from 'post' to 'post-card' for clarity -->
             <div class="post-header">
                 <img src="<%= post.createdBy.photo %>" alt="User Photo">
                 <a href="/user/<%= post.createdBy._id %>"><strong><%= post.createdBy.fullname %></strong></a>
                 <small> - <%= post.createdAt.toLocaleDateString() %></small>
             </div>
-            <p><%= post.post %></p>
-            
+            <p class="post-content"><%= post.post %></p>
+
             <!-- Like and Comment Section -->
             <div class="like-comment-section">
                 <!-- Add Comment Input at the Top -->
                 <form class="add-comment-form" data-post-id="<%= post._id %>">
-                    <input type="text" name="comment" placeholder="Add a comment..." required>
+                    <!-- <input type="text" name="comment" placeholder="Add a comment..." required> -->
+                    <input type="text" name="comment" placeholder="Comment as <%= user.fullname  %>" required>
                     <button type="submit">
                         <i class="fas fa-paper-plane"></i> Comment
                     </button>
@@ -48,38 +49,37 @@
                             <p class="comment-text"><%= comment.text %></p>
                         </div>
                     <% }) %>
-                </div> 
-                
+                </div>
+
                <!-- Like and Comment Buttons at the Bottom -->
                <div class="like-comment-buttons">
-                <form class="like-form" data-post-id="<%= post._id %>">
-                    <button type="submit">
-                        <i class="fas fa-thumbs-up"></i> <span id="like-count-<%= post._id %>"><%= post.likes.length %></span>
+                    <form class="like-form" data-post-id="<%= post._id %>">
+                        <button type="submit">
+                            <i class="fas fa-thumbs-up"></i> <span id="like-count-<%= post._id %>"><%= post.likes.length %></span>
+                        </button>
+                    </form>
+                    <button onclick="toggleComments('<%= post._id %>')">
+                        <i class="fas fa-comment"></i> <span id="comment-count-<%= post._id %>"><%= post.comments.length %></span>
                     </button>
-                </form>
-                <button onclick="toggleComments('<%= post._id %>')">
-                    <i class="fas fa-comment"></i> <span id="comment-count-<%= post._id %>"><%= post.comments.length %></span>
-                </button>
+                </div>
             </div>
         </div>
     <% }) %>
 
-<!-- Pagination -->
+    <!-- Pagination -->
     <div class="pagination">
         <% if (currentPage > 1) { %>
             <a href="?page=<%= currentPage - 1 %>" class="prev-button">Previous</a>
         <% } %>
-    
+
         <% for (let i = 1; i <= totalPages; i++) { %>
             <a href="?page=<%= i %>" class="page-number <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
         <% } %>
-    
+
         <% if (currentPage < totalPages) { %>
             <a href="?page=<%= currentPage + 1 %>" class="next-button">Next</a>
         <% } %>
     </div>
-<!-- Pagination -->
- 
 </div>
 
 <script src="/socket.io/socket.io.js"></script>

@@ -63,6 +63,23 @@
             </div>
         </div>
     <% }) %>
+
+<!-- Pagination -->
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="?page=<%= currentPage - 1 %>" class="prev-button">Previous</a>
+        <% } %>
+    
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="?page=<%= i %>" class="page-number <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+    
+        <% if (currentPage < totalPages) { %>
+            <a href="?page=<%= currentPage + 1 %>" class="next-button">Next</a>
+        <% } %>
+    </div>
+<!-- Pagination -->
+ 
 </div>
 
 <script src="/socket.io/socket.io.js"></script>

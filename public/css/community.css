@@ -65,19 +65,20 @@ h1 {
 }
 
 .post-header img {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
 
 .post-header strong {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #2c3e50;
 }
 
 .post-header small {
     color: #7f8c8d;
+    font-size: 0.8em;
 }
 
 .post p {
@@ -109,6 +110,7 @@ h1 {
 
 .add-comment-form button {
     padding: 8px 12px;
+    font-size: 12px;
     background-color: #2980b9;
     color: #fff;
     border: none;
@@ -195,4 +197,29 @@ h1 {
     color: #7f8c8d;
     font-size: 0.9em;
     line-height: 1.5;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    background-color: #27ae60;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pagination a.active {
+    background-color: #2ecc71;
+}
+
+.pagination a:hover {
+    background-color: #2ecc71;
 }

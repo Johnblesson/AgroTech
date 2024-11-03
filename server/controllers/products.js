@@ -108,7 +108,6 @@ export const deleteNotification = async (req, res) => {
   }
 };
 
-
 // Controller function to get a single product by ID
 export const getProductById = async (req, res) => {
   try {

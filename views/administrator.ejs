@@ -70,14 +70,6 @@
                     alert(`New application created: ${data.createdBy} applied for property ${data.applyAid} at ${data.location}`);
                 });
             });
-    
-        // One signal code
-      // window.OneSignalDeferred = window.OneSignalDeferred || [];
-      //   OneSignalDeferred.push(async function(OneSignal) {
-      //     await OneSignal.init({
-      //       appId: "7ed5629e-e9e9-4c3c-91f5-a9f0c076fecb",
-      //     });
-      //   });
         </script>
   </head>
   <body>
@@ -94,19 +86,19 @@
           <% if (sudo) { %>
             <p class="user-role">(CEO)</p>
           <% } else { %>
-            <p></p> <!-- Empty paragraph -->
+            <p></p> 
           <% } %>
           
          <% if (accountant) { %>
             <p class="user-role">(Accountant)</p>
           <% } else { %>
-            <p></p> <!-- Empty paragraph -->
+            <p></p> 
           <% } %>
 
           <% if (manager) { %>
             <p class="user-role">(Managing Director)</p>
           <% } else { %>
-              <p></p> <!-- Empty paragraph -->
+              <p></p> 
           <% } %>
         </div>
         <div class="header-right">
@@ -137,11 +129,6 @@
               <span class="material-icons-outlined">chat</span> Messages
             </a>
           </li>
-          <!-- <li class="sidebar-list-item">
-            <a href="/all-apartments" target="_blank">
-              <span class="material-icons-outlined">home</span> Apartments
-            </a>
-          </li> -->
           <li class="sidebar-list-item">
             <a href="/all-boost" target="_blank">
               <span class="material-icons-outlined">payment</span> Payments
@@ -231,7 +218,7 @@
           <div class="card">
             <a href="/agent-program">
             <div class="card-inner">
-              <h3>AGENCY PROGRAM</h3>
+              <h3>FARMERS PROGRAM</h3>
               <span class="material-icons-outlined">category</span>
             </div></a>
             <!-- <h1>249</h1> -->
@@ -261,7 +248,7 @@
           <div class="card">
             <a href="/only-agents">
             <div class="card-inner"> 
-              <h3>AGENTS</h3>
+              <h3>FARMERS</h3>
               <span class="material-icons-outlined">groups</span>
             </div></a>
             <h1><%= agentCount %></h1>

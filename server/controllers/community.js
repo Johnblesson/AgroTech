@@ -79,7 +79,6 @@ export const getPosts = async (req, res) => {
   }
 };
 
-
 // Like a post
 export const likePost = async (req, res) => {
   try {

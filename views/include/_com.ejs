@@ -1,6 +1,13 @@
 <link rel="stylesheet" href="./css/community.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<style>
+    .user-comment-photo {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+</style>
 <div class="community-container">
     <h1>AgroTech Community</h1>
 
@@ -27,9 +34,10 @@
                 <!-- Add Comment Input at the Top -->
                 <form class="add-comment-form" data-post-id="<%= post._id %>">
                     <!-- <input type="text" name="comment" placeholder="Add a comment..." required> -->
+                    <img src="<%= user.photo %>" alt="User Photo" class="user-comment-photo">
                     <input type="text" name="comment" placeholder="Comment as <%= user.fullname  %>" required>
                     <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Comment
+                        <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
 

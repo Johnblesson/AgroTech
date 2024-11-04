@@ -1,5 +1,6 @@
 <section class="about" id="about">
   <div class="container">
+    <!-- Logo and Program Details -->
     <figure class="hero-banner" style="padding: 20px; padding-top: 0;">
       <img src="./images/qcell.jpg" style="padding: 5px;" alt="Qcell Logo">
     </figure>
@@ -7,15 +8,14 @@
     <div class="about-content">
       <p class="section-subtitle">AgroTech Farming Program</p>
       <h2 class="h2 section-title">Join the AgroTech Farming Program</h2>
-
       <p class="about-text">
         The AgroTech Farming Program is designed specifically for farmers in Sierra Leone who are passionate about agriculture. By joining this program, farmers gain full access to a variety of valuable resources to enhance their productivity and success.
       </p>
 
+      <!-- Program Details -->
       <div class="callout">
         <strong>Eligibility:</strong>
         <p>To be a part of the AgroTech Farming Program, you must first create an account with AgroTech SL. Applications for the program require a Qcell number (codes: 31, 32, or 34). Email submission is optional.</p><br>
-
         <strong>Access to Resources:</strong>
         <ul>
           <li>Daily farming tips tailored to your specific needs.</li>
@@ -23,84 +23,120 @@
           <li>Exclusive access to agricultural resources, including guides and tools to improve your farming techniques.</li>
         </ul>
         <br>
-
         <strong>Post Your Products for Free:</strong>
         <p>Farmers can freely post their farming and agricultural products on our platform, connecting with potential buyers easily.</p><br>
-
         <strong>Community Support:</strong>
         <p>Join a community of like-minded farmers where you can share experiences, ask questions, and get advice from your peers.</p><br>
-
         <p>Join us in revolutionizing agriculture in Sierra Leone by signing up for the AgroTech Farming Program today!</p>
       </div>
 
-      
+      <!-- Dropdown Header for Platform Features -->
+      <h3 class="h3 section-title dropdown-header" onclick="toggleDropdown()">Platform Features Powered by Qcell's Network <span class="arrow">&#9660;</span></h3>
 
-      <!-- Additional Features Section -->
-      <h3 class="h3 section-title">Platform Features Powered by Qcell's Network</h3>
-
-      <div class="features-card">
+      <!-- Features Content Section (Initially Hidden) -->
+      <div class="features-card dropdown-content" style="display: none;">
         <div class="feature">
           <h4>1. Farmer Profile and Registration System</h4>
           <p>Allow farmers to register with essential details such as location, crop type, and farm size. The simple, mobile-friendly signup process ensures accessibility for users with limited digital skills.</p>
-        </div>
+        </div> <br>
 
         <div class="feature">
           <h4>2. Weather Forecasting and Alerts</h4>
           <p>Qcell’s network provides location-based weather forecasts and real-time alerts for rain, drought, or extreme weather. SMS alerts keep farmers updated on weather conditions to help plan activities accordingly.</p>
-        </div>
+        </div> <br>
 
         <div class="feature">
           <h4>3. Crop Management and Advisory System</h4>
           <p>Receive crop-specific guidance, planting schedules, pest control tips, and best practices for soil and water management, along with an AI-driven recommendation tool suggesting crop varieties and practices based on local soil and climate data.</p>
-        </div>
+        </div> <br>
 
         <div class="feature">
           <h4>4. Market Price Information</h4>
           <p>A live feed of local market prices for various crops helps farmers make informed decisions about selling their produce. Weekly SMS updates on crop prices in regional markets enhance market awareness.</p>
-        </div>
+        </div><br>
 
         <div class="feature">
           <h4>5. Digital Marketplace for Inputs and Produce</h4>
           <p>Create a marketplace where farmers can buy seeds, fertilizers, and other inputs, and connect directly with buyers for their produce. Farmers can post their crops for sale and receive bids, ensuring fair pricing.</p>
-        </div>
+        </div><br>
 
         <div class="feature">
           <h4>6. Access to Financial Services</h4>
           <p>Integrated with Qcell’s mobile payment system, farmers have access to microloans, savings plans, and crop insurance options, with secure payment options for receiving payments directly on the platform.</p>
-        </div>
+        </div><br>
 
         <div class="feature">
           <h4>7. Training and Knowledge Resources</h4>
           <p>Explore video tutorials, articles, and step-by-step guides on sustainable farming techniques. Downloadable guides are also available for offline access, empowering farmers with actionable knowledge.</p>
-        </div>
+        </div><br>
 
         <div class="feature">
           <h4>8. Community and Peer Support Forum</h4>
           <p>Connect with other farmers to share experiences, ask questions, and find solutions to common agricultural challenges in a moderated discussion space.</p>
-        </div>
-
+        </div><br>
 
         <div class="feature">
           <h4>9. Government and NGO Program Integration</h4>
           <p>Partner with government and agricultural organizations to list support programs, subsidies, and training events. Farmers can access information on grants or programs to enhance their operations.</p>
-        </div>
+        </div><br>
 
         <div class="feature">
           <h4>10. Feedback and Support Channels</h4>
           <p>Access 24/7 support through a chatbot or customer service line powered by Qcell’s network. Farmers can also provide feedback on services and report issues with the platform.</p>
         </div>
-      </div>
-    </div><br>
+      </div> <br>
+
+      
+    </div>
     <a href="#" onclick="redirectToForm('<%= role %>')" class="btn">Apply Now</a>
   </div>
 </section>
 
+<!-- CSS for Dropdown and Arrow -->
+<style>
+  .dropdown-header {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+
+  /* Rotate arrow when dropdown is open */
+  .dropdown-header.active .arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Styling for features content */
+  .features-card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+  }
+</style>
+
+<!-- JavaScript for Dropdown Toggle -->
 <script>
+  function toggleDropdown() {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const dropdownHeader = document.querySelector('.dropdown-header');
+    
+    // Toggle display of dropdown content
+    dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+
+    // Toggle active class for arrow rotation
+    dropdownHeader.classList.toggle('active');
+  }
+
   function redirectToForm(role) {
-      if (role === 'admin') {
-        window.location.href = '/agents-admin';
-      } else if (role === 'user') {
-        window.location.href = '/agents';
-      }
+    if (role === 'admin') {
+      window.location.href = '/agents-admin';
+    } else if (role === 'user') {
+      window.location.href = '/agents';
+    }
   }
 </script>

@@ -60,7 +60,7 @@
 } */
 
 .author-title {
-  margin: 0;
+  margin: 15px;
   font-size: 0.9em;
   color: #666;
 }
@@ -105,7 +105,6 @@
     grid-template-columns: repeat(1, 1fr); /* One column on mobile devices */
   }
 }
-
 </style>
 
 <ul class="product-list has-scrollbar">
@@ -156,9 +155,10 @@
 
           <div class="card-footer">
             <div class="card-author">
-              <p class="author-title">Created by: <%= product.createdBy %></p>
-              <!-- <hr class="divider" /> -->
-              <p class="author-title">Created at: <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)</p>
+              <p class="author-title">Created by: <%= product.createdBy %> <br>
+                <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
+              </p>
+              <!-- <p class="author-title">Created At: </p> -->
             </div>
             <div class="card-footer-actions">
               <button class="card-footer-actions-btn">

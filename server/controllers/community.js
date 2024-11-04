@@ -1,4 +1,3 @@
-// controllers/communityController.js
 import Community from '../models/community.js';
 import User from '../models/auth.js';
 
@@ -23,7 +22,33 @@ export const createPost = async (req, res) => {
 };
 
 
+// Delete a post
+export const deletePost = async (req, res) => {
+  try {
+      const { postId } = req.params;
+      const userId = req.user._id; // assuming req.user._id contains the authenticated user ID
 
+      const post = await Community.findById(postId);
+
+      if (!post) {
+          return res.status(404).json({ message: 'Post not found' });
+      }
+
+      // Check if the authenticated user is the creator of the post
+      if (post.createdBy.toString() !== userId.toString()) {
+          return res.status(403).json({ message: 'Unauthorized to delete this post' });
+      }
+
+      await Community.findByIdAndDelete(postId);
+      res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting post:', error);
+      res.status(500).json({ message: 'Failed to delete post' });
+  }
+};
+
+
+// Get all posts
 export const getPosts = async (req, res) => {
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();

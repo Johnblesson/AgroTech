@@ -5,6 +5,7 @@ import {
   getPosts,
   likePost,
   commentOnPost,
+  deletePost,
 } from '../controllers/community.js';
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.get('/', ensureAuthenticated, cacheMiddleware, getPosts); // View communi
 router.post('/create', ensureAuthenticated, createPost); // Create a post
 router.post('/:postId/like', ensureAuthenticated, likePost); // Like a post
 router.post('/:postId/comment', ensureAuthenticated, commentOnPost); // Comment on a post
+router.delete('/post/:postId', ensureAuthenticated, deletePost);
 
 export default router;

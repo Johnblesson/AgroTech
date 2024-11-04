@@ -62,7 +62,7 @@
 } */
 
 .author-title {
-  margin: 0;
+  margin: 15px;
   font-size: 0.9em;
   color: #666;
 }
@@ -156,8 +156,10 @@
 
           <div class="card-footer">
             <div class="card-author">
-              <p class="author-name">Created by: <a href="#"><%= product.createdBy %></a></p>
-              <p class="author-title">Created At: <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)</p>
+              <p class="author-title">Created by: <%= product.createdBy %> <br>
+                <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
+              </p>
+              <!-- <p class="author-title">Created At: </p> -->
             </div>
             <div class="card-footer-actions">
               <button class="card-footer-actions-btn">

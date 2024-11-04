@@ -74,13 +74,6 @@
           </nav>
 
           <div class="photos">
-            <!-- <img src="/images/img_1.avif" alt="Photo" />
-            <img src="/images/img_2.avif" alt="Photo" />
-            <img src="/images/img_3.avif" alt="Photo" />
-            <img src="/images/img_4.avif" alt="Photo" />
-            <img src="/images/img_5.avif" alt="Photo" />
-            <img src="/images/img_6.avif" alt="Photo" /> -->
-          <!-- </div> -->
           <ul class="property-list has-scrollbar">
             <% apartments.forEach(apt => { %>
               <li class="property-item">
@@ -91,7 +84,7 @@
                       <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
                     </div>
                     <h3 class="h3 card-title">
-                      <a href="/apartment-detail/<%= apt._id %>"><%= apt.title %></a>
+                      <a href="/product-detail/<%= apt._id %>"><%= apt.title %></a>
                     </h3>
                     <p class="card-text">
                       <% if (apt.description && apt.description.length > 150) { %>
@@ -102,8 +95,8 @@
                     </p>
                     <ul class="card-list">
                       <li class="card-item">
-                        <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
-                        <a href="/apartment-detail/<%= apt._id %>">
+                        <strong>Product ID (PID): PID<%= apt.pid %></strong>
+                        <a href="/product-detail/<%= apt._id %>">
                           <span>View Details</span>
                         </a>
                       </li>

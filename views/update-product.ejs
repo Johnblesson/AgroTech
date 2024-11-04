@@ -1,4 +1,185 @@
-  <!-- include style -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroTech SL - Empowering Farmers in Sierra Leone</title>
+  <style>
+    /* Alert styles */
+    .alert {
+      display: none;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 5px;
+      color: #fff;
+      background-color: #28a745; /* Green background for success */
+      font-size: 16px;
+      text-align: center;
+    }
+    .alert.show {
+      display: block;
+    }
+
+    /* Header actions styling */
+    .header-bottom-actions {
+      display: flex;
+      justify-content: center;
+    }
+    .header-bottom-actions-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .header-bottom-actions-btn ion-icon {
+      margin-bottom: 5px;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      min-width: 160px;
+      z-index: 1000;
+      padding: 10px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-item {
+      color: #333;
+      padding: 10px 15px;
+      text-decoration: none;
+    }
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+      color: #28a745;
+    }
+  </style>
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- Alert Container -->
+    <% if (alert) { %>
+      <div class="alert show">
+        <%= alert %>
+      </div>
+    <% } %>
+
+    <div class="header-top">
+      <div class="container">
+        <ul class="header-top-list">
+          <li>
+            <a href="/view/<%= user._id %>" class="header-top-link">
+              <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+            <li>
+              <a href="#" class="header-top-social-link">
+                <img src="/images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
+              </a>
+            </li>
+          </ul>
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+        <a href="/home" class="logo">AgroTech SL</a>
+
+        <nav class="navbar" data-navbar>
+          <div class="navbar-top">
+            <a href="/home" class="logo">AgroTech SL</a>
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+              <!-- <li><a href="/home" class="navbar-link" data-nav-link>Home</a></li> -->
+              <li><a href="/marketplace" class="navbar-link" data-nav-link>Marketplace</a></li>
+              <li class="dropdown">
+                <a href="#" class="navbar-link dropdown-toggle" data-nav-link>Resources</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/agro-news" class="dropdown-item">Agro News</a></li>
+                  <li><a href="/weather-update" class="dropdown-item">Weather Update</a></li>
+                  <li><a href="/tips" class="dropdown-item">Farming Tips</a></li>
+                </ul>
+              </li>
+              <li><a href="/community" class="navbar-link">Community</a></li>
+              <li><a href="/my-post" class="navbar-link" data-nav-link>My Posts</a></li>
+              <li><a href="/contact" class="navbar-link" data-nav-link>Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="header-bottom-actions">
+          <!-- <button class="header-bottom-actions-btn" aria-label="Search">
+            <a href="/search">
+              <ion-icon name="search-outline"></ion-icon>
+            </a>
+            <span>Search</span>
+          </button> -->
+          <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Profile</span>
+          </a>
+          <a href="/my-messages/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Messages">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+            <span>Messages</span>
+          </a>
+          <a href="/marketplace" class="header-bottom-actions-btn" aria-label="Marketplace">
+            <ion-icon name="storefront-outline"></ion-icon>
+            <span>Marketplace</span>
+          </a>
+          <button class="header-bottom-actions-btn" aria-label="Setttings">
+            <a href="/settings">
+              <ion-icon name="settings-outline"></ion-icon>
+            </a>
+            <span>Settings</span>
+          </button>
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+            <span>Menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+ 
+ <!-- include style -->
   <%- include('include/_style') %>
   <!-- /include style -->
  

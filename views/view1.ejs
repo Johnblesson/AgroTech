@@ -47,35 +47,18 @@
             <p>
                 <%= users.bio %>
             </p>
-
-            
-            <ul>
-              <!-- <li><i class="fab fa-twitter"></i></li>
-              <i class="fab fa-pinterest"></i>
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-dribbble"></i> -->
-            </ul>
           </div>
         </div>
         <div class="right__col">
           <nav>
             <ul>
               <li><a href="">posts</a></li>
-              <!-- <li><a href="">galleries</a></li> -->
-              <!-- <li><a href="#">home</a></li> -->
             </ul>
             <form action="/update-admin-profile/<%= users._id %>">
             <button>Edit</button>
           </form>
           </nav>
-
           <div class="photos">
-            <!-- <img src="/images/img_1.avif" alt="Photo" />
-            <img src="/images/img_2.avif" alt="Photo" />
-            <img src="/images/img_3.avif" alt="Photo" />
-            <img src="/images/img_4.avif" alt="Photo" />
-            <img src="/images/img_5.avif" alt="Photo" />
-            <img src="/images/img_6.avif" alt="Photo" /> -->
             <ul class="property-list has-scrollbar">
               <% apartments.forEach(apt => { %>
                 <li class="property-item">
@@ -97,8 +80,8 @@
                       </p>
                       <ul class="card-list">
                         <li class="card-item">
-                          <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
-                          <a href="/apartment-detail/<%= apt._id %>">
+                          <strong>Product ID (PID): PID<%= apt.pid %></strong>
+                          <a href="/product-detail/<%= apt._id %>">
                             <span>View Details</span>
                           </a>
                         </li>
@@ -116,10 +99,10 @@
                         </div>
                       </div>
                       <div class="card-footer-actions">
-                        <a href="/update-apartment/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
+                        <a href="/update-product/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
                           <ion-icon name="create-outline"></ion-icon>
                         </a>
-                        <form action="/apartments/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <form action="/products/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
                           <button type="submit" class="card-footer-actions-btn" title="Delete">
                             <ion-icon name="trash-outline"></ion-icon>
                           </button>

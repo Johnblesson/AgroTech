@@ -192,8 +192,6 @@ const getTimeOfDay = () => {
 
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
 
     res.render('post-product-admin', { user, greeting, sudo, accountant, role, manager, alert: req.query.alert });
@@ -202,7 +200,6 @@ const getTimeOfDay = () => {
     res.status(500).send('Internal Server Error');
   }
 };
-
 
 
 export const allAdminProducts = async (req, res) => {
@@ -383,16 +380,10 @@ const getTimeOfDay = () => {
     const products = await Products.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
-     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
      const sudo = user && user.sudo ? user.sudo : false;
-
-     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
      const accountant = user && user.accountant ? user.accountant : false;
- 
-     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
      const manager = user && user.manager ? user.manager : false;
-
-    const product = await Products.find();
+      const product = await Products.find();
 
     products.forEach(product => {
       // Display the first photo in the 'photos' array if available, otherwise use an empty string

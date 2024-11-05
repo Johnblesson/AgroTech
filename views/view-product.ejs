@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Apartment</title>
+    <title>View Product</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- 
@@ -54,7 +54,7 @@
 
 <div class="container mt-5 mx-auto">
     <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <a href="/apartment-detail-admin/<%= apartment._id %>"><h1 class="h2"><%= apartment.aid %> <%= apartment.location %></h1></a>
+      <a href="/product-detail-admin/<%= product._id %>"><h1 class="h2"><%= product.pid %> <%= product.location %></h1></a>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button id="shareBtn" type="button" onclick="window.print()" class="btn btn-sm btn-outline-secondary">Share as PDF</button>
@@ -62,8 +62,8 @@
         </div>
     </div>
         <div class="thumbnail-container">
-          <% if (apartment.photoUrls && apartment.photoUrls.length > 0) { %>
-              <% apartment.photoUrls.forEach((photoUrl, index) => { %>
+          <% if (product.photoUrls && product.photoUrls.length > 0) { %>
+              <% product.photoUrls.forEach((photoUrl, index) => { %>
                   <img src="<%= photoUrl %>" class="thumbnail <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>" alt="Thumbnail">
               <% }) %>
           <% } %>
@@ -76,14 +76,14 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Dashboard View</a></li>
-                        <li class="breadcrumb-item"><a href="#"> Apartment</a></li>
-                        <li class="breadcrumb-item active"><%= apartment.aid %></li>
+                        <li class="breadcrumb-item"><a href="#"> Product</a></li>
+                        <li class="breadcrumb-item active"><%= product.pid %></li>
                     </ol>
                 </nav>
             </div>
             <div class="col text-end fw-lighter">
-                <b>Last Updated <%= new Date(apartment.updatedAt).toUTCString() %> </b>
-                <!-- <b>ApartmentId:</b>  apartment._id  -->
+                <b>Last Updated <%= new Date(product.updatedAt).toUTCString() %> </b>
+                <!-- <b>productId:</b>  product._id  -->
             </div>
         </div>
     </div>
@@ -91,126 +91,97 @@
     <ul class="list-group">
         <li class="list-group-item"> 
             <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Apartment ID (AID):</b></div>
-                <div class="col"><%= apartment.aid %></div>
+                <div class="col" style="max-width: 140px"> <b>Product ID (PID):</b></div>
+                <div class="col"><%= product.pid %></div>
             </div>
         </li>
         <li class="list-group-item"> 
           <div class="row">
-              <div class="col" style="max-width: 140px"> <b>Title:</b></div>
-              <div class="col"><%= apartment.title %></div>
+              <div class="col" style="max-width: 140px"> <b>Product Name:</b></div>
+              <div class="col"><%= product.title %></div>
           </div>
       </li>
         <li class="list-group-item"> 
             <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Type of Property:</b></div>
-                <div class="col"><%= apartment.typeOfProperty %></div>
+                <div class="col" style="max-width: 140px"> <b>Type of Product:</b></div>
+                <div class="col"><%= product.typeOfProduct%></div>
             </div>
           </li>
-        <li class="list-group-item"> 
-            <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Created By:</b></div>
-                <div class="col"><%= apartment.createdBy %></div>
-            </div>
-        </li>
+         
         <li class="list-group-item"> 
           <div class="row">
               <div class="col" style="max-width: 140px"> <b>Price:</b></div>
-              <div class="col"><%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></div>
+              <div class="col"><%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></div>
           </div>
       </li>
-    
+<li class="list-group-item"> 
+  <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Views:</b></div>
+      <div class="col"><%= product.clicks %></div>
+  </div>
+</li>
 
 <li class="list-group-item"> 
   <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Status:</b></div>
-      <div class="col"><%= apartment.status %></div>
-  </div>
-</li>
-<li class="list-group-item"> 
-  <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Duration:</b></div>
-      <div class="col"><%= apartment.duration %></div>
-  </div>
-</li>
-<li class="list-group-item"> 
-  <div class="row">
       <div class="col" style="max-width: 140px"> <b>Phone Number:</b></div>
-      <div class="col"><%= apartment.phone %></div>
+      <div class="col"><%= product.phone %></div>
   </div>
 </li>
 <li class="list-group-item"> 
   <div class="row">
       <div class="col" style="max-width: 140px"> <b>Location:</b></div>
-      <div class="col"><%= apartment.location %></div>
+      <div class="col"><%= product.location %></div>
   </div>
 </li>
 <li class="list-group-item"> 
   <div class="row">
-      <div class="col" style="max-width: 140px"> <b>State:</b></div>
-      <div class="col"><%= apartment.state %></div>
+      <div class="col" style="max-width: 140px"> <b>Region:</b></div>
+      <div class="col"><%= product.region %></div>
   </div>
 </li>
-<li class="list-group-item"> 
-  <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Bedrooms</b></div>
-      <div class="col"><%= apartment.bedrooms %></div>
-  </div>
-</li>
-<li class="list-group-item"> 
-    <div class="row">
-        <div class="col" style="max-width: 140px"> <b>Bathrooms</b></div>
-        <div class="col"><%= apartment.bathrooms %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-        <div class="col" style="max-width: 140px"> <b>Address</b></div>
-        <div class="col"><%= apartment.address %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-        <div class="col" style="max-width: 140px"> <b>Address 2</b></div>
-        <div class="col"><%= apartment.address2 %></div>
-    </div>
-  </li>
   <li class="list-group-item"> 
     <div class="row">
         <div class="col" style="max-width: 140px"> <b>Negotiation</b></div>
-        <div class="col"><%= apartment.negotiation %></div>
+        <div class="col"><%= product.negotiation %></div>
     </div>
   </li>
   <li class="list-group-item"> 
     <div class="row">
         <div class="col" style="max-width: 140px"> <b>Avaliability</b></div>
-        <div class="col"><%= apartment.availabilty %></div>
+        <div class="col"><%= product.availabilty %></div>
     </div>
   </li>
   <li class="list-group-item"> 
     <div class="row">
         <div class="col" style="max-width: 140px"> <b>Verification</b></div>
-        <div class="col"><%= apartment.verification %></div>
+        <div class="col"><%= product.verification %></div>
     </div>
   </li>
 <li class="list-group-item"> 
   <div class="row">
       <div class="col" style="max-width: 140px"> <b>Description:</b></div>
-      <div class="col"><%= apartment.description %></div>
+      <div class="col"><%= product.description %></div>
+  </div>
+</li>
+
+<li class="list-group-item"> 
+  <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Created By:</b></div>
+      <div class="col"><%= product.createdBy %>, <%= product.role %>. </div>
   </div>
 </li>
 
 <li class="list-group-item"> 
   <div class="row">
     <div class="col" style="max-width: 140px"> <b>Date Created:</b></div>
-    <div class="col"><%= apartment.createdAt %></div>
+    <div class="col"><%= product.createdAt %></div>
   </div>
 </li>
 
 <li class="list-group-item"> 
   <div class="row">
     <div class="col" style="max-width: 140px"> <b>Date Modified:</b></div>
-    <div class="col"><%= apartment.updatedAt %></div>
+    <div class="col"><%= product.updatedAt %></div>
   </div>
 </li>
     </ul>
@@ -222,8 +193,6 @@
 <script>
   // JavaScript code for exporting to Excel
   document.getElementById("exportBtn").addEventListener("click", function() {
-      // Logic for exporting to Excel goes here
-      // You can use a library like SheetJS (https://sheetjs.com/) for Excel export
   });
 </script>
  <!-- Include html2pdf.js library -->

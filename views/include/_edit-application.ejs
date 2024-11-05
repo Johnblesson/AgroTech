@@ -20,14 +20,6 @@
 
         <ul class="header-top-list">
 
-          <!-- <li>
-            <a href="mailto:info@homeverse.com" class="header-top-link">
-              <ion-icon name="mail-outline"></ion-icon>
-
-              <span>info@homeverse.com</span>
-            </a>
-          </li> -->
-
           <li>
             <a href="#" class="header-top-link">
               <ion-icon name=""></ion-icon>
@@ -36,19 +28,19 @@
                 <% if (sudo) { %>
                   <p>(Owner)</p>
               <% } else { %>
-                  <p></p> <!-- Empty paragraph -->
+                  <p></p>
               <% } %>
 
               <% if (accountant) { %>
                 <p>(Accountant)</p>
               <% } else { %>
-                  <p></p> <!-- Empty paragraph -->
+                  <p></p>
               <% } %>
 
               <% if (manager) { %>
                 <p>(General Manager)</p>
               <% } else { %>
-                  <p></p> <!-- Empty paragraph -->
+                  <p></p>
               <% } %>
               </span>
             </a>
@@ -97,9 +89,6 @@
   </header>
 
   <div class="formbold-main-wrapper">
-    
-    <!-- Author: FormBold Team -->
-    <!-- Learn More: https://formbold.com -->
     <div class="formbold-form-wrapper"> <h3>UPDATE APPLICATION</h3>
       
   <form action="/update-admin-application/<%= apply._id %>?_method=PATCH" method="POST">
@@ -196,34 +185,6 @@
               readonly
             ><%= apply.comments %></textarea>
           </div>
-
-          <div class="formbold-mb-3 formbold-input-wrapp">
-            <label for="assignedStaff" class="formbold-form-label">Assigned Staff:</label>
-            <div>
-              <input
-                type="text"
-                name="assignedStaff"
-                id="assignedStaff"
-                value="<%= apply.staffInCharge %>"
-                class="formbold-form-input"
-                readonly
-              />
-            </div>
-          </div>
-
-          <div class="formbold-mb-3 formbold-input-wrapp">
-            <label for="staffInCharge" class="formbold-form-label"> Staff in Charge: </label>
-            <div>
-              <select name="staffInCharge" class="formbold-form-input" id="staffInCharge">
-                <% staffNames.forEach(staffName => { %>
-                  <option value="" disabled selected hidden>Select Staff</option>
-                  <option value="<%= staffName %>"><%= staffName %></option>
-                <% }); %>
-              </select>
-            </div>
-          </div>
-          
-  
         <button type="submit" class="formbold-btn">Done</button>
       </form>
     </div>

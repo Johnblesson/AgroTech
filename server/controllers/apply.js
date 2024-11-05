@@ -1,7 +1,6 @@
 import Products from "../models/products.js";
 import Application from "../models/apply.js";
 import Boost from "../models/boost.js";
-import Staffs from "../models/staffs.js";
 import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new application
@@ -97,9 +96,6 @@ export const editApplication = async (req, res) => {
   try {
     const apply = await Application.findOne({ _id: req.params.id });
 
-    // Fetch all staffs name
-    const staffNames = await Staffs.distinct('staffName');
-
     // Determine the time of the day
     const greeting = getTimeOfDay();
 
@@ -120,7 +116,6 @@ export const editApplication = async (req, res) => {
       sudo,
       manager,
       accountant,
-      staffNames,
       alert: req.query.alert, // Pass the alert message
     });
   } catch (error) {

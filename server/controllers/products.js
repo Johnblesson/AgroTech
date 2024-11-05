@@ -570,21 +570,9 @@ export const viewproduct = async (req, res) => {
     if (!product) {
       return res.status(404).send("product not found");
     }
-  
-    // Ensure photoUrls is set properly for the current product
-    const updatedProduct = {
-      ...product._doc,
-      photoUrls: [product.photo, product.photo1, product.photo2].filter(Boolean) // Filter out undefined or empty strings
-    };
 
-      // Format the createdAt date and calculate days ago
-      updatedProduct.formattedCreatedAt = moment(updatedProduct.createdAt).format('DD-MM-YYYY HH:mm');
-      updatedProduct.daysAgo = moment().diff(moment(updatedProduct.createdAt), 'days');
-
-
-    res.render("view-apt", {
-      product,
-      product: updatedProduct,
+    res.render("view-product", {
+      product
     });
   } catch (error) {
     console.log(error);

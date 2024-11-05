@@ -82,7 +82,7 @@ export const agentForm = async (req, res) => {
 
        // Pass flash messages
        const messages = {
-        error: req.flash('error'), // Get error messages
+        error: req.flash('error'), // Pass error messages
         success: req.flash('success') // You can also include success messages if needed
       };
   
@@ -168,9 +168,7 @@ export const agentProgram = async (req, res) => {
   
       // Fetch all users from the database
       const agent = await Agents.aggregate([
-        // Stage 1: Exclude password field from the response
         { $project: { password: 0 } },
-        // Stage 2: Skip and limit
         { $skip: skip },
         { $limit: limit }
     ]);
@@ -185,5 +183,3 @@ export const agentProgram = async (req, res) => {
       res.status(500).send('An error occurred while fetching users.');
     }
   };
-
-

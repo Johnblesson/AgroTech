@@ -765,12 +765,9 @@ export const searchProduct = async (req, res) => {
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
 
-    // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
     products.forEach(product => {
-      // Ensure photoUrl is set properly
-      product.photoUrl = product.photo || ''; // Use empty string if no photo is available
-
-      // Format the createdAt date and calculate days ago
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
@@ -824,12 +821,9 @@ export const searchProductAdmin = async (req, res) => {
     const user = req.isAuthenticated() ? req.user : null;
     const role = user ? user.role : null; // Get user role if user is authenticated
 
-    // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
     products.forEach(product => {
-      // Ensure photoUrl is set properly
-      product.photoUrl = product.photo || ''; // Use empty string if no photo is available
-
-      // Format the createdAt date and calculate days ago
+      // Display the first photo in the 'photos' array if available, otherwise use an empty string
+      product.photoUrl = product.photos && product.photos.length > 0 ? product.photos[0] : ''; 
       product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });

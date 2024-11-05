@@ -48,7 +48,7 @@ white-space: nowrap;
 }
 
 .dropdown-item:hover {
-background-color: #f8f9fa; /* Light background on hover */
+background-color: #f8f9fa; /* Background color on hover */
 color: #007bff; /* Text color on hover */
 }
 

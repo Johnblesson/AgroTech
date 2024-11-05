@@ -58,7 +58,7 @@ export const verify2FA = async (req, res) => {
       const verified = speakeasy.totp.verify({
           secret: user.twoFactorSecret, // The user's 2FA secret
           token: token,
-          encoding: 'base32', // Make sure the secret is in base32 encoding
+          encoding: 'base32', // The secret is in base32 encoding
           window: 2 // Allow for some leeway in token validity (2 periods of 30 seconds)
       });
 
@@ -102,7 +102,7 @@ export const verify2FA = async (req, res) => {
 
   
 
-  // Handle 2FA enable/disable request
+// Handle 2FA enable/disable request
 export const toggle2FA = async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
@@ -123,7 +123,7 @@ export const toggle2FA = async (req, res) => {
         await user.save();
         res.redirect('/settings');
       } else {
-        res.redirect('/settings'); // No change needed
+        res.redirect('/settings');
       }
     } catch (error) {
       res.status(500).json({ message: 'Error toggling 2FA', error });

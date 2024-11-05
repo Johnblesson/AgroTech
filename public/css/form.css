@@ -105,6 +105,7 @@ select.formbold-form-input,
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
+  user-select: none;
   cursor: pointer;
   color: #637381;
   font-weight: 500;
@@ -211,21 +212,17 @@ select.formbold-form-input,
   .file-input-container {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Adjust the gap between input elements */
+    gap: 10px;
   }
 
   .formbold-form-file {
-    /* Add your styling for file inputs here */
-    /* Example styles */
     border: 1px solid #ccc;
     padding: 8px;
-    width: 100%; /* Make inputs full width */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .file-name-placeholder {
-    /* Add your styling for filename placeholders here */
-    /* Example styles */
     margin-top: 5px;
     font-size: 14px;
     color: #666;
@@ -234,7 +231,7 @@ select.formbold-form-input,
   /* Media query for mobile devices */
   @media (max-width: 768px) {
     .file-input-container {
-      gap: 5px; /* Reduce the gap for smaller screens */
+      gap: 5px;
     }
 
     .formbold-form-file {

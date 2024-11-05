@@ -3,10 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Apartments</title>
+  <title>Search Products</title>
   <link rel="stylesheet" href="./css/search.css">
   <style>
-  
+    .product-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 20px; /* Adjust the gap between grid items */
+  padding: 15px;
+  list-style: none;
+  margin: 5px;
+}
+
+.property-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.card-author {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* .divider {
+  margin: 5px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+} */
+
+.author-title {
+  margin: 15px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.card-footer-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.card-footer-actions-btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: #333;
+}
+
+.card-footer-actions-btn ion-icon {
+  margin-right: 5px;
+}
+
+
+.top-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: hsl(9, 100%, 62%);
+}
+
+.top-left{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(1, 1fr); /* One column on mobile devices */
+  }
+}
   </style>
 </head>
 <body>
@@ -27,80 +132,67 @@
     </form>
   </div>
 
-  <ul class="property-list has-scrollbar">
-    <% apartments.forEach(apt => { %>
+  <ul class="product-list has-scrollbar">
+    <% products.forEach(product => { %>
       <li class="property-item">
-        <a href="/apartment-detail/<%= apt._id %>">
+        <a href="/product-detail/<%= product._id %>">
           <div class="property-card">
             <figure class="card-banner">
-              <% if (apt.photoUrl) { %>
-                <img src="<%= apt.photoUrl %>" alt="Apartment Photo">
+              <% if (product.photoUrl) { %>
+                <img src="<%= product.photoUrl %>" alt="Product Photo">
               <% } else { %>
                 <p>No photo available</p>
               <% } %>
-
-              <div class="card-badge top-right"><%= apt.availabilty %></div>
-              <div class="card-badge green top-left"><%= apt.status %></div>
-
+  
+              <!-- Dynamic badges for availability and status -->
+              <div class="card-badge top-right"><%= product.availability %></div>
+              <div class="card-badge green top-left"><%= product.typeOfProduct %></div>
+  
               <div class="banner-actions">
                 <button class="banner-actions-btn">
                   <ion-icon name="location"></ion-icon>
-                  <address><%= apt.location %></address>
-                </button>
-                <button class="banner-actions-btn">
-                  <ion-icon name="bed-outline"></ion-icon>
-                  <span><%= apt.bedrooms %></span>
-                </button>
-                <button class="banner-actions-btn">
-                  <ion-icon name="man-outline"></ion-icon>
-                  <span><%= apt.bathrooms %></span>
+                  <address><%= product.location %></address>
                 </button>
               </div>
             </figure>
-
+  
             <div class="card-content">
               <div class="card-price">
-                <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
+                <strong><%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong>
+                 <pre><%= product.negotiation %></pre>
               </div>
               <h3 class="h3 card-title">
-                <a href="/apartment-detail/<%= apt._id %>"><%= apt.title %></a>
+                <a href="/product-detail/<%= product._id %>"><%= product.title %></a>
               </h3>
               <p class="card-text">
-                <%= apt.description %>
+                <% if (product.description && product.description.length > 150) { %>
+                  <%= product.description.substring(0, 150) + "..." %>
+                <% } else { %>
+                  <%= product.description %>
+                <% } %>
               </p>
               <ul class="card-list">
                 <li class="card-item">
-                  <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
-                  <a href="/apartment-detail/<%= apt._id %>">
-                    <span>View Details</span>
-                    <!-- <span>Apply</span> -->
-                  </a>
+                  <strong>Product ID (PID): PID<%= product.pid %></strong>
                 </li>
               </ul>
             </div>
+  
             <div class="card-footer">
               <div class="card-author">
-                <div>
-                  <p class="author-name">Created by:
-                    <a href="#"><%= apt.createdBy %></a>
-                  </p>
-                  <p class="author-title">
-                    Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
-                  </p>
-                </div>
+                <p class="author-title">Created by: <%= product.createdBy %> <br>
+                  <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
+                </p>
+                <!-- <p class="author-title">Created At: </p> -->
               </div>
               <div class="card-footer-actions">
                 <button class="card-footer-actions-btn">
-                  <ion-icon name="resize-outline"></ion-icon>
-                </button>
-                <button class="card-footer-actions-btn">
-                  <ion-icon name="heart-outline"></ion-icon>
-                </button>
-                <button class="card-footer-actions-btn">
-                  <ion-icon name="add-circle-outline"></ion-icon>
+                  <ion-icon name="eye-outline"></ion-icon>
+                  <span><%= product.clicks %></span>
                 </button>
               </div>
             </div>
+            
           </div>
         </a>
       </li>

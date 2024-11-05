@@ -1,10 +1,207 @@
-<!-- include header -->
-<%- include('include/_detail-header') %>
-<!-- /include header -->
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- include all-properties -->
-<%- include('include/_product-detail', { products: products }) %>
-<!-- /include all-properties -->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroTech SL - Empowering Farmers in Sierra Leone</title>
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/apt-detail.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+    
+    <!-- Alert Container -->
+    <% if (alert) { %>
+      <div class="alert show">
+        <%= alert %>
+      </div>
+    <% } %>
+
+    <div class="header-top">
+      <div class="container">
+        <ul class="header-top-list">
+          <li>
+            <a href="/view/<%= user._id %>" class="header-top-link">
+              <span><%= greeting %>, <%= user ? user.role : '' %> | <%= user ? user.username : '' %></span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+            <li>
+              <a href="#" class="header-top-social-link">
+                <img src="/images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
+              </a>
+            </li>
+          </ul>
+          <form action="/logout" method="get">
+            <button class="header-top-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+        <a href="/home" class="logo">AgroTech SL</a>
+
+        <nav class="navbar" data-navbar>
+          <div class="navbar-top">
+            <a href="/home" class="logo">AgroTech SL</a>
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+              <!-- <li><a href="/home" class="navbar-link" data-nav-link>Home</a></li> -->
+              <li><a href="/marketplace" class="navbar-link" data-nav-link>Marketplace</a></li>
+              <li class="dropdown">
+                <a href="#" class="navbar-link dropdown-toggle" data-nav-link>Resources</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/agro-news" class="dropdown-item">Agro News</a></li>
+                  <li><a href="/weather-update" class="dropdown-item">Weather Update</a></li>
+                  <li><a href="/tips" class="dropdown-item">Farming Tips</a></li>
+                </ul>
+              </li>
+              <li><a href="/community" class="navbar-link">Community</a></li>
+              <li><a href="/my-post" class="navbar-link" data-nav-link>My Posts</a></li>
+              <li><a href="/contact" class="navbar-link" data-nav-link>Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="header-bottom-actions">
+          <a href="/view/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Profile</span>
+          </a>
+          <a href="/my-messages/<%= user._id %>" class="header-bottom-actions-btn" aria-label="Messages">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+            <span>Messages</span>
+          </a>
+          <a href="/marketplace" class="header-bottom-actions-btn" aria-label="Marketplace">
+            <ion-icon name="storefront-outline"></ion-icon>
+            <span>Marketplace</span>
+          </a>
+          <button class="header-bottom-actions-btn" aria-label="Setttings">
+            <a href="/settings">
+              <ion-icon name="settings-outline"></ion-icon>
+            </a>
+            <span>Settings</span>
+          </button>
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+            <span>Menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="property-list has-scrollbar">
+        <div class="property-item">
+            <div class="property-card">
+                <div class="carousel">
+                    <% if (product.photoUrls && product.photoUrls.length > 0) { %>
+                        <% product.photoUrls.forEach((photoUrl, index) => { %>
+                            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                <img src="<%= photoUrl %>" class="carousel-img" alt="Product Photo">
+                                <a href="<%= photoUrl %>" download class="download-btn">
+                                    <ion-icon name="download-outline"></ion-icon>
+                                </a>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="carousel-item active">
+                            <p>No photo available</p>
+                        </div>
+                    <% } %>
+                </div>  
+                <div class="thumbnail-container">
+                    <% if (product.photoUrls && product.photoUrls.length > 0) { %>
+                        <% product.photoUrls.forEach((photoUrl, index) => { %>
+                            <img src="<%= photoUrl %>" class="thumbnail <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>" alt="Thumbnail">
+                        <% }) %>
+                    <% } %>
+                </div>
+                <!-- Dynamic badges indicating availability and status -->
+                <div class="card-badge top-right"><%= product.availability %></div>
+                <div class="card-badge green top-left"><%= product.typeOfProduct %></div>
+
+                <div class="card-content">
+                    <!-- Dynamic price -->
+                    <div class="card-price">
+                        <strong><%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= product.duration %> 
+                        <p style="font-size: 12px;"><%= product.negotiation %></p>
+                    </div> 
+                    <!-- Dynamic title -->
+                    <h3 class="h3 card-title">
+                        <%= product.title %>
+                    </h3>
+                    <!-- Dynamic description -->
+                    <p class="card-text">
+                        <%= product.description %>
+                    </p>
+                    <!-- Additional details as needed -->
+                    <div class="card-details">
+                        <h3 class="card-title">
+                            Product Details
+                        </h3>
+                        <div class="card-text">
+                            <p><strong>Location:</strong> <%= product.location %></p>
+                            <p><strong>Region:</strong> <%= product.region %></p>
+                            <p><strong>Price:</strong> <%= product.currency %> <%= product.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %> <%= product.duration %></p>
+                            <p><strong>Negotiation:</strong> <%= product.negotiation %></p>
+                            <p><strong>Product Type:</strong> <%= product.typeOfProduct %></p>
+                            <p><strong>Availability:</strong> <%= product.availability %></p>
+                        </div>
+                        <div>
+                        <ul class="card-list">
+                            <!-- Placeholder for square footage -->
+                            <li class="card-item">
+                                <strong>Product ID (PID): PID<%= product.pid %></strong>
+                                <a href="/application-form?pid=<%= product.pid %>&location=<%= product.location %>&title=<%= product.title %>">
+                                    <span>Apply to buy this product.</span>
+                                    <button class="btn1">Apply</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <!-- Links container -->
+                <div class="product-links-container">
+                    <p>Before you apply for this product, make sure you have read the following:</p>
+                    <a href="/terms-and-conditions">Terms and Conditions</a>
+                    <a href="/services-fee-agreement">Service Fee Agreement</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                </div>
+
+                <div class="card-footer">
+                    <div class="card-author">
+                        <!-- Dynamic user fullname -->
+                        <p class="author-title">Created by: <%= product.createdBy %> <br>
+                            <%= product.formattedCreatedAt %> (<%= product.daysAgo %> days ago)
+                          </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- include cta -->
 <%- include('include/_cta') %>
@@ -13,3 +210,82 @@
 <!-- include footer -->
 <%- include('include/_footer') %>
 <!-- /include footer -->
+
+
+<script>
+    // JavaScript for carousel functionality
+    let slideIndex = 0;
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+
+    function showSlides() {
+        carouselItems.forEach(item => item.style.display = "none");
+        thumbnails.forEach(item => item.classList.remove('active'));
+        slideIndex++;
+        if (slideIndex > carouselItems.length) { slideIndex = 1 }
+        carouselItems[slideIndex - 1].style.display = "block";
+        thumbnails[slideIndex - 1].classList.add('active');
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+
+    function showSlide(index) {
+        carouselItems.forEach(item => item.classList.remove('active'));
+        thumbnails.forEach(item => item.classList.remove('active'));
+        carouselItems[index].classList.add('active');
+        thumbnails[index].classList.add('active');
+        slideIndex = index;
+    }
+
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => showSlide(index));
+    });
+
+    showSlides();
+</script>
+
+<!-- JavaScript for dropdown functionality -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdown = document.querySelector('.dropdown');
+      const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+      dropdownToggle.addEventListener('click', function(event) {
+        event.preventDefault();
+        dropdown.classList.toggle('active');
+      });
+      document.addEventListener('click', function(event) {
+        if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+    });
+  </script>
+
+<!-- JavaScript for carousel functionality -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Select the button and the navbar
+      const navOpenBtn = document.querySelector('[data-nav-open-btn]');
+      const navbar = document.querySelector('[data-navbar]');
+      const navCloseBtn = document.querySelector('[data-nav-close-btn]');
+      const overlay = document.querySelector('[data-overlay]');
+  
+      // Function to toggle menu visibility
+      function toggleMenu() {
+        navbar.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+  
+      // Open menu on button click
+      navOpenBtn.addEventListener('click', toggleMenu);
+  
+      // Close menu on overlay or close button click
+      if (navCloseBtn) navCloseBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', toggleMenu);
+    });
+  </script>
+  
+
+<!-- Ionicons CDN for icons -->
+<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

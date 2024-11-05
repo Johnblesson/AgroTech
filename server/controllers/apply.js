@@ -23,7 +23,7 @@ export const createApplication = async (req, res) => {
       comments,
       assignedStaff,
       staffInCharge,
-      createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+      createdAt: new Date(),
       updatedAt: new Date()
     });
 
@@ -50,19 +50,11 @@ export const getAllApplication = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
     const limit = 15; // Number of entries per page
     const skip = (page - 1) * limit;
-
-    // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
     const totalEntries = await Application.countDocuments();
-
     const totalPages = Math.ceil(totalEntries / limit);
 
-    // Fetch all users from the database
-    // const users = await User.find({}, '-password'); // Exclude password field from the response
     const apply = await Application.aggregate([
-      // Stage 1: Exclude password field from the response
       { $project: { password: 0 } },
-      // Stage 2: Skip and limit
       { $skip: skip },
       { $limit: limit }
   ]);
@@ -98,17 +90,10 @@ export const editApplication = async (req, res) => {
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
-
     const user = req.isAuthenticated() ? req.user : null;
-
-     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
-
     const accountant = user && user.accountant ? user.accountant : false;
-
     res.render("edit-application", {
       apply,
       greeting,
@@ -222,12 +207,8 @@ export const adminApplication = async (req, res) => {
 
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
-
-     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-     const manager = user && user.manager ? user.manager : false;
+    const manager = user && user.manager ? user.manager : false;
 
     // Render the apply page with the necessary data
     res.render('apply-admin', {
@@ -318,10 +299,7 @@ export const applyForSponsorship = async (req, res) => {
 
     // Determine the time of the day
     const greeting = getTimeOfDay();
-
-    // Check if the user is authenticated
     const user = req.isAuthenticated() ? req.user : null;
-
     const role = user ? user.role : null;
 
     // Render the apply page with the necessary data
@@ -340,7 +318,6 @@ export const applyForSponsorship = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
 
 
 // adminApplyForSponsorship
@@ -378,11 +355,7 @@ export const adminApplyForSponsorship = async (req, res) => {
 
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
 
     // Render the apply page with the necessary data
@@ -456,23 +429,15 @@ export const getAllBoost = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
     const limit = 15; // Number of entries per page
     const skip = (page - 1) * limit;
-
-    // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
     const totalEntries = await Boost.countDocuments();
-
     const totalPages = Math.ceil(totalEntries / limit);
-
-    // Fetch all users from the database
-    // const users = await User.find({}, '-password'); // Exclude password field from the response
     const boost = await Boost.aggregate([
-      // Stage 1: Exclude password field from the response
       { $project: { password: 0 } },
-      // Stage 2: Skip and limit
       { $skip: skip },
       { $limit: limit }
   ]);
   
+  // Render the all-boost page with the necessary data
     res.render('all-boost', { 
       boost: boost, 
       currentPage: page, 
@@ -486,7 +451,7 @@ export const getAllBoost = async (req, res) => {
 
 
 
-// Get edit boost
+// Get boost
 export const editboost = async (req, res) => {
   const locals = {
     title: "Edit boost",
@@ -516,13 +481,10 @@ export const editboost = async (req, res) => {
 
      // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
-
     const accountant = user && user.accountant ? user.accountant : false;
    
-
+    // Render the edit-boost page with the necessary data
     res.render("edit-boost", {
       locals,
       boost,
@@ -534,7 +496,6 @@ export const editboost = async (req, res) => {
       alert: req.query.alert, // Pass the alert message
     });
   } catch (error) {
-    // Handle errors gracefully
     console.error(error.message);
     res.status(404).send("User not found");
   }

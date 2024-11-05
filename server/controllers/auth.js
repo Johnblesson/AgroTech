@@ -182,7 +182,7 @@ export const activeUserSessions = async (req, res) => {
 
     // Fetch active user sessions
     // Assuming `activeSessions` is an array of user IDs representing active sessions
-    const activeSessionUserIds = Array.from(activeSessions); // Replace this with your actual logic to get active session user IDs
+    const activeSessionUserIds = Array.from(activeSessions); // Convert the Set to an array
 
     // Paginate the active sessions
     const users = await User.find({ '_id': { $in: activeSessionUserIds } })
@@ -359,17 +359,12 @@ export const getAllUsers = async (req, res) => {
     const skip = (page - 1) * limit;
 
     // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
     const totalEntries = await User.countDocuments();
-
     const totalPages = Math.ceil(totalEntries / limit);
-
     const user = req.isAuthenticated() ? req.user : null;
 
     // Fetch all users from the database
-    // const users = await User.find({}, '-password'); // Exclude password field from the response
     const users = await User.aggregate([
-      // Stage 1: Exclude password field from the response
       { $project: { password: 0 } },
       // Stage 2: Skip and limit
       { $skip: skip },
@@ -404,8 +399,7 @@ export const OnlyUsers = async (req, res) => {
     const limit = 15; // Number of entries per page
     const skip = (page - 1) * limit;
 
-    // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
+   // Count total number of users
     const totalEntries = await User.countDocuments({ role: 'user' });
 
     const totalPages = Math.ceil(totalEntries / limit);
@@ -414,7 +408,7 @@ export const OnlyUsers = async (req, res) => {
 
      // Fetch all users with role 'agent' from the database excluding the password field
      const users = await User.aggregate([
-      { $match: { role: 'user' } }, // Match only users with the role 'agent'
+      { $match: { role: 'user' } }, // Match only users with the role 'user'
       { $project: { password: 0 } }, // Exclude the password field
       { $skip: skip }, // Pagination: Skip the records for previous pages
       { $limit: limit } // Pagination: Limit the number of results per page
@@ -446,8 +440,7 @@ export const onlyAdmins = async (req, res) => {
     const limit = 15; // Number of entries per page
     const skip = (page - 1) * limit;
 
-    // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
+    // Count total number of admins
     const totalEntries = await User.countDocuments({ role: 'admin'});
 
     const totalPages = Math.ceil(totalEntries / limit);
@@ -456,7 +449,7 @@ export const onlyAdmins = async (req, res) => {
 
       // Fetch all users with role 'agent' from the database excluding the password field
       const users = await User.aggregate([
-        { $match: { role: 'admin' } }, // Match only users with the role 'agent'
+        { $match: { role: 'admin' } }, // Match only users with the role 'admin'
         { $project: { password: 0 } }, // Exclude the password field
         { $skip: skip }, // Pagination: Skip the records for previous pages
         { $limit: limit } // Pagination: Limit the number of results per page
@@ -466,7 +459,6 @@ export const onlyAdmins = async (req, res) => {
       data: users, 
       locals,
       user,
-      // greeting,
       currentPage: page, 
       totalPages: totalPages,
     });
@@ -477,6 +469,7 @@ export const onlyAdmins = async (req, res) => {
 };
 
 
+// Get All Users Controller
 export const onlyAgents = async (req, res) => {
 
   const locals = {
@@ -522,27 +515,17 @@ export const onlyAgents = async (req, res) => {
 
 // Get All Users Controller
 export const allAdminUser = async (req, res) => {
-
-  const locals = {
-    title: "All Users",
-    description: "This is the all users page.",
-  };
-
   try {
     const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
     const limit = 15; // Number of entries per page
     const skip = (page - 1) * limit;
 
-    // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
+    // Count total number of users
     const totalEntries = await User.countDocuments();
-
     const totalPages = Math.ceil(totalEntries / limit);
-
     const user = req.isAuthenticated() ? req.user : null;
 
     // Fetch all users from the database
-    // const users = await User.find({}, '-password'); // Exclude password field from the response
     const users = await User.aggregate([
       // Stage 1: Exclude password field from the response
       { $project: { password: 0 } },
@@ -553,9 +536,7 @@ export const allAdminUser = async (req, res) => {
   
     res.render('all-users-sudo', { 
       data: users, 
-      locals,
       user,
-      // greeting,
       currentPage: page, 
       totalPages: totalPages,
     });
@@ -604,10 +585,7 @@ export const edituser = async (req, res) => {
 
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-    const manager = user && user.manager ? user.manager : false;
-     
+    const manager = user && user.manager ? user.manager : false; 
     const accountant = user && user.accountant ? user.accountant : false;
 
     res.render("edit-user", {
@@ -691,14 +669,8 @@ const getTimeOfDay = () => {
 
   // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
   const sudo = user && user.sudo ? user.sudo : false;
-
-  // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
   const accountant = user && user.accountant ? user.accountant : false;
-
-  // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
   const manager = user && user.manager ? user.manager : false;
-
-  // Determine the time of the day
   const greeting = getTimeOfDay();
 
     // Check the role and render the appropriate page
@@ -804,22 +776,20 @@ export const settings = async (req, res) => {
   
     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
-    
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
-  
-    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
 
+    // Fetch the user data from the database
     const users = await User.findOne({ _id: req.params.id });
 
+    // Check if the user exists
     const isAdmin = role === 'admin'; // Define isAdmin based on the role
   
     // Determine the time of the day
     const greeting = getTimeOfDay();  
         // Render the admin update password page
         res.render('admin-settings', {
-            greeting, // Greeting message for admin
+            greeting,
             user,
             role,
             sudo,
@@ -851,6 +821,8 @@ export const getSudoOnly = (req, res) => {
   });
 };
 
+
+
 // Get sudo only Page Controller
 export const getAdminOnly = (req, res) => {
   const ip =
@@ -864,6 +836,8 @@ export const getAdminOnly = (req, res) => {
   res.render('404-admin', {
   });
 };
+
+
 
 // Go back function
 export const goBack = async (req, res) => {
@@ -880,6 +854,7 @@ export const goBack = async (req, res) => {
   }
 };
 
+// Delete user account
 export const deleteUserAccount = async (req, res) => {
   try {
     const userId = req.user._id;

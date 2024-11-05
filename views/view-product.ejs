@@ -54,7 +54,7 @@
 
 <div class="container mt-5 mx-auto">
     <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <a href="/product-detail-admin/<%= product._id %>"><h1 class="h2"><%= product.pid %> <%= product.location %></h1></a>
+      <a href="/product-detail-admin/<%= product._id %>"><h1 class="h2">PID<%= product.pid %> <%= product.location %></h1></a>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button id="shareBtn" type="button" onclick="window.print()" class="btn btn-sm btn-outline-secondary">Share as PDF</button>
@@ -77,7 +77,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Dashboard View</a></li>
                         <li class="breadcrumb-item"><a href="#"> Product</a></li>
-                        <li class="breadcrumb-item active"><%= product.pid %></li>
+                        <li class="breadcrumb-item active">PID<%= product.pid %></li>
                     </ol>
                 </nav>
             </div>
@@ -92,7 +92,7 @@
         <li class="list-group-item"> 
             <div class="row">
                 <div class="col" style="max-width: 140px"> <b>Product ID (PID):</b></div>
-                <div class="col"><%= product.pid %></div>
+                <div class="col">PID<%= product.pid %></div>
             </div>
         </li>
         <li class="list-group-item"> 
@@ -148,7 +148,7 @@
   <li class="list-group-item"> 
     <div class="row">
         <div class="col" style="max-width: 140px"> <b>Avaliability</b></div>
-        <div class="col"><%= product.availabilty %></div>
+        <div class="col"><%= product.availability %></div>
     </div>
   </li>
   <li class="list-group-item"> 

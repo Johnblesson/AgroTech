@@ -88,6 +88,7 @@
         <table class="fl-table">
             <thead>
             <tr>
+                <th>#</th>
                 <th>PID</th>
                 <th>Product Name</th>
                 <th>Created by</th>
@@ -98,8 +99,10 @@
             </tr>
             </thead>
             <tbody>
+                <% let counter = 1; %> <!-- Counter for numbering the products -->
                 <% products.forEach(product => { %>
             <tr>
+                <td class="hover"><%= counter++ %></td> <!-- Increment the counter -->
                 <td class="hover"><%= 'PID' +  product.pid %></td>
                 <td class="hover">
                     <% if (product.title && product.title.length > 20) { %>
@@ -125,7 +128,7 @@
             <tbody>
         </table>
 
-         <!-- Assuming you have a variable 'currentPage' and 'totalPages' from the server-side -->
+        <!-- pagination -->
         <div class="container mx-auto">
             <div class="pagination">
             <% for (let i = 1; i <= totalPages; i++) { %>

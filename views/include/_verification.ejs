@@ -8,7 +8,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="./css/form.css">
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
@@ -20,15 +20,6 @@
       <div class="container">
 
         <ul class="header-top-list">
-
-          <!-- <li>
-            <a href="mailto:info@homeverse.com" class="header-top-link">
-              <ion-icon name="mail-outline"></ion-icon>
-
-              <span>info@homeverse.com</span>
-            </a>
-          </li> -->
-
           <li>
             <a href="#" class="header-top-link">
               <ion-icon name=""></ion-icon>
@@ -80,8 +71,6 @@
   </header>
 
 <div class="formbold-main-wrapper">
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
     
     <form action="/update-admin-products/<%= product._id %>?_method=PATCH" method="POST">
@@ -92,7 +81,7 @@
             type="text"
             name="pid"
             id="pid"
-            value="<%= product.pid %>"
+            value="PID<%= product.pid %>"
             class="formbold-form-input"
             required
           />

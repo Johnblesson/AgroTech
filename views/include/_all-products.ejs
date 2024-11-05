@@ -17,19 +17,19 @@
         
 <!-- Search by AID -->
 <div class="search-container">
-    <input type="text" id="searchAidInput" placeholder="Search by AID..." onkeyup="searchApartments('aid')">
+    <input type="text" id="searchPidInput" placeholder="Search by PID..." onkeyup="searchProducts('aid')">
     <button onclick="clearSearch('aid')">Clear</button>
 </div>
 
 <!-- Search by Location -->
 <div class="search-container">
-    <input type="text" id="searchLocationInput" placeholder="Search by Location..." onkeyup="searchApartments('location')">
+    <input type="text" id="searchLocationInput" placeholder="Search by Location..." onkeyup="searchProducts('location')">
     <button onclick="clearSearch('location')">Clear</button>
 </div>
 
 <!-- Search by Availability -->
 <div class="search-container">
-    <input type="text" id="searchAvailabilityInput" placeholder="Search by Availability..." onkeyup="searchApartments('availability')">
+    <input type="text" id="searchAvailabilityInput" placeholder="Search by Availability..." onkeyup="searchProducts('availability')">
     <button onclick="clearSearch('availability')">Clear</button>
 </div>
 
@@ -37,6 +37,7 @@
         <table class="fl-table">
             <thead>
             <tr>
+                <th>#</th>
                 <th>PID</th>
                 <th>Created by</th>
                 <th>role</th>
@@ -52,8 +53,10 @@
             </tr>
             </thead>
             <tbody>
+                <% let counter = 1; %> <!-- Counter for numbering the products -->
                 <% products.forEach(product => { %>
             <tr>
+                <td class="hover"><%= counter++ %></td> <!-- Increment the counter -->
                 <td class="hover role-green-bg">PID<%= product.pid %></td> 
                 <td class="hover"><%= product.createdBy %></td>
                 <td class="hover"><%= product.role %></td>
@@ -78,8 +81,7 @@
                     <a href="/edit-admin-product/<%= product._id %>"><i class="fas fa-edit text-green-500 cursor-pointer"></i></a>
                     <a href="#" onclick="deleteproductById('<%= product._id %>')"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i></a>
                     <a href="/view-product-details/<%= product._id %>"><i class="fas fa-eye text-blue-500 cursor-pointer mx-2"></i></a>
-                </td>
-                 
+                </td> 
             </tr>
             <% }); %>
             <tbody>
@@ -90,7 +92,7 @@
             </div>
         <% } %>
 
-         <!-- Assuming you have a variable 'currentPage' and 'totalPages' from the server-side -->
+        <!-- pagination -->
         <div class="container mx-auto">
             <div class="pagination">
             <% for (let i = 1; i <= totalPages; i++) { %>
@@ -119,7 +121,7 @@
         // Determine which input field to use based on searchType
         switch (searchType) {
             case 'aid':
-                input = document.getElementById("searchAidInput");
+                input = document.getElementById("searchPidInput");
                 break;
             case 'location':
                 input = document.getElementById("searchLocationInput");
@@ -165,7 +167,7 @@
         // Determine which input field to clear based on searchType
         switch (searchType) {
             case 'aid':
-                input = document.getElementById("searchAidInput");
+                input = document.getElementById("searchPidInput");
                 break;
             case 'location':
                 input = document.getElementById("searchLocationInput");

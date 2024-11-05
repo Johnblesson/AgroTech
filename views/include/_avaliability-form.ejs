@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Avaliability Form</title>
-    <!-- 
-    - custom css link
-  -->
   <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
@@ -19,15 +16,6 @@
       <div class="container">
 
         <ul class="header-top-list">
-
-          <!-- <li>
-            <a href="mailto:info@homeverse.com" class="header-top-link">
-              <ion-icon name="mail-outline"></ion-icon>
-
-              <span>info@homeverse.com</span>
-            </a>
-          </li> -->
-
           <li>
             <a href="#" class="header-top-link">
               <ion-icon name=""></ion-icon>
@@ -79,19 +67,17 @@
   </header>
 
 <div class="formbold-main-wrapper">
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
     
-    <form action="/update-admin-availability/<%= apartment._id %>?_method=PATCH" method="POST">
+    <form action="/update-admin-availability/<%= product._id %>?_method=PATCH" method="POST">
       <div class="formbold-mb-3">
       <div>
-        <label for="aid" class="formbold-form-label"> AID </label>
+        <label for="pid" class="formbold-form-label"> PID </label>
         <input
           type="text"
-          name="aid"
-          id="aid"
-          value="<%= apartment.aid %>"
+          name="pid"
+          id="pid"
+          value="PID<%= product.pid %>"
           class="formbold-form-input"
           readonly
         />
@@ -100,15 +86,15 @@
 
     <div class="formbold-mb-3">
         <div>
-            <label for="avaliablity" class="formbold-form-label"> Availability: </label>
-            <select id="availabilty" class="formbold-form-input" name="availabilty">
+            <label for="availability" class="formbold-form-label"> Availability: </label>
+            <select id="availability" class="formbold-form-input" name="availability">
               <option value="" disabled selected hidden>Select Availability</option>
-              <option value="Avaliable">Available</option>
-              <option value="Not Availabile">Not Available</option>
+              <option value="Available">Available</option>
+              <option value="Not Available">Not Available</option>
           </select>
           </div>
     </div>
-
+    
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="phone" class="formbold-form-label"> Phone: </label>
         <div>
@@ -116,7 +102,7 @@
             type="text"
             name="phone"
             id="phone"
-            value="<%= apartment.phone %>"
+            value="<%= product.phone %>"
             class="formbold-form-input"
             readonly
           />
@@ -131,7 +117,7 @@
             type="text"
             name="location"
             id="location"
-            value="<%= apartment.location %>"
+            value="<%= product.location %>"
             class="formbold-form-input"
             readonly
           />
@@ -144,12 +130,12 @@
       type="text"
       name="createdBy"
       class="formbold-form-input"
-      value="<%= apartment.createdBy %>"
+      value="<%= product.createdBy %>"
         readonly
     />
       </div>
   
-      <button class="formbold-btn">Update Availability</button>
+      <button class="formbold-btn">Update</button>
     </form>
   </div>
 </div>

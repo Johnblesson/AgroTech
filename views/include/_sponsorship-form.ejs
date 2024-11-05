@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
   <title>Sponsorship Update</title>
     <!-- 
     - custom css link
@@ -80,19 +80,17 @@
   </header>
 
 <div class="formbold-main-wrapper">
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
     
-    <form action="/update-admin-sponsorship/<%= apartment._id %>?_method=PATCH" method="POST">
+    <form action="/update-admin-sponsorship/<%= product._id %>?_method=PATCH" method="POST">
       <div class="formbold-mb-3">
       <div>
-        <label for="aid" class="formbold-form-label"> AID </label>
+        <label for="aid" class="formbold-form-label"> PID </label>
         <input
           type="text"
           name="aid"
           id="aid"
-          value="<%= apartment.aid %>"
+          value="PID<%= product.pid %>"
           class="formbold-form-input"
           readonly
         />
@@ -117,7 +115,7 @@
             type="text"
             name="phone"
             id="phone"
-            value="<%= apartment.phone %>"
+            value="<%= product.phone %>"
             class="formbold-form-input"
             readonly
           />
@@ -132,7 +130,7 @@
             type="text"
             name="location"
             id="location"
-            value="<%= apartment.location %>"
+            value="<%= product.location %>"
             class="formbold-form-input"
             readonly
           />
@@ -145,12 +143,12 @@
       type="text"
       name="createdBy"
       class="formbold-form-input"
-      value="<%= apartment.createdBy %>"
+      value="<%= product.createdBy %>"
         readonly
     />
       </div>
   
-      <button class="formbold-btn">Update Apartment</button>
+      <button class="formbold-btn">Update</button>
     </form>
   </div>
 </div>

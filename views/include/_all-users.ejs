@@ -29,6 +29,7 @@
         <table class="fl-table">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Fullname</th>
                     <th>Username</th>
                     <th>Phone No.</th>
@@ -39,8 +40,10 @@
                 </tr>
             </thead>
             <tbody>
+                <% let counter = 1; %> <!-- Counter for numbering the products -->
                 <% data.forEach(user => { %>
                 <tr>
+                    <td class="hover"><%= counter++ %></td> <!-- Increment the counter -->
                     <td class="hover"><%= user.fullname %></td>
                     <td class="hover"><%= user.username %></td>
                     <td class="hover"><%= user.phone %></td>
@@ -66,6 +69,8 @@
                 <% }); %>
             <tbody>
         </table>
+
+        <!-- pagination -->
         <div class="container mx-auto">
             <div class="pagination">
                 <% for (let i = 1; i <= totalPages; i++) { %>

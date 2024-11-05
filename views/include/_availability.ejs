@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Availabile Apartment</title>
+    <title>Availability</title>
   <link rel="stylesheet" href="./css/users.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
@@ -118,79 +118,76 @@
     }
   </style>
 <body>
-    <h2>Apartment Availability</h2>
+    <h2> Availability</h2>
     <div class="table-wrapper">
         
-<!-- Search by AID -->
+<!-- Search by PID -->
 <div class="search-container">
-    <input type="text" id="searchAidInput" placeholder="Search by AID..." onkeyup="searchApartments('aid')">
-    <button onclick="clearSearch('aid')">Clear</button>
+    <input type="text" id="searchPidInput" placeholder="Search by PID..." onkeyup="searchProducts('pid')">
+    <button onclick="clearSearch('pid')">Clear</button>
 </div>
 
 <!-- Search by Location -->
 <div class="search-container">
-    <input type="text" id="searchLocationInput" placeholder="Search by Location..." onkeyup="searchApartments('location')">
+    <input type="text" id="searchLocationInput" placeholder="Search by Location..." onkeyup="searchProducts('location')">
     <button onclick="clearSearch('location')">Clear</button>
 </div>
 
 <!-- Search by Availability -->
 <div class="search-container">
-    <input type="text" id="searchAvailabilityInput" placeholder="Search by Availability..." onkeyup="searchApartments('availability')">
+    <input type="text" id="searchAvailabilityInput" placeholder="Search by Availability..." onkeyup="searchProducts('availability')">
     <button onclick="clearSearch('availability')">Clear</button>
 </div>
 
-        <% if (apartments.length > 0) { %> <!-- Check if there are apartments to display -->
+        <% if (products.length > 0) { %> <!-- Check if there are products to display -->
         <table class="fl-table">
             <thead>
             <tr>
-                <th>AID</th>
+                <th>#</th>
+                <th>PID</th>
                 <th>Created by</th>
-                <td class="hover">
-                    <% if (apartment.title && apartment.title.length > 20) { %>
-                        <%= apartment.title.substring(0, 20) + "..." %>
-                    <% } else { %>
-                        <%= apartment.title %>
-                    <% } %>
-                </td>
+                <th>Product Name</th>                 
                 <th>Phone No.</th>
                 <th>Location</th>
-                <th>Address</th>
+                <th>Region</th>
                 <th>Availability</th>
-                <!-- <th>Negotiation</th>
-                <th>Verification</th> -->
-                <!-- <th>Sponsored</th> -->
                 <th>Actions</th> <!-- New column for actions -->
             </tr>
             </thead>
             <tbody>
-                <% apartments.forEach(apartment => { %>
-            <tr>
-                <td class="hover"><%= 'AID' + apartment.aid %></td>
-                <td class="hover"><%= apartment.createdBy %></td>
-                <td class="hover"><%= apartment.title %></td>
-                <td class="hover"><%= apartment.phone %></td>
-                <td class="hover"><%= apartment.location %></td>
-                <td class="hover"><%= apartment.address %></td>
-                <td class="hover availabilty-blue-bg"><%= apartment.availabilty %>
-                </td>
-                <td class="hover px-6 py-4 whitespace-nowrap">
-                    <!-- Add icons with links to your delete, view, and update routes -->
-                    <a href="/edit-availability/<%= apartment._id %>"><i class="fas fa-edit text-green-500 cursor-pointer"></i></a>
-                    <a href="#" onclick="deleteApartmentById('<%= apartment._id %>')"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i></a>
-                    <a href="/apartment-detail-admin/<%= apartment._id %>"><i class="fas fa-eye text-blue-500 cursor-pointer mx-2"></i></a>
-                </td>
-                 
-            </tr>
-            <% }); %>
-            <tbody>
+                <% let counter = 1; %> <!-- Counter for numbering the products -->
+                <% products.forEach(product => { %>
+                  <tr>
+                    <td class="hover"><%= counter++ %></td> <!-- Increment the counter -->
+                    <td class="hover"><%= 'PID' + product.pid %></td>
+                    <td class="hover"><%= product.createdBy %></td>
+                    <td class="hover">
+                      <% if (product.title && product.title.length > 20) { %>
+                        <%= product.title.substring(0, 20) + "..." %>
+                      <% } else { %>
+                        <%= product.title %>
+                      <% } %>
+                    </td>
+                    <td class="hover"><%= product.phone %></td>
+                    <td class="hover"><%= product.location %></td>
+                    <td class="hover"><%= product.region %></td>
+                    <td class="hover availabilty-blue-bg"><%= product.availability %></td>
+                    <td class="hover px-6 py-4 whitespace-nowrap">
+                      <a href="/edit-availability/<%= product._id %>"><i class="fas fa-edit text-green-500 cursor-pointer"></i></a>
+                      <a href="#" onclick="deleteProductById('<%= product._id %>')"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i></a>
+                      <a href="/view-product-details/<%= product._id %>"><i class="fas fa-eye text-blue-500 cursor-pointer mx-2"></i></a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>              
         </table>
-        <% } else { %> <!-- If there are no apartments -->
+        <% } else { %> <!-- If there are no products -->
             <div class="storage-info role-pink-bg">
-                <p>No apartments available</p>
+                <p>No products available</p>
             </div>
         <% } %>
 
-         <!-- Assuming you have a variable 'currentPage' and 'totalPages' from the server-side -->
+         <!-- pagination -->
         <div class="container mx-auto">
             <div class="pagination">
             <% for (let i = 1; i <= totalPages; i++) { %>
@@ -204,22 +201,22 @@
 </body>
 <script>
     // Delete function
-    function deleteApartmentById(username) {
+    function deleteProductById(username) {
         if (confirm('Are you sure you want to delete this user?')) {
             // Redirect to the delete route with the storage ID
-            window.location.href = "/delete-apartments/" + username + "?_method=DELETE";
+            window.location.href = "/delete-products/" + username + "?_method=DELETE";
         }
     }
    </script>
 
 <script>
-    function searchApartments(searchType) {
+    function searchProducts(searchType) {
         var input, filter, table, tr, td, i, txtValue;
         
         // Determine which input field to use based on searchType
         switch (searchType) {
-            case 'aid':
-                input = document.getElementById("searchAidInput");
+            case 'pid':
+                input = document.getElementById("searchPidInput");
                 break;
             case 'location':
                 input = document.getElementById("searchLocationInput");
@@ -237,8 +234,8 @@
         for (i = 0; i < tr.length; i++) {
             // Determine which column to search based on searchType
             switch (searchType) {
-                case 'aid':
-                    td = tr[i].getElementsByTagName("td")[0]; // Assuming AID is the first column
+                case 'pid':
+                    td = tr[i].getElementsByTagName("td")[0]; // Assuming pID is the first column
                     break;
                 case 'location':
                     td = tr[i].getElementsByTagName("td")[4]; // Assuming Location is the fifth column
@@ -264,8 +261,8 @@
         
         // Determine which input field to clear based on searchType
         switch (searchType) {
-            case 'aid':
-                input = document.getElementById("searchAidInput");
+            case 'pid':
+                input = document.getElementById("searchPidInput");
                 break;
             case 'location':
                 input = document.getElementById("searchLocationInput");
@@ -276,7 +273,7 @@
         }
         
         input.value = "";
-        searchApartments(searchType);
+        searchProducts(searchType);
     }
 </script>
 </html>

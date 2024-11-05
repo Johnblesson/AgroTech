@@ -290,7 +290,6 @@ export const availability = async (req, res) => {
     const skip = (page - 1) * limit;
 
     // Fetch all storage data
-    // const allStorage = await User.find().skip(skip).limit(limit);
     const totalEntries = await Products.countDocuments();
 
     const totalPages = Math.ceil(totalEntries / limit);
@@ -322,7 +321,7 @@ export const availability = async (req, res) => {
 };
 
 
-// Get
+// Controller function to get all products
 export const editproduct = async (req, res) => {
 
     // Function to determine the time of the day
@@ -593,7 +592,6 @@ export const search = async (req, res) => {
 };
 
 
-
 // Get Upadate Sponsorship
 export const editSponsorship = async (req, res) => {
 
@@ -661,6 +659,7 @@ export const updateAdminSponsorship = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 // Update Admin Products record
 export const updateAdminAvailability = async (req, res) => {

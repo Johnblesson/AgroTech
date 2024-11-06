@@ -35,6 +35,17 @@
         </div>
 
         <div class="formbold-mb-3">
+          <label for="status" class="formbold-form-label"> Status: </label>
+          <div>
+            <select id="status" class="formbold-form-input" name="status">
+            <option value="" disabled selected hidden>Select Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+          </select>
+          </div>
+        </div>
+
+        <div class="formbold-mb-3">
             <label for="bio" class="formbold-form-label"> Bio: </label>
             <textarea rows="6" name="bio" id="bio" placeholder="Add bio..." class="formbold-form-input"><%= users.bio %></textarea>
             <!-- <div class="file-input-container">

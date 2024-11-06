@@ -38,10 +38,10 @@ router.delete('/delete-message/:id', ensureAuthenticated, isAdmin, checkSudoMidd
 router.get('/delete-message/:id', ensureAuthenticated, isAdmin, checkSudoMiddleware, deleteMessage);
 
 // Route to render the send message page for admin
-router.get('/send-message/:userId', ensureAuthenticated, isAdmin, renderSendMessagePage);
+router.get('/send-message/:userId', ensureAuthenticated, renderSendMessagePage);
 
 // Route to handle sending a message
-router.post('/send-message/:userId', ensureAuthenticated, isAdmin, sendMessageToUser);
+router.post('/send-message/:userId', ensureAuthenticated, sendMessageToUser);
 
 // Route to display user's messages
 router.get('/my-messages/:userId', ensureAuthenticated, displayUserMessages);
@@ -63,13 +63,13 @@ router.get('/message-history', ensureAuthenticated, isAdmin,  getMessageHistory 
 router.post('/admin-delete-user-message/:userId/:messageId', ensureAuthenticated, isAdmin,   adminDeleteUserMessage);
 
 // Route to render the reply page
-router.get('/reply/:messageId', renderReplyPage);
+router.get('/reply/:messageId', ensureAuthenticated, renderReplyPage);
 
 // Route to handle reply submission
-router.post('/reply/:messageId', sendReply);
+router.post('/reply/:messageId', ensureAuthenticated, sendReply);
 
 // Route to see replies for a specific message
-router.get('/see-replies/:messageId', seeReplies);
+router.get('/see-replies/:messageId', ensureAuthenticated, seeReplies);
 
 
 export default router;

@@ -10,7 +10,7 @@ import
     view, 
     getUpdateProfile, 
     viewAdminProfile,
-    getUserPostProfile
+    getUserPostProfile,
     } 
     from "../controllers/profile.js";
 import ensureAuthenticated from "../middlewares/auth.js";

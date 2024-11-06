@@ -60,7 +60,7 @@
           </nav>
           <div class="photos">
             <ul class="property-list has-scrollbar">
-              <% apartments.forEach(apt => { %>
+              <% products.forEach(apt => { %>
                 <li class="property-item">
                   <div class="property-card">
             
@@ -69,7 +69,7 @@
                         <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
                       </div>
                       <h3 class="h3 card-title">
-                        <a href="/apartment-detail/<%= apt._id %>"><%= apt.title %></a>
+                        <a href="/product-detail/<%= apt._id %>"><%= apt.title %></a>
                       </h3>
                       <p class="card-text">
                         <% if (apt.description && apt.description.length > 150) { %>

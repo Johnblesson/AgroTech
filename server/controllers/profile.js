@@ -1,6 +1,6 @@
 import User from '../models/auth.js';
 import moment from 'moment';
-import Apartments from '../models/products.js';
+import Products from '../models/products.js';
 
 export const profile = async (req, res) => {
   try {
@@ -9,9 +9,9 @@ export const profile = async (req, res) => {
 
     // Ensure photoUrl is set properly for the user
     if (!users.photo) {
-      users.photoUrl = ''; // Initialize an empty string if no photo is available
+      users.photoUrl = '';
     } else {
-      users.photoUrl = users.photo; // Set photoUrl to the value of photo
+      users.photoUrl = users.photo;
     }
 
     
@@ -22,12 +22,11 @@ export const profile = async (req, res) => {
       description: "This is the user's profile page.",
     };
     
-
     // Render the profile page with the user data
     res.render("profile", {
       locals,
-      users, // Pass the user data to the EJS template
-      user, // Pass the authenticated user data to the EJS template
+      users,
+      user,
     });
   } catch (error) {
     console.log(error);
@@ -44,18 +43,18 @@ export const profile = async (req, res) => {
      // Ensure photoUrl is set properly for each user
      users.forEach(user => {
       if (!user.photo) {
-        user.photoUrl = ''; // Initialize an empty string if no photo is available
+        user.photoUrl = '';
       } else {
-        user.photoUrl = user.photo; // Set photoUrl to the value of photo
+        user.photoUrl = user.photo;
       }
     });
 
     const user = req.isAuthenticated() ? req.user : null;
   
       res.render("profile-admin", {
-        users, // Pass the transformed users data to the EJS template
+        users,
         locals,
-        user, // Pass the authenticated user data to the EJS template
+        user,
       });
     } catch (error) {
       console.log(error);
@@ -64,6 +63,7 @@ export const profile = async (req, res) => {
   };
 
 
+  
   export const getUserPostProfile = async (req, res) => {
     const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
@@ -90,8 +90,8 @@ export const profile = async (req, res) => {
       const role = req.user.role; // Get the role of the logged-in user
       const accountant = user && user.accountant ? user.accountant : false;
       const manager = user && user.manager ? user.manager : false;
-      const isAdmin = role === 'admin'; // Define isAdmin based on the role
-      const greeting = getTimeOfDay(); // Get the greeting based on the time of day
+      const isAdmin = role === 'admin';
+      const greeting = getTimeOfDay();
 
           if (user.role === 'admin') {
             res.render('userProfileAdmin', {
@@ -102,7 +102,7 @@ export const profile = async (req, res) => {
               accountant,
               manager,
               isAdmin,
-              alert: req.query.alert, // Pass the alert message to the template
+              alert: req.query.alert,
             });
 
           } 
@@ -223,37 +223,37 @@ export const view = async (req, res) => {
   try {
     const users = await User.findOne({ _id: req.params.id });
 
-    let relativePath = ''; // Declare relativePath outside the if block
+    let relativePath = '';
   
-      // Transform the photo path to match the URL served by Express
-      if (users && users.photo) {
-        const photoPath = users.photo.replace(/\\/g, '/'); // Replace backslashes with forward slashes
-        relativePath = photoPath.replace('public/assets/', '/assets/'); // Remove "public/assets/" prefix and add "/assets/" route prefix
+    // Transform the photo path to match the URL served by Express
+    if (users && users.photo) {
+        const photoPath = users.photo.replace(/\\/g, '/');
+        relativePath = photoPath.replace('public/assets/', '/assets/');
       }
 
-          // Get the authenticated user from the request object
+    // Get the authenticated user from the request object
     const user = req.isAuthenticated() ? req.user : null;
 
     // Redirect to login if user is not authenticated
     if (!user) {
-      return res.redirect('/login'); // Redirect to login if user is not authenticated
+      return res.redirect('/login');
     }
 
     // Get the user ID from the authenticated user
     const userId = user._id;
 
-    // Find all verified apartments created by the authenticated user
-    const apartments = await Apartments.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+    // Find all verified products created by the authenticated user
+    const products = await Products.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
     const role = user.role;
 
-    // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
-    apartments.forEach(apartment => {
+    // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
+    products.forEach(product => {
       // Ensure photoUrl is set properly
-      apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
+      product.photoUrl = product.photo || '';
 
       // Format the createdAt date and calculate days ago
-      apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
-      apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
+      product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+      product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
 
     res.render("view", {
@@ -261,7 +261,7 @@ export const view = async (req, res) => {
       relativePath,
       user,
       role,
-      apartments,
+      products,
     });
   } catch (error) {
     console.log(error);
@@ -292,18 +292,18 @@ export const view = async (req, res) => {
       // Get the user ID from the authenticated user
       const userId = user._id;
   
-      // Find all verified apartments created by the authenticated user
-      const apartments = await Apartments.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+      // Find all verified products created by the authenticated user
+      const products = await Products.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
       const role = user.role;
   
-      // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
-      apartments.forEach(apartment => {
+      // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
+      products.forEach(product => {
         // Ensure photoUrl is set properly
-        apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
+        product.photoUrl = product.photo || ''; // Use empty string if no photo is available
   
         // Format the createdAt date and calculate days ago
-        apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
-        apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
+        product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+        product.daysAgo = moment().diff(moment(product.createdAt), 'days');
       });
   
       res.render("view1", {
@@ -311,7 +311,7 @@ export const view = async (req, res) => {
         relativePath,
         user,
         role,
-        apartments,
+        products,
       });
     } catch (error) {
       console.log(error);

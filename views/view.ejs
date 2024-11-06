@@ -42,7 +42,7 @@
         <div class="right__col">
           <nav>
             <ul>
-              <li><a href="">posts</a></li>
+              <li><a href="#">posts</a></li>
             <form action="/update-profile/<%= users._id %>">
             <button>Edit</button>
           </form>
@@ -50,7 +50,7 @@
 
           <div class="photos">
           <ul class="property-list has-scrollbar">
-            <% apartments.forEach(apt => { %>
+            <% products.forEach(apt => { %>
               <li class="property-item">
                 <div class="property-card">
           
@@ -89,10 +89,10 @@
                       </div>
                     </div>
                     <div class="card-footer-actions">
-                      <a href="/update-apartment/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
+                      <a href="/update-product/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
                         <ion-icon name="create-outline"></ion-icon>
                       </a>
-                      <form action="/apartments/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
+                      <form action="/products/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
                         <button type="submit" class="card-footer-actions-btn" title="Delete">
                           <ion-icon name="trash-outline"></ion-icon>
                         </button>

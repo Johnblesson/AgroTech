@@ -1,50 +1,81 @@
 <style>
- /* User Profile Container Styling */
-.user-profile-container {
-    max-width: 800px;
-    width: 100%;
-    margin: 20px auto; /* Centers the container */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Profile Information Styling */
-.profile-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-}
-
-.profile-details {
-    color: #34495e;
-}
-
-.profile-details p {
-    margin: 5px 0; /* Adds some space between paragraphs */
-}
-
-</style>
-
-<div class="user-profile-container">
-    <h1><%= user.fullname %>'s Profile</h1>
-    <div class="profile-info">
-        <img src="<%= user.photo %>" alt="<%= user.fullname %>'s profile picture" class="profile-picture">
-        <div class="profile-details">
-            <p><strong>Username:</strong> <%= user.username %></p>
-            <p><strong>Email:</strong> <%= user.email %></p>
-            <p><strong>Phone:</strong> <%= user.phone %></p>
-            <p><strong>Bio:</strong> <%= user.bio ? user.bio : 'No bio available' %></p>
-            <p><strong>Joined:</strong> <%= user.createdAt.toLocaleDateString() %></p>
+    /* User Profile Container Styling */
+    .user-profile-container {
+        max-width: 800px;
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Profile Information Styling */
+    .profile-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 20px;
+        object-fit: cover;
+    }
+    
+    .profile-details {
+        color: #34495e;
+    }
+    
+    .profile-details p {
+        margin: 5px 0;
+    }
+    
+    /* Message button */
+    .message-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px; /* Spacing from other profile details */
+      display: inline-block;
+    }
+    
+    .message-btn:hover {
+      background-color: #0056b3;
+    }
+    
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+      .message-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+    </style>
+    
+    <!-- HTML Content -->
+    <div class="user-profile-container">
+        <h1><%= user.fullname %>'s Profile</h1>
+        <div class="profile-info">
+            <img src="<%= user.photo %>" alt="<%= user.fullname %>'s profile picture" class="profile-picture">
+            <div class="profile-details">
+                <p><strong>Username:</strong> <%= user.username %></p>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Phone:</strong> <%= user.phone %></p>
+                <p><strong>Bio:</strong> <%= user.bio ? user.bio : 'No bio available' %></p>
+                <p><strong>Joined:</strong> <%= user.createdAt.toLocaleDateString() %></p>
+    
+                <!-- Message Button within profile-details -->
+                <form action="/send-message/<%= user._id %>">
+                    <button class="message-btn">Message</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    <!-- End of User Profile Container -->    

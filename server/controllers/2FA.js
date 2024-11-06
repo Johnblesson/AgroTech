@@ -7,7 +7,6 @@ import { checkUserMessages } from '../controllers/contact.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 // Generate a QR code and set up 2FA for the user
 export const setup2FA = async (req, res) => {
     try {

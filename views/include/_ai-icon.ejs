@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movable AI Icon Button</title>
+  <style>
+    /* Basic styling for the button */
+    #aiButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #00796b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: move;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+      z-index: 1000;
+      font-size: 24px;
+    }
+
+    #aiButton:hover {
+      background-color: #004d40;
+    }
+
+    /* Center-right position for mobile screens */
+    @media (max-width: 480px) {
+      #aiButton {
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Movable AI Button -->
+<div id="aiButton"> <a href="/ask-ai">
+  <span id="aiIcon">🤖</span> <!-- Emoji used as an example icon -->
+</a>
+</div>
+
+<script>
+  // JavaScript to make the button draggable on both desktop and mobile
+  const aiButton = document.getElementById('aiButton');
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  // Function to handle the start of dragging
+  function startDrag(e) {
+    isDragging = true;
+    const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
+    offsetX = clientX - aiButton.getBoundingClientRect().left;
+    offsetY = clientY - aiButton.getBoundingClientRect().top;
+    aiButton.style.transition = 'none'; // Disable transition during drag
+  }
+
+  // Function to handle dragging movement
+  function dragMove(e) {
+    if (isDragging) {
+      const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
+      aiButton.style.left = `${clientX - offsetX}px`;
+      aiButton.style.top = `${clientY - offsetY}px`;
+    }
+  }
+
+  // Function to end dragging
+  function endDrag() {
+    isDragging = false;
+    aiButton.style.transition = 'background-color 0.3s'; // Re-enable transition
+  }
+
+  // Event listeners for mouse
+  aiButton.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('mouseup', endDrag);
+
+  // Event listeners for touch
+  aiButton.addEventListener('touchstart', startDrag);
+  document.addEventListener('touchmove', dragMove);
+  document.addEventListener('touchend', endDrag);
+</script>
+
+</body>
+</html>

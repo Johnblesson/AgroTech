@@ -1,42 +1,94 @@
 .ask-ai-container {
-    width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#chatBox {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.user-message, .ai-message {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.user-message {
+  text-align: left;
+  background-color: #e1f5fe;
+}
+
+.ai-message {
+  text-align: left;
+  background-color: #f1f8e9;
+}
+
+#askForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+#userMessage {
+  width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.ask-button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ask-button:hover {
+  background-color: #004d40;
+}
+
+/* Media Queries */
+
+/* For tablets and small screens */
+@media (max-width: 768px) {
+  .ask-ai-container {
+    width: 70%;
+    padding: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
-  
-  #chatBox {
-    max-height: 500px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-  }
-  
-  .user-message, .ai-message {
-    margin: 10px 0;
-  }
-  
-  .user-message {
-    text-align: left;
-  }
-  
-  .ai-message {
-    text-align: right;
-  }
-  
-  #askForm {
-    display: flex;
-    justify-content: space-between;
-  }
-  
   #userMessage {
-    width: 80%;
-    padding: 10px;
+    width: 75%;
   }
-  
-  button {
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .ask-ai-container {
+    width: 90%;
     padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
-  
+  #userMessage {
+    width: 70%;
+  }
+  .ask-button {
+    padding: 8px;
+  }
+}

@@ -7,7 +7,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-
 export const getAIResponse = async (req, res) => {
     try {
       const userMessage = req.body.message;
@@ -53,7 +52,7 @@ export const getAskAi = async (req, res) => {
   
       // Determine the time of the day
       const greeting = getTimeOfDay();
-  
+      const isAdmin = role === 'admin'; // Define isAdmin based on the role
       // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
       const sudo = user && user.sudo ? user.sudo : false;
       const accountant = user && user.accountant ? user.accountant : false;
@@ -66,6 +65,7 @@ export const getAskAi = async (req, res) => {
         sudo,
         accountant,
         role,
+        isAdmin,
         manager,
         alert: req.query.alert,
         conversation: [], // Initialize with an empty conversation array

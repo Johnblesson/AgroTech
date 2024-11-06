@@ -61,18 +61,18 @@
     
     <!-- HTML Content -->
     <div class="user-profile-container">
-        <h1><%= user.fullname %>'s Profile</h1>
+        <h1><%= users.fullname %>'s Profile</h1>
         <div class="profile-info">
-            <img src="<%= user.photo %>" alt="<%= user.fullname %>'s profile picture" class="profile-picture">
+            <img src="<%= users.photo %>" alt="<%= users.fullname %>'s profile picture" class="profile-picture">
             <div class="profile-details">
-                <p><strong>Username:</strong> <%= user.username %></p>
-                <p><strong>Email:</strong> <%= user.email %></p>
-                <p><strong>Phone:</strong> <%= user.phone %></p>
-                <p><strong>Bio:</strong> <%= user.bio ? user.bio : 'No bio available' %></p>
-                <p><strong>Joined:</strong> <%= user.createdAt.toLocaleDateString() %></p>
+                <p><strong>Username:</strong> <%= users.username %></p>
+                <p><strong>Email:</strong> <%= users.email %></p>
+                <p><strong>Phone:</strong> <%= users.phone %></p>
+                <p><strong>Bio:</strong> <%= users.bio ? users.bio : 'No bio available' %></p>
+                <p><strong>Joined:</strong> <%= users.createdAt.toLocaleDateString() %></p>
     
                 <!-- Message Button within profile-details -->
-                <form action="/send-message/<%= user._id %>">
+                <form action="/send-message/<%= users._id %>">
                     <button class="message-btn">Message</button>
                 </form>
             </div>

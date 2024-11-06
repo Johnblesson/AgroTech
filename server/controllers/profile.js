@@ -78,7 +78,9 @@ export const profile = async (req, res) => {
   };
     try {
         const userId = req.params.id;
-        const user = await User.findById(userId).populate('communities'); // Populate communities
+        const users = await User.findById(userId).populate('communities'); // Populate communities
+        
+        const user = req.isAuthenticated() ? req.user : null;
 
         if (!user) {
             return res.render('error', { errorMessage: 'User not found' });
@@ -96,6 +98,7 @@ export const profile = async (req, res) => {
           if (user.role === 'admin') {
             res.render('userProfileAdmin', {
               user,
+              users,
               role,
               greeting,
               sudo,
@@ -109,6 +112,7 @@ export const profile = async (req, res) => {
           else if (user.role === 'user') {
             res.render('userProfile', {
               user,
+              users,
               role,
               greeting,
               sudo,

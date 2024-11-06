@@ -23,7 +23,7 @@ a {
 
 .header__wrapper header {
   width: 100%;
-  background: url("/images/bg.jpeg") no-repeat 50% 20% / cover;
+  background: url("/images/qcell.jpg") no-repeat 60% 30% / cover;
   min-height: calc(100px + 15vw);
 }
 

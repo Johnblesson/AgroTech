@@ -7,15 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    />
-    <!-- 
-    - favicon
-    -->
-  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
-    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/css/profile.css" />
   </head>
   <body>
@@ -24,15 +17,15 @@
       <div class="cols__container">
         <div class="left__col">
 
-<div class="img__container">
-    <% if (users.photo) { %>
-        <img src="<%= relativePath %>" alt="profile" />
-    <% } else { %>
-        <!-- Default image placeholder if photo doesn't exist -->
-        <img src="/path/to/default/image.jpg" alt="profile" />
-    <% } %>
-    <span></span>
-</div>
+        <div class="img__container">
+            <% if (users.photo) { %>
+                <img src="<%= relativePath %>" alt="profile" />
+            <% } else { %>
+                <!-- Default image placeholder if photo doesn't exist -->
+                <img src="/images/qcell.jpg" alt="profile" />
+            <% } %>
+            <span></span>
+        </div>
 
         <h2><%= users.fullname %></h2>
         <p><%= '@' + users.username %></p>

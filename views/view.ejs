@@ -47,64 +47,6 @@
             <button>Edit</button>
           </form>
           </nav>
-
-          <div class="photos">
-          <ul class="property-list has-scrollbar">
-            <% products.forEach(apt => { %>
-              <li class="property-item">
-                <div class="property-card">
-          
-                  <div class="card-content">
-                    <div class="card-price">
-                      <strong><%= apt.currency %> <%= apt.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></strong><%= apt.duration %> <pre><%= apt.negotiation %></pre>
-                    </div>
-                    <h3 class="h3 card-title">
-                      <a href="/product-detail/<%= apt._id %>"><%= apt.title %></a>
-                    </h3>
-                    <p class="card-text">
-                      <% if (apt.description && apt.description.length > 150) { %>
-                        <%= apt.description.substring(0, 150) + "..." %>
-                      <% } else { %>
-                        <%= apt.description %>
-                      <% } %>
-                    </p>
-                    <ul class="card-list">
-                      <li class="card-item">
-                        <strong>Product ID (PID): PID<%= apt.pid %></strong>
-                        <a href="/product-detail/<%= apt._id %>">
-                          <span>View Details</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="card-footer">
-                    <div class="card-author">
-                      <div>
-                        <p class="author-name"> Created by:
-                          <a href="#"><%= apt.createdBy %></a>
-                        </p>
-                        <p class="author-title">
-                          Created At: <%= apt.formattedCreatedAt %> (<%= apt.daysAgo %> days ago)
-                        </p>
-                      </div>
-                    </div>
-                    <div class="card-footer-actions">
-                      <a href="/update-product/<%= apt._id %>" class="card-footer-actions-btn" title="Edit">
-                        <ion-icon name="create-outline"></ion-icon>
-                      </a>
-                      <form action="/products/<%= apt._id %>?_method=DELETE" method="POST" style="display:inline;">
-                        <button type="submit" class="card-footer-actions-btn" title="Delete">
-                          <ion-icon name="trash-outline"></ion-icon>
-                        </button>
-                      </form>
-                    </div>
-                    
-                  </div>
-                </div>
-              </li>
-            <% }); %>
-          </ul>
-        </div>
       </div>
     </div>
     <script>

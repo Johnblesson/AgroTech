@@ -9,6 +9,11 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+    .user-profile-container h1 {
+        font-size: 20px;
+        text-align: center;
+    }
     
     /* Profile Information Styling */
     .profile-info {
@@ -22,11 +27,13 @@
         height: 100px;
         border-radius: 50%;
         margin-right: 20px;
+        margin-top: -100px;
         object-fit: cover;
     }
     
     .profile-details {
         color: #34495e;
+        font-size: 14px;
     }
     
     .profile-details p {
@@ -65,9 +72,11 @@
         <div class="profile-info">
             <img src="<%= users.photo %>" alt="<%= users.fullname %>'s profile picture" class="profile-picture">
             <div class="profile-details">
-                <p><strong>Username:</strong> <%= users.username %></p>
+                <p><strong>Username:</strong> @<%= users.username %></p>
+                <p><strong>Fullname:</strong> <%= users.fullname %></p>
                 <p><strong>Email:</strong> <%= users.email %></p>
                 <p><strong>Phone:</strong> <%= users.phone %></p>
+                <p><strong>Status:</strong> <%= users.status %></p>
                 <p><strong>Bio:</strong> <%= users.bio ? users.bio : 'No bio available' %></p>
                 <p><strong>Joined:</strong> <%= users.createdAt.toLocaleDateString() %></p>
     

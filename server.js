@@ -41,7 +41,6 @@ app.use(flash());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.set('trust proxy', true)
-// Enable Gzip compression
 app.use(compression());
 
 // Pass io to routes
@@ -66,14 +65,14 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets"), {
       res.set('Content-Type', 'text/css');
     }
   }
-})); // Serve static files from the 'public/assets' directory
+}));
 
 // Add express-session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 36000000 } // Session expiry time
+  cookie: { maxAge: 36000000 }
 }))
 
 // Make flash messages available in all templates

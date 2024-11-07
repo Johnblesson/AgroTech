@@ -125,3 +125,13 @@
         }
     }
     
+
+    // JavaScript for dropdown functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const navOpenBtn = document.querySelector('[data-nav-open-btn]');
+        const navbar = document.querySelector('[data-navbar]');
+  
+        navOpenBtn.addEventListener('click', () => {
+          navbar.classList.toggle('active');
+        });
+      });

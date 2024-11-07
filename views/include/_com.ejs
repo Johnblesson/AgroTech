@@ -1,38 +1,8 @@
 <link rel="stylesheet" href="./css/community.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    .user-comment-photo {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
 
-    /* .delete-post-btn {
-    background: none;
-    border: none;
-    color: #ff0000;
-    cursor: pointer;
-    margin-left: 10px;
-    }
-    .delete-post-btn:hover {
-        color: #cc0000;
-    } */
-
-    .delete-post-btn {
-    background: none;
-    border: none;
-    color: #ff0000;
-    cursor: pointer;
-    margin-left: 10px;
-    font-size: 0.8em; /* Reduce icon size */
-    }
-
-    .delete-post-btn:hover {
-        color: #cc0000;
-    }
-
-
+  </style>
 </style>
 <div class="community-container">
     <h1>AgroTech Community</h1>
@@ -47,7 +17,7 @@
 
     <!-- Display Posts -->
     <% posts.forEach(post => { %>
-        <div class="post-card"> <!-- Changed from 'post' to 'post-card' for clarity -->
+        <div class="post-card">
             <div class="post-header">
                 <img src="<%= post.createdBy.photo %>" alt="User Photo">
                 <a href="/user/<%= post.createdBy._id %>"><strong><%= post.createdBy.fullname %></strong></a>
@@ -123,6 +93,16 @@
         <% } %>
     </div>
 </div>
+<!-- JavaScript for dropdown functionality
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navOpenBtn = document.querySelector('[data-nav-open-btn]');
+      const navbar = document.querySelector('[data-navbar]');
 
+      navOpenBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+    });
+  </script> -->
 <script src="/socket.io/socket.io.js"></script>
 <script src="./js/community.js"></script>

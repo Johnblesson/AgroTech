@@ -34,7 +34,7 @@ Key Features:
 Interactive Chat for Agricultural Queries
 The platform includes an Ask-AI feature powered by an AI chatbot that provides real-time answers to agricultural questions.
 
-<img src="public/images/agroTech-AskAI.png" alt="AgroTech Ask-AI">
+   <img src="public/images/agroTech-AskAI.png" alt="AgroTech Ask-AI">
 
 # Key Benefits:
 - Farmers and users can ask questions related to farming, crop management, pest control, and more.

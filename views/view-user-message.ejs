@@ -25,7 +25,7 @@
             <i class="fas fa-trash-alt"></i>
           </button>
         </form>
-        <strong>From:</strong> <%= message.senderId ? (message.senderId.fullname || message.senderId.username) : 'Unknown' %> (Administrator)<br>
+        <strong>From:</strong> <%= message.senderId ? (message.senderId.fullname || message.senderId.username) : 'Unknown' %><br>
         <strong>Date:</strong> <%= new Date(message.date).toLocaleString() %>
       </div>
       <div class="message-content">

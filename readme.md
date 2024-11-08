@@ -82,26 +82,26 @@ Create a .env file in the root directory and add the following lines. These are 
 PORT=5000
 
 # Database Configuration
-DATABSE_URL=mongodb://0.0.0.0:27017/AgroTechSl
+- DATABSE_URL=mongodb://0.0.0.0:27017/AgroTechSl
 
 # API Keys
-SESSION_SECRET=your-secret-key
+- SESSION_SECRET=your-secret-key
 
 # Authentication
-JWT_SECRET=your-jwt-secret
+- JWT_SECRET=your-jwt-secret
 
 # AWS S3 Configuration
-AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
-AWS_ACCESS_KEY_ID=your-aws-access-key-id
-AWS_REGION=your-aws-region
-AWS_S3_BUCKET_NAME=agrotech-sl
+- AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+- AWS_ACCESS_KEY_ID=your-aws-access-key-id
+- AWS_REGION=your-aws-region
+- AWS_S3_BUCKET_NAME=agrotech-sl
 
 # Geolocation Configuration
-GEOLOCATION_API_URL=http://api.ipapi.com
-API_KEY=your-api-key
+- GEOLOCATION_API_URL=http://api.ipapi.com
+- API_KEY=your-api-key
 
 # OpenAI configuration
-OPENAI_API_KEY=your-api-key
+- OPENAI_API_KEY=your-api-key
 
 4. Run the Application
 

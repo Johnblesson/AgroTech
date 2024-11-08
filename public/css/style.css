@@ -448,8 +448,8 @@ button, a { transition: var(--transition); }
   /* Hero banner image styling */
   .hero-banner img {
     width: 100%;
-    border-radius: 15px; /* Adjust this value for more or less rounding */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for depth */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
 

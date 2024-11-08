@@ -1,4 +1,4 @@
-AgroTech SL: Enhancing Agriculture in Sierra Leone
+## AgroTech SL: Enhancing Agriculture in Sierra Leone
 
 <img src="public/images/agrotech.png" alt="AgroTech UI">
 <a href="https://agrotechsl.onrender.com/">Demo</a>
@@ -6,7 +6,7 @@ AgroTech SL: Enhancing Agriculture in Sierra Leone
 Overview:
 AgroTech SL is a web-based application designed to revolutionize the agricultural landscape in Sierra Leone by connecting farmers, agricultural entrepreneurs, and consumers. The platform aims to improve agricultural productivity, facilitate knowledge sharing, and promote e-commerce in the agricultural sector.
 
-Key Features:
+# Key Features:
 
 1. E-Commerce Marketplace:
    - Product Listings: Farmers can create profiles to showcase their products, including fresh produce, seeds, and agricultural tools. Each listing will include descriptions, prices, and availability.

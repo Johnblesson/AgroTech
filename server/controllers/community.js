@@ -1,5 +1,5 @@
-import Community from '../models/community.js';
-import User from '../models/auth.js';
+import Community from '../models/community.js'; // Community model
+import User from '../models/auth.js'; // User model
 
 // Create a post
 export const createPost = async (req, res) => {

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define the schema for the boost model
 const boostSchema = new mongoose.Schema({
     title: String,
     phone: String,
@@ -26,6 +27,7 @@ const boostSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+// Create the boost model
 const Boost = mongoose.model('boosts', boostSchema);
 
 export default Boost;

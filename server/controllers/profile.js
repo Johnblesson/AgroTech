@@ -1,7 +1,8 @@
-import User from '../models/auth.js';
-import moment from 'moment';
-import Products from '../models/products.js';
+import User from '../models/auth.js'; // User model
+import moment from 'moment'; // Date formatting library
+import Products from '../models/products.js'; // Products model
 
+// Get user's profile page
 export const profile = async (req, res) => {
   try {
     // Fetch a single user by ID
@@ -35,7 +36,7 @@ export const profile = async (req, res) => {
 };
 
 
-
+// Get user's profile page
   export const adminprofile = async (req, res) => {
     try {
       const users = await User.findOne({ _id: req.params.id });
@@ -63,7 +64,7 @@ export const profile = async (req, res) => {
   };
 
 
-  
+  // Get user's profile page
   export const getUserPostProfile = async (req, res) => {
     const getTimeOfDay = () => {
     const currentHour = new Date().getHours();

@@ -1,6 +1,6 @@
-// models/Community.js
 import mongoose from 'mongoose';
 
+// Define the schema for the community model
 const communitySchema = new mongoose.Schema({
   post: {
     type: String,
@@ -30,5 +30,6 @@ const communitySchema = new mongoose.Schema({
   ],
 });
 
+// Create the community model
 const Community = mongoose.model('Community', communitySchema);
 export default Community;

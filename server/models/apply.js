@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define the schema for the application model
 const applySchema = new mongoose.Schema({
     title: String,
     phone: String,
@@ -19,6 +20,7 @@ const applySchema = new mongoose.Schema({
     timestamps: true,
 });
 
+// Create the application model
 const Application = mongoose.model('applications', applySchema);
 
 export default Application;

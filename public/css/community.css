@@ -239,7 +239,7 @@ font-size: 0.8em; /* Reduce icon size */
   
         .navbar-link {
           padding: 10px 15px;
-          color: #fff;
+          /* color: #fff; */
         }
   
         .header-bottom-actions-btn {

@@ -1,8 +1,8 @@
-import Products from '../models/products.js';
-import User from '../models/auth.js';
-import Notification from '../models/notification.js';
-import moment from 'moment';
-import mongoose from 'mongoose';
+import Products from '../models/products.js'; // Import the Products model
+import User from '../models/auth.js'; // Import the User model
+import Notification from '../models/notification.js'; // Import the Notification model
+import moment from 'moment'; // Import the moment library for date formatting
+import mongoose from 'mongoose'; // Import mongoose for ObjectId validation
 import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new product

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Define the schema for the ipaddress model
 const { Schema } = mongoose;
 
 const ipAddressSchema = new Schema({
@@ -42,6 +43,7 @@ const ipAddressSchema = new Schema({
     },
 });
 
+// Create the ipaddress model
 const IPAddress = mongoose.model('IPAddress', ipAddressSchema);
 
 export default IPAddress;

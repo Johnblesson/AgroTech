@@ -1,6 +1,6 @@
-import Products from '../models/products.js';
-import User from '../models/auth.js';
-import moment from 'moment';
+import Products from '../models/products.js'; // Products model
+import User from '../models/auth.js'; // User model
+import moment from 'moment'; // Date formatting library
 
 
 // Controller function to render the my-post page

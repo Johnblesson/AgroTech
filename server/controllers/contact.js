@@ -1,6 +1,6 @@
-import Contacts from "../models/contact.js";
-import User from "../models/auth.js";
-import moment from "moment";
+import Contacts from "../models/contact.js"; // Contact model
+import User from "../models/auth.js"; // User model
+import moment from "moment"; // Date formatting library
 
 // Controller function to create a new Contacts
 export const createContacts = async (req, res) => {
@@ -240,11 +240,10 @@ export const sendMessageToUser = async (req, res) => {
 
 // Controller to display user messages
 export const displayUserMessages = async (req, res) => {
-  const { userId } = req.params; // Retrieve userId from the route parameter
+  const { userId } = req.params;
   const user = req.isAuthenticated() ? req.user : null;
 
   try {
-    // Ensure userId is valid
     if (!userId) {
       return res.status(400).send('User ID is required');
     }
@@ -272,7 +271,7 @@ export const displayUserMessages = async (req, res) => {
       user: userWithMessages 
     });
   } catch (error) {
-    console.error('Error fetching user messages:', error); // Log detailed error
+    console.error('Error fetching user messages:', error);
     res.status(500).send('An error occurred');
   }
 };

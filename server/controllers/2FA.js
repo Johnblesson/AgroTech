@@ -1,10 +1,10 @@
-import speakeasy from 'speakeasy';
-import QRCode from 'qrcode';
-import User from '../models/auth.js';
-import jwt from 'jsonwebtoken';
+import speakeasy from 'speakeasy'; // 2FA library
+import QRCode from 'qrcode'; // QR code generator
+import User from '../models/auth.js'; // User model
+import jwt from 'jsonwebtoken'; // JWT library
 import { checkUserMessages } from '../controllers/contact.js'
 // import passport from 'passport';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; // Environment variable library
 dotenv.config();
 
 // Generate a QR code and set up 2FA for the user

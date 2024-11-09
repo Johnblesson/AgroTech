@@ -1,9 +1,9 @@
-import Products from "../models/products.js";
-import User from "../models/auth.js";
-import Applications from "../models/apply.js";
-import Agents from "../models/agents.js";
-import PageViews from "../models/pageViews.js";
-import IPAddress from "../models/ipaddress.js";
+import Products from "../models/products.js"; // Products model
+import User from "../models/auth.js"; // User model
+import Applications from "../models/apply.js"; // Applications model
+import Agents from "../models/agents.js"; // Agents model
+import PageViews from "../models/pageViews.js"; // PageViews model
+import IPAddress from "../models/ipaddress.js"; // IPAddress model
 
 export const mainAdmin = async (req, res) => {
     try {

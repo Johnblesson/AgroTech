@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define the schema for the agents model
 const agentSchema = new mongoose.Schema({
     fullname: String,
     phone: String,
@@ -15,6 +16,7 @@ const agentSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+// Create the agents model
 const Agents = mongoose.model('agents-program', agentSchema);
 
 export default Agents;

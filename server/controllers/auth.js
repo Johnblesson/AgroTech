@@ -1,17 +1,17 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import express from 'express'; 
+import mongoose from 'mongoose'; // Import mongoose to interact with MongoDB
 const app = express();
-import User from '../models/auth.js';
-import { body, validationResult } from 'express-validator';
+import User from '../models/auth.js'; // Import the User model
+import { body, validationResult } from 'express-validator'; // Import the express-validator functions
 // import passport from 'passport';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import useragent from 'useragent';
+import bcrypt from 'bcrypt'; // For password hashing
+import jwt from 'jsonwebtoken'; // For generating JWTs
+import useragent from 'useragent'; // For device detection
 import geoip from 'geoip-lite'; // For country detection
-import passport from '../passport/passport-config.js';
-import { activeSessions } from '../passport/passport-config.js'
-import { checkUserMessages } from '../controllers/contact.js'
-import dotenv from 'dotenv';
+import passport from '../passport/passport-config.js'; // Import the passport configuration
+import { activeSessions } from '../passport/passport-config.js' // Import the activeSessions Set
+import { checkUserMessages } from '../controllers/contact.js' // Import the checkUserMessages function
+import dotenv from 'dotenv'; // Environment variable library
 dotenv.config();
 
 // Sign Up Controller
@@ -68,7 +68,7 @@ export const signUp = async (req, res) => {
       phone: req.body.phone,
       bio: req.body.bio,
       password: hashedPassword,
-      photo: req.file.location,  // Store the S3 file location
+      photo: req.file.location, // Store the S3 file location
       role: req.body.role,
       status: req.body.status,
       sudo: req.body.sudo,

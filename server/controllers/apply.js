@@ -1,6 +1,6 @@
-import Products from "../models/products.js";
-import Application from "../models/apply.js";
-import Boost from "../models/boost.js";
+import Products from "../models/products.js"; // Products model
+import Application from "../models/apply.js"; // Application model
+import Boost from "../models/boost.js"; // Boost model
 import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new application

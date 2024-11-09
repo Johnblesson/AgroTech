@@ -1,5 +1,5 @@
 import OpenAI from 'openai'; // Correct import for the latest version
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; // Environment variable library
 
 dotenv.config();
 

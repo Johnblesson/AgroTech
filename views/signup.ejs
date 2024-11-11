@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,69 +13,7 @@
     <meta name="description" content="AgroTech Platform supports Sierra Leonean farmers with resources to enhance their farming practices. Join us to connect with markets, access training, and manage crops effectively.">
     <meta name="keywords" content="agriculture, agrotech, farming resources, crop management, Sierra Leone farmers, agricultural platform, farm marketplace, agricultural training, crop disease identification, farming community, sustainable farming, weather updates for farmers, farm budgeting, local produce, farming tools, market access for farmers">
     <meta name="author" content="John Blesson Rowe">
-    <style>
-        a {
-            text-decoration: none;
-            color: #151cea;
-        }
-        a:hover {
-            color: #000;
-            text-decoration: none;
-        }   
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-bottom: 1em;
-            font-size: 1em;
-        }
 
-        .file-input-container {
-            position: relative;
-            width: 250px;
-        }
-        .file-input {
-            width: 100%;
-            height: 40px;
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;
-            cursor: pointer;
-        }
-        .file-input-label {
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-            color: #999;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-        .file-input-container input[type="file"]:focus + .file-input-label {
-            outline: 2px solid #3b82f6;
-        }
-        .submit-button {
-            margin-top: 60px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3b82f6;
-            color: #fff;
-            cursor: pointer;
-        }
-        .submit-button:hover {
-            background-color: #2563eb;
-        }
-        .hall {
-            font: 0.6em sans-serif;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -89,29 +28,56 @@
                         <% }); %>
                     </div>
                 <% } %>
-
-                <input type="text" name="fullname" placeholder="Full Name *" required>
-                <input type="text" name="username" placeholder="Username *" required>
-                <input type="email" name="email" placeholder="Email (Optional)">
-                <input type="text" name="phone" placeholder="Phone Number *" required>
+            
+                <div>
+                    <label for="fullname">Full Name<span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+            
+                <div>
+                    <label for="username">Username<span class="required">*</span></label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+            
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
+                </div>
+            
+                <div>
+                    <label for="phone">Phone Number<span class="required">*</span></label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+            
                 <div class="password-wrapper">
-                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <label for="password">Password<span class="required">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     <i class="toggle-password fas fa-eye-slash"></i>
                 </div>
-
+            
                 <div class="file-input-container">
+                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
                     <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
-                    <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i>  Upload profile photo *</label>
+                    <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i> Upload profile photo</label>
                 </div>
-
+                
+            
                 <button type="submit" class="submit-button">Submit</button>
-
+            
                 <p class="hall">
                     Check out the <a href="/registration-process-statement">Registration Statement Process</a>
                 </p>
-
+            
                 <p class="hall">Already have an account? <a href="/login">Login</a></p>
+            
+                <p class="hall">
+                    By clicking 'Submit' above, you acknowledge that you have read and agree to AgroTech SL's 
+                    <a href="/terms-and-conditions">Terms and Conditions</a>, 
+                    <a href="/services-fee-agreement">Service Fee Agreement</a> 
+                    and <a href="/privacy-policy">Privacy Policy</a>.
+                </p>
             </form>
+            
             <p class="hall">
                 By clicking 'Submit' above, you acknowledge that you have read and agree to AgroTech SL's 
                 <a href="/terms-and-conditions">Terms and Conditions</a>, 

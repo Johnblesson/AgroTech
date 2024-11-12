@@ -103,6 +103,10 @@ PORT=5000
 ## OpenAI configuration
 - OPENAI_API_KEY=your-api-key
 
+## Weather API Key
+WEATHER_API_KEY=your_weather_api_key
+WEATHER_API_URL=https://api.openweathermap.org
+
 4. Run the Application
 
 Development Mode

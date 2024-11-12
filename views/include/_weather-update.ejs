@@ -95,34 +95,48 @@
 </div>
 
 <script>
-    const apiKey = 'ade35581dc50ae6aba7ea83384d17e99'; // Your API Key
-    const getWeatherButton = document.getElementById('getWeather');
-    const weatherResult = document.getElementById('weatherResult');
-    const locationName = document.getElementById('locationName');
-    const weatherDescription = document.getElementById('weatherDescription');
-    const temperature = document.getElementById('temperature');
-    const humidity = document.getElementById('humidity');
-    const windSpeed = document.getElementById('windSpeed');
+    let apiKey;
 
-    getWeatherButton.addEventListener('click', () => {
-        const region = document.getElementById('region').value;
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${region},SL&appid=${apiKey}&units=metric`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Weather data not available');
-                }
-                return response.json();
-            })
-            .then(data => {
-                locationName.textContent = data.name;
-                weatherDescription.textContent = `Weather: ${data.weather[0].description}`;
-                temperature.textContent = `Temperature: ${data.main.temp} °C`;
-                humidity.textContent = `Humidity: ${data.main.humidity}%`;
-                windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
-                weatherResult.style.display = 'block';
-            })
-            .catch(error => {
-                alert(error.message);
-            });
+fetch('/getWeatherKey')
+    .then(response => response.json())
+    .then(data => {
+        apiKey = data.apiKey;
+    })
+    .catch(error => {
+        console.error('Failed to load API key:', error);
     });
+
+const getWeatherButton = document.getElementById('getWeather');
+const weatherResult = document.getElementById('weatherResult');
+const locationName = document.getElementById('locationName');
+const weatherDescription = document.getElementById('weatherDescription');
+const temperature = document.getElementById('temperature');
+const humidity = document.getElementById('humidity');
+const windSpeed = document.getElementById('windSpeed');
+
+getWeatherButton.addEventListener('click', () => {
+    const region = document.getElementById('region').value;
+    if (!apiKey) {
+        alert('API key is not loaded yet. Please try again later.');
+        return;
+    }
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${region},SL&appid=${apiKey}&units=metric`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Weather data not available');
+            }
+            return response.json();
+        })
+        .then(data => {
+            locationName.textContent = data.name;
+            weatherDescription.textContent = `Weather: ${data.weather[0].description}`;
+            temperature.textContent = `Temperature: ${data.main.temp} °C`;
+            humidity.textContent = `Humidity: ${data.main.humidity}%`;
+            windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            weatherResult.style.display = 'block';
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+});
 </script>

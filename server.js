@@ -97,6 +97,11 @@ io.on('connection', (socket) => {
   });
 });
 
+// Get weather API key
+app.get('/getWeatherKey', (req, res) => {
+  res.json({ apiKey: process.env.WEATHER_API_KEY });
+});
+
 // Routes
 app.use(viewRoutes);
 app.use(authRoutes);

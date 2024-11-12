@@ -22,6 +22,11 @@
       display: block;
     }
 
+    .alert.show a {
+      color: #fff;
+      text-decoration: none;
+    }
+
     /* Header actions styling */
     .header-bottom-actions {
       display: flex;
@@ -113,7 +118,7 @@
     <!-- Alert Container -->
     <% if (alert) { %>
       <div class="alert show">
-        <%= alert %>
+        <a href="/my-messages/<%= user._id %>"><%= alert %></a>
       </div>
     <% } %>
 

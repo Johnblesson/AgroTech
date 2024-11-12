@@ -1,47 +1,47 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from "dotenv";
-import multer from "multer";
-import ejs from "ejs";
-import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import session from 'express-session';
-import flash from 'connect-flash';
-import cookieParser from 'cookie-parser';
-import methodOverride from 'method-override';
-import passport from './server/passport/passport-config.js';
-import connectDB from './server/database/connection.js';
-import viewRoutes from "./server/routes/viewRoutes.js";
-import authRoutes from "./server/routes/auth.js";
-import homepageRoutes from "./server/routes/homepage.js";
-import profileRoutes from "./server/routes/profile.js";
-import apartmentsRoutes from "./server/routes/products.js";
-import applyRoute from "./server/routes/apply.js";
-import adminRoutes from "./server/routes/admin.js";
-import contactRoutes from "./server/routes/contact.js";
-import agentsRoute from "./server/routes/agents.js";
-import askAiRoute from "./server/routes/ask-ai.js";
-import communityRoutes from "./server/routes/community.js";
-import http from "http";
-import compression from "compression";
-import { Server } from "socket.io"; 
+import express from "express"; // Import express
+import bodyParser from "body-parser"; // Import body-parser
+import cors from "cors"; // Import cors
+import dotenv from "dotenv"; // Import dotenv
+import multer from "multer"; // Import multer
+import ejs from "ejs"; // Import ejs
+import path from "path"; // Import path module from Node.js
+import { fileURLToPath } from 'url'; // Import fileURLToPath
+import { dirname } from 'path'; // Import path module
+import session from 'express-session'; // Import express-session
+import flash from 'connect-flash'; // Import connect-flash
+import cookieParser from 'cookie-parser'; // Import cookie-parser
+import methodOverride from 'method-override'; // Import method-override
+import passport from './server/passport/passport-config.js'; // Import passport
+import connectDB from './server/database/connection.js'; // Import connectDB
+import viewRoutes from "./server/routes/viewRoutes.js"; // Import viewRoutes
+import authRoutes from "./server/routes/auth.js"; // Import authRoutes
+import homepageRoutes from "./server/routes/homepage.js"; // Import homepageRoutes
+import profileRoutes from "./server/routes/profile.js"; // Import profileRoutes
+import productsRoutes from "./server/routes/products.js"; // Import productsRoutes
+import applyRoute from "./server/routes/apply.js"; // Import applyRoute
+import adminRoutes from "./server/routes/admin.js"; // Import adminRoutes
+import contactRoutes from "./server/routes/contact.js"; // Import contactRoutes
+import agentsRoute from "./server/routes/agents.js"; // Import agentsRoute
+import askAiRoute from "./server/routes/ask-ai.js"; // Import askAiRoute
+import communityRoutes from "./server/routes/community.js"; // Import communityRoutes
+import http from "http"; // Import http module from Node.js
+import compression from "compression"; // Import compression
+import { Server } from "socket.io"; // Import socket.io
 
 // Create an Express application
-const app = express();
+const app = express(); // Create an Express application
 const server = http.createServer(app); // Create HTTP server
 const io = new Server(server); // Create Socket.io server
 
-dotenv.config();
-connectDB();
-app.use(express.json());
-app.use(cookieParser());
-app.use(flash());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-app.set('trust proxy', true)
-app.use(compression());
+dotenv.config(); // Configure dotenv to use environment variables
+connectDB(); // Connect to the database
+app.use(express.json()); // Parse JSON bodies
+app.use(cookieParser()); // Use cookie-parser
+app.use(flash()); // Use connect-flash
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(cors()); // Use cors
+app.set('trust proxy', true) // Trust proxy
+app.use(compression()); // Use compression
 
 // Pass io to routes
 app.use((req, res, next) => {
@@ -103,17 +103,17 @@ app.get('/getWeatherKey', (req, res) => {
 });
 
 // Routes
-app.use(viewRoutes);
-app.use(authRoutes);
-app.use(homepageRoutes);
-app.use(profileRoutes);
-app.use(apartmentsRoutes);
-app.use(applyRoute);
-app.use(adminRoutes);
-app.use(contactRoutes);
-app.use(agentsRoute);
-app.use(askAiRoute);
-app.use('/community', communityRoutes);
+app.use(viewRoutes); // Use viewRoutes
+app.use(authRoutes); // Use authRoutes
+app.use(homepageRoutes); // Use homepageRoutes
+app.use(profileRoutes); // Use profileRoutes
+app.use(productsRoutes); // Use productsRoutes
+app.use(applyRoute); // Use applyRoute
+app.use(adminRoutes); // Use adminRoutes
+app.use(contactRoutes); // Use contactRoutes
+app.use(agentsRoute); // Use agentsRoute
+app.use(askAiRoute); // Use askAiRoute
+app.use('/community', communityRoutes); // Use communityRoutes
 
 // Set up the server to listen on port 8080
 const PORT = process.env.PORT || 8080;

@@ -1,4 +1,3 @@
-
 <style>
   .property-list {
     display: grid;
@@ -33,8 +32,6 @@
   .card-content {
     padding: 16px;
   }
-
-
 
   .card-footer {
   display: flex;
@@ -85,8 +82,6 @@
 .card-footer-actions-btn ion-icon {
   margin-right: 5px;
 }
-
-
 
   .top-right {
     position: absolute;
@@ -151,6 +146,7 @@
             <ul class="card-list">
               <li class="card-item">
                 <strong>Product ID (AID): AID<%= product.aid %></strong>
+                <a href="/product-detail/<%= product._id %>">Details</a>
               </li>
             </ul>
           </div>

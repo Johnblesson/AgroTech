@@ -68,7 +68,6 @@ export const getAllContacts = async (req, res) => {
     }
   };
 
-
   // Get contact form
 export const getContactForm = async (req, res) => {
 

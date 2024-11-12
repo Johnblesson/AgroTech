@@ -30,6 +30,8 @@ AgroTech SL is a web-based application designed to revolutionize the agricultura
    - Price Trends: Access to real-time data on market prices for various agricultural products, helping farmers make informed decisions about what to grow and when to sell.
    - Demand Forecasting: Tools to analyze consumer trends and preferences, allowing farmers to tailor their production to meet market needs.
 
+   <img src="public/images/agrotech-news.png" alt="AgroTech News">
+
 ## 5. Ask-AI:
 Interactive Chat for Agricultural Queries
 The platform includes an Ask-AI feature powered by an AI chatbot that provides real-time answers to agricultural questions.

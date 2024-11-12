@@ -69,10 +69,10 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets"), {
 
 // Add express-session middleware
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 36000000 }
+  secret: process.env.SESSION_SECRET, // Use the SESSION_SECRET environment variable as the secret
+  resave: false, // Don't save session if unmodified
+  saveUninitialized: true, // Always create a session
+  cookie: { maxAge: 36000000 } // Set session to expire after 10 hours
 }))
 
 // Make flash messages available in all templates

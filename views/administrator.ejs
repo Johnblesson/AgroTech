@@ -58,8 +58,8 @@
             document.addEventListener('DOMContentLoaded', (event) => {
                 const socket = io();
     
-                socket.on('new-apartment', (data) => {
-                    alert(`New apartment created: ${data.title} at ${data.location}`);
+                socket.on('new-product', (data) => {
+                    alert(`New product created: ${data.title} at ${data.location}`);
                 });
             });
     

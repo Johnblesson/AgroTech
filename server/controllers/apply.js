@@ -7,7 +7,7 @@ import { io } from '../../server.js'; // Import the io instance
 export const createApplication = async (req, res) => {
   try {
     // Extracting data from request body
-    const { title, phone, location, applyPid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
+    const { title, phone, location, applyPid, price, qty, username, address, address2, createdBy, role, comments, assignedStaff, staffInCharge } = req.body;
 
     // Create a new Application object with form data
     const applicationForm = new Application({
@@ -16,6 +16,8 @@ export const createApplication = async (req, res) => {
       location,
       username,
       applyPid,
+      price, 
+      qty,
       address,
       address2,
       createdBy,
@@ -142,6 +144,7 @@ export const application = async (req, res) => {
     const productId = req.query.pid;
     const location = req.query.location;
     const title = req.query.title;
+    const price = req.query.price;
 
     // Fetch the product details based on the ID
     const product = await Products.findOne({ _id: req.params.id });
@@ -162,6 +165,7 @@ export const application = async (req, res) => {
       pid: productId,
       location: location,
       title: title,
+      price: price,
       role,
       alert: req.query.alert, // Pass the alert message
     });
@@ -192,6 +196,7 @@ export const adminApplication = async (req, res) => {
     const productId = req.query.pid;
     const location = req.query.location;
     const title = req.query.title;
+    const price = req.query.price;
 
     // Fetch the product details based on the ID
     const product = await Products.findOne({ _id: req.params.id });
@@ -218,6 +223,7 @@ export const adminApplication = async (req, res) => {
       pid: productId,
       location: location,
       title: title,
+      price: price,
       sudo,
       accountant,
       role,
@@ -405,7 +411,7 @@ export const createBoost = async (req, res) => {
       // `createdAt` and `updatedAt` are automatically handled by Mongoose if timestamps are enabled
     });
 
-    // Saving the boost-apartment to the database
+    // Saving the boost-product to the database
     const savedBoost = await boostForm.save();
 
     // Emit a new Application notification to all connected clients (if needed)

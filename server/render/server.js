@@ -17,7 +17,7 @@
 // import authRoutes from "./server/routes/auth.js";
 // import homepageRoutes from "./server/routes/homepage.js";
 // import profileRoutes from "./server/routes/profile.js";
-// import apartmentsRoutes from "./server/routes/apartments.js";
+// import apartmentsRoutes from "./server/routes/products.js";
 // import applyRoute from "./server/routes/apply.js";
 // import adminRoutes from "./server/routes/admin.js";
 // import accountRoutes from "./server/routes/account.js";

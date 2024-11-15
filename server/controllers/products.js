@@ -112,7 +112,7 @@ export const deleteNotification = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const product = await Products.findById(req.params.id);
-    if (!apartment) {
+    if (!product) {
       res.status(404).json({ message: 'Product not found' });
       return;
     }
@@ -122,7 +122,7 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// Controller function to update an apartment by ID
+// Controller function to update an product by ID
 export const updateProductById = async (req, res) => {
   try {
     const updatedProduct = await Products.findByIdAndUpdate(
@@ -212,7 +212,7 @@ export const allProducts = async (req, res) => {
   
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
+    res.status(500).send("An error occurred while fetching products.");
   }
 };
 
@@ -521,7 +521,7 @@ export const adminVerifyProduct = async (req, res) => {
   
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
+    res.status(500).send("An error occurred while fetching products.");
   }
 };
 
@@ -729,7 +729,7 @@ export const editAvailability = async (req, res) => {
 };
 
 
-// Controller to display the search apartment page
+// Controller to display the search product page
 export const searchProduct = async (req, res) => {
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();

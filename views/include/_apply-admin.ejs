@@ -30,7 +30,7 @@
   </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="location" class="formbold-form-label">Location: </label>
+        <label for="location" class="formbold-form-label">Product Location: </label>
         <div>
           <input
             type="text"
@@ -58,13 +58,41 @@
       </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="apply-aid" class="formbold-form-label"> Price: </label>
+        <div>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            class="formbold-form-input"
+            value="<%= price %>"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="qty" class="formbold-form-label"> Quantity: </label>
+        <div>
+          <input
+            type="text"
+            name="qty"
+            id="qty"
+            class="formbold-form-input"
+            placeholder="Add the quantity you want to buy"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="phone" class="formbold-form-label"> Phone: </label>
         <div>
           <input
             type="text"
             name="phone"
             id="phone"
-            placeholder="Add phone number"
+            placeholder="Add active phone number"
             class="formbold-form-input"
             required
           />

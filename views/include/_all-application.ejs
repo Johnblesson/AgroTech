@@ -21,7 +21,7 @@
         background-color: pink;
     }
   
-    .role-green-bg {
+    .role-yellow-bg {
         background-color: rgb(249, 233, 7);
     }
   
@@ -151,11 +151,13 @@
             <tr>
                 <th>Full Name</th>
                 <th>Username</th>
-                <th>Phone No.</th>
-                <th>AID</th>
-                <th>Location</th>
-                <th>Applicant Address</th>
                 <th>Role</th>
+                <th>Phone No.</th>
+                <th>PID</th>
+                <th>Location</th>
+                <th>Price (NLE)</th>
+                <th>Qty</th>
+                <th>Buyer's Address</th>
                 <th>Actions</th> <!-- New column for actions -->
             </tr>
             </thead>
@@ -164,11 +166,13 @@
             <tr>
                 <td class="hover"><%= apply.createdBy %></td>
                 <td class="hover"><%= apply.username %></td>
-                <td class="hover"><%= apply.phone %></td>
-                <td class="hover role-green-bg"><%= apply.applyPid %></td>
-                <td class="hover role-green-bg"><%= apply.location %></td>
-                <td class="hover"><%= apply.address %></td>
                 <td class="hover"><%= apply.role %></td>
+                <td class="hover role-yellow-bg"><%= apply.phone %></td>
+                <td class="hover role-yellow-bg"><%= apply.applyPid %></td>
+                <td class="hover role-yellow-bg"><%= apply.location %></td>
+                <td class="hover role-yellow-bg"><%= apply.price %></td>
+                <td class="hover role-yellow-bg"><%= apply.qty %></td>
+                <td class="hover"><%= apply.address %></td>
 
                
                 <td class="hover px-6 py-4 whitespace-nowrap">

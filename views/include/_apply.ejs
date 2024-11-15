@@ -33,7 +33,7 @@
   </div>
 
       <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="location" class="formbold-form-label">Location: </label>
+        <label for="location" class="formbold-form-label">Product Location: </label>
         <div>
           <input
             type="text"
@@ -54,8 +54,36 @@
             name="applyPid"
             id="apply-aid"
             class="formbold-form-input"
-            value="<%= 'PID' + pid %>"
+            value="<%= pid %>"
             readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="price" class="formbold-form-label"> Price: </label>
+        <div>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            class="formbold-form-input"
+            value="NLE <%= price %>"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="qty" class="formbold-form-label"> Quantity: </label>
+        <div>
+          <input
+            type="text"
+            name="qty"
+            id="qty"
+            class="formbold-form-input"
+            placeholder="Add the quantity you want to buy"
+            required
           />
         </div>
       </div>
@@ -67,7 +95,7 @@
             type="text"
             name="phone"
             id="phone"
-            placeholder="Add phone number"
+            placeholder="Add active phone number"
             class="formbold-form-input"
             required
           />
@@ -114,7 +142,7 @@
 
       <div class="formbold-mb-3">
         <label for="comments" class="formbold-form-label">
-            Comments:
+            Comments (Optional):
         </label>
         <textarea
           rows="6"

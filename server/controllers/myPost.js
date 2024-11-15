@@ -76,7 +76,7 @@ export const myPost = async (req, res) => {
   
       const userId = user._id;
   
-      // Find all verified apartments created by the authenticated user
+      // Find all verified products created by the authenticated user
       const products = await Products.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
   
       const greeting = getTimeOfDay();

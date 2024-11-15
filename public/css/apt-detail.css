@@ -235,28 +235,28 @@
     color: #333;
   }
   
-  /* Apartment Links Container */
-  .apartment-links-container {
+  /* Product Links Container */
+  .product-links-container {
     margin-top: 20px;
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 5px;
     font-size: 12px;
   }
-  .apartment-links-container p {
+  .product-links-container p {
     margin: 0;
   }
-  .apartment-links-container a {
+  .product-links-container a {
     color: #007bff;
     text-decoration: none;
   }
-  .apartment-links-container a:hover {
+  .product-links-container a:hover {
     text-decoration: underline;
   }
   
   /* Button styles */
   .btn1 {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     background: linear-gradient(to right, #5c6bc0, #512da8);
     color: #fff;

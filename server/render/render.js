@@ -132,8 +132,7 @@ export const adminHomeRoute = async (req, res) => {
 };
 
 
-
-// Post Apartment
+// Post Product
 export const getPostProduct = async (req, res) => {
  
   // Function to determine the time of the day
@@ -164,7 +163,7 @@ const getTimeOfDay = () => {
 };
 
 
-// Post Apartment Admin
+// Post Product Admin
 export const getPostProductAdmin = async (req, res) => {
 
   // Function to determine the time of the day
@@ -927,7 +926,7 @@ export const faq = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
+    res.status(500).send("An error occurred while fetching products.");
   }
 };
 
@@ -971,7 +970,7 @@ export const faqAdmin = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while fetching apartments.");
+    res.status(500).send("An error occurred while fetching products.");
   }
 };
 

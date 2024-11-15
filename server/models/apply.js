@@ -7,6 +7,8 @@ const applySchema = new mongoose.Schema({
     location: String,
     username: String,
     applyPid: String,
+    price: String,
+    qty: String,
     address: String,
     address2: String,
     createdBy : String,

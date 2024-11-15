@@ -23,7 +23,7 @@
 
         <div class="img__container">
           <% if (users.photoUrl) { %>
-            <img src="<%= users.photoUrl %>" alt="Apartment Photo">
+            <img src="<%= users.photoUrl %>" alt="Product Photo">
           <% } else { %>
             <p>No photo available</p>
           <% } %>
@@ -65,7 +65,7 @@
               <li><a href="">posts</a></li>
               <li><a href="">galleries</a></li>
               <li><a href=""onclick="goBack()">home</a></li>
-              <li><a href="/create-apartment-admin">create post</a></li>
+              <li><a href="/create-product-admin">create post</a></li>
             </ul>
             <button>Follow</button>
           </nav>
@@ -80,7 +80,7 @@
           </div> -->
 
           <ul class="property-list has-scrollbar">
-            <% apartments.forEach(apt => { %>
+            <% products.forEach(apt => { %>
               <li class="property-item">
                 <div class="property-card">
                   <figure class="card-banner">
@@ -133,7 +133,7 @@
                     <ul class="card-list">
                       <!-- Placeholder for square footage -->
                       <li class="card-item">
-                        <strong>Apartment ID (AID): AID<%= apt.aid %></strong>
+                        <strong>Product ID (AID): AID<%= apt.aid %></strong>
                         <a href="/admin-application-form?aid=<%= apt.aid %>&location=<%= apt.location %>">
                           <span>Contact site: Administrator</span>
                         </a>

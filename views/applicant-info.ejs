@@ -29,7 +29,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Applicant Information</a></li>
-                        <!-- <li class="breadcrumb-item"><a href="#"> Apartment</a></li> -->
+                        <!-- <li class="breadcrumb-item"><a href="#"> Product</a></li> -->
                         <li class="breadcrumb-item active"><%= apply.applyPid %></li>
                     </ol>
                 </nav>
@@ -44,21 +44,35 @@
     <ul class="list-group">
         <li class="list-group-item"> 
             <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Apartment ID (AID):</b></div>
+                <div class="col" style="max-width: 140px"> <b>Product ID (AID):</b></div>
                 <div class="col"><%= apply.applyPid %></div>
             </div>
         </li>
 
         <li class="list-group-item"> 
+          <div class="row">
+              <div class="col" style="max-width: 140px"> <b>Price:</b></div>
+              <div class="col"><%= apply.price %></div>
+          </div>
+        </li>
+
+        <li class="list-group-item"> 
+          <div class="row">
+              <div class="col" style="max-width: 140px"> <b>Quantity:</b></div>
+              <div class="col"><%= apply.qty %></div>
+          </div>
+        </li>
+
+        <li class="list-group-item"> 
             <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Property Location:</b></div>
+                <div class="col" style="max-width: 140px"> <b>Product Location:</b></div>
                 <div class="col"><%= apply.location %></div>
             </div>
           </li>
           
         <li class="list-group-item"> 
           <div class="row">
-              <div class="col" style="max-width: 140px"> <b>Applicant Fullname:</b></div>
+              <div class="col" style="max-width: 140px"> <b>Buyer's Fullname:</b></div>
               <div class="col"><%= apply.createdBy %></div>
           </div>
       </li>
@@ -78,7 +92,7 @@
 
 <li class="list-group-item"> 
   <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Applicant Address:</b></div>
+      <div class="col" style="max-width: 140px"> <b>Buyer's Address:</b></div>
       <div class="col"><%= apply.address %></div>
   </div>
 </li>

@@ -114,7 +114,7 @@ router.get("/country-metrics", ensureAuthenticated, cacheMiddleware, isAdmin, ch
 router.get("/settings", ensureAuthenticated, cacheMiddleware, settings);
 
 
-// Post apartments success message
+// Post products success message
 router.get('/admin-product-success', cacheMiddleware, ensureAuthenticated, (req, res) => {
     res.render('success/admin-product')
 })
@@ -131,12 +131,12 @@ router.get("/privacy-policy",  cacheMiddleware, (req, res) => {
     res.render("privacy-policy")
 })
 
-router.get("/user-apartment-success", ensureAuthenticated, cacheMiddleware, (req, res) => {
-    res.render("success/user-apartment")    
+router.get("/user-product-success", ensureAuthenticated, cacheMiddleware, (req, res) => {
+    res.render("success/user-product")    
 });
 
-router.get("/admin-apartment-success", ensureAuthenticated, isAdmin, cacheMiddleware, (req, res) => {
-    res.render("success/admin-apartment")    
+router.get("/admin-product-success", ensureAuthenticated, isAdmin, cacheMiddleware, (req, res) => {
+    res.render("success/admin-product")    
 });
 
 router.get('/invalid-2FA-code', (req, res) => {

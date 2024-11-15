@@ -45,6 +45,7 @@
     "redis": "^4.6.14",
     "socket.io": "^4.7.5",
     "speakeasy": "^2.0.0",
+    "twilio": "^5.3.6",
     "user-agent": "^1.0.4",
     "useragent": "^2.3.0",
     "web-push": "^3.6.7"

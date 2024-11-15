@@ -67,7 +67,7 @@
                 const socket = io();
     
                 socket.on('new-application', (data) => {
-                    alert(`New application created: ${data.createdBy} applied for property ${data.applyAid} at ${data.location}`);
+                    alert(`New application created: ${data.createdBy} applied for property ${data.applyPid} at ${data.location}`);
                 });
             });
         </script>

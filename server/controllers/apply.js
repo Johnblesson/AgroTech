@@ -7,7 +7,7 @@ import { io } from '../../server.js'; // Import the io instance
 export const createApplication = async (req, res) => {
   try {
     // Extracting data from request body
-    const { title, phone, location, applyAid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
+    const { title, phone, location, applyPid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
 
     // Create a new Application object with form data
     const applicationForm = new Application({
@@ -15,7 +15,7 @@ export const createApplication = async (req, res) => {
       phone,
       location,
       username,
-      applyAid,
+      applyPid,
       address,
       address2,
       createdBy,
@@ -31,7 +31,7 @@ export const createApplication = async (req, res) => {
     const savedApplication = await applicationForm.save();
 
     // Emit a new Application notification to all connected clients
-    io.emit('new-application', { createdBy: savedApplication.createdBy, applyAid: savedApplication.applyAid, location: savedApplication.location });
+    io.emit('new-application', { createdBy: savedApplication.createdBy, applyPid: savedApplication.applyPid, location: savedApplication.location });
 
     // Sending a success response
     res.status(201).render('success/application')
@@ -383,7 +383,7 @@ export const adminApplyForSponsorship = async (req, res) => {
 export const createBoost = async (req, res) => {
   try {
     // Extracting data from request body
-    const { title, phone, location, applyAid, username, address, address2, createdBy, comments, payment, duration, expiration } = req.body;
+    const { title, phone, location, applyPid, username, address, address2, createdBy, comments, payment, duration, expiration } = req.body;
 
     // Convert payment to boolean
     const paymentBoolean = typeof payment === 'string' ? payment.toLowerCase() === 'true' : Boolean(payment);
@@ -394,7 +394,7 @@ export const createBoost = async (req, res) => {
       phone,
       location,
       username,
-      applyAid,
+      applyPid,
       address,
       address2,
       createdBy,
@@ -409,7 +409,7 @@ export const createBoost = async (req, res) => {
     const savedBoost = await boostForm.save();
 
     // Emit a new Application notification to all connected clients (if needed)
-    // io.emit('new-application', { createdBy: savedBoost.createdBy, applyAid: savedBoost.applyAid, location: savedBoost.location });
+    // io.emit('new-application', { createdBy: savedBoost.createdBy, applyPid: savedBoost.applyPid, location: savedBoost.location });
 
     // Sending a success response
     res.status(201).render('success/boost');

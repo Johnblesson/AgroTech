@@ -6,7 +6,7 @@ const boostSchema = new mongoose.Schema({
     phone: String,
     location: String,
     username: String,
-    applyAid: String,
+    applyPid: String,
     address: String,
     address2: String,
     createdBy : String,

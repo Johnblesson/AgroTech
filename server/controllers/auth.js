@@ -18,77 +18,63 @@ dotenv.config();
 export const signUp = async (req, res) => {
   // Validation checks
   const errors = validationResult(req);
+  let errorMessages = [];
+
   if (!errors.isEmpty()) {
-    req.flash('error', 'Validation errors occurred. Please check your inputs.');
-    return res.redirect('/signup');
+    errorMessages = errors.array().map(err => err.msg);
+    return res.render('signup', { errorMessages });
   }
-
-  req.session = req.session || {};
-
-  // Create a session
-  req.session.user = {
-    isSignUp: true,
-    isLogin: true,
-  };
 
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
-    // Check for duplicate username before uploading the photo
+    // Check for duplicate username
     const existingUser = await User.findOne({ username: req.body.username });
     if (existingUser) {
-      req.flash('error', 'Username is already taken. Please choose another.');
-      return res.redirect('/signup');
+      errorMessages.push('Username is already taken. Please choose another.');
+      return res.render('signup', { errorMessages });
     }
 
-    // Ensure the password meets the required criteria before uploading the photo
+    // Ensure the password meets the required criteria
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordPattern.test(req.body.password)) {
-      req.flash('error', 'Password is weak. It must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.');
-      return res.redirect('/signup');
+      errorMessages.push('Password is weak. It must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.');
+      return res.render('signup', { errorMessages });
     }
 
-    // All validation checks have passed; now handle the file upload
+    // Handle the file upload
     if (!req.file) {
-      req.flash('error', 'No file uploaded. Please upload your profile picture.');
-      return res.redirect('/signup');
+      errorMessages.push('No file uploaded. Please upload your profile picture.');
+      return res.render('signup', { errorMessages });
     }
 
     if (!req.file.location) {
-      req.flash('error', 'File upload failed. Please try again.');
-      return res.redirect('/signup');
+      errorMessages.push('File upload failed. Please try again.');
+      return res.render('signup', { errorMessages });
     }
 
-    // Prepare user data after successful validation and file upload
+    // Save user data
     const userData = new User({
       fullname: req.body.fullname,
       username: req.body.username,
       email: req.body.email,
       phone: req.body.phone,
-      bio: req.body.bio,
       password: hashedPassword,
-      photo: req.file.location, // Store the S3 file location
-      role: req.body.role,
-      status: req.body.status,
-      sudo: req.body.sudo,
-      accountant: req.body.accountant,
-      manager: req.body.manager,
+      photo: req.file.location,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
-    // Save user data to the database
     const savedData = await userData.save();
-    // console.log('User data saved:', savedData);
-    req.flash('success', 'Sign-up successful! You can now log in.');
     res.redirect('/login');
   } catch (error) {
     console.error('Sign-Up Error:', error);
-    req.flash('error', 'An error occurred while signing up. Please try again later.');
-    res.redirect('/signup');
+    errorMessages.push('An error occurred while signing up. Please try again later.');
+    return res.render('signup', { errorMessages });
   }
 };
+
 
 
 // Google Oauth
@@ -105,69 +91,75 @@ export const logIn = (req, res, next) => {
   passport.authenticate('local', async (err, user, info) => {
     try {
       if (err) {
-        req.flash('error', 'An error occurred during login. Please try again.');
-        return res.redirect('/login');
-      }
-
-      if (!user) {
-        req.flash('error', info.message || 'User does not exist.');
-        return res.redirect('/login');
-      }
-
-      if (user.status === 'active') {
-        req.login(user, async (loginErr) => {
-          if (loginErr) {
-            req.flash('error', 'Login failed. Please try again.');
-            return res.redirect('/login');
-          }
-
-          const ip = req.ip;
-          const agent = useragent.parse(req.headers['user-agent']);
-          const country = geoip.lookup(ip)?.country || 'Unknown';
-
-          await User.findByIdAndUpdate(user._id, {
-            $set: {
-              lastLoginIP: ip,
-              lastLoginDevice: agent.toString(),
-              lastLoginCountry: country,
-            },
-            $push: {
-              loginHistory: { ip, device: agent.toString(), country },
-            },
-          });
-
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-          delete user.password;
-          req.session.user = user;
-
-          if (user.twoFactorEnabled) {
-            return res.redirect('/2fa-verify');
-          }
-
-          // Check if the user has messages
-          const hasMessages = await checkUserMessages(user._id);
-
-          let redirectUrl = '';
-          if (user.role === 'admin') {
-            redirectUrl = `/admin-home?token=${token}`;
-          } else {
-            redirectUrl = `/home?token=${token}`;
-          }
-
-          // Redirect with an alert if there are messages
-          if (hasMessages) {
-            return res.redirect(`${redirectUrl}&alert=You have new messages`);
-          } else {
-            return res.redirect(redirectUrl);
-          }
+        return res.render('login', {
+          errorMessages: ['An error occurred during login. Please try again.'],
         });
-      } else {
-        req.flash('error', 'Forbidden: User status is inactive.');
-        return res.redirect('/login');
       }
+
+      // Check if the user exists
+      if (!user) {
+        return res.render('login', {
+          errorMessages: [info.message || 'User does not exist.'],
+        });
+      }
+
+      // Check if the user is active
+      if (user.status !== 'active') {
+        return res.render('login', {
+          errorMessages: ['Forbidden: User status is inactive.'],
+        });
+      }
+
+      // Log the user in
+      req.login(user, async (loginErr) => {
+        if (loginErr) {
+          return res.render('login', {
+            errorMessages: ['Login failed. Please try again.'],
+          });
+        }
+
+        // Get the user's IP address, device, and country
+        const ip = req.ip;
+        const agent = useragent.parse(req.headers['user-agent']);
+        const country = geoip.lookup(ip)?.country || 'Unknown';
+
+        // Update the user's last login details
+        await User.findByIdAndUpdate(user._id, {
+          $set: {
+            lastLoginIP: ip,
+            lastLoginDevice: agent.toString(),
+            lastLoginCountry: country,
+          },
+          $push: {
+            loginHistory: { ip, device: agent.toString(), country },
+          },
+        });
+
+        // Generate a JWT token
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        delete user.password;
+        req.session.user = user;
+
+        if (user.twoFactorEnabled) {
+          return res.redirect('/2fa-verify');
+        }
+
+        // Check if the user has messages
+        const hasMessages = await checkUserMessages(user._id);
+        let redirectUrl = user.role === 'admin' ? `/admin-home?token=${token}` : `/home?token=${token}`;
+
+        // Redirect with an alert if there are messages
+        if (hasMessages) {
+          redirectUrl += '&alert=You have new messages';
+        }
+
+        return res.redirect(redirectUrl);
+      });
     } catch (catchErr) {
-      req.flash('error', 'An internal server error occurred. Please try again later.');
-      return res.redirect('/login');
+      console.error('Login Error:', catchErr);
+      return res.render('login', {
+        errorMessages: ['An internal server error occurred. Please try again later.'],
+      });
     }
   })(req, res, next);
 };

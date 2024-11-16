@@ -122,8 +122,8 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// For development only
 // const networkInterfaces = os.networkInterfaces(); // Get network interfaces
-
 // server.listen(PORT, '0.0.0.0', () => {
 //   console.log(`Server is running on port ${PORT}`);
 //   console.log(`Available on:`);

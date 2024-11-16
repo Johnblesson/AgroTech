@@ -55,10 +55,18 @@
                     <i class="toggle-password fas fa-eye-slash"></i>
                 </div>
             
-                <div class="file-input-container">
+                <!-- <div class="file-input-container">
                     <label for="fileInput">Profile Photo<span class="required">*</span></label>
                     <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
                     <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i> Upload profile photo</label>
+                </div> -->
+
+                <div class="file-input-container">
+                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
+                    <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
+                    <label for="fileInput" class="file-input-label">
+                        <i class="fas fa-upload"></i> <span id="fileLabelText">Upload profile photo</span>
+                    </label>
                 </div>
                 
             
@@ -86,31 +94,6 @@
             </p>
         </div>
     </div>
-
-    <script>
-        const togglePassword = document.querySelector('.toggle-password');
-        const password = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', function (e) {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-
-            if (type === 'password') {
-                password.style.width = 'calc(100% - 40px)';
-            } else {
-                password.style.width = '100%';
-            }
-        });
-    </script>
-
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function() {
-            var label = this.nextElementSibling;
-            var fileName = this.files[0] ? this.files[0].name : 'Choose a file...';
-            label.textContent = fileName;
-        });
-    </script>
+    <script src="/js/signup.js"></script>
 </body>
 </html>

@@ -28,13 +28,20 @@ h1 {
 }
 
 
-
-
+/* Error Message */
 .error-message {
     color: red;
-    text-align: center;
-    margin-bottom: 1em;
-}
+    background-color: #fdd;
+    border: 1px solid red;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  .error-message p {
+    margin: 0;
+  }
+
+  
 
 .password-wrapper {
     position: relative;

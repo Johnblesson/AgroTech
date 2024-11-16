@@ -121,16 +121,16 @@ p a {
   #LOGO
 \*-----------------------------------*/
 .logo-container {
-    display: flex; /* Use Flexbox to center contents */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically if the container has a height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo {
     font-family: 'Poppins', sans-serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #4CAF50; /* Choose a green shade for an agricultural theme */
+    color: #4CAF50;
     text-decoration: none;
     display: inline-block;
     padding: 10px 15px;

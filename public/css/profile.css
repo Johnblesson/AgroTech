@@ -27,13 +27,6 @@ a {
   min-height: calc(100px + 15vw);
 }
 
-/* .header__wrapper header {
-  width: 100%;
-  background: url("/images/bg.jpeg") no-repeat center center;
-  background-size: contain; 
-  min-height: calc(100px + 10vw); 
-} */
-
 .header__wrapper .cols__container .left__col {
   padding: 25px 20px;
   text-align: center;
@@ -271,7 +264,7 @@ a {
 
 /* Property item */
 .property-item {
-  flex: 1 1 350px; /* Adjust the width of each item */
+  flex: 1 1 350px;
   max-width: 350px;
   margin-bottom: 20px;
 }
@@ -313,13 +306,13 @@ a {
 .card-badge.top-right {
   top: 10px;
   right: 10px;
-  background-color: #ff5a5f; /* Adjust as needed */
+  background-color: #ff5a5f;
 }
 
 .card-badge.top-left {
   top: 10px;
   left: 10px;
-  background-color: #4CAF50; /* Adjust as needed */
+  background-color: #4CAF50;
 }
 
 /* Banner actions (buttons) */

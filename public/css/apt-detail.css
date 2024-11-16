@@ -5,7 +5,7 @@
     margin: 10px;
     border-radius: 5px;
     color: #fff;
-    background-color: #28a745; /* Green background for success */
+    background-color: #28a745;
     font-size: 16px;
     text-align: center;
   }
@@ -61,7 +61,7 @@
   
   /* Navbar styles */
   .navbar.active, .overlay.active {
-    display: block; /* Ensures the overlay and navbar appear when active */
+    display: block;
   }
   
   /* Carousel styles */

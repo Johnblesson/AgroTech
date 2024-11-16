@@ -74,7 +74,7 @@ font-size: 0.8em; /* Reduce icon size */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px; /* Space between each post card */
+    margin-bottom: 20px;
 }
 
 /* Post Header Styling */
@@ -157,12 +157,12 @@ font-size: 0.8em; /* Reduce icon size */
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
-    display: flex; /* Align icon and count linearly */
+    display: flex;
     align-items: center;
 }
 
 .like-comment-buttons button i {
-    margin-right: 4px; /* Space between icon and count */
+    margin-right: 4px;
 }
 
 /* Comment Section Styling */

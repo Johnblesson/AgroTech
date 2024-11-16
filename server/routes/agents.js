@@ -3,7 +3,6 @@ const router = Router();
 
 import { createAgentForm, agentForm, agentProgram, agentFormAdmin} from "../controllers/agents.js";
 import ensureAuthenticated from "../middlewares/auth.js";
-// import { checkSudoMiddleware } from '../middlewares/sudo.js'
 import { checkManagerMiddleware } from '../middlewares/manager.js'
 import { isAdmin } from "../middlewares/isAdmin.js";
 

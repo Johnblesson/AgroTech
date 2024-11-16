@@ -22,7 +22,10 @@
   
         <div class="footer-brand">
   
-          <a href="#" class="logo">AgroTech SL</a>
+          <a href="#" onclick="redirectToHome('<%= role %>')" class="logo">
+            <ion-icon name="leaf"></ion-icon>
+            AgroTech SL
+          </a>    
   
           <p class="section-text">
             Our mission is to empower farmers in Sierra Leone by providing a comprehensive, user-friendly platform 
@@ -193,6 +196,7 @@
   </script>
   
   <script>
+    // Redirect to blog page based on user role
      function redirectToBlog(role) {
       if (role === 'admin') {
         window.location.href = '/admin-blog';
@@ -201,6 +205,7 @@
       }
     }
 
+    // Redirect to about page based on user role
     function redirectToAbout(role) {
       if (role === 'admin') {
         window.location.href = '/admin-about';
@@ -209,6 +214,7 @@
       }
     }
   
+    // Redirect to contact page based on user role
     function redirectToContact(role) {
       if (role === 'admin') {
         window.location.href = '/admin-contact';
@@ -217,11 +223,21 @@
       }
     }
   
+    // Redirect to FAQ page based on user role
     function redirectToFaq(role) {
       if (role === 'admin') {
         window.location.href = '/faq-admin';
       } else if (role === 'user') {
         window.location.href = '/faq';
+      }
+    }
+
+    // Redirect to home page based on user role
+    function redirectToHome(role) {
+      if (role === 'admin') {
+        window.location.href = '/admin-home';
+      } else if (role === 'user') {
+        window.location.href = '/home';
       }
     }
   </script>

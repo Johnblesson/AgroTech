@@ -36,7 +36,7 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown:hover .dropdown-menu {
-display: block; /* Show dropdown on hover */
+display: block;
 }
 
 .dropdown-item {
@@ -48,8 +48,8 @@ white-space: nowrap;
 }
 
 .dropdown-item:hover {
-background-color: #f8f9fa; /* Background color on hover */
-color: #007bff; /* Text color on hover */
+background-color: #f8f9fa;
+color: #007bff;
 }
 
 /* Adjust dropdown to align correctly */
@@ -93,7 +93,7 @@ text-decoration: underline;
           top: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+          background-color: rgba(0, 0, 0, 0.5);
       }
 
       /* Modal content box */

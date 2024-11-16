@@ -241,6 +241,6 @@ select.formbold-form-input,
     }
 
     .file-name-placeholder {
-      font-size: 12px; /* Reduce font size for smaller screens */
+      font-size: 12px;
     }
   }

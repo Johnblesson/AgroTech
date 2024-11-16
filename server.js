@@ -27,6 +27,7 @@ import communityRoutes from "./server/routes/community.js"; // Import communityR
 import http from "http"; // Import http module from Node.js
 import compression from "compression"; // Import compression
 import { Server } from "socket.io"; // Import socket.io
+import os from "os"; // Import os module from Node.js
 
 // Create an Express application
 const app = express(); // Create an Express application
@@ -117,8 +118,22 @@ app.use('/community', communityRoutes); // Use communityRoutes
 
 // Set up the server to listen on port 8080
 const PORT = process.env.PORT || 8080;
+// server.listen(PORT, '0.0.0.0', () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+
+const networkInterfaces = os.networkInterfaces(); // Get network interfaces
+
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Available on:`);
+  Object.keys(networkInterfaces).forEach((iface) => {
+    networkInterfaces[iface].forEach((alias) => {
+      if (alias.family === 'IPv4') {
+        console.log(`  http://${alias.address}:${PORT}`);
+      }
+    });
+  });
 });
 
 export { io }; // Export io to use in other files

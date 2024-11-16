@@ -400,10 +400,10 @@ export const OnlyUsers = async (req, res) => {
 
      // Fetch all users with role 'agent' from the database excluding the password field
      const users = await User.aggregate([
-      { $match: { role: 'user' } }, // Match only users with the role 'user'
-      { $project: { password: 0 } }, // Exclude the password field
-      { $skip: skip }, // Pagination: Skip the records for previous pages
-      { $limit: limit } // Pagination: Limit the number of results per page
+      { $match: { role: 'user' } },
+      { $project: { password: 0 } },
+      { $skip: skip },
+      { $limit: limit }
     ]);
   
     res.render('all-users', { 
@@ -441,10 +441,10 @@ export const onlyAdmins = async (req, res) => {
 
       // Fetch all users with role 'agent' from the database excluding the password field
       const users = await User.aggregate([
-        { $match: { role: 'admin' } }, // Match only users with the role 'admin'
-        { $project: { password: 0 } }, // Exclude the password field
-        { $skip: skip }, // Pagination: Skip the records for previous pages
-        { $limit: limit } // Pagination: Limit the number of results per page
+        { $match: { role: 'admin' } },
+        { $project: { password: 0 } },
+        { $skip: skip },
+        { $limit: limit } 
       ]);
   
     res.render('all-users', { 
@@ -462,10 +462,10 @@ export const onlyAdmins = async (req, res) => {
 
 
 // Get All Users Controller
-export const onlyAgents = async (req, res) => {
+export const onlyFarmer = async (req, res) => {
 
   const locals = {
-    title: "All Agents",
+    title: "All Farmers",
     description: "This is the agents page.",
   };
 
@@ -475,18 +475,18 @@ export const onlyAgents = async (req, res) => {
     const skip = (page - 1) * limit;
 
     // Count total number of agents
-    const totalEntries = await User.countDocuments({ role: 'agent' });
+    const totalEntries = await User.countDocuments({ role: 'farmer' });
 
     const totalPages = Math.ceil(totalEntries / limit);
 
     const user = req.isAuthenticated() ? req.user : null;
 
-    // Fetch all users with role 'agent' from the database excluding the password field
+    // Fetch all users with role 'farmer' from the database excluding the password field
     const users = await User.aggregate([
-      { $match: { role: 'agent' } }, // Match only users with the role 'agent'
-      { $project: { password: 0 } }, // Exclude the password field
-      { $skip: skip }, // Pagination: Skip the records for previous pages
-      { $limit: limit } // Pagination: Limit the number of results per page
+      { $match: { role: 'farmer' } },
+      { $project: { password: 0 } },
+      { $skip: skip },
+      { $limit: limit }
     ]);
 
     res.render('all-users', { 
@@ -826,6 +826,20 @@ export const getAdminOnly = (req, res) => {
   const timestamp = new Date().toISOString();
   console.log('ip address:', ip, 'attempt accessing the admin-only route', timestamp);
   res.render('404-admin', {
+  });
+};
+
+// Get sudo only Page Controller
+export const getFarmerOnly = (req, res) => {
+  const ip =
+    req.headers['cf-conneting-ip'] ||
+    req.headers['x-real-ip'] ||
+    req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress || '';
+
+  const timestamp = new Date().toISOString();
+  console.log('ip address:', ip, 'attempt accessing the admin-only route', timestamp);
+  res.render('404-farmer', {
   });
 };
 

@@ -1,7 +1,7 @@
 import Products from "../models/products.js"; // Products model
 import User from "../models/auth.js"; // User model
 import Applications from "../models/apply.js"; // Applications model
-import Agents from "../models/agents.js"; // Agents model
+import Farmers from "../models/farmers.js"; // Farmers model
 import PageViews from "../models/pageViews.js"; // PageViews model
 import IPAddress from "../models/ipaddress.js"; // IPAddress model
 
@@ -11,13 +11,13 @@ export const mainAdmin = async (req, res) => {
         const productsCount = await Products.countDocuments();
         const usersCount = await User.countDocuments();
         const applicationsCount = await Applications.countDocuments();
-        const agentsCount = await Agents.countDocuments();
+        const farmersCount = await Farmers.countDocuments();
         const ipAddressCount = await IPAddress.countDocuments();
 
         // Fetch counts for specific user roles
         const adminCount = await User.countDocuments({ role: 'admin' });
         const userCount = await User.countDocuments({ role: 'user' });
-        const agentCount = await User.countDocuments({ role: 'agent' });
+        const farmerCount = await User.countDocuments({ role: 'farmer' });
 
         // Increment the view count for the guest page
         const pageView = await PageViews.findOneAndUpdate(
@@ -39,10 +39,10 @@ export const mainAdmin = async (req, res) => {
             productsCount, 
             usersCount, 
             applicationsCount, 
-            agentsCount,
+            farmersCount,
             adminCount, 
             userCount,
-            agentCount,
+            farmerCount,
             views,
             user, 
             sudo,

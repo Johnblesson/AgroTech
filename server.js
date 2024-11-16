@@ -21,7 +21,7 @@ import productsRoutes from "./server/routes/products.js"; // Import productsRout
 import applyRoute from "./server/routes/apply.js"; // Import applyRoute
 import adminRoutes from "./server/routes/admin.js"; // Import adminRoutes
 import contactRoutes from "./server/routes/contact.js"; // Import contactRoutes
-import agentsRoute from "./server/routes/agents.js"; // Import agentsRoute
+import farmersRoute from "./server/routes/farmers.js"; // Import farmersRoute
 import askAiRoute from "./server/routes/ask-ai.js"; // Import askAiRoute
 import communityRoutes from "./server/routes/community.js"; // Import communityRoutes
 import http from "http"; // Import http module from Node.js
@@ -112,7 +112,7 @@ app.use(productsRoutes); // Use productsRoutes
 app.use(applyRoute); // Use applyRoute
 app.use(adminRoutes); // Use adminRoutes
 app.use(contactRoutes); // Use contactRoutes
-app.use(agentsRoute); // Use agentsRoute
+app.use(farmersRoute); // Use farmersRoute
 app.use(askAiRoute); // Use askAiRoute
 app.use('/community', communityRoutes); // Use communityRoutes
 

@@ -38,12 +38,13 @@ import {
     allAdminUser, 
     settings, 
     onlyAdmins, 
-    onlyAgents, 
+    onlyFarmer, 
     OnlyUsers 
 } from "../controllers/auth.js"
 
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
+import { isFarmer } from "../middlewares/isFarmer.js";
 import { isAccountant } from "../middlewares/isAccountant.js";
 import cacheMiddleware from "../middlewares/cacheMiddleware.js"
 import { checkSudoMiddleware } from '../middlewares/sudo.js';
@@ -69,7 +70,7 @@ router.get('/tips', cacheMiddleware, ensureAuthenticated, farmingTips)
 
 router.get('/weather-update', cacheMiddleware, ensureAuthenticated, weatherUpdate)
 
-router.get('/create-product',  cacheMiddleware, ensureAuthenticated, getPostProduct)
+router.get('/create-product',  cacheMiddleware, ensureAuthenticated, isFarmer, getPostProduct)
 
 router.get('/create-product-admin', cacheMiddleware, ensureAuthenticated, isAdmin, getPostProductAdmin)
 
@@ -79,7 +80,7 @@ router.get('/all-admin-user', isAdmin, isAccountant, cacheMiddleware, ensureAuth
 
 router.get('/only-admins', isAdmin, cacheMiddleware, ensureAuthenticated, onlyAdmins)
 
-router.get('/only-agents', isAdmin, cacheMiddleware, ensureAuthenticated, onlyAgents)
+router.get('/only-farmers', isAdmin, cacheMiddleware, ensureAuthenticated, onlyFarmer)
 
 router.get('/only-users', isAdmin, cacheMiddleware, ensureAuthenticated, OnlyUsers)
 

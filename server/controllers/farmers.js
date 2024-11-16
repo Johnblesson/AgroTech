@@ -1,10 +1,10 @@
-import Agents from '../models/agents.js'; // Importing the Agents model
+import Farmers from '../models/farmers.js'; // Importing the Farmers model
 import User from '../models/auth.js'; // Importing the User model
 import flash from 'connect-flash'; // Make sure to import connect-flash
 
 // Controller function to create a new Agent
-// POST /agents
-export const createAgentForm = async (req, res) => {
+// POST /farmers
+export const createFarmerForm = async (req, res) => {
     try {
         // Extracting data from request body
         const { fullname, phone, email, username, address, address2, createdBy, comments } = req.body;
@@ -22,8 +22,8 @@ export const createAgentForm = async (req, res) => {
             return res.status(400).redirect(redirectPath);
         }
 
-        // Create a new Agents object with form data
-        const agentsForm = new Agents({
+        // Create a new Farmers object with form data
+        const agentsForm = new Farmers({
             fullname, 
             phone, 
             email,  
@@ -36,26 +36,26 @@ export const createAgentForm = async (req, res) => {
             updatedAt: new Date()
         });
 
-        // Saving the Agents to the database
+        // Saving the Farmers to the database
         const savedAgents = await agentsForm.save();
         
         // Sending a success response
-        res.status(201).render('success/agents');
+        res.status(201).render('success/farmers');
         console.log(savedAgents);
     } catch (error) {
         // Sending an error response
         req.flash('error', error.message); // Flash error message for other errors
         const userRole = req.isAuthenticated() && req.user ? req.user.role : null;
-        const redirectPath = userRole === 'admin' ? 'agents-admin' : 'agents';
+        const redirectPath = userRole === 'admin' ? 'farmers-admin' : 'farmers';
         return res.status(400).redirect(redirectPath);
     }
 };
 
 
   // Get agent form
-  // GET /agents
+  // GET /farmers
 
-export const agentForm = async (req, res) => {
+export const farmerForm = async (req, res) => {
 
     // Function to determine the time of the day
     const getTimeOfDay = () => {
@@ -87,7 +87,7 @@ export const agentForm = async (req, res) => {
       };
   
       // Render the apply page with the necessary data
-      res.render('apply-agent-form', {
+      res.render('apply-farmer-form', {
         user,
         greeting,
         role,
@@ -100,9 +100,9 @@ export const agentForm = async (req, res) => {
     }
   };
 
-  // GET /agents
+  // GET /farmers
 
-export const agentFormAdmin = async (req, res) => {
+export const farmerFormAdmin = async (req, res) => {
 
   // Function to determine the time of the day
   const getTimeOfDay = () => {
@@ -137,7 +137,7 @@ export const agentFormAdmin = async (req, res) => {
      const manager = user && user.manager ? user.manager : false;
 
     // Render the apply page with the necessary data
-    res.render('apply-agent-form-admin', {
+    res.render('apply-farmer-form-admin', {
       user,
       greeting,
       role,
@@ -152,8 +152,8 @@ export const agentFormAdmin = async (req, res) => {
   }
 };
 
-// Get All Agents Controller
-export const agentProgram = async (req, res) => {
+// Get All Farmers Controller
+export const farmerProgram = async (req, res) => {
 
     try {
       // const user = req.isAuthenticated() ? req.user : null;
@@ -163,17 +163,17 @@ export const agentProgram = async (req, res) => {
       const skip = (page - 1) * limit;
   
       // Fetch all storage data
-      const totalEntries = await Agents.countDocuments();
+      const totalEntries = await Farmers.countDocuments();
       const totalPages = Math.ceil(totalEntries / limit);
   
       // Fetch all users from the database
-      const agent = await Agents.aggregate([
+      const agent = await Farmers.aggregate([
         { $project: { password: 0 } },
         { $skip: skip },
         { $limit: limit }
     ]);
     
-      res.render('agent-program', { 
+      res.render('farming-program', { 
         agent: agent, 
         currentPage: page, 
         totalPages: totalPages,

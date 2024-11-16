@@ -40,17 +40,17 @@
                 </tr>
             </thead>
             <tbody>
-                <% let counter = 1; %> <!-- Counter for numbering the products -->
+                <% let counter = 1; %>
                 <% data.forEach(user => { %>
                 <tr>
-                    <td class="hover"><%= counter++ %></td> <!-- Increment the counter -->
+                    <td class="hover"><%= counter++ %></td>
                     <td class="hover"><%= user.fullname %></td>
                     <td class="hover"><%= user.username %></td>
                     <td class="hover"><%= user.phone %></td>
                     <td class="hover" style="text-align: center;">
                         <a href="mailto:<%= user.email %>" class="contact-link" style="color: #007bff; text-decoration: none;"><%= user.email %></a>
                       </td>                     
-                    <td class="hover <%= user.role === 'admin' ? 'role-pink-bg' : (user.role === 'user' ? 'role-green-bg' : (user.role === 'agent' ? 'role-sky-blue-bg' : '')) %>"><%= user.role %></td>
+                    <td class="hover <%= user.role === 'admin' ? 'role-pink-bg' : (user.role === 'user' ? 'role-green-bg' : (user.role === 'farmer' ? 'role-sky-blue-bg' : '')) %>"><%= user.role %></td>
                     <td class="hover <%= user.status === 'active' ? 'status-green-bg' : (user.status === 'inactive' ? 'status-red-bg' : '') %>">
                         <% if (user.status === 'active') { %>
                             <span class="status-circle active-circle"></span> Active

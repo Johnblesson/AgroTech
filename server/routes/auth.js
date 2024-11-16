@@ -15,6 +15,7 @@ import
     googleAuth, 
     getSudoOnly,
     getAdminOnly,
+    getFarmerOnly,
     goBack,
     deleteUserAccount,
     activeUserSessions,
@@ -79,8 +80,8 @@ router.post('/2fa', ensureAuthenticated, toggle2FA);
 // Route to render 2FA verification page
 router.get('/2fa-verify', ensureAuthenticated, (req, res) => {
     const user = req.isAuthenticated() ? req.user : null;
-    res.render('2fa-verify', { user }); // Your EJS template for 2FA verification
-  });
+    res.render('2fa-verify', { user });
+})
 
 // Logout route
 router.get('/logout', (req, res) => {
@@ -96,6 +97,7 @@ router.get('/forbidden', (req, res) => {
 // Sudo only
 router.get("/sudo-only", getSudoOnly)
 router.get("/admin-only", getAdminOnly)
+router.get("/farmer-only", getFarmerOnly)
 
 // Route to handle goBack
 router.get('/go-back', goBack);

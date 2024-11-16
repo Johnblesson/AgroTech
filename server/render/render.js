@@ -1006,7 +1006,7 @@ const getTimeOfDay = () => {
     const greeting = getTimeOfDay();
 
     // Render the index page with the receptions and latestStorage data
-    res.render('agent-page', { locals, user, greeting, role, sudo, isAdmin, accountant, manager, alert: req.query.alert });
+    res.render('farmer-page', { locals, user, greeting, role, sudo, isAdmin, accountant, manager, alert: req.query.alert });
   } catch (error) {
     console.error('Error rendering the page:', error);
     res.status(500).send('Internal Server Error');

@@ -17,6 +17,6 @@ const agentSchema = new mongoose.Schema({
 });
 
 // Create the agents model
-const Agents = mongoose.model('agents-program', agentSchema);
+const Farmers = mongoose.model('agents-program', agentSchema);
 
-export default Agents;
+export default Farmers;

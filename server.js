@@ -1,33 +1,33 @@
-import express from "express"; // Import express
-import bodyParser from "body-parser"; // Import body-parser
-import cors from "cors"; // Import cors
-import dotenv from "dotenv"; // Import dotenv
-import multer from "multer"; // Import multer
-import ejs from "ejs"; // Import ejs
-import path from "path"; // Import path module from Node.js
-import { fileURLToPath } from 'url'; // Import fileURLToPath
-import { dirname } from 'path'; // Import path module
-import session from 'express-session'; // Import express-session
-import flash from 'connect-flash'; // Import connect-flash
-import cookieParser from 'cookie-parser'; // Import cookie-parser
-import methodOverride from 'method-override'; // Import method-override
-import passport from './server/passport/passport-config.js'; // Import passport
-import connectDB from './server/database/connection.js'; // Import connectDB
-import viewRoutes from "./server/routes/viewRoutes.js"; // Import viewRoutes
-import authRoutes from "./server/routes/auth.js"; // Import authRoutes
-import homepageRoutes from "./server/routes/homepage.js"; // Import homepageRoutes
-import profileRoutes from "./server/routes/profile.js"; // Import profileRoutes
-import productsRoutes from "./server/routes/products.js"; // Import productsRoutes
-import applyRoute from "./server/routes/apply.js"; // Import applyRoute
-import adminRoutes from "./server/routes/admin.js"; // Import adminRoutes
-import contactRoutes from "./server/routes/contact.js"; // Import contactRoutes
-import farmersRoute from "./server/routes/farmers.js"; // Import farmersRoute
-import askAiRoute from "./server/routes/ask-ai.js"; // Import askAiRoute
-import communityRoutes from "./server/routes/community.js"; // Import communityRoutes
-import http from "http"; // Import http module from Node.js
-import compression from "compression"; // Import compression
-import { Server } from "socket.io"; // Import socket.io
-import os from "os"; // Import os module from Node.js
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import multer from "multer";
+import ejs from "ejs";
+import path from "path"; 
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import session from 'express-session';
+import flash from 'connect-flash';
+import cookieParser from 'cookie-parser';
+import methodOverride from 'method-override';
+import passport from './server/passport/passport-config.js';
+import connectDB from './server/database/connection.js';
+import viewRoutes from "./server/routes/viewRoutes.js";
+import authRoutes from "./server/routes/auth.js";
+import homepageRoutes from "./server/routes/homepage.js";
+import profileRoutes from "./server/routes/profile.js";
+import productsRoutes from "./server/routes/products.js";
+import applyRoute from "./server/routes/apply.js";
+import adminRoutes from "./server/routes/admin.js";
+import contactRoutes from "./server/routes/contact.js";
+import farmersRoute from "./server/routes/farmers.js";
+import askAiRoute from "./server/routes/ask-ai.js";
+import communityRoutes from "./server/routes/community.js";
+import http from "http";
+import compression from "compression";
+import { Server } from "socket.io";
+import os from "os";
 
 // Create an Express application
 const app = express(); // Create an Express application

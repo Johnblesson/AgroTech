@@ -156,6 +156,48 @@ export const getAdminContactForm = async (req, res) => {
   }
 };
 
+// Farming Tips Page
+export const toContactUsPage = async (req, res) => {
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null;
+    const isAdmin = role === 'admin'; // Define isAdmin based on the role
+    const sudo = user && user.sudo ? user.sudo : false;
+    const accountant = user && user.accountant ? user.accountant : false;
+    const manager = user && user.manager ? user.manager : false;
+
+    const greeting = getTimeOfDay();
+
+    res.render('to-contact-page', {
+      user,
+      greeting,
+      role,
+      sudo,
+      accountant,
+      manager,
+      isAdmin, // Pass isAdmin to the template
+      alert: req.query.alert,
+    });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
+
   export const messageView = async (req, res) => {
     try {
       const contact = await Contacts.findOne({ _id: req.params.id });

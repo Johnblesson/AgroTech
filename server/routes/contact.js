@@ -5,7 +5,8 @@ import
 { 
     createContacts, 
     getContactForm, 
-    getAllContacts, 
+    getAllContacts,
+    toContactUsPage,
     messageView, 
     deleteMessage, 
     getAdminContactForm, 
@@ -29,7 +30,8 @@ import cacheMiddleware from "../middlewares/cacheMiddleware.js"
 import { isAdmin } from "../middlewares/isAdmin.js";
 
 // Add more routes here
-router.get('/contact', ensureAuthenticated, cacheMiddleware, getContactForm);
+router.get('/contact-us', ensureAuthenticated, cacheMiddleware, getContactForm);
+router.get('/contact', cacheMiddleware, ensureAuthenticated, toContactUsPage);
 router.get('/admin-contact', ensureAuthenticated, cacheMiddleware, isAdmin, getAdminContactForm);
 router.post('/contact', ensureAuthenticated, createContacts);
 router.get('/all-messages', ensureAuthenticated, cacheMiddleware, isAdmin, getAllContacts);

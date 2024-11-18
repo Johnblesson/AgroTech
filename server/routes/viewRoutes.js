@@ -44,7 +44,9 @@ import {
 
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
-import { isFarmer } from "../middlewares/isFarmer.js";
+
+// The isFarmer middleware is not yet implemented
+// import { isFarmer } from "../middlewares/isFarmer.js";
 import { isAccountant } from "../middlewares/isAccountant.js";
 import cacheMiddleware from "../middlewares/cacheMiddleware.js"
 import { checkSudoMiddleware } from '../middlewares/sudo.js';
@@ -70,7 +72,7 @@ router.get('/tips', cacheMiddleware, ensureAuthenticated, farmingTips)
 
 router.get('/weather-update', cacheMiddleware, ensureAuthenticated, weatherUpdate)
 
-router.get('/create-product',  cacheMiddleware, ensureAuthenticated, isFarmer, getPostProduct)
+router.get('/create-product',  cacheMiddleware, ensureAuthenticated, getPostProduct) // isFarmer: preventing user to access the route
 
 router.get('/create-product-admin', cacheMiddleware, ensureAuthenticated, isAdmin, getPostProductAdmin)
 

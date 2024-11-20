@@ -350,7 +350,7 @@ button, a { transition: var(--transition); }
   transition: 0.25s ease-out;
 }
 
-.navbar-top {
+/* .navbar-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -359,7 +359,113 @@ button, a { transition: var(--transition); }
   margin-bottom: 25px;
 }
 
-.navbar-top .logo img { width: 200px; }
+.navbar-top .logo img { width: 200px; } */
+
+/* Navbar Top */
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+/* .logo {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.logo ion-icon {
+  margin-right: 8px;
+  font-size: 24px;
+  color: #4caf50;
+} */
+
+.nav-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.nav-close-btn:hover {
+  opacity: 0.8;
+}
+
+/* User Info Card */
+.user-card {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 1px solid #4caf50;
+}
+
+.user-info {
+  font-family: Arial, sans-serif;
+}
+
+.user-fullname {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-top {
+    padding: 8px 15px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  .user-card {
+    padding: 10px 15px;
+    margin: 10px 15px;
+  }
+
+  .user-photo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .user-fullname {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .nav-close-btn ion-icon {
   font-size: 20px;
@@ -428,7 +534,7 @@ button, a { transition: var(--transition); }
 \*-----------------------------------*/
 .logo {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #4CAF50;
   text-decoration: none;

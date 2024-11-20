@@ -127,14 +127,31 @@
 
         <nav class="navbar" data-navbar>
           <div class="navbar-top">
-            <!-- <a href="/home" class="logo">AgroTech SL</a> -->
+            <!-- Logo and Close Button -->
             <a href="/home" class="logo">
               <ion-icon name="leaf"></ion-icon>
               AgroTech SL
-            </a>  
+            </a>
             <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
               <ion-icon name="close-outline"></ion-icon>
             </button>
+          </div>
+          
+          <!-- User Info Card -->
+          <div class="user-card">
+            <a href="/view/<%= user._id %>"><img src="<%= user.photo %>" alt="User Photo" class="user-photo"></a>
+            <div class="user-info">
+              <p class="user-fullname">
+                <%= user.fullname %>
+                <span style="margin-left: 8px; display: inline-flex; align-items: center;">
+                  <% if (user.status === 'active') { %>
+                    <span style="width: 10px; height: 10px; background-color: green; border-radius: 50%; display: inline-block;"></span>
+                  <% } else { %>
+                    <span style="width: 10px; height: 10px; background-color: red; border-radius: 50%; display: inline-block;"></span>
+                  <% } %>
+                </span>
+              </p>
+            </div>
           </div>
           <div class="navbar-bottom">
             <ul class="navbar-list">

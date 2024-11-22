@@ -10,13 +10,13 @@ import useragent from 'useragent'; // For device detection
 import geoip from 'geoip-lite'; // For country detection
 import passport from '../passport/passport-config.js'; // Import the passport configuration
 import { activeSessions } from '../passport/passport-config.js' // Import the activeSessions Set
-import { checkUserMessages } from '../controllers/contact.js' // Import the checkUserMessages function
+import { checkUserMessages } from '../controllers/contact.js' // Import the checkUserMessages 
+import { generateWelcomeMessage } from '../controllers/welcomeMessage.js'
 import dotenv from 'dotenv'; // Environment variable library
 dotenv.config();
 
 // Sign Up Controller
 export const signUp = async (req, res) => {
-  // Validation checks
   const errors = validationResult(req);
   let errorMessages = [];
 
@@ -67,6 +67,20 @@ export const signUp = async (req, res) => {
     });
 
     const savedData = await userData.save();
+
+   // Retrieve admin user ID (modify this to match your admin identification logic)
+   const admin = await User.findOne({ role: 'admin' }); // Assuming admin has the role 'admin'
+   if (!admin) {
+     throw new Error('Administrator account not found.');
+   }
+
+   const adminId = admin._id;
+
+   // Generate and add welcome message to the user's messages
+   const welcomeMessage = generateWelcomeMessage(adminId);
+   savedData.messages.push(welcomeMessage);
+   await savedData.save();
+
     res.redirect('/login');
   } catch (error) {
     console.error('Sign-Up Error:', error);

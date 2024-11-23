@@ -622,7 +622,7 @@ export const guestPage = async (req, res) => {
     return res.render('guest-page', { greeting: getTimeOfDay(), products: [] });
   }
 
-  const API_KEY = 'dc750824f1d744';  // Replace with your IPinfo API key
+  const API_KEY = 'dc750824f1d744'; // IPinfo API key
 
   try {
     // Fetch location data from IPinfo API

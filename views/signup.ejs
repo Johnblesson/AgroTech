@@ -66,6 +66,7 @@
                     <i class="toggle-password fas fa-eye-slash"></i>
                     <div id="password-requirements">
                         <p class="req">Password Requirements</p>
+                        <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                         <p id="length" class="invalid">Minimum 6 characters</p>
                         <p id="uppercase" class="invalid">At least one uppercase letter</p>
                         <p id="lowercase" class="invalid">At least one lowercase letter</p>
@@ -100,59 +101,5 @@
         </div>
     </div>
     <script src="/js/signup.js"></script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('password');
-    const requirements = {
-        length: document.getElementById('length'),
-        uppercase: document.getElementById('uppercase'),
-        lowercase: document.getElementById('lowercase'),
-        number: document.getElementById('number'),
-    };
-
-    passwordInput.addEventListener('input', () => {
-        const password = passwordInput.value;
-
-        // Validate length
-        if (password.length >= 6) {
-            requirements.length.classList.remove('invalid');
-            requirements.length.classList.add('valid');
-        } else {
-            requirements.length.classList.remove('valid');
-            requirements.length.classList.add('invalid');
-        }
-
-        // Validate uppercase letter
-        if (/[A-Z]/.test(password)) {
-            requirements.uppercase.classList.remove('invalid');
-            requirements.uppercase.classList.add('valid');
-        } else {
-            requirements.uppercase.classList.remove('valid');
-            requirements.uppercase.classList.add('invalid');
-        }
-
-        // Validate lowercase letter
-        if (/[a-z]/.test(password)) {
-            requirements.lowercase.classList.remove('invalid');
-            requirements.lowercase.classList.add('valid');
-        } else {
-            requirements.lowercase.classList.remove('valid');
-            requirements.lowercase.classList.add('invalid');
-        }
-
-        // Validate number
-        if (/\d/.test(password)) {
-            requirements.number.classList.remove('invalid');
-            requirements.number.classList.add('valid');
-        } else {
-            requirements.number.classList.remove('valid');
-            requirements.number.classList.add('invalid');
-        }
-    });
-});
-
-
-    </script>
 </body>
 </html>

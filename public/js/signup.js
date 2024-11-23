@@ -22,3 +22,57 @@
           ? 'File uploaded' 
           : 'Upload profile photo';
   });
+
+
+
+
+// Password Requirements Validation
+  document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    const requirements = {
+        length: document.getElementById('length'),
+        uppercase: document.getElementById('uppercase'),
+        lowercase: document.getElementById('lowercase'),
+        number: document.getElementById('number'),
+    };
+
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+
+        // Validate length
+        if (password.length >= 6) {
+            requirements.length.classList.remove('invalid');
+            requirements.length.classList.add('valid');
+        } else {
+            requirements.length.classList.remove('valid');
+            requirements.length.classList.add('invalid');
+        }
+
+        // Validate uppercase letter
+        if (/[A-Z]/.test(password)) {
+            requirements.uppercase.classList.remove('invalid');
+            requirements.uppercase.classList.add('valid');
+        } else {
+            requirements.uppercase.classList.remove('valid');
+            requirements.uppercase.classList.add('invalid');
+        }
+
+        // Validate lowercase letter
+        if (/[a-z]/.test(password)) {
+            requirements.lowercase.classList.remove('invalid');
+            requirements.lowercase.classList.add('valid');
+        } else {
+            requirements.lowercase.classList.remove('valid');
+            requirements.lowercase.classList.add('invalid');
+        }
+
+        // Validate number
+        if (/\d/.test(password)) {
+            requirements.number.classList.remove('invalid');
+            requirements.number.classList.add('valid');
+        } else {
+            requirements.number.classList.remove('valid');
+            requirements.number.classList.add('invalid');
+        }
+    });
+});

@@ -27,18 +27,17 @@ a:hover {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
-  }
-  .error-message p {
+}
+
+.error-message p {
     margin: 0;
-  }
-  
+}
 
 /* File Input */
 .file-input-container {
     position: relative;
     width: 100%;
     margin-bottom: 35px;
-    padding-top: -20px;
 }
 
 .file-input {
@@ -72,7 +71,8 @@ a:hover {
 }
 
 /* Buttons */
-button, .submit-button {
+button,
+.submit-button {
     width: 100%;
     padding: 10px;
     border: none;
@@ -84,15 +84,19 @@ button, .submit-button {
     transition: background 0.3s;
 }
 
-button:hover, .submit-button:hover {
+button:hover,
+.submit-button:hover {
     background-color: #512da8;
 }
 
 /* Form Inputs */
-input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px -15px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
@@ -101,7 +105,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="fil
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     color: #555;
 }
 
@@ -122,7 +126,7 @@ label .required {
 
 .toggle-password {
     position: absolute;
-    top: 23%;
+    top: 19.5%;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
@@ -194,27 +198,7 @@ h1 {
     font: 0.8em sans-serif;
 }
 
-/* Media Queries */
-@media only screen and (max-width: 600px) {
-    .container {
-        padding: 20px;
-    }
-
-    input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
-        width: calc(100% - 20px);
-        font-size: 14px;
-    }
-
-    button {
-        padding: 12px;
-    }
-
-    .social-icons .icon {
-        margin: 0 5px;
-    }
-}
-
-
+/* Password Strength Meter */
 #password-requirements {
     font-size: 0.9em;
     color: #555;
@@ -238,7 +222,45 @@ h1 {
     color: green;
 }
 
-.req {
-    color: #555;
-    margin: 5px 0;
+/* Small Text */
+.small {
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+/* Muted Text */
+.text-muted {
+    color: #6c757d;
+}
+
+/* Margin Bottom */
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+/* Media Queries for Mobile */
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 12px;
+    }
+
+    .social-icons .icon {
+        margin: 0 5px;
+    }
+
+    #password-requirements {
+        font-size: 0.8em;
+        padding: 8px;
+    }
 }

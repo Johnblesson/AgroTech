@@ -261,7 +261,7 @@ export const view = async (req, res) => {
       product.daysAgo = moment().diff(moment(product.createdAt), 'days');
     });
 
-    res.render("view", {
+    res.render("view-profile", {
       users,
       relativePath,
       user,
@@ -324,13 +324,79 @@ export const view = async (req, res) => {
   };
 
 
- // Get user's profile page
-  export const getUpdateProfile = async (req, res) => {
+//  // Get user's profile page
+//   export const getUpdateProfile = async (req, res) => {
  
-    // Function to determine the time of the day
+//     // Function to determine the time of the day
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+  
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
+//     try {
+//       const users = await User.findOne({ _id: req.params.id });
+//       const user = req.isAuthenticated() ? req.user : null;
+//       const role = user ? user.role : null; // Get user role if user is authenticated
+
+//         // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//         const sudo = user && user.sudo ? user.sudo : false;
+      
+//       // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//       const accountant = user && user.accountant ? user.accountant : false;
+    
+//       // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+//       const manager = user && user.manager ? user.manager : false;
+    
+//       // Determine the time of the day
+//       const greeting = getTimeOfDay();
+
+//          // Check the role and render the appropriate page
+//     if (role === 'admin') {
+//       // Render the admin update profile's page
+//       res.render('update-profile-admin', {
+//           users,
+//           greeting,
+//           user,
+//           sudo,
+//           accountant,
+//           manager,
+//           role,
+//           alert: req.query.alert, // Pass the alert message
+//       });
+//   } else if (role === 'user') {
+//       // Render the user update profile page
+//       res.render('update-profile', {
+//           users, 
+//           greeting,
+//           user,
+//           role,
+//           alert: req.query.alert, // Pass the alert message
+//       });
+//   } else {
+//       // Handle other roles or unauthorized access
+//       res.status(403).send('Unauthorized');
+//   }
+//     } catch (error) {
+//       console.error('Error rendering the page:', error);
+//       res.status(500).send('Internal Server Error');
+//     }
+//   };
+
+
+
+import mongoose from 'mongoose';
+
+export const getUpdateProfile = async (req, res) => {
+  // Function to determine the time of the day
   const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
-  
+
     if (currentHour >= 5 && currentHour < 12) {
       return 'Good Morning';
     } else if (currentHour >= 12 && currentHour < 18) {
@@ -339,51 +405,50 @@ export const view = async (req, res) => {
       return 'Good Evening';
     }
   };
-    try {
-      const users = await User.findOne({ _id: req.params.id });
-      const user = req.isAuthenticated() ? req.user : null;
-      const role = user ? user.role : null; // Get user role if user is authenticated
 
-        // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-        const sudo = user && user.sudo ? user.sudo : false;
-      
-      // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-      const accountant = user && user.accountant ? user.accountant : false;
-    
-      // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-      const manager = user && user.manager ? user.manager : false;
-    
-      // Determine the time of the day
-      const greeting = getTimeOfDay();
-
-         // Check the role and render the appropriate page
-    if (role === 'admin') {
-      // Render the admin update profile's page
-      res.render('update-profile-admin', {
-          users,
-          greeting,
-          user,
-          sudo,
-          accountant,
-          manager,
-          role,
-          alert: req.query.alert, // Pass the alert message
-      });
-  } else if (role === 'user') {
-      // Render the user update profile page
-      res.render('update-profile', {
-          users, 
-          greeting,
-          user,
-          role,
-          alert: req.query.alert, // Pass the alert message
-      });
-  } else {
-      // Handle other roles or unauthorized access
-      res.status(403).send('Unauthorized');
-  }
-    } catch (error) {
-      console.error('Error rendering the page:', error);
-      res.status(500).send('Internal Server Error');
+  try {
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new Error(`Invalid user ID: ${req.params.id}`);
     }
-  };
+
+    const users = await User.findOne({ _id: req.params.id });
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null; // Get user role if user is authenticated
+
+    // Fetch user role details
+    const sudo = user && user.sudo ? user.sudo : false;
+    const accountant = user && user.accountant ? user.accountant : false;
+    const manager = user && user.manager ? user.manager : false;
+
+    // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Check the role and render the appropriate page
+    if (role === 'admin') {
+      res.render('update-profile-admin', {
+        users,
+        greeting,
+        user,
+        sudo,
+        accountant,
+        manager,
+        role,
+        alert: req.query.alert, // Pass the alert message
+      });
+    } else if (role === 'user') {
+      res.render('update-profile', {
+        users,
+        greeting,
+        user,
+        role,
+        alert: req.query.alert, // Pass the alert message
+      });
+    } else {
+      res.status(403).send('Unauthorized');
+    }
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};

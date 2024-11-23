@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
   <title>Update profile</title>
   <link rel="stylesheet" href="./css/form.css">
   <style>
@@ -12,8 +13,8 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      width: 200%;
-      max-width: 700px;
+      width: 80%;
+      max-width: 700px; /* Increased width */
       margin: 20px auto;
     }
 
@@ -38,7 +39,7 @@
     <img 
       src="<%= users.photo %>" 
       alt="User's Photo" 
-      style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 150px; height: 150px; object-fit: cover;" 
+      style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 100px; height: 100px; object-fit: cover;" 
     />
 
     <!-- Paragraph -->
@@ -58,6 +59,38 @@
         <input type="text" name="username" id="username" value="<%= users.username %>" class="formbold-form-input" readonly/>
       </div>
 
+      
+        <div class="formbold-mb-3">
+          <label for="district" class="formbold-form-label">Place of Birth:</label>
+          <div>
+          <select id="district" class="formbold-form-input" name="placeOfBirth">
+            <option value="" disabled selected>Select a hometown</option>
+            <option value="Bo">Bo, Sierra Leone</option>
+            <option value="Bombali">Bombali, Sierra Leone</option>
+            <option value="Bonthe">Bonthe, Sierra Leone</option>
+            <option value="Falaba">Falaba, Sierra Leone</option>
+            <option value="Kailahun">Kailahun, Sierra Leone</option>
+            <option value="Kambia">Kambia, Sierra Leone</option>
+            <option value="Karene">Karene, Sierra Leone</option>
+            <option value="Kenema">Kenema, Sierra Leone</option>
+            <option value="Koinadugu">Koinadugu, Sierra Leone</option>
+            <option value="Kono">Kono, Sierra Leone</option>
+            <option value="Moyamba">Moyamba, Sierra Leone</option>
+            <option value="Port Loko">Port Loko, Sierra Leone</option>
+            <option value="Pujehun">Pujehun, Sierra Leone</option>
+            <option value="Tonkolili">Tonkolili, Sierra Leone</option>
+            <option value="Western Area Rural">Western Area Rural, Sierra Leone</option>
+            <option value="Western Area Urban">Western Area Urban, Sierra Leone</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="country" class="formbold-form-label"> Country: </label>
+        <input type="text" name="country" id="country" value="<%= users.country %>" class="formbold-form-input" readonly/>
+      </div>
+      
       <div class="formbold-mb-3">
         <label for="email" class="formbold-form-label"> Email: </label>
         <input type="email" name="email" id="location" value="<%= users.email %>" class="formbold-form-input" />
@@ -88,5 +121,18 @@
     </form>
   </div>
 </div>
+<script>
+  function handleDistrictChange() {
+      const districtSelect = document.getElementById("district");
+      const otherDistrictGroup = document.getElementById("otherDistrictGroup");
+      const selectedValue = districtSelect.value;
+
+      if (selectedValue === "Other") {
+          otherDistrictGroup.style.display = "block";
+      } else {
+          otherDistrictGroup.style.display = "none";
+      }
+  }
+</script>
 </body>
 </html>

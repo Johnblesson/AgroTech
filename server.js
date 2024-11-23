@@ -68,6 +68,11 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets"), {
   }
 }));
 
+// Handle favicon requests
+app.get('/favicon.svg', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/favicon.svg'));
+});
+
 // Add express-session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET, // Use the SESSION_SECRET environment variable as the secret

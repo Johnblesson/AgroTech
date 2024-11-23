@@ -54,7 +54,7 @@ export const signUp = async (req, res) => {
       return res.render('signup', { errorMessages });
     }
 
-    // Save user data
+    // Save user data to the database
     const userData = new User({
       fullname: req.body.fullname,
       username: req.body.username,

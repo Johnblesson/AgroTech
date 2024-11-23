@@ -23,8 +23,8 @@ router.get('/admin-profile/:id', ensureAuthenticated, isAdmin, adminprofile);
 router.patch('/update-profile/:id', ensureAuthenticated, updateUser);
 router.get('/view/:id', ensureAuthenticated, cacheMiddleware, view);
 router.get('/view-admin-profile/:id', ensureAuthenticated, isAdmin, viewAdminProfile);
-router.get('/users', getUsers);
-router.get('/update-profile/:id', ensureAuthenticated, getUpdateProfile);
+router.get('/users', ensureAuthenticated, isAdmin, getUsers); // Route to get all users by the admin
+router.get('/update-profile/:id([0-9a-fA-F]{24})', ensureAuthenticated, getUpdateProfile);
 router.get('/user/:id', ensureAuthenticated, getUserPostProfile);
 
 export default router;

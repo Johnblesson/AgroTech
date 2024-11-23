@@ -146,4 +146,8 @@ router.get('/invalid-2FA-code', (req, res) => {
     res.render('success/invalid-2FA-code')
 })
 
+// router.get('/profile-updated', (req, res) => {
+//     res.render('success/profile')
+// })
+
 export default router;

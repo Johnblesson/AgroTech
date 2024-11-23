@@ -25,6 +25,8 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   bio: String,
+  placeOfBirth: { type: String, default: 'Western Area Urban' },
+  country: { type: String, default: 'Sierra Leone' },  // Country of residence
   role: {
     type: String,
     enum: ['admin', 'user', 'farmer'],

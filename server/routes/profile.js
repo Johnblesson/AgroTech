@@ -11,6 +11,7 @@ import
     getUpdateProfile, 
     viewAdminProfile,
     getUserPostProfile,
+    adminViewUserprofile
     } 
     from "../controllers/profile.js";
 import ensureAuthenticated from "../middlewares/auth.js";
@@ -26,5 +27,6 @@ router.get('/view-admin-profile/:id', ensureAuthenticated, isAdmin, viewAdminPro
 router.get('/users', ensureAuthenticated, isAdmin, getUsers); // Route to get all users by the admin
 router.get('/update-profile/:id([0-9a-fA-F]{24})', ensureAuthenticated, getUpdateProfile);
 router.get('/user/:id', ensureAuthenticated, getUserPostProfile);
+router.get('/admin-view-user-profile/:id', ensureAuthenticated, isAdmin, adminViewUserprofile);
 
 export default router;

@@ -452,3 +452,56 @@ export const getUpdateProfile = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+
+
+
+  // View user GET REQUEST
+  export const adminViewUserprofile = async (req, res) => {
+    try {
+      const users = await User.findOne({ _id: req.params.id });
+  
+      let relativePath = '';
+    
+      // Transform the photo path to match the URL served by Express
+      if (users && users.photo) {
+          const photoPath = users.photo.replace(/\\/g, '/');
+          relativePath = photoPath.replace('public/assets/', '/assets/');
+        }
+  
+      // Get the authenticated user from the request object
+      const user = req.isAuthenticated() ? req.user : null;
+  
+      // Redirect to login if user is not authenticated
+      if (!user) {
+        return res.redirect('/login');
+      }
+  
+      // Get the user ID from the authenticated user
+      const userId = user._id;
+  
+      // Find all verified products created by the authenticated user
+      const products = await Products.find({ user: userId, verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
+      const role = user.role;
+  
+      // Process each product to set photoUrl, formattedCreatedAt, and daysAgo
+      products.forEach(product => {
+        // Ensure photoUrl is set properly
+        product.photoUrl = product.photo || '';
+  
+        // Format the createdAt date and calculate days ago
+        product.formattedCreatedAt = moment(product.createdAt).format('DD-MM-YYYY HH:mm');
+        product.daysAgo = moment().diff(moment(product.createdAt), 'days');
+      });
+  
+      res.render("view-profile-admin", {
+        users,
+        relativePath,
+        user,
+        role,
+        products,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };

@@ -5,7 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 140vh;
     margin: 0;
 }
 
@@ -36,8 +36,9 @@ a:hover {
 /* File Input */
 .file-input-container {
     position: relative;
-    width: 250px;
+    width: 100%;
     margin-bottom: 35px;
+    padding-top: -20px;
 }
 
 .file-input {
@@ -121,7 +122,7 @@ label .required {
 
 .toggle-password {
     position: absolute;
-    top: 65%;
+    top: 23%;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
@@ -211,4 +212,33 @@ h1 {
     .social-icons .icon {
         margin: 0 5px;
     }
+}
+
+
+#password-requirements {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#password-requirements p {
+    margin: 5px 0;
+}
+
+.invalid {
+    color: red;
+}
+
+.valid {
+    color: green;
+}
+
+.req {
+    color: #555;
+    margin: 5px 0;
 }

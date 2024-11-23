@@ -14,8 +14,13 @@
     <meta name="keywords" content="agriculture, agrotech, farming resources, crop management, Sierra Leone farmers, agricultural platform, farm marketplace, agricultural training, crop disease identification, farming community, sustainable farming, weather updates for farmers, farm budgeting, local produce, farming tools, market access for farmers">
     <meta name="author" content="John Blesson Rowe">
 
+    <style>
+   
+
+    </style>
 </head>
 <body>
+    
     <div class="container">
         <div class="form-container sign-up">
             <form action="/signup" method="post" enctype="multipart/form-data">
@@ -49,17 +54,24 @@
                     <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
                 </div>
             
+                <!-- <div class="password-wrapper">
+                    <label for="password">Password<span class="required">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <i class="toggle-password fas fa-eye-slash"></i>
+                </div> -->
+
                 <div class="password-wrapper">
                     <label for="password">Password<span class="required">*</span></label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     <i class="toggle-password fas fa-eye-slash"></i>
+                    <div id="password-requirements">
+                        <p class="req">Password Requirements</p>
+                        <p id="length" class="invalid">Minimum 6 characters</p>
+                        <p id="uppercase" class="invalid">At least one uppercase letter</p>
+                        <p id="lowercase" class="invalid">At least one lowercase letter</p>
+                        <p id="number" class="invalid">At least one number</p>
+                    </div>
                 </div>
-            
-                <!-- <div class="file-input-container">
-                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
-                    <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
-                    <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i> Upload profile photo</label>
-                </div> -->
 
                 <div class="file-input-container">
                     <label for="fileInput">Profile Photo<span class="required">*</span></label>
@@ -69,7 +81,6 @@
                     </label>
                 </div>
                 
-            
                 <button type="submit" class="submit-button">Submit</button>
             
                 <p class="hall">
@@ -86,14 +97,62 @@
                 </p>
             </form>
             
-            <p class="hall">
-                By clicking 'Submit' above, you acknowledge that you have read and agree to AgroTech SL's 
-                <a href="/terms-and-conditions">Terms and Conditions</a>, 
-                <a href="/services-fee-agreement">Service Fee Agreement</a> 
-                and <a href="/privacy-policy">Privacy Policy</a>.
-            </p>
         </div>
     </div>
     <script src="/js/signup.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    const requirements = {
+        length: document.getElementById('length'),
+        uppercase: document.getElementById('uppercase'),
+        lowercase: document.getElementById('lowercase'),
+        number: document.getElementById('number'),
+    };
+
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+
+        // Validate length
+        if (password.length >= 6) {
+            requirements.length.classList.remove('invalid');
+            requirements.length.classList.add('valid');
+        } else {
+            requirements.length.classList.remove('valid');
+            requirements.length.classList.add('invalid');
+        }
+
+        // Validate uppercase letter
+        if (/[A-Z]/.test(password)) {
+            requirements.uppercase.classList.remove('invalid');
+            requirements.uppercase.classList.add('valid');
+        } else {
+            requirements.uppercase.classList.remove('valid');
+            requirements.uppercase.classList.add('invalid');
+        }
+
+        // Validate lowercase letter
+        if (/[a-z]/.test(password)) {
+            requirements.lowercase.classList.remove('invalid');
+            requirements.lowercase.classList.add('valid');
+        } else {
+            requirements.lowercase.classList.remove('valid');
+            requirements.lowercase.classList.add('invalid');
+        }
+
+        // Validate number
+        if (/\d/.test(password)) {
+            requirements.number.classList.remove('invalid');
+            requirements.number.classList.add('valid');
+        } else {
+            requirements.number.classList.remove('valid');
+            requirements.number.classList.add('invalid');
+        }
+    });
+});
+
+
+    </script>
 </body>
 </html>

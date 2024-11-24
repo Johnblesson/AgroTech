@@ -795,8 +795,8 @@ export const ipMetrics = async (req, res) => {
 export const viewIPCities = async (req, res) => {
   try {
     // Get page number from query parameters, default to 1
-    const page = parseInt(req.query.page, 15) || 1;
-    const limit = 15; // Number of items per page
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = 80; // Number of items per page
     const skip = (page - 1) * limit; // Calculate skip value for pagination
 
     // Fetch IP addresses with pagination

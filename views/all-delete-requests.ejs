@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Request Deletion</title>
+  <link rel="stylesheet" href="/css/users.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<style>
+    .storage-info {
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+  
+    .role-pink-bg {
+        background-color: pink;
+    }
+  
+    .role-green-bg {
+        background-color: rgb(249, 233, 7);
+    }
+  
+    .status-red-bg {
+        background-color: rgb(255, 5, 5);
+    }
+  
+    .status-green-bg {
+        background-color: rgb(7, 252, 85);
+    }
+  
+    .sudo-blue-bg {
+        background-color: rgb(7, 207, 252);
+    }
+  
+    .sudo-grey-bg {
+        background-color: rgb(162, 159, 159);
+    }
+  
+    /* Center the button */
+    .center-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+  
+    .hover:hover {
+        background-color: #c6195e;
+        content: attr(Non-functional);
+        color: #ffffff;
+    }
+  
+    /* Make the table container full width */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+  
+    /* Adjust table width */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+  
+    /* Adjust table cell padding */
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+    }
+  
+    /* Merged styles from inline */
+    .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+  </style>
+<body>
+    <h2>All Request Deletion</h2>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Created By</th>
+                <th>Reason</th>
+                <th>Message</th>
+                <th>Actions</th> <!-- New column for actions -->
+            </tr>
+            </thead>
+            <tbody>
+                <% deleteRequests.forEach(deleteRequests => { %>
+            <tr>
+                <td class="hover"><%= deleteRequests.fullname %></td>
+                <td class="hover"><%= deleteRequests.createdBy %></td>
+                <td class="hover">
+                    <% if (deleteRequests.reason && deleteRequests.reason.length > 20) { %>
+                        <%= deleteRequests.reason.substring(0, 20) + "..." %>
+                    <% } else { %>
+                        <%= deleteRequests.reason %>
+                    <% } %>
+                <td class="hover">
+                    <% if (deleteRequests.msg && deleteRequests.msg.length > 20) { %>
+                        <%= deleteRequests.msg.substring(0, 20) + "..." %>
+                    <% } else { %>
+                        <%= deleteRequests.msg %>
+                    <% } %>
+                </td>
+                <td class="hover px-6 py-4 whitespace-nowrap">
+                    <!-- Add icons with links to your delete, view, and update routes -->
+                    <!-- <a href=""><i class="fas fa-edit text-green-500 cursor-pointer"></i></a> -->
+                    <a href="#" onclick="deleteRequests('<%= deleteRequests._id %>')"><i class="fas fa-trash-alt text-red-500 cursor-pointer"></i></a>
+                    <a href="/delete-requests/<%= deleteRequests._id %>"><i class="fas fa-eye text-blue-500 cursor-pointer mx-2"></i></a>
+                </td>
+                 
+            </tr>
+            <% }); %>
+            <tbody>
+        </table>
+
+         <!-- Assuming you have a variable 'currentPage' and 'totalPages' from the server-side -->
+        <div class="container mx-auto">
+            <div class="pagination">
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        </div>
+  </div>
+    </div>
+</body>
+<script>
+    function deleteRequests(username) {
+        if (confirm('Are you sure you want to delete this Requests?')) {
+            // Redirect to the delete route with the storage ID
+            window.location.href = "/delete-request/" + username + "?_method=DELETE";
+        }
+    }
+   </script>
+</html>

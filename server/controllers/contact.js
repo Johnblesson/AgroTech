@@ -33,7 +33,7 @@ export const createContacts = async (req, res) => {
 };
 
 
-// Get All Users Controller
+// Get All Users contact Controller
 export const getAllContacts = async (req, res) => {
 
     try {
@@ -67,6 +67,8 @@ export const getAllContacts = async (req, res) => {
       res.status(500).send('An error occurred while fetching users.');
     }
   };
+
+  
 
   // Get contact form
 export const getContactForm = async (req, res) => {

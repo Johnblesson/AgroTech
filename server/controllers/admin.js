@@ -4,6 +4,7 @@ import Applications from "../models/apply.js"; // Applications model
 import Farmers from "../models/farmers.js"; // Farmers model
 import PageViews from "../models/pageViews.js"; // PageViews model
 import IPAddress from "../models/ipaddress.js"; // IPAddress model
+import DeleteAccounts from "../models/deleteAccount.js";
 
 export const mainAdmin = async (req, res) => {
     try {
@@ -13,6 +14,7 @@ export const mainAdmin = async (req, res) => {
         const applicationsCount = await Applications.countDocuments();
         const farmersCount = await Farmers.countDocuments();
         const ipAddressCount = await IPAddress.countDocuments();
+        const deleteRequests = await DeleteAccounts.countDocuments();
 
         // Fetch counts for specific user roles
         const adminCount = await User.countDocuments({ role: 'admin' });
@@ -49,7 +51,8 @@ export const mainAdmin = async (req, res) => {
             accountant, 
             manager,
             ipAddresses,
-            ipAddressCount 
+            ipAddressCount, 
+            deleteRequests
         });
     } catch (error) {
         console.log(error);

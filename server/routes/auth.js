@@ -17,7 +17,7 @@ import
     getAdminOnly,
     getFarmerOnly,
     goBack,
-    deleteUserAccount,
+    // deleteUserAccount,
     activeUserSessions,
     loginHistory,
     removeLoginHistory,
@@ -31,6 +31,7 @@ import {
     toggle2FA 
 } 
 from '../controllers/2FA.js'
+import { deleteAccount, getDeleteForm, deleteRequests, getAllDeleteRequests, viewFullRequestDeletion } from "../controllers/deleteAccount.js";
 import upload from "../upload/upload.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
@@ -102,7 +103,14 @@ router.get("/farmer-only", getFarmerOnly)
 // Route to handle goBack
 router.get('/go-back', goBack);
 
-router.delete('/delete-account', ensureAuthenticated, deleteUserAccount);
-router.get('/delete-account', ensureAuthenticated, deleteUserAccount);
+// router.delete('/delete-account', ensureAuthenticated, deleteUserAccount);
+// router.get('/delete-account', ensureAuthenticated, deleteUserAccount);
+
+// Route to delete user account
+router.post('/delete-account', ensureAuthenticated, deleteAccount);
+router.get('/delete-account', ensureAuthenticated, getDeleteForm);
+router.get('/delete-requests', ensureAuthenticated, isAdmin, getAllDeleteRequests);
+router.delete('/delete-requests/:id', ensureAuthenticated, isAdmin, deleteRequests);
+router.get('/delete-requests/:id', ensureAuthenticated, isAdmin, viewFullRequestDeletion);
 
 export default router;

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Deletion Request</title>
+  <link rel="stylesheet" href="./css/form.css">
+  <style>
+.pre-container {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pre-container h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.pre-container p {
+  font-size: 1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <div class="pre-container">
+      <h1 class="formbold-form-title">Request Account Deletion</h1>
+      <p>Please fill out this form to request the permanent deletion of your AgroTech SL account.</p>
+    </div>
+    <form action="/delete-account" method="POST">
+      <div class="formbold-mb-3 formbold-input-wrapper">
+        <label for="fullname" class="formbold-form-label">Full Name:</label>
+        <div>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            value="<%= user.fullname %>"
+            class="formbold-form-input"
+            readonly
+          />
+        </div>
+      </div>
+
+      <input type="hidden" name="createdBy" value="<%= user.fullname %>" />
+      <input type="hidden" name="username" value="<%= user.username %>" />
+
+      <div class="formbold-mb-3">
+        <label for="reason" class="formbold-form-label">Reason for Account Deletion:</label>
+        <select name="reason" id="reason" class="formbold-form-input">
+          <option value="" disabled selected>Select a reason</option>
+          <option value="No longer need the account">No longer need the account</option>
+          <option value="Concerns about privacy or data security">Concerns about privacy or data security</option>
+          <option value="Dissatisfied with the platform">Dissatisfied with the platform</option>
+          <option value="Found an alternative solution">Found an alternative solution</option>
+          <option value="Other">Other (please specify below)</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="msg" class="formbold-form-label">Additional Comments (Optional):</label>
+        <textarea
+          rows="6"
+          name="msg"
+          id="msg"
+          class="formbold-form-input"
+          placeholder="Please provide additional details, <%= user.fullname %>..."
+        ></textarea>
+      </div>
+
+      <button type="submit" class="formbold-btn">Submit Request</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

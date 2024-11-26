@@ -10,7 +10,6 @@ import {
     getPostProductAdmin,
     guestPage, 
     faq,
-    agroNews,
     faqAdmin,
     farmingTips,
     weatherUpdate,
@@ -30,7 +29,8 @@ import {
     adminService, 
     adminBlog, 
     termsConditions, 
-    registrationProcessStatement 
+    registrationProcessStatement,
+    createAgroNews, agroNews, getNewsForm, adminReadAllNews, deleteNews
 } from "../render/admin.js";
 
 import { 
@@ -40,7 +40,7 @@ import {
     onlyAdmins, 
     onlyFarmer, 
     OnlyUsers 
-} from "../controllers/auth.js"
+} from "../controllers/auth.js";
 
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
@@ -65,8 +65,6 @@ router.get("/features", cacheMiddleware, ensureAuthenticated, features);
 router.get("/service", cacheMiddleware, ensureAuthenticated, service);
 
 router.get("/blog", cacheMiddleware, ensureAuthenticated, blog);
-
-router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews) // farmingTips
 
 router.get('/tips', cacheMiddleware, ensureAuthenticated, farmingTips)
 
@@ -149,5 +147,14 @@ router.get('/invalid-2FA-code', (req, res) => {
 router.get('/account-delete', (req, res) => {
     res.render('success/delete-account')
 })
+
+
+// Agro News routes
+router.post('/create-agro-news', cacheMiddleware, ensureAuthenticated, createAgroNews)
+router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews)
+router.get('/agro-news-form', cacheMiddleware, ensureAuthenticated, getNewsForm)
+router.get('/admin-read-all-news', cacheMiddleware, ensureAuthenticated, isAdmin, adminReadAllNews)
+router.delete('/delete-news/:id', cacheMiddleware, ensureAuthenticated, isAdmin, deleteNews)
+router.get('/delete-news/:id', cacheMiddleware, ensureAuthenticated, isAdmin, deleteNews)
 
 export default router;

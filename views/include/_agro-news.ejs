@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./css/farming-tips.css">
+<!-- <link rel="stylesheet" href="./css/farming-tips.css">
 
 <section class="farming-tips-section">
   <div class="container">
@@ -20,4 +20,45 @@
     </article>
 
   </div>
+</section> -->
+
+
+<link rel="stylesheet" href="./css/farming-tips.css">
+
+<section class="farming-tips-section">
+  <div class="container">
+    <h1>Latest News</h1>
+
+    <% if (newsList && newsList.length > 0) { %>
+      <% newsList.forEach((news) => { %>
+        <article>
+          <h2><%= news.title %></h2>
+          <p class="meta">
+            <span class="date">Published on: <%= news.createdAt.toDateString() %></span>
+            <p class="source">
+              <% if (news.source && news.sourceLink) { %>
+                Source:<a href="<%= news.sourceLink %>" target="_blank"><%= news.source %></a>
+              <% } else if (news.source) { %>
+                Source: <%= news.source %>
+              <% } %>
+            </p>            
+          </p>
+          <br>
+          <hr>
+          <p><%= news.newsDetail %></p> <br>
+          <% if (news.hashtags && news.hashtags.length > 0) { %>
+            <p class="hashtags">
+              <% news.hashtags.forEach((tag) => { %>
+                <span>#<%= tag %></span>
+              <% }) %>
+            </p>
+          <% } %>
+        </article>
+      <% }) %>
+    <% } else { %>
+      <p>No news available at the moment. Please check back later.</p>
+    <% } %>
+
+  </div>
 </section>
+

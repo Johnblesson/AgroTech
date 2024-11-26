@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroTech News - Post Form</title>
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <div class="pre-containter">
+      <h1 class="formbold-form-title">Share Your News</h1>
+    <pre>
+        Share your latest agricultural updates, insights, and opportunities with the AgroTech community. 
+        Your post will be published on the AgroTech News Feed for others to read and engage with.
+    </pre>
+    </div>
+<form action="/create-agro-news" method="POST">
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="title" class="formbold-form-label"> Title: </label>
+        <div>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Enter news title"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="source" class="formbold-form-label"> Source Name: </label>
+        <div>
+          <input
+            type="text"
+            name="source"
+            id="source"
+            placeholder="Enter source name"
+            class="formbold-form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="sourceLink" class="formbold-form-label"> Source Link: </label>
+        <div>
+          <input
+            type="link"
+            name="sourceLink"
+            id="sourceLink"
+            placeholder="Enter the source link (e.g., https://example.com/news)"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <input
+        type="hidden"
+        name="createdBy"
+        value="<%= user.fullname %>"
+      />
+
+      <div class="formbold-mb-3">
+        <label for="newsDetail" class="formbold-form-label">
+            News Detail:
+        </label>
+        <textarea
+          rows="6"
+          name="newsDetail"
+          id="newsDetail"
+          class="formbold-form-input"
+          placeholder="Enter your news details here, <%= user.fullname %>..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="formbold-mb-3 formbold-input-wrapp">
+        <label for="hashtags" class="formbold-form-label"> Hashtags: </label>
+        <div>
+          <input
+            type="text"
+            name="hashtags"
+            id="hashtags"
+            placeholder="Enter hashtags, separated by commas (e.g., #AgroTech, #Farming)"
+            class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="formbold-btn">Publish News</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

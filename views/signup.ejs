@@ -74,12 +74,21 @@
                     </div>
                 </div>
 
+                <!-- <div class="file-input-container">
+                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
+                    <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
+                    <label for="fileInput" class="file-input-label">
+                        <i class="fas fa-upload"></i> <span id="fileLabelText">Upload profile photo</span>
+                    </label>
+                </div> -->
+
                 <div class="file-input-container">
                     <label for="fileInput">Profile Photo<span class="required">*</span></label>
                     <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
                     <label for="fileInput" class="file-input-label">
                         <i class="fas fa-upload"></i> <span id="fileLabelText">Upload profile photo</span>
                     </label>
+                    <canvas id="canvas" style="display: none;"></canvas> <!-- Hidden canvas for resizing -->
                 </div>
                 
                 <button type="submit" class="submit-button">Submit</button>
@@ -101,5 +110,37 @@
         </div>
     </div>
     <script src="/js/signup.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const canvas = document.getElementById('canvas');
+        const fileLabelText = document.getElementById('fileLabelText');
+    
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        // Resize the image to 960x965 before uploading
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = 960;
+                        canvas.height = 965;
+                        ctx.drawImage(img, 0, 0, 960, 965);
+                        
+                        // Convert the resized image to a data URL
+                        const resizedDataURL = canvas.toDataURL('image/jpeg');
+                        
+                        // Replace file input with the resized image data URL
+                        fileInput.value = ''; // Clear the file input value
+                        fileInput.setAttribute('data-resized', resizedDataURL); // Store the resized image data URL
+                        fileLabelText.textContent = "Profile photo ready to upload"; // Update the label text
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>

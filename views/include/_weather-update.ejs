@@ -1,4 +1,7 @@
-<!-- include weather update -->
+<link rel="stylesheet" href="/css/farming-tips.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
 <style>
     .weather-container {
         max-width: 600px;
@@ -8,21 +11,33 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     h1 {
         text-align: center;
         color: #333;
-        font-style: normal;
-        font-size: 20px;
+        font-size: 24px;
         font-weight: bold;
+        margin-bottom: 15px;
     }
+
+    .short-description {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: center;
+        font-style: italic;
+    }
+
     .form-group {
         margin-bottom: 15px;
     }
+
     .form-group label {
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
     }
+
     .form-group select, .form-group button {
         width: 100%;
         padding: 10px;
@@ -30,6 +45,7 @@
         border-radius: 4px;
         font-size: 16px;
     }
+
     .weather-result {
         margin-top: 20px;
         padding: 10px;
@@ -37,6 +53,7 @@
         border-radius: 4px;
         background-color: #e7f1ff;
     }
+
     .weather-result h2 {
         margin: 0;
     }
@@ -62,81 +79,84 @@
         transform: scale(0.95);
     }
 </style>
-<div class="weather-container">
+
+<section class="farming-tips-section">
+  <div class="container">
     <h1>Free Weather Update</h1>
-    <div class="form-group">
-        <label for="region">Select Region</label>
-        <select id="region">
-            <option value="Freetown">Freetown</option>
-            <option value="Bo">Bo</option>
-            <option value="Kenema">Kenema</option>
-            <option value="Makeni">Makeni</option>
-            <option value="Koidu">Koidu</option>
-            <option value="Port Loko">Port Loko</option>
-            <option value="Moyamba">Moyamba</option>
-            <option value="Pujehun">Pujehun</option>
-            <option value="Tonkolili">Tonkolili</option>
-            <option value="Kambia">Kambia</option>
-        </select>
+    <p class="short-description">Get the latest weather updates for various regions in Sierra Leone, with details on temperature, humidity, and wind speed.</p>
+    
+    <div class="weather-container">
+        <div class="form-group">
+            <label for="region">Select Region</label>
+            <select id="region">
+                <option value="Freetown">Freetown</option>
+                <option value="Bo">Bo</option>
+                <option value="Kenema">Kenema</option>
+                <option value="Makeni">Makeni</option>
+                <option value="Koidu">Koidu</option>
+                <option value="Port Loko">Port Loko</option>
+                <option value="Moyamba">Moyamba</option>
+                <option value="Pujehun">Pujehun</option>
+                <option value="Tonkolili">Tonkolili</option>
+                <option value="Kambia">Kambia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="getWeather" class="colorful-button">Get Weather Update</button>
+        </div>
+        <div class="weather-result" id="weatherResult" style="display:none;">
+            <h2>Weather Update for <span id="locationName"></span></h2>
+            <p id="weatherDescription"></p>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <p id="windSpeed"></p>
+        </div>
     </div>
-    <!-- <div class="form-group">
-        <button id="getWeather">Get Weather Update</button>
-    </div> -->
-    <div class="form-group">
-        <button id="getWeather" class="colorful-button">Get Weather Update</button>
-    </div>
-    <div class="weather-result" id="weatherResult" style="display:none;">
-        <h2>Weather Update for <span id="locationName"></span></h2>
-        <p id="weatherDescription"></p>
-        <p id="temperature"></p>
-        <p id="humidity"></p>
-        <p id="windSpeed"></p>
-    </div>
-</div>
+</section>
 
 <script>
     let apiKey;
 
-fetch('/getWeatherKey')
-    .then(response => response.json())
-    .then(data => {
-        apiKey = data.apiKey;
-    })
-    .catch(error => {
-        console.error('Failed to load API key:', error);
-    });
-
-const getWeatherButton = document.getElementById('getWeather');
-const weatherResult = document.getElementById('weatherResult');
-const locationName = document.getElementById('locationName');
-const weatherDescription = document.getElementById('weatherDescription');
-const temperature = document.getElementById('temperature');
-const humidity = document.getElementById('humidity');
-const windSpeed = document.getElementById('windSpeed');
-
-getWeatherButton.addEventListener('click', () => {
-    const region = document.getElementById('region').value;
-    if (!apiKey) {
-        alert('API key is not loaded yet. Please try again later.');
-        return;
-    }
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${region},SL&appid=${apiKey}&units=metric`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Weather data not available');
-            }
-            return response.json();
-        })
+    fetch('/getWeatherKey')
+        .then(response => response.json())
         .then(data => {
-            locationName.textContent = data.name;
-            weatherDescription.textContent = `Weather: ${data.weather[0].description}`;
-            temperature.textContent = `Temperature: ${data.main.temp} °C`;
-            humidity.textContent = `Humidity: ${data.main.humidity}%`;
-            windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
-            weatherResult.style.display = 'block';
+            apiKey = data.apiKey;
         })
         .catch(error => {
-            alert(error.message);
+            console.error('Failed to load API key:', error);
         });
-});
+
+    const getWeatherButton = document.getElementById('getWeather');
+    const weatherResult = document.getElementById('weatherResult');
+    const locationName = document.getElementById('locationName');
+    const weatherDescription = document.getElementById('weatherDescription');
+    const temperature = document.getElementById('temperature');
+    const humidity = document.getElementById('humidity');
+    const windSpeed = document.getElementById('windSpeed');
+
+    getWeatherButton.addEventListener('click', () => {
+        const region = document.getElementById('region').value;
+        if (!apiKey) {
+            alert('API key is not loaded yet. Please try again later.');
+            return;
+        }
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${region},SL&appid=${apiKey}&units=metric`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Weather data not available');
+                }
+                return response.json();
+            })
+            .then(data => {
+                locationName.textContent = data.name;
+                weatherDescription.textContent = `Weather: ${data.weather[0].description}`;
+                temperature.textContent = `Temperature: ${data.main.temp} °C`;
+                humidity.textContent = `Humidity: ${data.main.humidity}%`;
+                windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+                weatherResult.style.display = 'block';
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
 </script>

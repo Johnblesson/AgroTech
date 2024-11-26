@@ -437,49 +437,7 @@ export const service = async (req, res) => {
     }
   };
 
-// Agro News Page
-export const agroNews = async (req, res) => {
-  
-  // Function to determine the time of the day
-const getTimeOfDay = () => {
-  const currentHour = new Date().getHours();
 
-  if (currentHour >= 5 && currentHour < 12) {
-    return 'Good Morning';
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return 'Good Afternoon';
-  } else {
-    return 'Good Evening';
-  }
-};
-  try {
-    const user = req.isAuthenticated() ? req.user : null;
-    const role = user ? user.role : null; // Get user role if user is authenticated
-    const isAdmin = role === 'admin'; // Define isAdmin based on the role
-    const sudo = user && user.sudo ? user.sudo : false;
-    const accountant = user && user.accountant ? user.accountant : false;
-    const manager = user && user.manager ? user.manager : false;
-
-     // Determine the time of the day
-    const greeting = getTimeOfDay();
-
-    // Render the index page with the receptions and latestStorage data
-    // res.render('agro-news', { user, greeting, role, alert: req.query.alert });
-    if (role === 'admin') {
-      res.render('agro-news-admin', { user, greeting, isAdmin, role, sudo, manager, accountant, alert: req.query.alert });
-    } 
-    else if (role === 'user') {
-      res.render('agro-news', { user, greeting, isAdmin, role, sudo, manager, accountant, alert: req.query.alert });
-    }
-     else {
-      // Handle other roles or unauthorized access
-      res.status(403).send('Unauthorized');
-    }
-  } catch (error) {
-    console.error('Error rendering the page:', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
 
 // Farming Tips Page
 export const farmingTips = async (req, res) => {

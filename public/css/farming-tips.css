@@ -40,3 +40,47 @@
     margin-bottom: 0;
   }
   
+
+
+  .source {
+    display: inline; /* Ensures the text remains on the same line */
+    font-size: 14px; /* Adjust as necessary */
+    color: #333; /* Optional styling for text color */
+  }
+  
+  .source a {
+    color: #007BFF; /* Optional link color */
+    text-decoration: none; /* Removes underline from links */
+  }
+  
+  .source a:hover {
+    text-decoration: underline; /* Underline link on hover */
+  }
+  
+
+
+  /* Read agro News */
+  .card-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto; /* Push the actions to the right */
+  }
+  
+  
+  .card-actions i {
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .card-actions i:hover {
+    transform: scale(1.2);
+  }
+  
+  .text-green-500 {
+    color: #28a745;
+  }
+  
+  .text-red-500 {
+    color: #dc3545;
+  }

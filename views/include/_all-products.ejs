@@ -33,7 +33,7 @@
     <button onclick="clearSearch('availability')">Clear</button>
 </div>
 
-        <% if (products.length > 0) { %> <!-- Check if there are products to display -->
+        <% if (products.length > 0) { %> <!-- If there are products -->
         <table class="fl-table">
             <thead>
             <tr>
@@ -49,7 +49,7 @@
                 <th>Negotiation</th>
                 <th>Availability</th>
                 <th>Verification</th>
-                <th>Actions</th> <!-- New column for actions -->
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -132,7 +132,7 @@
         }
         
         filter = input.value.toUpperCase();
-        table = document.getElementsByClassName("fl-table")[0]; // Assuming only one table
+        table = document.getElementsByClassName("fl-table")[0]; // Get the first table
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those who don't match the search query
@@ -140,13 +140,13 @@
             // Determine which column to search based on searchType
             switch (searchType) {
                 case 'aid':
-                    td = tr[i].getElementsByTagName("td")[0]; // Assuming AID is the first column
+                    td = tr[i].getElementsByTagName("td")[0];
                     break;
                 case 'location':
-                    td = tr[i].getElementsByTagName("td")[4]; // Assuming Location is the fifth column
+                    td = tr[i].getElementsByTagName("td")[4];
                     break;
                 case 'availability':
-                    td = tr[i].getElementsByTagName("td")[6]; // Assuming Availability is the seventh column
+                    td = tr[i].getElementsByTagName("td")[6];
                     break;
             }
             

@@ -120,30 +120,42 @@ router.get('/admin-product-success', cacheMiddleware, ensureAuthenticated, (req,
     res.render('success/admin-product')
 })
 
+// Post products success message
 router.get('/product-success', cacheMiddleware,  ensureAuthenticated, (req, res) => {
     res.render('success/farmers-product')
 })
 
+// Terms and conditions
 router.get("/services-fee-agreement", cacheMiddleware, (req, res) => {
     res.render("service-fee-agreement")
 })
 
+// Privacy policy
 router.get("/privacy-policy",  cacheMiddleware, (req, res) => {
     res.render("privacy-policy")
 })
 
+// Boosting benefits
+router.get("/boosting-benefits", (req, res) => {
+    res.render("boosting-benefits")
+})
+
+// Success messages
 router.get("/user-product-success", ensureAuthenticated, cacheMiddleware, (req, res) => {
     res.render("success/user-product")    
 });
 
+// Success messages
 router.get("/admin-product-success", ensureAuthenticated, isAdmin, cacheMiddleware, (req, res) => {
     res.render("success/admin-product")    
 });
 
+// 2FA invalid messages
 router.get('/invalid-2FA-code', (req, res) => {
     res.render('success/invalid-2FA-code')
 })
 
+// Account delete success message
 router.get('/account-delete', (req, res) => {
     res.render('success/delete-account')
 })

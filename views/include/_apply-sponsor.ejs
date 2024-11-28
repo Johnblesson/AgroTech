@@ -3,50 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgroTech | Admin Form</title>
+  <title>AgroTech | Form - Apply for boosting</title>
   <link rel="stylesheet" href="./css/form.css">
   <style>
     /* Define base styles for form elements */
-  .formbold-form-label {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .formbold-form-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-  }
-
-  /* Add responsive styles */
-  @media (max-width: 768px) {
-    .formbold-form-wrapper {
-      width: 90%;
-      margin: auto;
-    }
-
-    .formbold-input-wrapp {
+    .formbold-form-label {
       display: block;
-    }
-
-    .formbold-form-input {
       margin-bottom: 8px;
     }
 
-    .formbold-mb-3 {
-      margin-bottom: 24px;
+    .formbold-form-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 16px;
     }
+
+    /* Style for the Qmoney image */
+    .qmoney-logo {
+      display: block;
+      margin: 10px auto;
+      width: 80px; /* Adjust size as needed */
+    }
+
+
+  .payment-info-card {
+  border: 1px solid #ddd; /* Border around the card */
+  border-radius: 8px; /* Rounded corners for modern look */
+  padding: 20px; /* Space inside the card */
+  background-color: #f9f9f9; /* Light background for contrast */
+  text-align: center; /* Centered text */
+  margin-bottom: 20px; /* Space below the card */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for card depth */
+}
+
+.payment-info-card p {
+  margin: 10px 0; /* Space between text lines */
+  font-size: 0.95em; /* Slightly larger text for readability */
+  color: #333; /* Darker text for contrast */
+}
+
+.payment-info-card img {
+  display: block;
+  margin: 15px auto 0; /* Center image with space above */
+  width: 80px; /* Resize image to fit within the card */
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+  .payment-info-card {
+    padding: 15px;
   }
 
-  /* Additional styles for smaller screens */
-  @media (max-width: 480px) {
-    .formbold-form-input {
-      font-size: 14px;
-    }
+  .payment-info-card p {
+    font-size: 0.9em;
   }
+
+  .payment-info-card img {
+    width: 70px;
+  }
+}
+
+/* Media query for mobile screens */
+@media (max-width: 480px) {
+  .payment-info-card {
+    padding: 10px; /* Further reduce padding */
+    text-align: left; /* Align text to the left for better reading on small screens */
+  }
+
+  .payment-info-card p {
+    font-size: 0.85em; /* Smaller font size for very small screens */
+  }
+
+  .payment-info-card img {
+    width: 60px; /* Further reduce image size */
+  }
+}
+
+
+
+    /* Add responsive styles */
+    @media (max-width: 768px) {
+      .formbold-form-wrapper {
+        width: 90%;
+        margin: auto;
+      }
+
+      .formbold-input-wrapp {
+        display: block;
+      }
+
+      .formbold-form-input {
+        margin-bottom: 8px;
+      }
+
+      .formbold-mb-3 {
+        margin-bottom: 24px;
+      }
+    }
+
+    /* Additional styles for smaller screens */
+    @media (max-width: 480px) {
+      .formbold-form-input {
+        font-size: 14px;
+      }
+    }
 
   </style>
 </head>
@@ -54,12 +117,20 @@
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">Boost Product. 
-      Make sure you input your correct informations.
-      You will be contacted to make payment.
-    </pre>
+    <div class="payment-info-card">
+      <p><strong>Boost product with AgroTech SL!</strong></p>
+      <p>Ensure you input the correct information. Payment is only accepted via <strong>Qmoney.</strong></p>
+      <!-- Link to the boosting benefits -->
+      <a href="/boosting-benefits" target="_blank">Learn more about boosting benefits</a>
+      <p><strong>Payment Details:</strong></p>
+      <p>Qcell Number: <strong>034870008</strong></p>
+      <p>Account Name: <strong>AgroTech SL</strong></p>
+      <p>Amount: <strong>NLE 10</strong></p>
+      <p>Copy and paste your transaction message below to complete your application.</p>
+      <img src="./images/qmoney.png" alt="Qmoney Logo" class="qmoney-logo">
+    </div>    
 
-  <form action="/apply-boost" method="POST">
+    <form action="/apply-boost" method="POST">
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="title" class="formbold-form-label"> Product Name: </label>
         <div>
@@ -109,7 +180,7 @@
             type="text"
             name="phone"
             id="phone"
-            placeholder="Phone number"
+            placeholder="Enter your Qcell number..."
             class="formbold-form-input"
             required
           />
@@ -150,14 +221,15 @@
 
       <div class="formbold-mb-3">
         <label for="comments" class="formbold-form-label">
-            Comments:
+            Transaction Message:
         </label>
         <textarea
           rows="6"
           name="comments"
           id="comments"
           class="formbold-form-input"
-          placeholder="Add few comments"
+          placeholder="Copy and paste the transaction message here, <%= user.fullname %>"
+          required
         ></textarea>
       </div>
 

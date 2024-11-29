@@ -62,33 +62,61 @@
   background-color: #004d40;
 }
 
-/* Media Queries */
+.suggestions {
+  margin: 20px 0;
+  text-align: center;
+}
 
-/* For tablets and small screens */
+.suggestion-btn, .toggle-btn {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.suggestion-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
   .ask-ai-container {
     width: 70%;
     padding: 15px;
-    margin-top: 30px;
-    margin-bottom: 30px;
   }
   #userMessage {
     width: 75%;
   }
 }
 
-/* For mobile devices */
 @media (max-width: 480px) {
   .ask-ai-container {
     width: 90%;
     padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
   }
   #userMessage {
     width: 70%;
   }
   .ask-button {
     padding: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .suggestion-btn, .toggle-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  #userMessage {
+    width: 100%;
+    font-size: 16px;
   }
 }

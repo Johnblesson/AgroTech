@@ -13,48 +13,23 @@
       <!-- Messages will appear here -->
       <div id="conversation"></div>
     </div>
+
+    <div class="suggestions">
+      <h3>Suggestions:</h3>
+      <div id="suggestion-list">
+        <button class="suggestion-btn">What are the best crops to grow in Sierra Leone during the rainy season?</button>
+        <button class="suggestion-btn">How can I improve soil fertility on my farm?</button>
+        <button class="suggestion-btn">What are the common pests affecting rice crops in Sierra Leone?</button>
+      </div>
+      <button id="toggle-suggestions" class="toggle-btn">See More</button>
+    </div>
     
     <form id="askForm">
-      <input type="text" id="userMessage" placeholder="Type your question, <%= user.fullname  %>..." required />
+      <input type="text" id="userMessage" placeholder="Type your question, <%= user.fullname %>..." required />
       <button type="submit" id="askButton" class="ask-button">Ask</button>
     </form>
   </div>
 
-  <script>
-    const form = document.getElementById('askForm');
-    const chatBox = document.getElementById('conversation');
-    const askButton = document.getElementById('askButton');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const message = document.getElementById('userMessage').value;
-      chatBox.innerHTML += `<div class="user-message"><strong>You:</strong> ${message}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
-
-      askButton.disabled = true;
-      askButton.textContent = 'Loading...';
-
-      try {
-        const response = await fetch('/ask-ai', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message }),
-        });
-
-        if (!response.ok) throw new Error('Network response was not ok');
-
-        const data = await response.json();
-        chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${data.aiMessage}</div>`;
-      } catch (error) {
-        console.error('Error fetching AI response:', error);
-        chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> Sorry, an error occurred while fetching the response.</div>`;
-      } finally {
-        form.reset();
-        askButton.disabled = false;
-        askButton.textContent = 'Ask';
-        chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll after AI response
-      }
-    });
-  </script>
+  <script src="./js/ask-ai.js"></script>
 </body>
 </html>

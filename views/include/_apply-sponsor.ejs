@@ -5,142 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgroTech | Form - Apply for boosting</title>
   <link rel="stylesheet" href="./css/form.css">
-  <style>
-    /* Define base styles for form elements */
-    .formbold-form-label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .formbold-form-input {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      margin-bottom: 16px;
-    }
-
-    /* Style for the Qmoney image */
-    .qmoney-logo {
-      display: block;
-      margin: 10px auto;
-      width: 80px; /* Adjust size as needed */
-    }
-
-
-  .payment-info-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.payment-info-card p {
-  margin: 10px 0;
-  font-size: 0.95em;
-  color: #333;
-}
-
-.payment-info-card img {
-  display: block;
-  margin: 15px auto 0;
-  width: 80px;
-}
-
-
-#pay-now {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-
-  #pay-now:hover {
-    background-color: #0056b3;
-  }
-
-/* Media query for tablets and smaller screens */
-@media (max-width: 768px) {
-  .payment-info-card {
-    padding: 15px;
-  }
-
-  .payment-info-card p {
-    font-size: 0.9em;
-  }
-
-  .payment-info-card img {
-    width: 70px;
-  }
-}
-
-/* Media query for mobile screens */
-@media (max-width: 480px) {
-  .payment-info-card {
-    padding: 5px;
-    text-align: center;
-  }
-
-  .payment-info-card p {
-    font-size: 0.85em;
-  }
-
-  .payment-info-card img {
-    width: 60px;
-  }
-}
-
-
-
-    /* Add responsive styles */
-    @media (max-width: 768px) {
-      .formbold-form-wrapper {
-        width: 90%;
-        margin: auto;
-      }
-
-      .formbold-input-wrapp {
-        display: block;
-      }
-
-      .formbold-form-input {
-        margin-bottom: 8px;
-      }
-
-      .formbold-mb-3 {
-        margin-bottom: 24px;
-      }
-    }
-
-    /* Additional styles for smaller screens */
-    @media (max-width: 480px) {
-      .formbold-form-input {
-        font-size: 14px;
-      }
-    }
-
-    /* Media Query for smaller screens */
-    @media (max-width: 600px) {
-      #pay-now {
-        padding: 8px 16px;
-        font-size: 14px;
-        margin-top: 15px;
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="./css/boost.css">
 </head>
 <body>
 
@@ -148,18 +13,23 @@
   <div class="formbold-form-wrapper">
     <div class="payment-info-card">
       <p><strong>Boost product with AgroTech SL!</strong></p>
-      <p>Ensure you input the correct information. Payment is only accepted via <strong>Qmoney.</strong></p>
+      <p>Ensure you input the correct information. Payment is only accepted via <strong>Orange Money & Qmoney.</strong></p>
       <!-- Link to the boosting benefits -->
       <a href="/boosting-benefits" target="_blank">Learn more about boosting benefits</a>
       <p><strong>Payment Details:</strong></p>
-      <p>Qcell Number: <strong>034870008</strong></p>
-      <p>Account Name: <strong>AgroTech SL</strong></p>
+      <p>Orange Money Number: <strong>079969094</strong></p>
+      <p>Qcell Money Number: <strong>034870008</strong></p>
+      <p>Account Name: <strong>John Blesson Rowe</strong></p>
       <p>Amount: <strong>NLE 10</strong></p>
       <p>Copy and paste your transaction message below to complete your application.</p>
-      <button id="pay-now" type="button">PAY NOW</button>
-      <img src="./images/qmoney.png" alt="Qmoney Logo" class="qmoney-logo">
-    </div>    
-
+    
+      <div class="payment-actions">
+        <a href="#" id="pay-now">PAY NOW</a>
+        <img src="./images/qmoney.png" alt="Qmoney Logo" class="qmoney-logo">
+        <img src="./images/orangemoney.png" alt="Orange Money Logo" class="orange-money-logo">
+      </div>
+    </div>
+    
     <form action="/apply-boost" method="POST">
       <div class="formbold-mb-3 formbold-input-wrapp">
         <label for="title" class="formbold-form-label"> Product Name: </label>
@@ -269,9 +139,16 @@
 </div>
 <script>
   document.getElementById("pay-now").addEventListener("click", function () {
-    window.location.href = "tel:*323#";
+    const code = prompt("Enter 1 to use *144# or 2 to use *323#:");
+
+    if (code === "1") {
+      window.location.href = "tel:*144#";
+    } else if (code === "2") {
+      window.location.href = "tel:*323#";
+    } else {
+      alert("Invalid selection. Please try again.");
+    }
   });
 </script>
-
 </body>
 </html>

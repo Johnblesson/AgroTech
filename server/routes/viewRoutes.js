@@ -160,7 +160,6 @@ router.get('/account-delete', (req, res) => {
     res.render('success/delete-account')
 })
 
-
 // Agro News routes
 router.post('/create-agro-news', cacheMiddleware, ensureAuthenticated, createAgroNews)
 router.get('/agro-news', cacheMiddleware, ensureAuthenticated, agroNews)

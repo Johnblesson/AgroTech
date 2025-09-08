@@ -40,7 +40,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "pm2": "^5.4.2",
+    "pm2": "^6.0.9",
     "qrcode": "^1.5.4",
     "redis": "^4.6.14",
     "socket.io": "^4.7.5",

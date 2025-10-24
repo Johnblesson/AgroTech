@@ -1,84 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="./css/login.css">
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-    <title>AgroTech SL - Login | Empowering Farmers in Sierra Leone</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroTech SL - Login | Empowering Farmers in Sierra Leone</title>
 
-    <!-- Meta Description Tag -->
-    <meta name="description" content="AgroTech SL connects farmers in Sierra Leone with tools and resources to maximize productivity. Join us to enhance your farming experience.">
+  <meta name="description" content="AgroTech SL connects farmers in Sierra Leone with tools and resources to maximize productivity. Log in to access your agricultural dashboard and marketplace.">
+  <meta name="keywords" content="AgroTech, farming platform, Sierra Leone farmers, agriculture, agribusiness, sustainable farming, farmer marketplace">
+  <meta name="author" content="John Blesson Rowe">
 
-    <!-- Meta Keywords Tag -->
-    <meta name="keywords" content="
-        AgroTech,
-        farming platform,
-        Sierra Leone farmers,
-        agricultural tools,
-        farm management,
-        crop production,
-        farmer resources,
-        connect farmers,
-        sustainable agriculture,
-        agricultural innovation">
-    
-    <!-- Meta Author Tag -->
-    <meta name="author" content="John Blesson Rowe">
-    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+
+  <style>
+    /* ===== GLOBAL RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #dff7e1, #b9f1c8, #d8f8ff);
+      background-size: 400% 400%;
+      animation: gradientBG 8s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== SPLASH SCREEN ===== */
+    #splash-screen {
+      position: fixed;
+      top: 0; left: 0;
+      /* border-radius: 50%; */
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #c8f5d2, #b6f1ea);
+      z-index: 9999;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #splash-screen img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: contain;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.8; }
+    }
+
+    /* ===== LOGIN CONTAINER ===== */
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1.2s ease;
+      display: none; /* hidden until splash ends */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo-container img {
+      width: 250px;
+      height: 80px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2e7d32;
+      text-decoration: none;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    /* ===== ERROR MESSAGE ===== */
+    .error-message {
+      background-color: rgba(255, 99, 71, 0.15);
+      border: 1px solid #ff6f61;
+      color: #b71c1c;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* ===== INPUTS ===== */
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1px solid rgba(46, 125, 50, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #2e7d32;
+      outline: none;
+      background: #fff;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+    }
+
+    /* ===== BUTTON ===== */
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20);
+      transform: scale(1.03);
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+      color: #2e7d32;
+      font-size: 0.95rem;
+    }
+
+    p a {
+      color: #1b5e20;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 0 15px;
+        padding: 30px 20px;
+      }
+      .logo { font-size: 1.6rem; }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- Login Form -->
-        <div class="form-container login">
-            <form action="/login" method="post">
-                <div class="logo-container">
-                    <a href="/" class="logo">AgroTech SL</a>
-                </div>
 
-                <!-- Display error messages -->
-                <% if (errorMessages && errorMessages.length > 0) { %>
-                    <div class="error-message">
-                        <% errorMessages.forEach(function(message) { %>
-                            <p><%= message %></p>
-                        <% }); %>
-                    </div>
-                <% } %>
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <img src="/images/logo-full.jpg" alt="AgroTech Logo">
+  </div>
 
-                <input type="text" name="username" placeholder="Username" required aria-label="Username">
-                <div class="password-wrapper">
-                    <input type="password" name="password" id="password" placeholder="Password" required aria-label="Password">
-                    <i class="toggle-password fas fa-eye-slash" title="Toggle password visibility"></i>
-                </div>
-
-                <!-- <a href="#">Forgot Your Password?</a> -->
-                <button type="submit">Login</button>
-                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
-            </form>
-        </div>
+  <!-- LOGIN FORM -->
+  <div class="container" id="login-container">
+    <div class="logo-container">
+      <img src="/images/agrotech-logo1.png" alt="AgroTech SL Logo">
+      <!-- <a href="/" class="logo">AgroTech SL</a> --> <hr>
+      <h2>Welcome Back</h2>
     </div>
 
-    <script>
-        const togglePassword = document.querySelector('.toggle-password');
-        const password = document.querySelector('#password');
+    <form action="/login" method="post">
+      <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="error-message">
+          <% errorMessages.forEach(function(message) { %>
+            <p><%= message %></p>
+          <% }); %>
+        </div>
+      <% } %>
 
-        togglePassword.addEventListener('click', function (e) {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
+      <input type="text" name="username" placeholder="Username" required />
+      <div class="password-wrapper">
+        <input type="password" name="password" id="password" placeholder="Password" required />
+        <i class="toggle-password fas fa-eye-slash" title="Show/Hide password"></i>
+      </div>
 
-            // Adjust input width when password is hidden
-            if (type === 'password') {
-                password.style.width = 'calc(100% - 40px)';
-            } else {
-                password.style.width = '100%';
-            }
-        });
-    </script>
+      <button type="submit">Login</button>
+      <p>Don’t have an account? <a href="/signup">Sign Up</a></p>
+    </form>
+  </div>
+
+  <script>
+    // Password visibility toggle
+    const togglePassword = document.querySelector('.toggle-password');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+
+    // Splash Screen Timer (3 seconds)
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash-screen');
+      const loginContainer = document.getElementById('login-container');
+      setTimeout(() => {
+        splash.style.display = 'none';
+        loginContainer.style.display = 'block';
+      }, 3000);
+    });
+  </script>
 </body>
-
 </html>

@@ -1,146 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/signup.css">
-    <title>AgroTech SL | Signup </title>
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroTech SL | Create Account</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Join AgroTech SL to connect with farmers, buyers, and agricultural opportunities across Sierra Leone. Empower your farming journey with innovation." />
+  <meta name="keywords" content="AgroTech, Sierra Leone, farmers, agricultural innovation, farm marketplace, crop trading, digital farming, technology in agriculture" />
+  <meta name="author" content="John Blesson Rowe" />
 
-    <!-- Meta Tags -->
-    <meta name="description" content="AgroTech Platform supports Sierra Leonean farmers with resources to enhance their farming practices. Join us to connect with markets, access training, and manage crops effectively.">
-    <meta name="keywords" content="agriculture, agrotech, farming resources, crop management, Sierra Leone farmers, agricultural platform, farm marketplace, agricultural training, crop disease identification, farming community, sustainable farming, weather updates for farmers, farm budgeting, local produce, farming tools, market access for farmers">
-    <meta name="author" content="John Blesson Rowe">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e6f2e6, #d1ffd6);
+      font-family: 'Poppins', sans-serif;
+    }
 
-    <style>
-   
+    .auth-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-    </style>
+    .card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
+      background: #fff;
+    }
+
+    .card-header {
+      background: transparent;
+      text-align: center;
+      border-bottom: none;
+      padding-top: 30px;
+    }
+
+    .card-header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2e8b57;
+      text-decoration: none;
+    }
+
+    .card-header p {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .form-label span {
+      color: red;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 15px;
+    }
+
+    .btn-success {
+      background-color: #2e8b57;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-success:hover {
+      background-color: #267347;
+    }
+
+    .terms {
+      display: block;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .redirect-text {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .error-message {
+      background: #ffe5e5;
+      border-left: 4px solid #ff4d4d;
+      padding: 10px;
+      border-radius: 5px;
+      color: #a94442;
+      margin-bottom: 1rem;
+    }
+
+    .file-input-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      border: 1px dashed #bbb;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .file-input-label:hover {
+      background-color: #e9f7ef;
+      border-color: #2e8b57;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 40px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+  </style>
 </head>
+
 <body>
-    
-    <div class="container">
-        <div class="form-container sign-up">
-            <form action="/signup" method="post" enctype="multipart/form-data">
-                <h1>Create your account</h1>
-                <!-- Display flash error messages -->
-                <% if (errorMessages && errorMessages.length > 0) { %>
-                    <div class="error-message">
-                        <% errorMessages.forEach(function(message) { %>
-                            <p><%= message %></p>
-                        <% }); %>
-                    </div>
-                <% } %>
-            
-                <div>
-                    <label for="fullname">Full Name<span class="required">*</span></label>
-                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-                </div>
-            
-                <div>
-                    <label for="username">Username<span class="required">*</span></label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-            
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
-                </div>
-            
-                <div>
-                    <label for="phone">Phone Number<span class="required">*</span></label>
-                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
-                </div>
-            
-                <!-- <div class="password-wrapper">
-                    <label for="password">Password<span class="required">*</span></label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    <i class="toggle-password fas fa-eye-slash"></i>
-                </div> -->
+  <div class="auth-container">
+    <div class="card">
+      <div class="card-header">
+        <a href="/" class="logo"><i class="fa-solid fa-seedling"></i> AgroTech SL</a>
+        <h4 class="mt-2 fw-bold">Create Your Account</h4>
+        <p>Join our agricultural marketplace and connect with opportunities.</p>
+      </div>
 
-                <div class="password-wrapper">
-                    <label for="password">Password<span class="required">*</span></label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    <i class="toggle-password fas fa-eye-slash"></i>
-                    <div id="password-requirements">
-                        <p class="req">Password Requirements</p>
-                        <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
-                        <p id="length" class="invalid">Minimum 6 characters</p>
-                        <p id="uppercase" class="invalid">At least one uppercase letter</p>
-                        <p id="lowercase" class="invalid">At least one lowercase letter</p>
-                        <p id="number" class="invalid">At least one number</p>
-                    </div>
-                </div>
+      <div class="card-body">
 
-                <!-- <div class="file-input-container">
-                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
-                    <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
-                    <label for="fileInput" class="file-input-label">
-                        <i class="fas fa-upload"></i> <span id="fileLabelText">Upload profile photo</span>
-                    </label>
-                </div> -->
+        <% if (errorMessages && errorMessages.length > 0) { %>
+          <div class="error-message">
+            <% errorMessages.forEach(function(message) { %>
+              <p><%= message %></p>
+            <% }); %>
+          </div>
+        <% } %>
 
-                <div class="file-input-container">
-                    <label for="fileInput">Profile Photo<span class="required">*</span></label>
-                    <input type="file" name="photo" accept="image/*" class="file-input" id="fileInput">
-                    <label for="fileInput" class="file-input-label">
-                        <i class="fas fa-upload"></i> <span id="fileLabelText">Upload profile photo</span>
-                    </label>
-                    <canvas id="canvas" style="display: none;"></canvas> <!-- Hidden canvas for resizing -->
-                </div>
-                
-                <button type="submit" class="submit-button">Submit</button>
-            
-                <p class="hall">
-                    Check out the <a href="/registration-process-statement">Registration Statement Process</a>
-                </p>
-            
-                <p class="hall">Already have an account? <a href="/login">Login</a></p>
-            
-                <p class="hall">
-                    By clicking 'Submit' above, you acknowledge that you have read and agree to AgroTech SL's 
-                    <a href="/terms-and-conditions">Terms and Conditions</a>, 
-                    <a href="/services-fee-agreement">Service Fee Agreement</a> 
-                    and <a href="/privacy-policy">Privacy Policy</a>.
-                </p>
-            </form>
-            
-        </div>
+        <form action="/signup" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="form-label">Full Name <span>*</span></label>
+            <input type="text" name="fullname" class="form-control" placeholder="Enter your full name" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Username <span>*</span></label>
+            <input type="text" name="username" class="form-control" placeholder="Choose a username" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email (optional)</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Phone Number <span>*</span></label>
+            <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" required />
+          </div>
+
+          <div class="mb-3 position-relative">
+            <label class="form-label">Password <span>*</span></label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required />
+            <i class="toggle-password fas fa-eye-slash" onclick="togglePassword()"></i>
+
+            <div id="password-requirements" class="mt-2 small">
+              <strong>Password Requirements:</strong>
+              <ul class="list-unstyled">
+                <li id="length" class="text-danger">Minimum 6 characters</li>
+                <li id="uppercase" class="text-danger">At least one uppercase letter</li>
+                <li id="lowercase" class="text-danger">At least one lowercase letter</li>
+                <li id="number" class="text-danger">At least one number</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Profile Photo <span>*</span></label>
+            <input type="file" name="photo" accept="image/*" class="form-control" required />
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">Create Account</button>
+          </div>
+
+          <p class="redirect-text mt-3">
+            Already have an account? <a href="/login" class="text-success fw-semibold">Login here</a>
+          </p>
+
+          <small class="terms">
+            By clicking “Create Account”, you agree to AgroTech SL’s 
+            <a href="/terms-and-conditions" class="text-success">Terms</a>, 
+            <a href="/services-fee-agreement" class="text-success">Service Fee Agreement</a> 
+            & <a href="/privacy-policy" class="text-success">Privacy Policy</a>.
+          </small>
+        </form>
+      </div>
     </div>
-    <script src="/js/signup.js"></script>
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const canvas = document.getElementById('canvas');
-        const fileLabelText = document.getElementById('fileLabelText');
-    
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function() {
-                        // Resize the image to 960x965 before uploading
-                        const ctx = canvas.getContext('2d');
-                        canvas.width = 960;
-                        canvas.height = 965;
-                        ctx.drawImage(img, 0, 0, 960, 965);
-                        
-                        // Convert the resized image to a data URL
-                        const resizedDataURL = canvas.toDataURL('image/jpeg');
-                        
-                        // Replace file input with the resized image data URL
-                        fileInput.value = ''; // Clear the file input value
-                        fileInput.setAttribute('data-resized', resizedDataURL); // Store the resized image data URL
-                        fileLabelText.textContent = "Profile photo ready to upload"; // Update the label text
-                    };
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const password = document.getElementById('password');
+      const toggleIcon = document.querySelector('.toggle-password');
+      if (password.type === 'password') {
+        password.type = 'text';
+        toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        password.type = 'password';
+        toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

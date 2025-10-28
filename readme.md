@@ -1,4 +1,4 @@
-# AgroTech SL: Enhancing Agriculture in Sierra Leone
+# AgroTech SL: Buy & Sell Fresh Farm Produce Across Sierra Leone
 
 <img src="public/images/1.jpg" alt="AgroTech UI">
 <a href="https://agrotechsl.onrender.com/">Demo</a>

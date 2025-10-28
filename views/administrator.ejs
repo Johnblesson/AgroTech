@@ -1,115 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Admin Dashboard</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./css/admin.css" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/admin.css">
     <style>
-        a {
-          text-decoration: none;
-          /* pointer-events: none; */
-          color: #ffffff;
-        }
-        a:hover{
-          color: #ffffff;
-        }
-
-        .header-left {
-          display: flex;
-          align-items: center;
-        }
-
-        .user-fullname {
-        font-size: 18px;
-        margin-right: 10px; /* Adjust as needed */
+      a {
+        text-decoration: none;
+        color: #ffffff;
       }
+      a:hover {
+        color: #ffffff;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-fullname {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+
       .user-role {
         font-size: 18px;
-        color: grey; /* Optional: change the color as needed */
+        color: grey;
       }
 
-      /* Hide specific icons on mobile view */
       @media (max-width: 768px) {
-        .header-right .material-icons-outlined {
+        .header-right i {
           display: none;
         }
-
         .header-right a {
           display: none;
         }
       }
+    </style>
 
-      </style>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-        <script>
-          // Socket.io code
-            document.addEventListener('DOMContentLoaded', (event) => {
-                const socket = io();
-    
-                socket.on('new-product', (data) => {
-                    alert(`New product created: ${data.title} at ${data.location}`);
-                });
-            });
-    
-            document.addEventListener('DOMContentLoaded', (event) => {
-                const socket = io();
-    
-                socket.on('new-application', (data) => {
-                    alert(`New application created: ${data.createdBy} applied for property ${data.applyPid} at ${data.location}`);
-                });
-            });
-        </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script
+      src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+      defer
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const socket = io();
+
+        socket.on("new-product", (data) => {
+          alert(`New product created: ${data.title} at ${data.location}`);
+        });
+
+        socket.on("new-application", (data) => {
+          alert(
+            `New application created: ${data.createdBy} applied for property ${data.applyPid} at ${data.location}`
+          );
+        });
+      });
+    </script>
   </head>
+
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
-          <span class="material-icons-outlined">menu</span>
+          <i class="fa-solid fa-bars"></i>
         </div>
-        <div class="header-left">
-          <span class="material-icons-outlined">person</span>
-          <p class="user-fullname"><a href="/view/<%= user._id %>"><%= user ? user.fullname : '' %></a></p>
-          <% if (sudo) { %>
-            <p class="user-role">(CEO)</p>
-          <% } else { %>
-            <p></p> 
-          <% } %>
-          
-         <% if (accountant) { %>
-            <p class="user-role">(Accountant)</p>
-          <% } else { %>
-            <p></p> 
-          <% } %>
 
-          <% if (manager) { %>
-            <p class="user-role">(Managing Director)</p>
-          <% } else { %>
-              <p></p> 
+        <div class="header-left">
+          <i class="fa-solid fa-user"></i>
+          <p class="user-fullname">
+            <a href="/view/<%= user._id %>"><%= user ? user.fullname : '' %></a>
+          </p>
+
+          <% if (sudo) { %>
+          <p class="user-role">(CEO)</p>
+          <% } else if (accountant) { %>
+          <p class="user-role">(Accountant)</p>
+          <% } else if (manager) { %>
+          <p class="user-role">(Managing Director)</p>
           <% } %>
         </div>
+
         <div class="header-right">
-          <span class="material-icons-outlined"><a href="#" class="header-top-social-link">
-            <img src="./images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
+          <a href="#" class="header-top-social-link">
+            <img
+              src="./images/sl.png"
+              alt="Sierra Leone"
+              style="width: 20px; height: 20px; border-radius: 50%"
+            />
           </a>
-        </span>
-          <span class="material-icons-outlined"><a href="/notifications">notifications</a></span>
-          <span class="material-icons-outlined"><a href="/all-messages">chat</a></span>
-          <span class="material-icons-outlined"><a href="/view/<%= user._id %>">account_circle</a></span>
-          <span class="material-icons-outlined"><a href="/logout">logout</a></span>
+          <a href="/notifications" title="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </a>
+          <a href="/all-messages" title="Messages">
+            <i class="fa-solid fa-comments"></i>
+          </a>
+          <a href="/view/<%= user._id %>" title="Profile">
+            <i class="fa-solid fa-user-circle"></i>
+          </a>
+          <a href="/logout" title="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -118,50 +128,52 @@
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
-            <a href="/admin-home"><span class="material-icons-outlined">home</span> AgroTech SL </a>
+            <a href="/admin-home">
+              <i class="fa-solid fa-house"></i> AgroTech SL
+            </a>
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <i class="fa-solid fa-xmark" onclick="closeSidebar()"></i>
         </div>
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
             <a href="/all-messages" target="_blank">
-              <span class="material-icons-outlined">chat</span> Messages
+              <i class="fa-solid fa-comments"></i> Messages
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/all-boost" target="_blank">
-              <span class="material-icons-outlined">payment</span> Payments
+              <i class="fa-solid fa-credit-card"></i> Payments
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/all-admin-user" target="_blank">
-              <span class="material-icons-outlined">groups</span> Administrative
+              <i class="fa-solid fa-user-shield"></i> Administrative
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/verify-product" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Verification
+              <i class="fa-solid fa-check-double"></i> Verification
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/sponsorship" target="_blank">
-              <span class="material-icons-outlined">monetization_on</span> Sponsorship
+              <i class="fa-solid fa-hand-holding-dollar"></i> Sponsorship
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/availability" target="_blank">
-              <span class="material-icons-outlined">event_available</span> Avaliability
+              <i class="fa-solid fa-calendar-check"></i> Availability
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/active-sessions" target="_blank">
-              <span class="material-icons-outlined">groups</span> Active Sessions
+              <i class="fa-solid fa-users"></i> Active Sessions
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="/settings" target="_blank">
-              <span class="material-icons-outlined">settings</span> Settings
+              <i class="fa-solid fa-gear"></i> Settings
             </a>
           </li>
         </ul>
@@ -171,154 +183,169 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>ADMIN DASHBOARD</h2>
+          <h2><i class="fa-solid fa-gauge"></i> ADMIN DASHBOARD</h2>
         </div>
 
+        <!-- Top Cards -->
         <div class="main-cards">
           <div class="card">
             <a href="/all-products">
-            <div class="card-inner">
-              <h3>PRODUCTS</h3>
-              <span class="material-icons-outlined">home</span>
-            </div></a>
-            <!-- <h1>249</h1> -->
+              <div class="card-inner">
+                <h3>PRODUCTS</h3>
+                <i class="fa-solid fa-box"></i>
+              </div>
+            </a>
             <h1><%= productsCount %></h1>
           </div>
 
-          
           <div class="card">
             <a href="/all-applications">
-            <div class="card-inner">
-              <h3>APPLICATIONS</h3>
-              <span class="material-icons-outlined">category</span>
-            </div></a>
+              <div class="card-inner">
+                <h3>APPLICATIONS</h3>
+                <i class="fa-solid fa-file-circle-check"></i>
+              </div>
+            </a>
             <h1><%= applicationsCount %></h1>
           </div>
 
           <div class="card">
             <a href="/all-users">
-            <div class="card-inner">
-              <h3>ALL USERS</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div></a>
+              <div class="card-inner">
+                <h3>ALL USERS</h3>
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </a>
             <h1><%= usersCount %></h1>
           </div>
 
           <div class="card">
             <a href="#">
-            <div class="card-inner"> 
-              <h3>ACCOUNTS</h3>
-              <span class="material-icons-outlined">money</span>
-            </div></a>
-            <!-- <h1>Company Records</h1> -->
+              <div class="card-inner">
+                <h3>ACCOUNTS</h3>
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+            </a>
           </div>
         </div>
 
+        <!-- Second Row -->
         <div class="main-cards">
           <div class="card">
             <a href="/farmers-program-list">
-            <div class="card-inner">
-              <h3>FARMERS PROGRAM</h3>
-              <span class="material-icons-outlined">category</span>
-            </div></a>
-            <!-- <h1>249</h1> -->
-             <!-- <p>Applications</p> -->
+              <div class="card-inner">
+                <h3>FARMERS PROGRAM</h3>
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+            </a>
             <h1><%= farmersCount %></h1>
           </div>
 
-          
           <div class="card">
             <a href="/only-admins">
-            <div class="card-inner">
-              <h3>ADMINS</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div></a>
+              <div class="card-inner">
+                <h3>ADMINS</h3>
+                <i class="fa-solid fa-user-tie"></i>
+              </div>
+            </a>
             <h1><%= adminCount %></h1>
           </div>
 
           <div class="card">
             <a href="/only-users">
-            <div class="card-inner">
-              <h3>USERS</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div></a>
+              <div class="card-inner">
+                <h3>USERS</h3>
+                <i class="fa-solid fa-user"></i>
+              </div>
+            </a>
             <h1><%= userCount %></h1>
           </div>
 
           <div class="card">
             <a href="/only-farmers">
-            <div class="card-inner"> 
-              <h3>FARMERS</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div></a>
+              <div class="card-inner">
+                <h3>FARMERS</h3>
+                <i class="fa-solid fa-tractor"></i>
+              </div>
+            </a>
             <h1><%= farmerCount %></h1>
           </div>
         </div>
 
+        <!-- Charts -->
         <div class="charts">
           <div class="charts-card">
             <a href="/view-ip-addresses">
-            <h2 class="chart-title">IP Addresses of Visitors</h2>
-             <h1 style="text-align: center;"><%= ipAddressCount %></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-location-dot"></i> IP Addresses of Visitors
+              </h2>
+              <h1 style="text-align: center"><%= ipAddressCount %></h1>
+            </a>
           </div>
+
           <div class="charts-card">
             <a href="/metrics">
-              <h2 class="chart-title">Web Application Metrics</h2>
-              <h1 style="text-align: center;"></h1>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-chart-line"></i> Web Application Metrics
+              </h2>
             </a>
-          </div>          
+          </div>
+
           <div class="charts-card">
             <a href="#">
-            <h2 class="chart-title">Web Application Views</h2>
-             <h1 style="text-align: center;"><%= views %></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-eye"></i> Web Application Views
+              </h2>
+              <h1 style="text-align: center"><%= views %></h1>
+            </a>
           </div>
 
           <div class="charts-card">
             <a href="/admin-message-user">
-            <h2 class="chart-title">Send User Message</h2>
-             <h1 style="text-align: center;"></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-envelope"></i> Send User Message
+              </h2>
+            </a>
           </div>
 
           <div class="charts-card">
             <a href="/message-history">
-            <h2 class="chart-title">Message History</h2>
-             <h1 style="text-align: center;"></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-clock-rotate-left"></i> Message History
+              </h2>
+            </a>
           </div>
 
           <div class="charts-card">
             <a href="/delete-requests">
-            <h2 class="chart-title">Request Account Deletion</h2>
-             <h1 style="text-align: center;"><%= deleteRequests %></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-trash"></i> Request Account Deletion
+              </h2>
+              <h1 style="text-align: center"><%= deleteRequests %></h1>
+            </a>
           </div>
 
           <div class="charts-card">
             <a href="/agro-news-form">
-            <h2 class="chart-title">Post Agri News</h2>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-newspaper"></i> Post Agri News
+              </h2>
+            </a>
           </div>
 
           <div class="charts-card">
             <a href="/admin-read-all-news">
-            <h2 class="chart-title">Read Agri News</h2>
-            <h1 style="text-align: center;"><%= newsCount %></h1>
-          </a>
+              <h2 class="chart-title">
+                <i class="fa-solid fa-book-open"></i> Read Agri News
+              </h2>
+              <h1 style="text-align: center"><%= newsCount %></h1>
+            </a>
           </div>
-
         </div>
       </main>
-      <!-- End Main -->
-
     </div>
 
     <!-- Scripts -->
-    <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
-    <!-- Custom JS -->
     <script src="./js/admin.js"></script>
   </body>
 </html>

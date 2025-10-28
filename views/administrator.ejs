@@ -44,6 +44,47 @@
         color: grey;
       }
 
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+    .user-avatar img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4CAF50;
+      transition: transform 0.2s ease;
+    }
+
+    .user-avatar img:hover {
+      transform: scale(1.05);
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .user-fullname a {
+      font-weight: 600;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .user-fullname a:hover {
+      color: #4CAF50;
+    }
+
+    .user-role {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+
       @media (max-width: 768px) {
         .header-right i {
           display: none;
@@ -85,20 +126,19 @@
           <i class="fa-solid fa-bars"></i>
         </div>
 
-        <div class="header-left">
-          <i class="fa-solid fa-user"></i>
-          <p class="user-fullname">
-            <a href="/view/<%= user._id %>"><%= user ? user.fullname : '' %></a>
-          </p>
+        <div class="header-left"> 
+          <i class="fa-solid fa-user"></i> 
+          <p class="user-fullname"> 
+            <a href="/view/<%= user._id %>">
+              <%= user ? user.fullname : '' %></a> 
+            </p> <% if (sudo) { %> <p class="user-role">(CEO)</p> 
+            <% } else if (accountant)
+             { %> <p class="user-role">(Accountant)</p> 
+             <% } else if (manager) 
+             { %> <p class="user-role">(Managing Director)</p> 
+             <% } %> 
+            </div>
 
-          <% if (sudo) { %>
-          <p class="user-role">(CEO)</p>
-          <% } else if (accountant) { %>
-          <p class="user-role">(Accountant)</p>
-          <% } else if (manager) { %>
-          <p class="user-role">(Managing Director)</p>
-          <% } %>
-        </div>
 
         <div class="header-right">
           <a href="#" class="header-top-social-link">

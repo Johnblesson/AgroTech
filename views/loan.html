@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Microloan Application | FinTech</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4CAF50, #2196F3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .loan-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      padding: 30px 25px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .loan-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .loan-header h3 {
+      font-weight: 700;
+      color: #333;
+    }
+
+    .loan-header p {
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+
+    .btn-apply {
+      width: 100%;
+      background: linear-gradient(90deg, #4CAF50, #2196F3);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-apply:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(90deg, #43a047, #1976d2);
+    }
+
+    .text-small {
+      font-size: 0.85rem;
+      color: #777;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .form-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    @media (max-width: 576px) {
+      .loan-card {
+        padding: 25px 20px;
+      }
+      .loan-header h3 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loan-card">
+    <div class="loan-header">
+      <i class="fa-solid fa-coins fa-2x text-success mb-2"></i>
+      <h3>Apply for a Mini Microloan</h3>
+      <p>Quick, simple, and secure financial support.</p>
+    </div>
+
+    <form>
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-user form-icon"></i>
+        <input type="text" class="form-control ps-5" placeholder="Full Name" required>
+      </div>
+
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-envelope form-icon"></i>
+        <input type="email" class="form-control ps-5" placeholder="Email Address" required>
+      </div>
+
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-phone form-icon"></i>
+        <input type="tel" class="form-control ps-5" placeholder="Phone Number" required>
+      </div>
+
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-money-bill-wave form-icon"></i>
+        <input type="number" class="form-control ps-5" placeholder="Loan Amount (SLL)" required>
+      </div>
+
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-clock form-icon"></i>
+        <select class="form-control ps-5" required>
+          <option value="">Select Repayment Duration</option>
+          <option>1 Month</option>
+          <option>3 Months</option>
+          <option>6 Months</option>
+          <option>12 Months</option>
+        </select>
+      </div>
+
+      <div class="mb-3 input-group">
+        <i class="fa-solid fa-briefcase form-icon"></i>
+        <input type="text" class="form-control ps-5" placeholder="Employment / Business Info" required>
+      </div>
+
+      <button type="submit" class="btn btn-apply">Submit Application</button>
+      <p class="text-small mt-3">
+        🔒 Your information is encrypted and kept confidential.
+      </p>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

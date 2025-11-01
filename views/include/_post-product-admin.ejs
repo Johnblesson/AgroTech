@@ -1,126 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Posting Form</title>
-  <link rel="stylesheet" href="./css/form.css">
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroTech SL — Add Product</title>
+  <link rel="stylesheet" href="/css/form.css" />
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
 </head>
 
 <body>
-<div class="formbold-main-wrapper">
-  <div class="formbold-form-wrapper">
-    <pre style="text-align: center; font: 0.6em sans-serif;">
-      Enter the complete details of your product. 
-      Ensure all information is correct so buyers can reach out. 
-      We’ll connect you to potential buyers soon!
-    </pre>
-    <form action="create-product" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="productId" id="productId" class="formbold-form-input" />
+  <div class="agrotech-form-container">
+    <div class="agrotech-form-card">
+      <h2 class="agrotech-form-title">🌾 Post Your Agricultural Product</h2>
 
-      <div class="formbold-mb-3">
-        <label for="title" class="formbold-form-label">Product Name: </label>
-        <input type="text" name="title" id="title" placeholder="Enter Product Name" class="formbold-form-input" required/>
-      </div>
+      <p class="agrotech-form-subtitle">
+        Enter complete and accurate details of your product to connect with potential buyers across Sierra Leone.
+      </p>
 
-      <div class="formbold-mb-3">
-        <label for="typeOfProduct" class="formbold-form-label"> Product Type: </label>
-        <select id="typeOfProduct" name="typeOfProduct" class="formbold-form-input" required>
-          <option value="" disabled selected hidden>Select Product Type</option>
-          <option value="Crop">Crop</option>
-          <option value="Livestock">Livestock</option>
-          <option value="Poultry">Poultry</option>
-          <option value="Dairy">Dairy</option>
-          <option value="Others">Others</option>
-        </select>
-      </div>
+      <form action="create-product" method="POST" enctype="multipart/form-data" id="productForm">
 
-      <div class="formbold-mb-3">
-        <label for="price" class="formbold-form-label"> Price: </label>
-        <input type="number" name="price" id="price" placeholder="Enter Price" class="formbold-form-input" required/>
-      </div>
+        <input type="hidden" name="productId" id="productId" />
 
-      <div class="formbold-mb-3">
-        <label for="currency" class="formbold-form-label"> Currency: </label>
-        <select id="currency" name="currency" class="formbold-form-input" required>
-          <option value="" disabled selected>Select Currency</option>
-          <option value="SLL">Sierra Leonean Leone (SLL)</option>
-          <option value="USD">United States Dollar (USD)</option>
-          <option value="EUR">Euro (EUR)</option>
-        </select>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="title">Product Name</label>
+          <input type="text" name="title" id="title" placeholder="e.g., Fresh Cassava Tubers" required />
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="phone" class="formbold-form-label"> Contact Phone: </label>
-        <input type="text" name="phone" id="phone" placeholder="Phone Number" class="formbold-form-input" required/>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="typeOfProduct">Product Type</label>
+          <select name="typeOfProduct" id="typeOfProduct" required>
+            <option value="" disabled selected>Select Product Type</option>
+            <option value="Crop">Crop</option>
+            <option value="Livestock">Livestock</option>
+            <option value="Poultry">Poultry</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="location" class="formbold-form-label"> Location: </label>
-        <input type="text" name="location" id="location" placeholder="Location" class="formbold-form-input" required/>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="price">Price</label>
+          <input type="number" name="price" id="price" placeholder="Enter Price" required />
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="region" class="formbold-form-label"> Region: </label>
-        <select id="region" name="region" class="formbold-form-input" required>
-          <option value="" disabled selected hidden>Select Region</option>
-          <option value="Western Region">Western Region</option>
-          <option value="Eastern Region">Eastern Region</option>
-          <option value="Southern Region">Southern Region</option>
-          <option value="Northern Region">Northern Region</option>
-          <option value="Others">Others</option>
-        </select>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="currency">Currency</label>
+          <select id="currency" name="currency" required>
+            <option value="" disabled selected>Select Currency</option>
+            <option value="SLL">Leone (SLL)</option>
+            <option value="USD">United States Dollar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+          </select>
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
-        <select id="negotiation" name="negotiation" class="formbold-form-input" required>
-          <option value="" disabled selected hidden>Is the price negotiable?</option>
-          <option value="Negotiable">Negotiable</option>
-          <option value="Non Negotiable">Non Negotiable</option>
-        </select>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="phone">Contact Phone</label>
+          <input type="text" name="phone" id="phone" placeholder="e.g., +232 76 123 456" required />
+        </div>
 
-      <div class="formbold-mb-3">
-        <input type="hidden" name="role" value="<%= user.role %>" class="formbold-form-input"/>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="location">Location</label>
+          <input type="text" name="location" id="location" placeholder="e.g., Bo Town" required />
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="createdBy" class="formbold-form-label"> Created By: </label>
-        <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
-      </div>
+        <div class="agrotech-input-group">
+          <label for="region">Region</label>
+          <select id="region" name="region" required>
+            <option value="" disabled selected>Select Region</option>
+            <option value="Western Region">Western Region</option>
+            <option value="Eastern Region">Eastern Region</option>
+            <option value="Southern Region">Southern Region</option>
+            <option value="Northern Region">Northern Region</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
 
-      <div class="formbold-mb-3">
-        <label for="description" class="formbold-form-label"> Product Description: </label>
-        <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Describe the product in detail..."></textarea>
-      </div>
+        <div class="agrotech-input-group">
+          <label for="negotiation">Negotiation</label>
+          <select id="negotiation" name="negotiation" required>
+            <option value="" disabled selected>Is the price negotiable?</option>
+            <option value="Negotiable">Negotiable</option>
+            <option value="Non Negotiable">Non Negotiable</option>
+          </select>
+        </div>
 
-      <div class="file-input-container">
-        <label for="photos" class="formbold-form-label"> Upload Images </label>
-        <input type="file" name="photo" class="formbold-form-file" required>
-        <input type="file" name="photo1" class="formbold-form-file">
-        <input type="file" name="photo2" class="formbold-form-file">
-      </div>
+        <div class="agrotech-input-group">
+          <label for="description">Product Description</label>
+          <textarea name="description" id="description" rows="5" placeholder="Describe your product..."></textarea>
+        </div>
 
-      <button type="submit" class="formbold-btn">Add Product</button>
-    </form>
+        <input type="hidden" name="role" value="<%= user.role %>" />
+        <div class="agrotech-input-group">
+          <label for="createdBy">Created By</label>
+          <input type="text" name="createdBy" value="<%= user.fullname %>" readonly />
+        </div>
+
+        <div class="file-section">
+          <label>Upload Product Images</label>
+          <input type="file" name="photo" required />
+          <input type="file" name="photo1" />
+          <input type="file" name="photo2" />
+        </div>
+
+        <button type="submit" class="agrotech-btn">Add Product</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<script>
-  document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(this);
+  <script>
+    document.querySelector('#productForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
 
-    fetch('/create-product', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  });
-</script>
+      fetch('/create-product', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.error('Error:', err));
+    });
+  </script>
 </body>
 </html>

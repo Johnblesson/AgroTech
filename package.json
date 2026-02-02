@@ -15,7 +15,7 @@
     "@google-cloud/vertexai": "^1.10.0",
     "aws-sdk": "^2.1628.0",
     "axios": "^1.7.2",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "body-parser": "^1.20.2",
     "cluster": "^0.7.7",
     "compression": "^1.7.4",

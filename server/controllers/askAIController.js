@@ -1,57 +1,98 @@
+// import dotenv from "dotenv";
+// import { TextServiceClient } from "@google-ai/generativelanguage";
+
+// dotenv.config();
+
+// // Load environment variables
+// const API_KEY = process.env.GOOGLE_API_KEY; // Your Gemini API key
+// const MODEL_NAME = "models/gemini-1.5"; // Or gemini-1.5-pro for higher reasoning
+
+// // Initialize Gemini client
+// const client = new TextServiceClient({
+//   apiKey: API_KEY,
+// });
+
+// // ===============================
+// // POST: Get AI Response
+// // ===============================
+// export const getAIResponse = async (req, res) => {
+//   try {
+//     const userMessage = req.body.message;
+
+//     // Send user input to Gemini
+//     const [response] = await client.generateText({
+//       model: MODEL_NAME,
+//       temperature: 0.7,
+//       candidateCount: 1,
+//       prompt: {
+//         text: userMessage,
+//       },
+//     });
+
+//     const aiMessage =
+//       response?.candidates?.[0]?.content || "No response from AI.";
+
+//     res.json({ aiMessage });
+//   } catch (error) {
+//     console.error("Error fetching AI response:", error);
+
+//     if (error.code === 403) {
+//       return res.status(403).json({
+//         error:
+//           "Access denied. Make sure your Gemini API key is correct and valid.",
+//       });
+//     }
+
+//     if (error.code === 401) {
+//       return res
+//         .status(401)
+//         .json({ error: "Unauthorized. Check your Google API key." });
+//     }
+
+//     res
+//       .status(500)
+//       .json({ error: "An error occurred while processing your request." });
+//   }
+// };
+
+
 import dotenv from "dotenv";
-import { VertexAI } from "@google-cloud/vertexai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
-// Load environment variables
-const PROJECT_ID = process.env.PROJECT_ID;
-const LOCATION = process.env.LOCATION || "us-central1";
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
-// Initialize Vertex AI client
-const vertexAI = new VertexAI({ project: PROJECT_ID, location: LOCATION });
-const model = "gemini-1.5-flash"; // You can use gemini-1.5-pro for higher reasoning
-
-// ===============================
-// POST: Get AI Response
-// ===============================
 export const getAIResponse = async (req, res) => {
   try {
     const userMessage = req.body.message;
 
-    // Get the generative model instance
-    const generativeModel = vertexAI.getGenerativeModel({ model });
-
-    // Send user input to Gemini
-    const response = await generativeModel.generateContent({
-      contents: [{ role: "user", parts: [{ text: userMessage }] }],
-    });
-
-    const aiMessage =
-      response?.response?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from AI.";
+    const result = await model.generateContent(userMessage);
+    const aiMessage = result.response.text();
 
     res.json({ aiMessage });
   } catch (error) {
     console.error("Error fetching AI response:", error);
 
-    if (error.code === 403) {
-      return res.status(403).json({
-        error:
-          "Access denied. Make sure your Vertex AI API is enabled and credentials are correct.",
-      });
-    }
-
-    if (error.code === 401) {
+    if (error.status === 404)
       return res
-        .status(401)
-        .json({ error: "Unauthorized. Check your Google credentials." });
-    }
+        .status(404)
+        .json({ error: "Model not found. Try gemini-1.5-flash-latest or gemini-1.5-pro-latest." });
 
-    res
-      .status(500)
-      .json({ error: "An error occurred while processing your request." });
+    if (error.status === 403)
+      return res
+        .status(403)
+        .json({ error: "Access denied. Check your Gemini API key and project permissions." });
+
+    res.status(500).json({
+      error: "An error occurred while processing your request.",
+      details: error.message,
+    });
   }
 };
+  
+
 
 // ===============================
 // GET: Render Ask-AI Page

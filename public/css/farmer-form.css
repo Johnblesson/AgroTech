@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --green: #2e7d32;
+  --light-green: #a5d6a7;
+  --white: #ffffff;
+  --gray: #f8f9fa;
+  --text-dark: #1a1a1a;
+  --border: #dcdcdc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--gray);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Wrapper */
+.formbold-main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Card */
+.formbold-form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  background: var(--white);
+  padding: 35px 40px;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Intro text */
+.formbold-form-wrapper pre {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 25px;
+  white-space: pre-wrap;
+}
+
+/* Spacing */
+.formbold-mb-3 {
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.formbold-form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* Inputs */
+.formbold-form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus */
+.formbold-form-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+  outline: none;
+}
+
+/* Textarea */
+textarea.formbold-form-input {
+  resize: vertical;
+}
+
+/* Button */
+.formbold-btn {
+  width: 100%;
+  background: var(--green);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.formbold-btn:hover {
+  background: #256428;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 14px;
+}
+
+/* Required asterisk */
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .formbold-form-wrapper {
+    padding: 25px;
+  }
+
+  .formbold-btn {
+    font-size: 15px;
+  }
+}

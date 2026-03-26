@@ -1,244 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroTech Farming Program</title>
+
+  <!-- CSS -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --green: #2e7d32;
+      --light-green: #a5d6a7;
+      --accent: #77a542;
+      --white: #ffffff;
+      --gray: #f9fafb;
+      --text-dark: #1a1a1a;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* SECTION */
+    .agrotech-about {
+      padding: 60px 0;
+    }
+
+    /* HEADER */
+    .section-subtitle {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title span {
+      color: var(--green);
+    }
+
+    .section-intro {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #555;
+    }
+
+    /* CALLOUT */
+    .program-callout {
+      background: var(--white);
+      padding: 25px 30px;
+      border-radius: 12px;
+      border-left: 5px solid var(--accent);
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .program-callout h3 {
+      margin-bottom: 10px;
+    }
+
+    .program-callout ul {
+      list-style: none;
+      padding-left: 10px;
+      margin: 10px 0;
+    }
+
+    .program-callout li {
+      margin-bottom: 6px;
+    }
+
+    .program-callout li::before {
+      content: "🌾";
+      margin-right: 8px;
+    }
+
+    .cta {
+      background: #f1f8ee;
+      border-left: 4px solid var(--accent);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-style: italic;
+    }
+
+    /* DROPDOWN */
+    .requirements-section {
+      margin-top: 20px;
+    }
+
+    .dropdown-header {
+      cursor: pointer;
+      font-size: 1.2rem;
+      background: #eaf6e3;
+      padding: 14px 18px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .dropdown-header:hover {
+      background: #d6edc1;
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-header.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Smooth dropdown */
+    .dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .dropdown-content.active {
+      max-height: 1200px; /* enough to fit content */
+    }
+
+    .features-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      margin-top: 10px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .feature {
+      margin-bottom: 15px;
+    }
+
+    .feature h4 {
+      color: var(--green);
+      margin-bottom: 5px;
+    }
+
+    .feature p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* BUTTON */
+    .apply-btn {
+      display: inline-block;
+      margin-top: 25px;
+      background: var(--green);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .apply-btn:hover {
+      background: #256428;
+      transform: translateY(-2px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .section-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
 <section class="agrotech-about" id="about">
   <div class="container">
-    <!-- Program Header -->
+
+    <!-- HEADER -->
     <div class="program-header text-center">
-      <!-- <img src="./images/agrotech.png" alt="AgroTech Logo" class="program-logo"> -->
       <p class="section-subtitle">Empowering Farmers Across Sierra Leone</p>
       <h2 class="section-title">Join the <span>AgroTech Farming Program</span></h2>
       <p class="section-intro">
-        The AgroTech Farming Program is a groundbreaking initiative created to empower local farmers through innovation, education, and connectivity. 
-        Gain access to tools, resources, and a thriving digital farming community — all designed to maximize your productivity and profit.
+        The AgroTech Farming Program empowers farmers through innovation, education, and connectivity.
       </p>
     </div>
 
-    <!-- Program Callout -->
-    <div class="program-callout shadow-sm">
+    <!-- CALLOUT -->
+    <div class="program-callout">
       <h3>Program Overview</h3>
-      <p><strong>Eligibility:</strong> Farmers must create an AgroTech SL account to apply. Phone number is required; email is optional.</p>
-      <p><strong>Access to Resources:</strong></p>
+      <p><strong>Eligibility:</strong> Must have an AgroTech account.</p>
+
       <ul>
-        <li>Daily farming tips tailored to your crops and region.</li>
-        <li>Online and offline weather updates for better planting and harvesting decisions.</li>
-        <li>Access to farming guides, productivity tools, and expert resources.</li>
+        <li>Daily farming tips</li>
+        <li>Weather updates</li>
+        <li>Farming guides</li>
       </ul>
-      <p><strong>Post Your Products for Free:</strong> Connect directly with buyers and promote your produce at zero cost.</p>
-      <p><strong>Community Support:</strong> Join a vibrant community of farmers to exchange knowledge, get advice, and share experiences.</p>
 
       <div class="cta">
-        <p><em>Be part of the agricultural revolution in Sierra Leone. Enroll today and transform your farming experience with technology!</em></p>
+        Be part of the agricultural revolution. Enroll today!
       </div>
     </div>
 
-    <!-- Requirements Dropdown -->
+    <!-- DROPDOWN -->
     <div class="requirements-section">
-      <h3 class="dropdown-header" onclick="toggleDropdown()">
+      <div class="dropdown-header" id="dropdownHeader">
         Platform Features & Requirements 
         <span class="arrow">&#9660;</span>
-      </h3>
+      </div>
 
-      <div class="dropdown-content features-card">
-        <div class="feature">
-          <h4>1. Farmer Profile & Registration System</h4>
-          <p>Register easily with details such as location, crops, and farm size. Mobile-friendly interface ensures access for everyone.</p>
-        </div>
-        <div class="feature">
-          <h4>2. Weather Forecasting & Alerts</h4>
-          <p>Get real-time forecasts and SMS alerts for weather updates, rain, or drought conditions.</p>
-        </div>
-        <div class="feature">
-          <h4>3. Crop Management & Advisory</h4>
-          <p>Receive AI-powered crop guidance, pest control tips, and soil management practices tailored to your area.</p>
-        </div>
-        <div class="feature">
-          <h4>4. Market Price Information</h4>
-          <p>Track weekly market prices for your produce and plan sales with confidence.</p>
-        </div>
-        <div class="feature">
-          <h4>5. Digital Marketplace</h4>
-          <p>Buy inputs and sell produce directly on the AgroTech platform — fair, transparent, and connected.</p>
-        </div>
-        <div class="feature">
-          <h4>6. Financial Services</h4>
-          <p>Access microloans, insurance, and savings plans integrated with Qcell’s payment system.</p>
-        </div>
-        <div class="feature">
-          <h4>7. Training & Resources</h4>
-          <p>Watch tutorials, read guides, and download materials on sustainable and smart farming.</p>
-        </div>
-        <div class="feature">
-          <h4>8. Farmer Community Forum</h4>
-          <p>Engage with fellow farmers, discuss challenges, and learn from others in a supportive environment.</p>
-        </div>
-        <div class="feature">
-          <h4>9. Government & NGO Integration</h4>
-          <p>Access agricultural grants, programs, and training events from official partners.</p>
-        </div>
-        <div class="feature">
-          <h4>10. Feedback & Support</h4>
-          <p>24/7 support via chatbot and helpline to ensure smooth use of the platform.</p>
+      <div class="dropdown-content" id="dropdownContent">
+        <div class="features-card">
+
+          <div class="feature"> <h4>1. Farmer Profile & Registration System</h4> 
+            <p>Register easily with details such as location, crops, and farm size. 
+              Mobile-friendly interface ensures access for everyone.</p> 
+            </div> 
+            <div class="feature"> 
+              <h4>2. Weather Forecasting & Alerts</h4> 
+              <p>Get real-time forecasts and SMS alerts for weather updates, rain, 
+                or drought conditions.</p> 
+              </div> 
+              <div class="feature"> 
+                <h4>3. Crop Management & Advisory</h4> 
+                <p>Receive AI-powered crop guidance, pest control tips, and soil management 
+                  practices tailored to your area.</p> 
+                </div>
+                <div class="feature"> 
+                  <h4>4. Market Price Information</h4> 
+                  <p>Track weekly market prices for your produce and plan sales with confidence.</p> 
+                </div> 
+                <div class="feature"> 
+                  <h4>5. Digital Marketplace</h4> 
+                  <p>Buy inputs and sell produce directly on the AgroTech platform — fair, transparent, and connected.</p> 
+                </div> 
+                <div class="feature"> 
+                  <h4>6. Financial Services</h4> 
+                  <p>Access microloans, insurance, and savings plans integrated with Qcell’s payment system.</p> 
+                </div> <div class="feature"> 
+                  <h4>7. Training & Resources</h4> 
+                  <p>Watch tutorials, read guides, and download materials on sustainable and smart farming.</p> 
+                </div>
+                <div class="feature"> 
+                  <h4>8. Farmer Community Forum</h4> 
+                  <p>Engage with fellow farmers, discuss challenges, and learn from others in a supportive environment.</p> 
+                </div> 
+                <div class="feature"> 
+                  <h4>9. Government & NGO Integration</h4> 
+                  <p>Access agricultural grants, programs, and training events from official partners.</p> 
+                </div> <div class="feature"> 
+                  <h4>10. Feedback & Support</h4> 
+                  <p>24/7 support via chatbot and helpline to ensure smooth use of the platform.</p> 
+                </div>
+
         </div>
       </div>
     </div>
 
-    <!-- Apply Button -->
-    <div class="text-center mt-4">
-      <a href="#" onclick="redirectToForm('<%= role %>')" class="apply-btn">Apply Now</a>
+    <!-- BUTTON -->
+    <div class="text-center">
+      <a href="#" onclick="redirectToForm('user')" class="apply-btn">Apply Now</a>
     </div>
+
   </div>
 </section>
 
-<!-- CSS Styling -->
-<style>
-  .agrotech-about {
-    background: #f9fafb;
-    padding: 60px 20px;
-    font-family: "Poppins", sans-serif;
-  }
-
-  .program-header .program-logo {
-    height: 70px;
-    margin-bottom: 15px;
-  }
-
-  .section-subtitle {
-    color: #77a542;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .section-title {
-    font-size: 2rem;
-    color: #333;
-    font-weight: 700;
-  }
-
-  .section-title span {
-    color: #77a542;
-  }
-
-  .section-intro {
-    max-width: 700px;
-    margin: 10px auto 30px;
-    color: #555;
-  }
-
-  .program-callout {
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 12px;
-    border-left: 6px solid #77a542;
-    margin-bottom: 30px;
-  }
-
-  .program-callout h3 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-
-  .program-callout ul {
-    list-style: none;
-    padding-left: 20px;
-  }
-
-  .program-callout ul li::before {
-    content: "🌾";
-    margin-right: 8px;
-  }
-
-  .cta {
-    background: #f1f8ee;
-    border-left: 4px solid #77a542;
-    padding: 10px 15px;
-    margin-top: 15px;
-    border-radius: 8px;
-    font-style: italic;
-  }
-
-  .dropdown-header {
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: #333;
-    background: #eaf6e3;
-    padding: 12px 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.3s;
-  }
-
-  .dropdown-header:hover {
-    background: #d6edc1;
-  }
-
-  .arrow {
-    transition: transform 0.3s;
-  }
-
-  .dropdown-header.active .arrow {
-    transform: rotate(180deg);
-  }
-
-  .features-card {
-    display: none;
-    background: #fff;
-    border: 1px solid #ddd;
-    margin-top: 10px;
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  .feature h4 {
-    color: #4a7c2a;
-    margin-bottom: 5px;
-  }
-
-  .feature p {
-    color: #555;
-    line-height: 1.6;
-  }
-
-  .apply-btn {
-    background: #77a542;
-    color: #fff;
-    font-weight: 600;
-    /* text-align: center; */
-    padding: 12px 25px;
-    border-radius: 8px;
-    transition: all 0.3s;
-    text-decoration: none;
-  }
-
-  .apply-btn:hover {
-    background: #5f8c35;
-  }
-</style>
-
-<!-- JavaScript -->
+<!-- JAVASCRIPT -->
 <script>
-  function toggleDropdown() {
-    const dropdownContent = document.querySelector('.dropdown-content');
-    const dropdownHeader = document.querySelector('.dropdown-header');
-    const arrow = dropdownHeader.querySelector('.arrow');
+  const header = document.getElementById("dropdownHeader");
+  const content = document.getElementById("dropdownContent");
 
-    if (dropdownContent.style.display === 'block') {
-      dropdownContent.style.display = 'none';
-      arrow.style.transform = 'rotate(0deg)';
-    } else {
-      dropdownContent.style.display = 'block';
-      arrow.style.transform = 'rotate(180deg)';
-    }
-
-    dropdownHeader.classList.toggle('active');
-  }
+  header.addEventListener("click", () => {
+    header.classList.toggle("active");
+    content.classList.toggle("active");
+  });
 
   function redirectToForm(role) {
     if (role === 'admin') {
       window.location.href = '/apply-farmers-admin';
-    } else if (role === 'user') {
-      window.location.href = '/apply-to-be-a-farmer';
     } else {
       window.location.href = '/apply-to-be-a-farmer';
     }
   }
 </script>
+
+</body>
+</html>
